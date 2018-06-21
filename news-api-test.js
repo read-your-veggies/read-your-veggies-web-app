@@ -1,5 +1,4 @@
 const axios = require('axios');
-const API_KEY = 'ac3e99c739ed4fb58c0b6be160947ad8';
 const extractor = require('unfluff');
 
 let retrieveArticles = function (urlList) {
