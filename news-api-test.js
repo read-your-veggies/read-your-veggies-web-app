@@ -1,47 +1,56 @@
 const axios = require('axios');
 const extractor = require('unfluff');
 
+require('dotenv').config();
+
 let retrieveArticles = function (urlList) {
   articleList = [];
 
   var parseAllArticles = () => {
     if (urlList.length > 0) {
-        var currentArticleUlr = articleList.pop();
-        axios.get(currentArticleUlr)
-            .then( (response) => {
-                let webpage = extractor(response.data);
-                articleList.push(webpage.text);
-            })
-            .then(() => )
-    }
+      var currArticleUrl = urlList.pop();
+      console.log('scraping this URL', currArticleUrl);
+      
+      axios.get(currArticleUrl)
+          .then( (response) => {
+              var webpage = extractor(response.data);
+              var article = {
+                url: currArticleUrl,
+                title: webpage.title,
+                author: webpage.author,
+                source: webpage.publisher,
+                description: webpage.description,
+                fullText: webpage.text,
+              }
+              articleList.push(article);
+          })
+          .then( () => {
+            parseAllArticles();
+          })
+          .catch( (err) => {
+            console.log(err);
+          })
+    } else {
+      // console.log(articleList);
+      // return articleList;
 
+      // Now we have a full list of web-scraped article data, time to send to the db.
+    }
   }
 
-
-  
-  urlList.forEach( (url, idx, ary) => {
-    axios.get(url)
-        .then( (response) => {
-            let webpage = extractor(response.data);
-            articleList.push(webpage.text);
-            // We will also need to push the author and source, either together with the 
-            // article or into a separate array.
-
-          // If the articleList length matches the urlList length, then we are done
-          // and can return and/or console log the results.
-        })
-  })
+  parseAllArticles();
 }
 
 
-axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`)
+axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.NEWS_API_KEY}`)
     .then( (response) => {
-    //   console.log('news data', response.data)
+      // console.log('news data', response.data)
       let urlList = [];
       response.data.articles.forEach( (article) => {
         urlList.push(article.url);
       })
-      console.log('list of urls', urlList);
+      console.log('time to retrieve the articles');
+      retrieveArticles(urlList);
     })
     .catch( (err) => {
       console.log(err);
