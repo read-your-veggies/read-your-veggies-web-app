@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/read-your-veggies/read-your-veggies-web-app#readme",
   "dependencies": {
-    "article-parser": "^2.3.7",
     "axios": "0.18.0",
     "body-parser": "1.18.3",
     "cors": "2.8.4",
@@ -34,12 +33,12 @@
     "graphql": "^0.13.2",
     "https": "^1.0.0",
     "mongoose": "^5.1.6",
-    "node-article-extractor": "^1.1.2",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "react": "16.4.0",
     "react-dom": "16.4.0",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "unfluff": "^3.0.1"
   },
   "devDependencies": {
     "babel-core": "6.26.3",
