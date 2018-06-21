@@ -10,3 +10,5 @@ axios.get(url)
   .catch(function (error) {
     console.log(error);
   });
+
+  // No need to integrate this file, it will be deleted.
