@@ -11,5 +11,4 @@ const connectToDb = () => {
   });
 }
 
-
 module.exports.connectToDb = connectToDb;
