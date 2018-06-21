@@ -1,12 +1,15 @@
 var express = require('express');
+
+var express_graphql = require('express-graphql');
+var { buildSchema } = require('graphql');
+
 var bodyParser = require('body-parser');
-var requestLogger = require('./utilities.js').requestLogger;
 var https = require('https');
 var fs = require('fs');
 var path = require('path');
 
 const db = require('../db/index.js');
-
+var requestLogger = require('./utilities.js').requestLogger;
 
 var app = express();
 
@@ -15,12 +18,27 @@ app.use(requestLogger);
 app.use(bodyParser.json());
 
 // Serve static files to the client
-app.use(express.static(__dirname + '/../client/dist'));
+app.use('/', express.static(__dirname + '/../client/dist'));
 
-//All routes here:
-//
-//
-//
+
+/*************** GRAPHQL STUFF *****************/
+// GraphQL schema
+var schema = buildSchema(`
+    type Query {
+        message: String
+    }
+`);
+// Root resolver
+var root = {
+    message: () => 'Hello World!'
+};
+// Create an express server and a GraphQL endpoint
+app.use('/graphql', express_graphql({
+    schema: schema,
+    rootValue: root,
+    graphiql: true
+}));
+/*************** GRAPHQL STUFF *****************/
 
 var port = process.env.PORT || 5000;
 
