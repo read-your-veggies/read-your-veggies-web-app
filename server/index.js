@@ -1,6 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var requestLogger = require('./utilities.js').requestLogger;
+var https = require('https');
+var fs = require('fs');
+var path = require('path');
 
 const db = require('../db/index.js');
 
@@ -19,12 +22,25 @@ app.use(express.static(__dirname + '/../client/dist'));
 //
 //
 
-var port = process.env.PORT || 9000; 
+var port = process.env.PORT || 5000;
 
-// listen for requests
-app.listen(port, () => {
-console.log(`Listening on port ${port}`);
-});
+//Conditional check for DEV vs DEPLOYMENT environments
+if (process.env.DEPLOYED !== 'true') {
+
+  var certOptions = {
+    key: fs.readFileSync(path.resolve('server.key')),
+    cert: fs.readFileSync(path.resolve('server.crt'))
+  }
+
+  var server = https.createServer(certOptions, app).listen(port, function() {
+    console.log(`listening on port ${port}!`);
+  });
+
+} else {
+  var server = app.listen(port, () => {
+    console.log(`listening on port ${port}!`);
+  });
+}
 
 db.connectToDb();
 
