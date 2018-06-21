@@ -30,7 +30,7 @@ var schema = buildSchema(`
 `);
 // Root resolver
 var root = {
-    message: () => 'Hello World!'
+    message: () => 'Hello From GraphQL Server!'
 };
 // Create an express server and a GraphQL endpoint
 app.use('/graphql', express_graphql({
