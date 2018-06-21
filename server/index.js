@@ -1,71 +1,20 @@
 var express = require('express');
-//var express_graphql = require('express-graphql');
-//var { buildSchema } = require('graphql');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
 var graphqlExpress = require('graphql-server-express').graphqlExpress;
 var graphiqlExpress = require('graphql-server-express').graphiqlExpress;
 var makeExecutableSchema = require('graphql-tools').makeExecutableSchema;
-//var cors = require('cors');
-
 var bodyParser = require('body-parser');
 var https = require('https');
 var fs = require('fs');
 var path = require('path');
-
-//const db = require('../db/index.js');
 var requestLogger = require('./utilities.js').requestLogger;
-
-//var app = express();
-
-//middleware
-//app.use(requestLogger);
-//app.use(bodyParser.json());
-
-// Serve static files to the client
-//app.use('/', express.static(__dirname + '/../client/dist'));
-
-
-/*************** GRAPHQL STUFF *****************/
-// GraphQL schema
-// var schema = buildSchema(`
-//     type Query {
-//         message: String
-//     }
-// `);
-// // Root resolver
-// var root = {
-//     message: () => 'Hello From GraphQL Server!'
-// };
-// // Create an express server and a GraphQL endpoint
-// app.use('/graphql', express_graphql({
-//     schema: schema,
-//     rootValue: root,
-//     graphiql: true
-// }));
-/*************** GRAPHQL STUFF *****************/
+//var express_graphql = require('express-graphql');
+//var { buildSchema } = require('graphql');
+//const db = require('../db/index.js');
+//var cors = require('cors');
 
 var port = process.env.PORT || 5000;
-
-//Conditional check for DEV vs DEPLOYMENT environments
-// if (process.env.DEPLOYED !== 'true') {
-
-//   var certOptions = {
-//     key: fs.readFileSync(path.resolve('server.key')),
-//     cert: fs.readFileSync(path.resolve('server.crt'))
-//   }
-
-//   var server = https.createServer(certOptions, app).listen(port, function() {
-//     console.log(`listening on port ${port}!`);
-//   });
-
-// } else {
-//   var server = app.listen(port, () => {
-//     console.log(`listening on port ${port}!`);
-//   });
-// }
-
-//db.connectToDb();
 
 const MONGO_URL = 'mongodb://localhost:27017/readyourveggies';
 
@@ -158,13 +107,11 @@ const start = async () => {
 
     // SERVER
     const app = express();
-    //app.use(cors());
     app.use(requestLogger);
+    app.use('/', express.static(__dirname + '/../client/dist'));
+    //app.use(cors());
     app.use('/graphql', bodyParser.json(), graphqlExpress({schema}));
-
-    const homePath = '/graphiql';
-
-    app.use(homePath, graphiqlExpress({
+    app.use('/graphiql', graphiqlExpress({
       endpointURL: '/graphql'
     }));
 
@@ -182,7 +129,9 @@ const start = async () => {
         console.log(`listening on port ${port}!`);
       });
     }
+
     // end of "try"
+
   } catch (e) {
     console.log(e);
   }
