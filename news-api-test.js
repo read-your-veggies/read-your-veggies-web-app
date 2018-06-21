@@ -4,6 +4,22 @@ const extractor = require('unfluff');
 
 let retrieveArticles = function (urlList) {
   articleList = [];
+
+  var parseAllArticles = () => {
+    if (urlList.length > 0) {
+        var currentArticleUlr = articleList.pop();
+        axios.get(currentArticleUlr)
+            .then( (response) => {
+                let webpage = extractor(response.data);
+                articleList.push(webpage.text);
+            })
+            .then(() => )
+    }
+
+  }
+
+
+  
   urlList.forEach( (url, idx, ary) => {
     axios.get(url)
         .then( (response) => {
@@ -11,7 +27,6 @@ let retrieveArticles = function (urlList) {
             articleList.push(webpage.text);
             // We will also need to push the author and source, either together with the 
             // article or into a separate array.
-
 
           // If the articleList length matches the urlList length, then we are done
           // and can return and/or console log the results.
