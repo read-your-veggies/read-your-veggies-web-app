@@ -35,7 +35,7 @@ var requestLogger = require('./utilities.js').requestLogger;
 // `);
 // // Root resolver
 // var root = {
-//     message: () => 'Hello World!'
+//     message: () => 'Hello From GraphQL Server!'
 // };
 // // Create an express server and a GraphQL endpoint
 // app.use('/graphql', express_graphql({
@@ -87,6 +87,7 @@ const start = async () => {
         post(_id: String): Post
         posts: [Post]
         comment(_id: String): Comment
+        message: String
       }
 
       type Post {
@@ -125,6 +126,7 @@ const start = async () => {
         comment: async (root, {_id}) => {
           return prepare(await Comments.findOne(ObjectId(_id)));
         },
+        message: () => 'Hello From GraphQL Server!',
       },
       Post: {
         comments: async ({_id}) => {
