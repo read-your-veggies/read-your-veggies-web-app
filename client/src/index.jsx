@@ -1,20 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './components/App.jsx';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    } 
-  }
+import { BrowserRouter } from 'react-router-dom';
+import { ApolloProvider } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
-  render () {
-    return (
-      <div className="app-container">
-        <h1>Hello World</h1>
-      </div>
-    )
-  }
-}
+//this is our graphQl endpoint
+const httpLink = new HttpLink({ uri: 'https://localhost:5000/graphql' });
 
-ReactDOM.render(<App/>, document.getElementById('app'));
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache()
+});
+
+
+ReactDOM.render(
+  <BrowserRouter>
+    <ApolloProvider client={client}>
+      <App location = {location} />
+    </ApolloProvider>
+  </BrowserRouter>,
+  document.getElementById('app'),
+);
