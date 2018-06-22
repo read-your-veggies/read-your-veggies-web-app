@@ -18,9 +18,9 @@ var port = process.env.PORT || 5000;
 
 const MONGO_URL = 'mongodb://localhost:27017/readyourveggies';
 
-const prepare = (o) => {
-  o._id = o._id.toString()
-  return o
+const prepare = (object) => {
+  object._id = object._id.toString();
+  return object;
 }
 
 const start = async () => {
