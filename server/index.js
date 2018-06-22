@@ -18,7 +18,24 @@ const app = express();
 app.use(requestLogger);
 
 app.use('/', express.static(__dirname + '/../client/dist'));
-// No body parser?
+
+app.use(session({
+  secret: 'Clark Kent is Superman!',
+  resave: true,
+  saveUninitialized: true,
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(authMiddleware);
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  successRedirect: '/',
+  failureRedirect: '/',
+}));
 
 async function startGraphQl() {
   var schema = await getGraphQlSchema();
