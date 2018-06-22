@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/read-your-veggies/read-your-veggies-web-app#readme",
   "dependencies": {
+    "apollo-boost": "^0.1.10",
     "apollo-client-preset": "^1.0.8",
     "axios": "0.18.0",
     "body-parser": "1.18.3",
