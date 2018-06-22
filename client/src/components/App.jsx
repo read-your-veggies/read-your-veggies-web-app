@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, withRouter } from "react-router-dom";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import axios from 'axios';
 
 const GET_MESSAGE_FROM_SERVER = gql`
   {

@@ -58,6 +58,32 @@ var parseArticle = (currArticleUrl) => {
         source: webpage.publisher,
         description: webpage.description,
         fullText: webpage.text,
+        votes: {
+          agree: {
+            summedUserStance: 0,
+            totalVotes: 0,
+          },
+          disagree: {
+            summedUserStance: 0,
+            totalVotes: 0,
+          },
+          fun: {
+            summedUserStance: 0,
+            totalVotes: 0,
+          },
+          bummer: {
+            summedUserStance: 0,
+            totalVotes: 0,
+          },
+          mean: {
+            summedUserStance: 0,
+            totalVotes: 0,
+          },
+          worthyAdversary: {
+            summedUserStance: 0,
+            totalVotes: 0,
+          },
+        }  
       }
       resolve(article);
     })

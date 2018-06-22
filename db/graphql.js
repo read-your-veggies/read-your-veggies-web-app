@@ -11,6 +11,7 @@ const getGraphQlSchema = async () => {
     const Posts = db.collection('posts');
     const Comments = db.collection('comments');
     const Articles = db.collection('articles');
+    const Users = db.collection('users');
 
     typeDefs = [`
       type Query {
@@ -48,6 +49,7 @@ const getGraphQlSchema = async () => {
       type Mutation {
         createPost(title: String, content: String): Post
         createComment(postId: String, content: String): Comment
+        deleteArticles: Article
         createArticle(url: String,
           title: String,
           author: [String],
@@ -94,10 +96,17 @@ const getGraphQlSchema = async () => {
           console.log('res is', res);
           return prepare(await Posts.findOne({_id: res.insertedIds[0]}))
         },
+        // probably should disable this for production:
         createArticle: async (root, args, context, info) => {
           const res = await Articles.insert(args);
           console.log('res is', res);
           return prepare(await Articles.findOne({_id: res.insertedIds[0]}))
+        },
+        // probably should disable this as well:
+        deleteArticles: async () => {
+          const res = await Articles.remove({});
+          console.log('res is', res);
+          return 'deleted';
         },
         createComment: async (root, args) => {
           const res = await Comments.insert(args)
