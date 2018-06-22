@@ -18,3 +18,5 @@ passport.use(new FacebookStrategy({
       done(null, profile);
     }
 ));
+
+module.exports = passport;

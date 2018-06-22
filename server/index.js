@@ -4,7 +4,10 @@ var graphiqlExpress = require('graphql-server-express').graphiqlExpress;
 var bodyParser = require('body-parser');
 var https = require('https');
 var fs = require('fs');
+var passport = require('./facebookAuth.js');
+var session = require('express-session');
 var path = require('path');
+var authMiddleware = require('./authMiddleware.js');
 var requestLogger = require('./utilities.js').requestLogger;
 var scrapeArticles = require('../db/utilities.js').scrapeArticles;
 var deleteArticles = require('../db/utilities.js').deleteArticles;
@@ -15,6 +18,7 @@ const app = express();
 app.use(requestLogger);
 
 app.use('/', express.static(__dirname + '/../client/dist'));
+// No body parser?
 
 async function startGraphQl() {
   var schema = await getGraphQlSchema();
