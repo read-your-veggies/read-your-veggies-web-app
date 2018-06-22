@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/readyourveggies');
-// const connectToDb = require('./index.js').connectToDb;
-const Schema = mongoose.Schema;
 
+const Schema = mongoose.Schema;
 
 const articleSchema = new Schema({
   url: String,
@@ -15,4 +13,4 @@ const articleSchema = new Schema({
 
 var Article = mongoose.model('Article', articleSchema);
 
-module.exports = Article;
+module.exports = { Article }
