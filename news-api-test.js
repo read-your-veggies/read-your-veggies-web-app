@@ -1,5 +1,9 @@
 const axios = require('axios');
 const extractor = require('unfluff');
+const Article = require('./db/ArticleSchema.js');
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/readyourveggies');
 
 require('dotenv').config();
 
@@ -53,14 +57,27 @@ let retrieveArticles = function (urlList) {
             console.log(err);
           })
     } else {
-      console.log(articleList);
+      console.log('scraped a full list of articles');
       // return articleList;
 
       // Now we have a full list of web-scraped article data, time to send to the db.
+      populateArticles(articleList);
     }
   }
   parseAllArticles();
 }
 
+let populateArticles = (articleList) => {
+  articleList.forEach( (article) => {
+    Article.create(article, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('Article saved to db');
+      }
+    })
+  });
+}
+  
 retrieveUrls(); 
 // Will need to export the functions when fully integrating.
