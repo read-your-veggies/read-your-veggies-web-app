@@ -1,5 +1,5 @@
 const passport = require('passport');
-const fbStrategy = require('passport-facebook');
+const FacebookStrategy = require('passport-facebook');
 require('dotenv').config();
 
 passport.serializeUser( (user, done) => {
@@ -13,10 +13,11 @@ passport.deserializeUser( (user, done) => {
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: process.env.CALLBACK_URL},
-    function(accessToken, refreshToken, profile, done) {
-      done(null, profile);
-    }
+    callbackURL: process.env.CALLBACK_URL
+  },
+  function(accessToken, refreshToken, profile, done) {
+    done(null, profile);
+  }
 ));
 
 module.exports = passport;
