@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var databasePath = process.env.DATABASE_PATH || 'mongodb://localhost/readyourveggies';
-mongoose.connect(databasePath);
 
+mongoose.connect(databasePath);
 var db = mongoose.connection;
 
 const connectToDb = (callback) => {
@@ -12,4 +12,4 @@ const connectToDb = (callback) => {
   });
 }
 
-module.exports.connectToDb = connectToDb;
+module.exports = { connectToDb, db };
