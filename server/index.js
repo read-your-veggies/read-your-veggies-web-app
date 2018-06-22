@@ -108,12 +108,13 @@ const start = async () => {
     // SERVER
     const app = express();
     app.use(requestLogger);
+
     app.use('/', express.static(__dirname + '/../client/dist'));
     //app.use(cors());
+
     app.use('/graphql', bodyParser.json(), graphqlExpress({schema}));
-    app.use('/graphiql', graphiqlExpress({
-      endpointURL: '/graphql'
-    }));
+
+    app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
     // LISTEN
     if (process.env.DEPLOYED !== 'true') {
