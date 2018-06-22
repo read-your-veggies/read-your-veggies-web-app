@@ -10,6 +10,7 @@ const getGraphQlSchema = async () => {
   try {
     const Posts = db.collection('posts');
     const Comments = db.collection('comments');
+    const Articles = db.collection('articles');
 
     typeDefs = [`
       type Query {
@@ -17,6 +18,17 @@ const getGraphQlSchema = async () => {
         posts: [Post]
         comment(_id: String): Comment
         message: String
+        articles: [Article]
+      }
+
+      type Article {
+        _id: String
+        url: String
+        title: String
+        author: [String]
+        source: String
+        description: String
+        fullText: String
       }
     
       type Post {
@@ -36,6 +48,12 @@ const getGraphQlSchema = async () => {
       type Mutation {
         createPost(title: String, content: String): Post
         createComment(postId: String, content: String): Comment
+        createArticle(url: String,
+          title: String,
+          author: [String],
+          source: String,
+          description: String,
+          fullText: String): Article
       }
     
       schema {
@@ -56,6 +74,9 @@ const getGraphQlSchema = async () => {
           return prepare(await Comments.findOne(ObjectId(_id)));
         },
         message: () => 'Hello From GraphQL Server!',
+        articles: async () => {
+          return (await Articles.find({}).toArray()).map(prepare);
+        },
       },
       Post: {
         comments: async ({_id}) => {
@@ -72,6 +93,11 @@ const getGraphQlSchema = async () => {
           const res = await Posts.insert(args);
           console.log('res is', res);
           return prepare(await Posts.findOne({_id: res.insertedIds[0]}))
+        },
+        createArticle: async (root, args, context, info) => {
+          const res = await Articles.insert(args);
+          console.log('res is', res);
+          return prepare(await Articles.findOne({_id: res.insertedIds[0]}))
         },
         createComment: async (root, args) => {
           const res = await Comments.insert(args)
