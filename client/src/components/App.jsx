@@ -3,16 +3,23 @@ import { Route, withRouter } from "react-router-dom";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 
-const GET_INFO = gql`
+const GET_MESSAGE_FROM_SERVER = gql`
   {
     message
+  }
+`;
+
+const GET_TEAM_NAME_FROM_LOCAL_STATE = gql`
+  query {
+    teamName @client
   }
 `;
 
 class App extends Component {
   render() {
     return(
-      <Query query={GET_INFO}>
+      <div>
+      <Query query={GET_MESSAGE_FROM_SERVER}>
         {({ loading, error, data }) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
@@ -22,29 +29,16 @@ class App extends Component {
           );
         }}
       </Query>
+      <Query query={GET_TEAM_NAME_FROM_LOCAL_STATE}>
+      {({ data }) => {
+        return (
+          <h1>{data.teamName}</h1>
+        );
+      }}
+    </Query>
+    </div>
     );
   }
 }
-
-
-
-const Dogs = ({ onDogSelected }) => (
-  <Query query={GET_DOGS}>
-    {({ loading, error, data }) => {
-      if (loading) return "Loading...";
-      if (error) return `Error! ${error.message}`;
-
-      return (
-        <select name="dog" onChange={onDogSelected}>
-          {data.dogs.map(dog => (
-            <option key={dog.id} value={dog.breed}>
-              {dog.breed}
-            </option>
-          ))}
-        </select>
-      );
-    }}
-  </Query>
-);
 
 export default withRouter(App);

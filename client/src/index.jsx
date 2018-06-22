@@ -5,20 +5,29 @@ import App from './components/App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
+import {ApolloLink} from 'apollo-boost'
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import {withClientState} from 'apollo-link-state';
 
-var defaults;
-var resolvers;
-var typeDefs;
 
+// Set up Cache
+const cache = new InMemoryCache();
+
+const stateLink = withClientState({
+  cache,
+  defaults: {
+    teamName: 'House Slytherin @ Local State!',
+  },
+  resolvers: {}, //TODO - figure out what these are.
+});
+
+// Initialize the Apollo Client with a link to the local state
 const client = new ApolloClient({
-  uri: 'https://localhost:5000/graphql',
-  clientState: {
-    defaults,
-    resolvers,
-    typeDefs
-  }
+  link: ApolloLink.from([
+    stateLink,
+  ]),
+  cache: cache,
 });
 
 
