@@ -53,7 +53,7 @@ let retrieveArticles = function (urlList) {
             console.log(err);
           })
     } else {
-      // console.log(articleList);
+      console.log(articleList);
       // return articleList;
 
       // Now we have a full list of web-scraped article data, time to send to the db.
