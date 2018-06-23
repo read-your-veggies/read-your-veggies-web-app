@@ -9,6 +9,7 @@ const articleSchema = new Schema({
   source: String,
   description: String,
   fullText: String,
+  articleStance: Number,
   votes: {
     agree: {
       summedUserStance: Number,
@@ -34,8 +35,7 @@ const articleSchema = new Schema({
       summedUserStance: Number,
       totalVotes: Number,
     },
-    articleStance: String,
-  }  
+  },
 });
 
 const Article = mongoose.model('Article', articleSchema);

@@ -8,13 +8,10 @@ var getUrlsFromNewsAPI = () => {
   return new Promise((resolve, reject) => {
     axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.NEWS_API_KEY}`)
     .then(response => {
-      // console.log('news data', response.data)
       let urlList = [];
       response.data.articles.forEach(article => {
         urlList.push(article.url);
       });
-      // console.log('time to retrieve the articles');
-      // retrieveArticles(urlList);
       return urlList;
     })
     .then(urlList => {
@@ -39,10 +36,6 @@ var getArticlesFromUrls = (urlArray) => {
       reject(err);
     })
   });
-}
-
-var getArticleStance = (source) => {
-  return sourceWeights[source];
 }
 
 var parseArticle = (currArticleUrl) => {
@@ -84,7 +77,6 @@ var parseArticle = (currArticleUrl) => {
           },
         }  
       }
-      //article.articleStance = getArticleStance(article.source);
       resolve(article);  
     })
     .catch(err => {
@@ -96,14 +88,14 @@ var parseArticle = (currArticleUrl) => {
 var decorateArticlesWithStance = (articlesArray) => {
   return new Promise((resolve, reject) => {
     articlesArray.forEach(article => {
-      article.articleStance = String(sourceWeights[article.source]);
+      article.articleStance = sourceWeights[article.source];
     });
     resolve(articlesArray);
   })
 }
 
 var insertArticlesIntoDb = (articlesArray) => {
-  console.log(articlesArray);
+  console.log('articlesarray is', articlesArray);
   return new Promise((resolve, reject) => {
     Article.insertMany(articlesArray, (err) => {
       if (err) {

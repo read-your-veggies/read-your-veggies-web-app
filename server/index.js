@@ -17,7 +17,7 @@ const app = express();
 app.use(requestLogger);
 
 app.use('/', express.static(__dirname + '/../client/dist'));
-
+/*****************************AUTH*****************************/
 app.use(session({
   secret: 'Clark Kent is Superman!',
   resave: true,
@@ -26,9 +26,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(authMiddleware);
-
 app.get('/auth/facebook', passport.authenticate('facebook',{
   // authType: 'rerequest',
   scope:['email', 'user_birthday', 'user_location']
@@ -39,7 +37,12 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
   successRedirect: '/',
   failureRedirect: '/',
 }));
+app.get('/checkAuthHeaders', (req , res) => {res.send(200)});
 
+//React Router Redirect Hack
+app.get('/dashboard', (req,res) => res.redirect('/'));
+app.get('/login', (req,res) => res.redirect('/'));
+/*****************************GRAPHQL*****************************/
 async function startGraphQl() {
   var schema = await getGraphQlSchema();
   app.use('/graphql', bodyParser.json(), graphqlExpress({schema}));
@@ -47,7 +50,7 @@ async function startGraphQl() {
 }
 startGraphQl();
 
-// LISTEN
+/*****************************LISTEN*****************************/
 var port = process.env.PORT || 5000;
 
 if (process.env.DEPLOYED !== 'true') {
@@ -64,9 +67,9 @@ if (process.env.DEPLOYED !== 'true') {
   });
 }
 
-// WORKERS
-// articleHelpers.deleteArticles();
-// articleHelpers.scrapeArticles();
+/*****************************WORKERS*****************************/
+articleHelpers.deleteArticles();
+articleHelpers.scrapeArticles();
 
 
 
