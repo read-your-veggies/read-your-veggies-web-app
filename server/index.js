@@ -27,8 +27,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(authMiddleware);
-app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook', passport.authenticate('facebook',{
+  // authType: 'rerequest',
+  scope:['email', 'user_location', 'user_hometown', 'user_age_range']
+}));
+
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  // This scope array seems to be how we request additional info
   successRedirect: '/',
   failureRedirect: '/',
 }));

@@ -1,5 +1,7 @@
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook');
+const {User} = require('../db/schemas.js')
+
 require('dotenv').config();
 
 passport.serializeUser( (user, done) => {
@@ -13,10 +15,42 @@ passport.deserializeUser( (user, done) => {
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: process.env.CALLBACK_URL
+    callbackURL: process.env.CALLBACK_URL,
+    profileFields: ['email', 'birthday', 'location', 'displayName', 'hometown', 'age_range']
   },
   function(accessToken, refreshToken, profile, done) {
-    done(null, profile);
+    // Add to database here
+    // console.log('User', User);
+    process.nextTick( () => {    // This is a pretty new function for me.
+      console.log('profile', profile);
+      User.findOne({facebookId: profile.id}, (err, user) => {
+        if (err) return done(err);
+
+        if (user) {
+          return done(null, user);
+        } else {
+          var newUser = new User();
+          newUser.facebookId = profile.id;
+          newUser.name = profile.displayName;
+          newUser.emails = profile._json.email;
+          newUser.facebookUrl = profile.profileUrl;
+          newUser.location = profile._json.location.name;
+          newUser.hometown = profile._json.hometown.name;
+          newUser.age_range = profile._json.age_range;
+
+          console.log('new user to be saved', newUser);
+
+          newUser.save( (err) => {
+            if (err) {
+              console.log(err);
+            }
+
+            return done(null, newUser);
+          })
+        }
+      })
+    })
+    // done(null, profile);
   }
 ));
 

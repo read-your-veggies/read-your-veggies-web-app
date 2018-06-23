@@ -46,7 +46,15 @@ const userSchema = new Schema({
   name: String,
   health: Number,
   user_stance: Number,
-  recently_read: [String]
+  recently_read: [String],
+  emails: String,
+  facebookId: String,
+  facebookUrl: String,
+  birthday: String,
+  location: String,
+  hometown: String,
+  age_range: Schema.Types.Mixed,
+
 });
 
 const User = mongoose.model('User', userSchema);
