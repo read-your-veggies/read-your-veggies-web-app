@@ -95,7 +95,6 @@ var decorateArticlesWithStance = (articlesArray) => {
 }
 
 var insertArticlesIntoDb = (articlesArray) => {
-  console.log('articlesarray is', articlesArray);
   return new Promise((resolve, reject) => {
     Article.insertMany(articlesArray, (err) => {
       if (err) {
