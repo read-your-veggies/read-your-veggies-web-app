@@ -9,6 +9,10 @@ import {ApolloLink} from 'apollo-client-preset';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import {withClientState} from 'apollo-link-state';
+import { Mutation } from "react-apollo";
+import { UPDATE_USER_INFO } from './apollo/localQueries.js';
+
+
 
 // Set up Cache
 const cache = new InMemoryCache();
@@ -46,7 +50,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <BrowserRouter>
     <ApolloProvider client={client}>
-      <App location = {location} />
+      <Mutation mutation={UPDATE_USER_INFO}>
+      {(updateUserInfo => <App location = {location} updateUserInfo = {updateUserInfo} />)}
+      </Mutation>
     </ApolloProvider>
   </BrowserRouter>,
   document.getElementById('app'),

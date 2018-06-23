@@ -5,7 +5,6 @@ import Login from './Login.jsx';
 import axios from 'axios';
 import Header from './Header.jsx';
 import { graphql, compose } from 'react-apollo';
-import { GET_USER_INFO, UPDATE_USER_INFO } from '../apollo/localQueries.js';
 
 class App extends Component {
   constructor(props) {
@@ -45,11 +44,4 @@ class App extends Component {
   }
 }
 
-export default compose(
-  graphql(UPDATE_USER_INFO, {name: 'updateUserInfo'}),
-  graphql(GET_USER_INFO, {
-    props: ({data: {userInfo}}) => ({
-      userInfo
-    })
-  })
-)(withRouter(App));
+export default withRouter(App);
