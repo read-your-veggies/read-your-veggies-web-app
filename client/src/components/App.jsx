@@ -6,12 +6,23 @@ import { GET_TEAM_NAME_FROM_LOCAL_STATE } from '../apollo/localQueries';
 import { DELETE_ARTICLE } from '../apollo/resolvers';
 import axios from 'axios';
 
+const updateCache = (cache, { data: { deleteArticle} }) => {
+  console.log(cache, deleteArticle);
+  const { articles } = cache.readQuery({ query: GET_ARTICLES_FROM_SERVER });
+
+  cache.writeQuery({
+    query: GET_ARTICLES_FROM_SERVER,
+    data: {
+      articles: articles.filter(article => article._id !== deleteArticle._id)
+    }
+  });
+};
 
 class App extends Component {
   render() {
     return(
       <div>
-        <Mutation mutation={DELETE_ARTICLE}>
+        <Mutation mutation={DELETE_ARTICLE} update={updateCache}>
         { (deleteArticle) => {
           return (
             <Query query={GET_ARTICLES_FROM_SERVER}>
