@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
+import apolloStateDefaults from './apollo/apolloStateDefaults';
 
 import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
@@ -16,9 +17,7 @@ const cache = new InMemoryCache();
 
 const stateLink = withClientState({
   cache,
-  defaults: {
-    teamName: 'House Slytherin @ Local State!',
-  },
+  defaults: apolloStateDefaults,
   resolvers: {}, //TODO - figure out what these are.
 });
 
