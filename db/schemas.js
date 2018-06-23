@@ -50,6 +50,9 @@ const userSchema = new Schema({
   emails: Array,
   facebookId: String,
   facebookUrl: String,
+  birthday: String,
+  location: String,
+
 });
 
 const User = mongoose.model('User', userSchema);

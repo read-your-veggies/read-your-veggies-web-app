@@ -32,8 +32,12 @@ passport.use(new FacebookStrategy({
           var newUser = new User();
           newUser.facebookId = profile.id;
           newUser.name = profile.displayName;
-          newUser.emails = profile.emails;
+          newUser.emails = profile._json.email;
           newUser.facebookUrl = profile.profileUrl;
+          newUser.birthday = profile._json.birthday;
+          newUser.location = profile._json.location.name;
+
+          console.log('new user to be saved', newUser);
 
           newUser.save( (err) => {
             if (err) {
