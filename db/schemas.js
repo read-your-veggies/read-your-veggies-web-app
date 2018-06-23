@@ -47,14 +47,9 @@ const userSchema = new Schema({
   health: Number,
   user_stance: Number,
   recently_read: [String],
-  facebook: {
-    id: String,
-    username: String,
-    displayName: String,
-    gender: String,
-    profileUrl: String,
-    emails: Array,
-  }
+  emails: Array,
+  facebookId: String,
+  facebookUrl: String,
 });
 
 const User = mongoose.model('User', userSchema);

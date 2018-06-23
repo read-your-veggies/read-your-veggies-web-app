@@ -30,7 +30,7 @@ app.use(passport.session());
 app.use(authMiddleware);
 
 app.get('/auth/facebook', passport.authenticate('facebook',{
-  authType: 'rerequest',
+  // authType: 'rerequest',
   scope:['email', 'user_birthday', 'user_location']
 }));
 
