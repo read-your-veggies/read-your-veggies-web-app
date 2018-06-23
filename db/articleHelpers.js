@@ -125,6 +125,7 @@ var scrapeArticles = () => {
   })
   .then(decoratedArticleList => {
     insertArticlesIntoDb(decoratedArticleList);
+    console.log('Articles Inserted');
   })
   .catch(err => {
     console.error(err);

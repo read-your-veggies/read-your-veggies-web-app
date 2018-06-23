@@ -37,7 +37,7 @@
     "graphql-tag": "^2.9.2",
     "graphql-tools": "^3.0.2",
     "https": "^1.0.0",
-    "mongodb": "^2.2.33",
+    "mongodb": "^2.2.35",
     "mongoose": "^5.1.6",
     "newsapi": "^2.2.2",
     "passport": "^0.4.0",
