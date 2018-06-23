@@ -4,6 +4,7 @@ import Panel from 'react-bootstrap/lib/Panel';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
+import Voter from './Voter.jsx';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Badge from 'react-bootstrap/lib/Badge';
 import { DELETE_ARTICLE } from '../apollo/resolvers';
@@ -53,10 +54,7 @@ class Article extends React.Component {
         { (deleteArticle) => {
           return (
             <div className="article">
-              <Panel bsStyle="success" onClick={() => {
-                  console.log('deleted');
-                  deleteArticle({ variables: { _id: this.props.article._id } 
-                })}}>
+              <Panel bsStyle="success" onClick={() => deleteArticle({ variables: { _id: this.props.article._id } })}>
                   <Panel.Heading className='title'>
                     <Panel.Title>{this.props.article.title}</Panel.Title>
                     <Badge pullRight bsStyle="danger">{this.props.article.articleStance}</Badge>
@@ -101,6 +99,7 @@ class Article extends React.Component {
                   <h4>Fulltext</h4>
                   <p>{this.props.article.fullText}</p>
                 </Modal.Body>
+                <Voter articleId={this.props.article._id}/>
                 <Modal.Footer>
                   <Button onClick={this.handleClose}>Close</Button>
                 </Modal.Footer>

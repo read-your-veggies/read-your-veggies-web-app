@@ -12,4 +12,19 @@ export const DELETE_ARTICLE = gql`
       articleStance
     }
   }
-`;
+`
+
+// todo:
+export const UPDATE_ARTICLE_VOTES = gql`
+  mutation updateArticleVotes($_id: String!) {
+    updateArticleVotes(_id: $_id) {
+      _id
+      url
+      title
+      source
+      description
+      fullText
+      articleStance
+    }
+  }
+`
