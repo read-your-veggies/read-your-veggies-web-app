@@ -1,65 +1,31 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from "react-router-dom";
-import { Query, Mutation } from "react-apollo";
-
+import { Query } from "react-apollo";
 import { GET_ARTICLES_FROM_SERVER } from '../apollo/serverQueries';
 import { GET_TEAM_NAME_FROM_LOCAL_STATE } from '../apollo/localQueries';
-import { DELETE_ARTICLE } from '../apollo/resolvers';
-import Panel from 'react-bootstrap/lib/Panel';
-
-import { GET_USER_INFO, UPDATE_USER_INFO } from '../apollo/localQueries.js';
-
-const updateCache = (cache, { data: { deleteArticle} }) => {
-  console.log(cache, deleteArticle);
-  const { articles } = cache.readQuery({ query: GET_ARTICLES_FROM_SERVER });
-
-  cache.writeQuery({
-    query: GET_ARTICLES_FROM_SERVER,
-    data: {
-      articles: articles.filter(article => article._id !== deleteArticle._id)
-    }
-  });
-};
+import Article from './Article.jsx';
 
 class Dashboard extends Component {
   render() {
     return(
-      <div>
-        
-          <h1>Doctor's Orders</h1>
-        
-        <Query query={GET_USER_INFO}>
-          {({ data, client }) => {
+      <div> 
+        {/* <h1>Doctor's Orders</h1>   */}
+
+        <Query query={GET_ARTICLES_FROM_SERVER}>
+          {({ loading, error, data }) => {
+            if (loading) return "Loading...";
+            if (error) return `Error! ${error.message}`;
+
             return (
-              <h1>{data.userInfo.displayName}</h1>
+              <div className="grid">
+                {data.articles.map((article) => (
+                  <Article article={article}/>
+                ))}
+              </div>
             );
           }}
         </Query>
-        <Mutation mutation={DELETE_ARTICLE} update={updateCache}>
-        { (deleteArticle) => {
-          return (
-            <Query query={GET_ARTICLES_FROM_SERVER}>
-            {({ loading, error, data }) => {
-              if (loading) return "Loading...";
-              if (error) return `Error! ${error.message}`;
 
-              return (
-                <div className="grid">
-                  {data.articles.map((article) => (
-                    <Panel className="article" onClick={() => deleteArticle({ variables: { _id: article._id } })}>
-                        <Panel.Heading className='title'>
-                          <Panel.Title>{article.title}</Panel.Title>
-                        </Panel.Heading>
-                        <Panel.Body className='subtitle'>{article.description}</Panel.Body>
-                    </Panel>
-                  ))}
-                </div>
-              );
-            }}
-          </Query>
-
-          )}}
-        </Mutation>
         <Query query={GET_TEAM_NAME_FROM_LOCAL_STATE}>
           {({ data, client }) => {
             return (

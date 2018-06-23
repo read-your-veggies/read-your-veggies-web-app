@@ -11,21 +11,36 @@ html, body, #app, .app-container {
 }
 
 .article {
-  width: 33%;
+  width: 32%;
+  margin: 0.5%;
 }
 
 .header {
   display: flex;
-  justify-content: flex-start;
-  padding-left: 1em;
+  justify-content: space-around;
 }
 
-.header h1 {
+.header-text {
+  text-align: center;
+}
+
+#read-your-veggies {
   font-family: 'Pacifico', cursive;
   color: #ff77e8;
-  font-size: 5em;
+  font-size: 4em;
 }
 
-.header img {
-  height: 7em;
+#profile-link {
+  align-self: center;
+}
+
+#logo {
+  height: 6em;
+  align-self: center;
+}
+
+.eat-me {
+  display: block;
+  margin: auto;
+  margin-bottom: 1em;
 }
