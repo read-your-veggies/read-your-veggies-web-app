@@ -62,8 +62,8 @@ if (process.env.DEPLOYED !== 'true') {
 }
 
 // WORKERS
-//deleteArticles();
-//scrapeArticles();
+deleteArticles();
+scrapeArticles();
 
 
 
