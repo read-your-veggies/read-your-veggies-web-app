@@ -62,15 +62,9 @@ if (process.env.DEPLOYED !== 'true') {
   });
 }
 
-<<<<<<< HEAD
-// WORKERS
-// articleHelpers.deleteArticles();
-// articleHelpers.scrapeArticles();
-=======
 /*****************************WORKERS*****************************/
-articleHelpers.deleteArticles();
-articleHelpers.scrapeArticles();
->>>>>>> dev
+// articleHelpers.deleteArticles();
+//articleHelpers.scrapeArticles();
 
 
 

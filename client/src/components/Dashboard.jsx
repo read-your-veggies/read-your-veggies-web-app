@@ -4,6 +4,8 @@ import { Query, Mutation } from "react-apollo";
 import { GET_ARTICLES_FROM_SERVER } from '../apollo/serverQueries';
 import { GET_TEAM_NAME_FROM_LOCAL_STATE } from '../apollo/localQueries';
 import { DELETE_ARTICLE } from '../apollo/resolvers';
+import Panel from 'react-bootstrap/lib/Panel';
+
 
 const updateCache = (cache, { data: { deleteArticle} }) => {
   console.log(cache, deleteArticle);
@@ -21,6 +23,9 @@ class Dashboard extends Component {
   render() {
     return(
       <div>
+        
+          <h1>Doctor's Orders</h1>
+        
         <Mutation mutation={DELETE_ARTICLE} update={updateCache}>
         { (deleteArticle) => {
           return (
@@ -30,29 +35,33 @@ class Dashboard extends Component {
               if (error) return `Error! ${error.message}`;
 
               return (
-                <ul>{data.articles.map((article) => (
-                  <div onClick={() => deleteArticle({ variables: { _id: article._id } })} className ='article-stream-card'>
-                    <li className = 'article-stream-card-title'>{article.title}</li>
-                    <li className = 'article-stream-card-desc'>{article.description}</li>
-                  </div>
-                ))}</ul>
+                <div className="grid">
+                  {data.articles.map((article) => (
+                    <Panel className="article" onClick={() => deleteArticle({ variables: { _id: article._id } })}>
+                        <Panel.Heading className='title'>
+                          <Panel.Title>{article.title}</Panel.Title>
+                        </Panel.Heading>
+                        <Panel.Body className='subtitle'>{article.description}</Panel.Body>
+                    </Panel>
+                  ))}
+                </div>
               );
             }}
           </Query>
 
           )}}
         </Mutation>
-      <Query query={GET_TEAM_NAME_FROM_LOCAL_STATE}>
-      {({ data, client }) => {
-        return (
-          <h1 onClick={() =>  {
-            client.writeData({ data: { teamName: data.teamName + 1 } })
+        <Query query={GET_TEAM_NAME_FROM_LOCAL_STATE}>
+          {({ data, client }) => {
+            return (
+              <h1 onClick={() =>  {
+                client.writeData({ data: { teamName: data.teamName + 1 } })
+              }}
+              >{data.teamName}</h1>
+            );
           }}
-          >{data.teamName}</h1>
-        );
-      }}
-    </Query>
-    </div>
+        </Query>
+      </div>
     );
   }
 }
