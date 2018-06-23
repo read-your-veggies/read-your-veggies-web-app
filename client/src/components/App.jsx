@@ -22,6 +22,7 @@ class App extends Component {
   render() {
     return(
       <div>
+        <a className="button">Button</a>
         <Mutation mutation={DELETE_ARTICLE} update={updateCache}>
         { (deleteArticle) => {
           return (
