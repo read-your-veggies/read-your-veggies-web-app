@@ -19,11 +19,12 @@ class App extends Component {
         this.props.history.push('/dashboard');
         var user = (JSON.parse(res.headers.user));
         //TODO - Add user info to local store here.
+        console.log(user);
         this.props.updateUserInfo({
           variables: {
-            theDisplayName: user.displayName,
-            theProvider: user.id,
-            theProviderId: user.provider
+            theDisplayName: user.name,
+            theProvider: 'Facebook',
+            theProviderId: user.facebookId
           }
         })
       } else {
