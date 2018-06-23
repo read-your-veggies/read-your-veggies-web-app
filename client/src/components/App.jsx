@@ -3,6 +3,7 @@ import { Route, withRouter, Switch } from "react-router-dom";
 import Dashboard from './Dashboard.jsx';
 import Login from './Login.jsx';
 import axios from 'axios';
+import Header from './Header.jsx';
 import { graphql, compose } from 'react-apollo';
 import { GET_USER_INFO, UPDATE_USER_INFO } from '../apollo/localQueries.js';
 
@@ -33,10 +34,13 @@ class App extends Component {
   }
   render() {
     return (
-      <Switch>
-        <Route path='/dashboard' component={Dashboard}/>
-        <Route path='/login' component={Login}/>
-      </Switch>
+      <div className="app-container">
+        <Header />
+        <Switch>
+          <Route path='/dashboard' component={Dashboard}/>
+          <Route path='/login' component={Login}/>
+        </Switch>
+      </div>
     )
   }
 }

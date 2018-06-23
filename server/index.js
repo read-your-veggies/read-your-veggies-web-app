@@ -69,7 +69,11 @@ if (process.env.DEPLOYED !== 'true') {
 
 /*****************************WORKERS*****************************/
 // articleHelpers.deleteArticles();
+<<<<<<< HEAD
 // articleHelpers.scrapeArticles();
+=======
+//articleHelpers.scrapeArticles();
+>>>>>>> dev
 
 
 
