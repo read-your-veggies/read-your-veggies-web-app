@@ -29,9 +29,13 @@ app.use(passport.session());
 
 app.use(authMiddleware);
 
-app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook', passport.authenticate('facebook',{
+  authType: 'rerequest',
+  scope:['email', 'user_birthday', 'user_location']
+}));
 
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  // This scope array seems to be how we request additional info
   successRedirect: '/',
   failureRedirect: '/',
 }));
@@ -61,8 +65,8 @@ if (process.env.DEPLOYED !== 'true') {
 }
 
 // WORKERS
-articleHelpers.deleteArticles();
-articleHelpers.scrapeArticles();
+// articleHelpers.deleteArticles();
+// articleHelpers.scrapeArticles();
 
 
 
