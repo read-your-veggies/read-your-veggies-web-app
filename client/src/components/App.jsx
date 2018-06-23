@@ -3,19 +3,30 @@ import { Route, withRouter, Switch } from "react-router-dom";
 import Dashboard from './Dashboard.jsx';
 import Login from './Login.jsx';
 import axios from 'axios';
+import { graphql, compose } from 'react-apollo';
+import { GET_USER_INFO, UPDATE_USER_INFO } from '../apollo/localQueries.js';
 
 class App extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
   }
 
   componentDidMount() {
     axios.get('/checkAuthHeaders').then((res) => {
       if (res.headers.user !== undefined) {
         this.props.history.push('/dashboard');
+        var user = (JSON.parse(res.headers.user));
+        //TODO - Add user info to local store here.
+        this.props.updateUserInfo({
+          variables: {
+            theDisplayName: user.displayName,
+            theProvider: user.id,
+            theProviderId: user.provider
+          }
+        })
       } else {
         this.props.history.push('/login');
-        //TODO - Add user info to local store here.
       }
     });
   }
@@ -29,4 +40,11 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default compose(
+  graphql(UPDATE_USER_INFO, {name: 'updateUserInfo'}),
+  graphql(GET_USER_INFO, {
+    props: ({data: {userInfo}}) => ({
+      userInfo
+    })
+  })
+)(withRouter(App));
