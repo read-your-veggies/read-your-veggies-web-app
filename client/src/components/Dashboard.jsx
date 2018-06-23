@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from "react-router-dom";
 import { Query, Mutation } from "react-apollo";
+
 import { GET_ARTICLES_FROM_SERVER } from '../apollo/serverQueries';
 import { GET_TEAM_NAME_FROM_LOCAL_STATE } from '../apollo/localQueries';
 import { DELETE_ARTICLE } from '../apollo/resolvers';
 import Panel from 'react-bootstrap/lib/Panel';
 
+import { GET_USER_INFO, UPDATE_USER_INFO } from '../apollo/localQueries.js';
 
 const updateCache = (cache, { data: { deleteArticle} }) => {
   console.log(cache, deleteArticle);
@@ -26,6 +28,13 @@ class Dashboard extends Component {
         
           <h1>Doctor's Orders</h1>
         
+        <Query query={GET_USER_INFO}>
+          {({ data, client }) => {
+            return (
+              <h1>{data.userInfo.displayName}</h1>
+            );
+          }}
+        </Query>
         <Mutation mutation={DELETE_ARTICLE} update={updateCache}>
         { (deleteArticle) => {
           return (
