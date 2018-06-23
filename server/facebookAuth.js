@@ -23,7 +23,7 @@ passport.use(new FacebookStrategy({
     // console.log('User', User);
     process.nextTick( () => {    // This is a pretty new function for me.
       console.log('profile', profile);
-      User.findOne({'user.id': profile.id}, (err, user) => {
+      User.findOne({facebookId: profile.id}, (err, user) => {
         if (err) return done(err);
 
         if (user) {
