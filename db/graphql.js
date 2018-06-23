@@ -1,5 +1,6 @@
 var makeExecutableSchema = require('graphql-tools').makeExecutableSchema;
 const db = require('./index.js').db;
+typeDefs = require('./typeDefs.js');
 
 const prepare = (object) => {
   object._id = object._id.toString();
@@ -11,56 +12,7 @@ const getGraphQlSchema = async () => {
     const Posts = db.collection('posts');
     const Comments = db.collection('comments');
     const Articles = db.collection('articles');
-
-    typeDefs = [`
-      type Query {
-        post(_id: String): Post
-        posts: [Post]
-        comment(_id: String): Comment
-        message: String
-        articles: [Article]
-      }
-
-      type Article {
-        _id: String
-        url: String
-        title: String
-        author: [String]
-        source: String
-        description: String
-        fullText: String
-      }
-    
-      type Post {
-        _id: String
-        title: String
-        content: String
-        comments: [Comment]
-      }
-    
-      type Comment {
-        _id: String
-        postId: String
-        content: String
-        post: Post
-      }
-    
-      type Mutation {
-        createPost(title: String, content: String): Post
-        createComment(postId: String, content: String): Comment
-        createArticle(url: String,
-          title: String,
-          author: [String],
-          source: String,
-          description: String,
-          fullText: String): Article
-      }
-    
-      schema {
-        query: Query
-        mutation: Mutation
-      }
-    `]
+    const Users = db.collection('users');
 
     const resolvers = {
       Query: {
@@ -94,10 +46,17 @@ const getGraphQlSchema = async () => {
           console.log('res is', res);
           return prepare(await Posts.findOne({_id: res.insertedIds[0]}))
         },
+        // probably should disable this for production:
         createArticle: async (root, args, context, info) => {
           const res = await Articles.insert(args);
           console.log('res is', res);
           return prepare(await Articles.findOne({_id: res.insertedIds[0]}))
+        },
+        // probably should disable this as well:
+        deleteArticles: async () => {
+          const res = await Articles.remove({});
+          console.log('res is', res);
+          return 'deleted';
         },
         createComment: async (root, args) => {
           const res = await Comments.insert(args)

@@ -9,8 +9,7 @@ var session = require('express-session');
 var path = require('path');
 var authMiddleware = require('./authMiddleware.js');
 var requestLogger = require('./utilities.js').requestLogger;
-var scrapeArticles = require('../db/utilities.js').scrapeArticles;
-var deleteArticles = require('../db/utilities.js').deleteArticles;
+var articleHelpers = require('../db/articleHelpers.js');
 var getGraphQlSchema = require('../db/graphql.js').getGraphQlSchema;
 
 // SERVER
@@ -62,8 +61,8 @@ if (process.env.DEPLOYED !== 'true') {
 }
 
 // WORKERS
-//deleteArticles();
-//scrapeArticles();
+articleHelpers.deleteArticles();
+articleHelpers.scrapeArticles();
 
 
 
