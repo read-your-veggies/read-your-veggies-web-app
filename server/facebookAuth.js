@@ -19,10 +19,10 @@ passport.use(new FacebookStrategy({
     profileFields: ['email', 'birthday', 'location']
   },
   function(accessToken, refreshToken, profile, done) {
-    // console.log('profile', profile);
     // Add to database here
     // console.log('User', User);
     process.nextTick( () => {    // This is a pretty new function for me.
+      console.log('profile', profile);
       User.findOne({'user.id': profile.id}, (err, user) => {
         if (err) return done(err);
 
@@ -30,13 +30,22 @@ passport.use(new FacebookStrategy({
           return done(null, user);
         } else {
           var newUser = new User();
-          newUser.
+          newUser.facebook.id = profile.id;
+          newUser.facebook.name = profile.name;
+          newUser.facebook.emails = profile.emails;
+          newUser.facebook.profileUrl = profile.profileUrl;
+
+          newUser.save( (err) => {
+            if (err) {
+              console.log(err);
+            }
+
+            return done(null, newUser);
+          })
         }
       })
     })
-
-
-    done(null, profile);
+    // done(null, profile);
   }
 ));
 
