@@ -1,6 +1,8 @@
 var makeExecutableSchema = require('graphql-tools').makeExecutableSchema;
 const db = require('./index.js').db;
 typeDefs = require('./typeDefs.js');
+//needed to delete by _id
+const mongodb = require('mongodb');
 
 const prepare = (object) => {
   object._id = object._id.toString();
@@ -57,6 +59,12 @@ const getGraphQlSchema = async () => {
           const res = await Articles.remove({});
           console.log('res is', res);
           return 'deleted';
+        },
+        //test function to allow client to delete article on click
+        deleteArticle: async (root, args, context, info) => {
+          console.log(args._id)
+          const res = await Articles.deleteOne({_id: new mongodb.ObjectID(args._id)});
+          return res;
         },
         createComment: async (root, args) => {
           const res = await Comments.insert(args)

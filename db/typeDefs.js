@@ -51,6 +51,7 @@ module.exports = [`
     createPost(title: String, content: String): Post
     createComment(postId: String, content: String): Comment
     deleteArticles: Article
+    deleteArticle(_id: String): Article
     createArticle(url: String,
       title: String,
       author: [String],
