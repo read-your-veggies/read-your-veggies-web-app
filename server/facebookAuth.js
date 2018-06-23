@@ -16,7 +16,7 @@ passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: process.env.CALLBACK_URL,
-    profileFields: ['email', 'birthday', 'location', 'displayName']
+    profileFields: ['email', 'birthday', 'location', 'displayName', 'hometown']
   },
   function(accessToken, refreshToken, profile, done) {
     // Add to database here
@@ -36,6 +36,7 @@ passport.use(new FacebookStrategy({
           newUser.facebookUrl = profile.profileUrl;
           newUser.birthday = profile._json.birthday;
           newUser.location = profile._json.location.name;
+          newUser.hometown = profile._json.hometown.name;
 
           console.log('new user to be saved', newUser);
 

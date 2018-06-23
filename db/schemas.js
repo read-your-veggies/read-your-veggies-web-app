@@ -47,11 +47,12 @@ const userSchema = new Schema({
   health: Number,
   user_stance: Number,
   recently_read: [String],
-  emails: Array,
+  emails: String,
   facebookId: String,
   facebookUrl: String,
   birthday: String,
   location: String,
+  hometown: String,
 
 });
 

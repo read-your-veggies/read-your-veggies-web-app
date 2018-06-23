@@ -29,7 +29,7 @@ app.use(passport.session());
 app.use(authMiddleware);
 app.get('/auth/facebook', passport.authenticate('facebook',{
   // authType: 'rerequest',
-  scope:['email', 'user_birthday', 'user_location']
+  scope:['email', 'user_birthday', 'user_location', 'user_hometown']
 }));
 
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
