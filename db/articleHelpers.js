@@ -1,10 +1,10 @@
 const axios = require('axios');
 const extractor = require('unfluff');
 const Article = require('./schemas.js').Article;
+const sourceWeights = require('./data/sourceWeights.js');
 require('dotenv').config();
 
 var getUrlsFromNewsAPI = () => {
-
   return new Promise((resolve, reject) => {
     axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.NEWS_API_KEY}`)
     .then(response => {
@@ -17,36 +17,35 @@ var getUrlsFromNewsAPI = () => {
       // retrieveArticles(urlList);
       return urlList;
     })
-    .catch(err => {
-      console.error(err);
-    })
     .then(urlList => {
       resolve(urlList);
+    })
+    .catch(err => {
+      reject(err);
     })
   })
 }
 
-var getArticlesFromUrls = (urlList) => {
-
+var getArticlesFromUrls = (urlArray) => {
   return new Promise((resolve, reject) => {
-
-    var promises = urlList.map(url => {
+    var promises = urlArray.map(url => {
       return parseArticle(url);
     }); 
-
     Promise.all(promises)
-    .catch(err => {
-      console.error(err);
+    .then(articlesArray => {
+      resolve(articlesArray);
     })
-    .then(articleList => {
-      resolve(articleList);
+    .catch(err => {
+      reject(err);
     })
   });
+}
 
+var getArticleStance = (source) => {
+  return sourceWeights[source];
 }
 
 var parseArticle = (currArticleUrl) => {
-
   return new Promise((resolve, reject) => {
     axios.get(currArticleUrl)
     .then(response => {
@@ -85,7 +84,8 @@ var parseArticle = (currArticleUrl) => {
           },
         }  
       }
-      resolve(article);
+      //article.articleStance = getArticleStance(article.source);
+      resolve(article);  
     })
     .catch(err => {
       reject(err);
@@ -93,9 +93,19 @@ var parseArticle = (currArticleUrl) => {
   });
 }
 
-var insertArticlesIntoDb = (articleList) => {
+var decorateArticlesWithStance = (articlesArray) => {
   return new Promise((resolve, reject) => {
-    Article.insertMany(articleList, (err, result) => {
+    articlesArray.forEach(article => {
+      article.articleStance = String(sourceWeights[article.source]);
+    });
+    resolve(articlesArray);
+  })
+}
+
+var insertArticlesIntoDb = (articlesArray) => {
+  console.log(articlesArray);
+  return new Promise((resolve, reject) => {
+    Article.insertMany(articlesArray, (err) => {
       if (err) {
         reject(err);
       } else {
@@ -111,7 +121,10 @@ var scrapeArticles = () => {
     return getArticlesFromUrls(urlList);
   })
   .then(articleList => {
-    insertArticlesIntoDb(articleList);
+    return decorateArticlesWithStance(articleList);
+  })
+  .then(decoratedArticleList => {
+    insertArticlesIntoDb(decoratedArticleList);
   })
   .catch(err => {
     console.error(err);

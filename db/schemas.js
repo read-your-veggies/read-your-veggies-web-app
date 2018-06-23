@@ -34,6 +34,7 @@ const articleSchema = new Schema({
       summedUserStance: Number,
       totalVotes: Number,
     },
+    articleStance: String,
   }  
 });
 

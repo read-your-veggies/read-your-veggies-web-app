@@ -1,5 +1,6 @@
 var makeExecutableSchema = require('graphql-tools').makeExecutableSchema;
 const db = require('./index.js').db;
+typeDefs = require('./typeDefs.js');
 
 const prepare = (object) => {
   object._id = object._id.toString();
@@ -12,57 +13,6 @@ const getGraphQlSchema = async () => {
     const Comments = db.collection('comments');
     const Articles = db.collection('articles');
     const Users = db.collection('users');
-
-    typeDefs = [`
-      type Query {
-        post(_id: String): Post
-        posts: [Post]
-        comment(_id: String): Comment
-        message: String
-        articles: [Article]
-      }
-
-      type Article {
-        _id: String
-        url: String
-        title: String
-        author: [String]
-        source: String
-        description: String
-        fullText: String
-      }
-    
-      type Post {
-        _id: String
-        title: String
-        content: String
-        comments: [Comment]
-      }
-    
-      type Comment {
-        _id: String
-        postId: String
-        content: String
-        post: Post
-      }
-    
-      type Mutation {
-        createPost(title: String, content: String): Post
-        createComment(postId: String, content: String): Comment
-        deleteArticles: Article
-        createArticle(url: String,
-          title: String,
-          author: [String],
-          source: String,
-          description: String,
-          fullText: String): Article
-      }
-    
-      schema {
-        query: Query
-        mutation: Mutation
-      }
-    `]
 
     const resolvers = {
       Query: {
