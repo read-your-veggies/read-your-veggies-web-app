@@ -1556,6 +1556,4 @@ for (var slant in sourceData) {
   }
 }
 
-console.log('sources is', sources);
-
 module.exports = sources;

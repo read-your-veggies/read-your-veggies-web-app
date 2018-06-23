@@ -8,9 +8,47 @@ const articleSchema = new Schema({
   author: Array, // news api always returns an array of strings here
   source: String,
   description: String,
-  fullText: String,    
+  fullText: String,
+  votes: {
+    agree: {
+      summedUserStance: Number,
+      totalVotes: Number,
+    },
+    disagree: {
+      summedUserStance: Number,
+      totalVotes: Number,
+    },
+    fun: {
+      summedUserStance: Number,
+      totalVotes: Number,
+    },
+    bummer: {
+      summedUserStance: Number,
+      totalVotes: Number,
+    },
+    mean: {
+      summedUserStance: Number,
+      totalVotes: Number,
+    },
+    worthyAdversary: {
+      summedUserStance: Number,
+      totalVotes: Number,
+    },
+    articleStance: String,
+  }  
 });
 
-var Article = mongoose.model('Article', articleSchema);
+const Article = mongoose.model('Article', articleSchema);
 
-module.exports = { Article }
+const userSchema = new Schema({
+  authenticationInfo: String,
+  avatar: String,
+  name: String,
+  health: Number,
+  user_stance: Number,
+  recently_read: [String]
+});
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = { Article, User }

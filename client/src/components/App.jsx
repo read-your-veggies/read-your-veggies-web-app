@@ -3,6 +3,7 @@ import { Route, withRouter } from "react-router-dom";
 import { Query } from "react-apollo";
 import { GET_ARTICLES_FROM_SERVER } from '../apollo/serverQueries';
 import { GET_TEAM_NAME_FROM_LOCAL_STATE } from '../apollo/localQueries';
+import axios from 'axios';
 
 
 class App extends Component {
