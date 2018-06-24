@@ -3,6 +3,12 @@ html, body, #app, .app-container {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: rgb(236, 235, 235);
+}
+
+div {
+  border: 1px solid red;
 }
 
 .grid {
@@ -15,9 +21,22 @@ html, body, #app, .app-container {
   margin: 0.5%;
 }
 
+.article-full-text{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400 !important;
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+}
+
 .header {
   display: flex;
   justify-content: space-around;
+}
+
+.header h2 {
+  font-weight: 200 !important;
 }
 
 .header-text {
@@ -30,8 +49,20 @@ html, body, #app, .app-container {
   font-size: 4em;
 }
 
+#user-info-container {
+  flex-basis: 20%;
+  display: flex;
+  justify-content: space-around;
+}
+
 #profile-link {
   align-self: center;
+}
+
+#logo-container {
+  flex-basis: 20%;
+  display: flex;
+  justify-content: space-around;
 }
 
 #logo {
@@ -43,4 +74,13 @@ html, body, #app, .app-container {
   display: block;
   margin: auto;
   margin-bottom: 1em;
+}
+
+@media only screen and (max-width: 600px) {
+  .article {
+    width: 85%
+  }
+  #logo-container {
+    display: none;
+  }
 }

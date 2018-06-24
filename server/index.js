@@ -12,11 +12,13 @@ var requestLogger = require('./utilities.js').requestLogger;
 var articleHelpers = require('../db/articleHelpers.js');
 var getGraphQlSchema = require('../db/graphql.js').getGraphQlSchema;
 
-// SERVER
-const app = express();
+
+var app = express();
 app.use(requestLogger);
 
-app.use('/', express.static(__dirname + '/../client/dist'));
+app.use(express.static(__dirname + '/../client/dist'));
+app.use(bodyParser.json());
+
 /*****************************AUTH*****************************/
 app.use(session({
   secret: 'Clark Kent is Superman!',
@@ -27,17 +29,35 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(authMiddleware);
-app.get('/auth/facebook', passport.authenticate('facebook',{
-  // authType: 'rerequest',
-  scope:['email', 'user_location', 'user_hometown', 'user_age_range']
+
+//dummy endpoint to verify user authentication
+//Authentication 
+app.get('/checkauthheaders', (req, res) => {res.send();})
+//Handle logouts
+app.get('/logout', ((req, res) => {
+  req.logout();
+  console.log(req.user);
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    }
+    req.session = null;
+    res.clearCookie('connect.sid');
+    req.logout();
+    req.logOut();
+    res.redirect('/');
+  });
 }));
 
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-  // This scope array seems to be how we request additional info
   successRedirect: '/',
   failureRedirect: '/',
 }));
-app.get('/checkAuthHeaders', (req , res) => {res.send(200)});
+app.get('/auth/facebook', passport.authenticate('facebook',{
+  // authType: 'rerequest',
+  // This scope array seems to be how we request additional info
+  scope:['email', 'user_location', 'user_hometown', 'user_age_range']
+}));
 
 //React Router Redirect Hack
 app.get('/dashboard', (req,res) => res.redirect('/'));
@@ -70,8 +90,3 @@ if (process.env.DEPLOYED !== 'true') {
 /*****************************WORKERS*****************************/
 articleHelpers.deleteArticles();
 articleHelpers.scrapeArticles();
-
-
-
-
-

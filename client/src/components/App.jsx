@@ -4,7 +4,6 @@ import Dashboard from './Dashboard.jsx';
 import Login from './Login.jsx';
 import axios from 'axios';
 import Header from './Header.jsx';
-import { graphql, compose } from 'react-apollo';
 
 class App extends Component {
   constructor(props) {
@@ -18,7 +17,7 @@ class App extends Component {
         this.props.history.push('/dashboard');
         var user = (JSON.parse(res.headers.user));
         //TODO - Add user info to local store here.
-        console.log(user);
+        console.log(res.headers);
         this.props.updateUserInfo({
           variables: {
             theDisplayName: user.name,

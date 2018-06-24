@@ -97,7 +97,7 @@ class Article extends React.Component {
                   <hr />
 
                   <h4>Fulltext</h4>
-                  <p>{this.props.article.fullText}</p>
+                  <pre className='article-full-text'>{this.props.article.fullText}</pre>
                 </Modal.Body>
                 <Voter articleId={this.props.article._id}/>
                 <Modal.Footer>
@@ -106,7 +106,7 @@ class Article extends React.Component {
               </Modal>
             </div>
           )}}
-       </Mutation>
+      </Mutation>
     );
   }
 }
