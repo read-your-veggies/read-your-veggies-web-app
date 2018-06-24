@@ -66,8 +66,9 @@ div {
 }
 
 #logo {
-  height: 6em;
+  height: 9em;
   align-self: center;
+  max-width: 100%;
 }
 
 .eat-me {
@@ -75,10 +76,6 @@ div {
   margin: auto;
   margin-bottom: 1em;
 }
-
-/* .modal-dialog {
-  width: 80%;
-} */
 
 @media only screen and (max-width: 600px) {
   .article {
