@@ -3,15 +3,12 @@ html, body, #app, .app-container {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-<<<<<<< HEAD
   font-family: 'Roboto', sans-serif;
   background-color: rgb(236, 235, 235);
 }
 
 div {
   border: 1px solid red;
-=======
->>>>>>> dc8859b43cb153c3e227050c86f1c7edbde653cb
 }
 
 .grid {
@@ -24,7 +21,6 @@ div {
   margin: 0.5%;
 }
 
-<<<<<<< HEAD
 .article-full-text{
   font-family: 'Roboto', sans-serif;
   font-weight: 400 !important;
@@ -34,20 +30,15 @@ div {
   white-space: -o-pre-wrap;    /* Opera 7 */
 }
 
-=======
->>>>>>> dc8859b43cb153c3e227050c86f1c7edbde653cb
 .header {
   display: flex;
   justify-content: space-around;
 }
 
-<<<<<<< HEAD
 .header h2 {
   font-weight: 200 !important;
 }
 
-=======
->>>>>>> dc8859b43cb153c3e227050c86f1c7edbde653cb
 .header-text {
   text-align: center;
 }
@@ -58,28 +49,22 @@ div {
   font-size: 4em;
 }
 
-<<<<<<< HEAD
 #user-info-container {
   flex-basis: 20%;
   display: flex;
   justify-content: space-around;
 }
 
-=======
->>>>>>> dc8859b43cb153c3e227050c86f1c7edbde653cb
 #profile-link {
   align-self: center;
 }
 
-<<<<<<< HEAD
 #logo-container {
   flex-basis: 20%;
   display: flex;
   justify-content: space-around;
 }
 
-=======
->>>>>>> dc8859b43cb153c3e227050c86f1c7edbde653cb
 #logo {
   height: 6em;
   align-self: center;
@@ -89,7 +74,6 @@ div {
   display: block;
   margin: auto;
   margin-bottom: 1em;
-<<<<<<< HEAD
 }
 
 @media only screen and (max-width: 600px) {
@@ -99,6 +83,4 @@ div {
   #logo-container {
     display: none;
   }
-=======
->>>>>>> dc8859b43cb153c3e227050c86f1c7edbde653cb
 }
