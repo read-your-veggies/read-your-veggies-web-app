@@ -97,7 +97,11 @@ class Article extends React.Component {
                   <hr />
 
                   <h4>Fulltext</h4>
+<<<<<<< HEAD
                   <pre className='article-full-text'>{this.props.article.fullText}</pre>
+=======
+                  <p>{this.props.article.fullText}</p>
+>>>>>>> dc8859b43cb153c3e227050c86f1c7edbde653cb
                 </Modal.Body>
                 <Voter articleId={this.props.article._id}/>
                 <Modal.Footer>
@@ -106,7 +110,11 @@ class Article extends React.Component {
               </Modal>
             </div>
           )}}
+<<<<<<< HEAD
       </Mutation>
+=======
+       </Mutation>
+>>>>>>> dc8859b43cb153c3e227050c86f1c7edbde653cb
     );
   }
 }
