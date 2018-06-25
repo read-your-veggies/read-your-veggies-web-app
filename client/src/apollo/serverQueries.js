@@ -10,9 +10,9 @@ export const GET_ARTICLES_FROM_SERVER = gql`
     }
   }
 `
-export const GET_ONE_FULL_ARTICLE = (articleId) => {gql`
-  query {
-    article(_id: ${articleId}){
+export const GET_ONE_FULL_ARTICLE =  gql`
+  query article($_id: String!) {
+    article(_id: $_id){
       _id
       url
       title
@@ -22,4 +22,4 @@ export const GET_ONE_FULL_ARTICLE = (articleId) => {gql`
       articleStance
     }
   }
-`}
+`
