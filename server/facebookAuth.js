@@ -36,7 +36,7 @@ passport.use(new FacebookStrategy({
           newUser.facebookUrl = profile.profileUrl;
           newUser.location = profile._json.location.name;
           newUser.hometown = profile._json.hometown.name;
-          newUser.age_range = profile._json.age_range;
+          newUser.age_range = JSON.stringify(profile._json.age_range);
 
           console.log('new user to be saved', newUser);
 
