@@ -10,6 +10,7 @@ export const GET_ARTICLES_FROM_SERVER = gql`
       description
       fullText
       articleStance
+      image
     }
   }
 `

@@ -15,7 +15,7 @@ class Voter extends React.Component {
       <Mutation mutation={UPDATE_ARTICLE_VOTES} >
         { (updateArticleVotes) => {
           return (
-            <form>
+            <form className="voter-form">
               <FormGroup>
                 <Radio value="agree" inline>
                   Agree

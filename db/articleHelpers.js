@@ -49,6 +49,7 @@ var parseArticle = (currArticleUrl) => {
         author: webpage.author,
         source: webpage.publisher,
         description: webpage.description,
+        image: webpage.image,
         fullText: webpage.text,
         votes: {
           agree: {
