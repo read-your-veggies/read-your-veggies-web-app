@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Route, withRouter, Switch } from "react-router-dom";
+import axios from 'axios';
+
+import Header from './Header.jsx';
 import Dashboard from './Dashboard.jsx';
 import Login from './Login.jsx';
-import axios from 'axios';
-import Header from './Header.jsx';
+import HealthDashboard from './HealthDashboard.jsx';
+
 
 class App extends Component {
   constructor(props) {
@@ -33,10 +36,11 @@ class App extends Component {
   render() {
     return (
       <div className="app-container">
-        <Header />
+        <Header location={location} />
         <Switch>
-          <Route path='/dashboard' component={Dashboard}/>
-          <Route path='/login' component={Login}/>
+          <Route path='/dashboard' component={Dashboard} />
+          <Route path='/login' component={Login} />
+          <Route path='/health' component={HealthDashboard} />
         </Switch>
       </div>
     )
