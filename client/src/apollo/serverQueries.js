@@ -20,6 +20,7 @@ export const GET_ONE_FULL_ARTICLE =  gql`
       description
       fullText
       articleStance
+      image
     }
   }
 `

@@ -1,0 +1,8 @@
+.speedometer{
+  display: block;
+  margin: 0 auto;
+}
+
+.speedometer g.label {
+  display: none;
+}

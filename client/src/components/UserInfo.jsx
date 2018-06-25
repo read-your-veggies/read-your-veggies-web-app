@@ -1,10 +1,9 @@
 import React from 'react';
-import { Query } from "react-apollo";
-import { GET_USER_INFO } from '../apollo/localQueries.js';
 import { withRouter } from "react-router-dom";
-
-
 import HealthSpeedometer from './HealthSpeedometer.jsx';
+import Tooltip from 'react-bootstrap/lib/Tooltip';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+
 
 class UserInfo extends React.Component {
   constructor(props) {
@@ -13,27 +12,28 @@ class UserInfo extends React.Component {
   }
 
   handleSpeedometerClick() {
-    console.log('asdf');
-    this.props.history.push('/health');
+    if (this.props.displayName !== 'John Doe') {
+      this.props.history.push('/health');
+    }
   }
 
   render() {
+
+    var tooltip = <Tooltip id="modal-tooltip">{this.props.displayName === 'John Doe' ? 'Login' : 'Logout?'}</Tooltip>;
+
     return (
       <div id='user-info-container'>
-        <Query query={GET_USER_INFO}>
-          {({ data, client }) => {
-            return (
-              <h2 id="profile-link">{data.userInfo.displayName}</h2>
-            );
-          }}
-        </Query>
-          <div className='small-speedometer-click-wrapper' onClick={this.handleSpeedometerClick}>
-            <HealthSpeedometer 
-              height={100}
-              width={150}
-            />
-          </div>
-        <a id='logout-button' href='/logout'>Logout</a>
+        <h2 id="profile-link">{' '}
+          <OverlayTrigger overlay={tooltip}>
+            <a href="/logout">{this.props.displayName}</a>
+          </OverlayTrigger>{' '}
+        </h2>
+        <div className='small-speedometer-click-wrapper' onClick={this.handleSpeedometerClick}>
+          <HealthSpeedometer 
+            height={100}
+            width={150}
+          />
+        </div>
       </div>
     );
   }

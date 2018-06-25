@@ -18,6 +18,7 @@ module.exports = [`
     fullText: String
     votes: Vote
     articleStance: String
+    image: String
   }
 
   type Vote {
