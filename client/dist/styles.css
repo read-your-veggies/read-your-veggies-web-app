@@ -83,10 +83,20 @@ div {
 
 #profile-link {
   align-self: center;
+  margin: 0;
 }
 
 #logout-button{
   align-self: center;
+}
+
+.speedometer{
+  display: block;
+  margin: 0 auto;
+}
+
+.speedometer g.label {
+  display: none;
 }
 
 #logo-container {

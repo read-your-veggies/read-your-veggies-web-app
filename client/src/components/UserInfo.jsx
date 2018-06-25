@@ -1,9 +1,24 @@
 import React from 'react';
 import { Query } from "react-apollo";
 import { GET_USER_INFO } from '../apollo/localQueries.js';
+import { withRouter } from "react-router-dom";
 
-const UserInfo = () => {
-  return (
+
+import HealthSpeedometer from './HealthSpeedometer.jsx';
+
+class UserInfo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSpeedometerClick = this.handleSpeedometerClick.bind(this);
+  }
+
+  handleSpeedometerClick() {
+    console.log('asdf');
+    this.props.history.push('/health');
+  }
+
+  render() {
+    return (
       <div id='user-info-container'>
         <Query query={GET_USER_INFO}>
           {({ data, client }) => {
@@ -12,9 +27,17 @@ const UserInfo = () => {
             );
           }}
         </Query>
+          <div className='small-speedometer-click-wrapper' onClick={this.handleSpeedometerClick}>
+            <HealthSpeedometer 
+              height={100}
+              width={150}
+            />
+          </div>
         <a id='logout-button' href='/logout'>Logout</a>
-    </div>
-  )
+      </div>
+    );
+  }
+
 }
 
-export default UserInfo;
+export default withRouter(UserInfo);
