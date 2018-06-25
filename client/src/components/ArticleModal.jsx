@@ -17,7 +17,6 @@ class ArticleModal extends React.Component {
   }
 
   render() {
-    
     const popover = (
       <Popover id="modal-popover" title="popover">
         very popover. such engagement
@@ -31,7 +30,6 @@ class ArticleModal extends React.Component {
         { ({ loading, error, data}) => {
           if (loading) return null;
           if (error) return 'Error!';
-
           return (
             <Modal show={this.props.show} onHide={this.props.handleClose}>
                 <Modal.Header closeButton>
@@ -39,11 +37,10 @@ class ArticleModal extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                   {/* <h4>{this.props.article.description}</h4> */}
-                  <hr />
 
                   <div className="article-body">
-                    <img className="article-image" src={this.props.article.image} />
-                    <p className="article-full-text">{this.props.article.fullText}</p>
+                    <img className="article-image" src={data.article.image} />
+                    <p className="article-full-text">{data.article.fullText}</p>
                     <Voter articleId={this.props.article._id}/>
                   </div>
 
@@ -58,14 +55,6 @@ class ArticleModal extends React.Component {
                       <a href="#tooltip">Why this article?</a>
                     </OverlayTrigger>{' '}
                   </p>
-<<<<<<< HEAD
-=======
-
-                  <hr />
-
-                  <h4>Fulltext</h4>
-                  <pre className='article-full-text'>{data.article.fullText}</pre>
->>>>>>> dev
                 </Modal.Body>
                 <Modal.Footer>
                   <Button onClick={this.props.handleClose}>Close</Button>
@@ -75,7 +64,6 @@ class ArticleModal extends React.Component {
         }}
       </Query>
     )
-
 
 
     return (
