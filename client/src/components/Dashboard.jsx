@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { Query } from "react-apollo";
 import { GET_ARTICLES_FROM_SERVER, GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
 import { GET_TEAM_NAME_FROM_LOCAL_STATE } from '../apollo/localQueries';
