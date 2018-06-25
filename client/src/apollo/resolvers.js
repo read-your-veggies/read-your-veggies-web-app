@@ -16,15 +16,10 @@ export const DELETE_ARTICLE = gql`
 
 // todo:
 export const UPDATE_ARTICLE_VOTES = gql`
-  mutation updateArticleVotes($_id: String!) {
-    updateArticleVotes(_id: $_id) {
+  mutation updateArticleVotes($_id: String!, $title: String) {
+    updateArticleVotes(_id: $_id, title: $title) {
       _id
-      url
       title
-      source
-      description
-      fullText
-      articleStance
     }
   }
 `

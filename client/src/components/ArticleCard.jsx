@@ -64,7 +64,6 @@ class ArticleCard extends React.Component {
                   </Panel.Heading>
                   <Panel.Body className='subtitle'>{this.props.article.description}</Panel.Body>
 
-                  {/* Wrap this button in apollo consumer, the load the entire article into state.  Then pass the whole article down as a prop. */}
                   <ApolloConsumer>
                     { client => (
                       <Button 
@@ -86,7 +85,6 @@ class ArticleCard extends React.Component {
                     </Button>
                     )}
                   </ApolloConsumer>
-
 
               </Panel>
               <ArticleModal 

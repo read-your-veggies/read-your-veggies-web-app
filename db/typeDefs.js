@@ -27,7 +27,7 @@ module.exports = [`
     fun: Tally
     bummer: Tally
     mean: Tally
-    worthAdversary: Tally
+    worthyAdversary: Tally
   }
 
   type Tally {
