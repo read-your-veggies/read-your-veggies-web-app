@@ -54,7 +54,7 @@ const userSchema = new Schema({
   birthday: String,
   location: String,
   hometown: String,
-  age_range: Schema.Types.Mixed,
+  age_range: String,
 
 });
 
