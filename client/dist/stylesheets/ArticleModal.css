@@ -1,28 +1,49 @@
 @import url("./Voter.css");
 
-.modal-dialog {
-  height: 100%;
-}
-
-.modal-content {
-  height: 100%;
-}
-
-.modal-body {
-  height: 80%;
-}
-
 .modal-header {
   text-align: center;
 }
 
-.article-full-text {
-  white-space: pre-wrap;
+.modal-title {
+  font-size: 2em;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: flex-start;
+}
+
+.modal-body-left {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body-right{
+  width: 50%;
+  height: 500px;
   overflow: scroll;
 }
 
 .article-image {
-  width: 50%;
+  max-height: 250px;
+  width: auto;
+}
+
+.voting-panel {
+  height: 250px;
+}
+
+.article-full-text {
+  background-color: rgb(236, 235, 235);
+  font-size: 1.5em;
+  white-space: pre-wrap;
+}
+
+.modal-footer p, .modal-footer .btn {
+  display: inline;
+}
+
+.modal-footer p {
   float: left;
-  padding-right: 1em;
 }

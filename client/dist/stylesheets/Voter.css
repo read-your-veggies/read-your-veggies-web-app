@@ -1,3 +1,9 @@
-.voter-form {
-  float: left;
+.form-group {
+  display: flex;
+  flex-direction: flex-start;
+}
+
+.voter-form-left, .voter-form-right {
+  width: 50%;
+  font-size: 1em;
 }

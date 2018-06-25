@@ -37,26 +37,27 @@ class ArticleModal extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                   {/* <h4>{this.props.article.description}</h4> */}
-
-                  <div className="article-body">
+                  <div className="modal-body-left">
                     <img className="article-image" src={data.article.image} />
-                    <p className="article-full-text">{data.article.fullText}</p>
                     <Voter articleId={this.props.article._id}/>
                   </div>
-
+                  <div className="modal-body-right">
+                    <Panel>
+                      <Panel.Body className="article-full-text">{data.article.fullText}</Panel.Body>
+                    </Panel>
+                  </div>
+                </Modal.Body>
+                <Modal.Footer>
                   <p>
                     <OverlayTrigger overlay={popover}>
                       <a href="#popover">Reveal Source</a>
                     </OverlayTrigger>{' '}
                   </p>
-
                   <p>
                     <OverlayTrigger overlay={tooltip}>
                       <a href="#tooltip">Why this article?</a>
                     </OverlayTrigger>{' '}
                   </p>
-                </Modal.Body>
-                <Modal.Footer>
                   <Button onClick={this.props.handleClose}>Close</Button>
                 </Modal.Footer>
               </Modal>
