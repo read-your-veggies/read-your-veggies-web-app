@@ -12,7 +12,7 @@ const UserInfo = () => {
             );
           }}
         </Query>
-        <a href='/logout'>Logout</a>
+        <a id='logout-button' href='/logout'>Logout</a>
     </div>
   )
 }

@@ -21,6 +21,18 @@ div {
   margin: 0.5%;
 }
 
+.delete-article-button {
+  float: right;
+  color: black;
+  background-color: lightcoral;
+  font-weight: 400 !important;
+
+}
+
+.delete-article-button:hover {
+  background-color: red;
+}
+
 .article-full-text{
   font-family: 'Roboto', sans-serif;
   font-weight: 400 !important;
@@ -53,9 +65,14 @@ div {
   flex-basis: 20%;
   display: flex;
   justify-content: space-around;
+  flex-direction: column;
 }
 
 #profile-link {
+  align-self: center;
+}
+
+#logout-button{
   align-self: center;
 }
 
