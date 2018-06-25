@@ -19,7 +19,7 @@ const getGraphQlSchema = async () => {
     const resolvers = {
       Query: {
         post: async (root, {_id}) => {
-          return prepare(await Posts.findOne(ObjectId(_id)));
+          return prepare(await Posts.findOne(new mongodb.ObjectID(_id)));
         },
         posts: async () => {
           return (await Posts.find({}).toArray()).map(prepare);
@@ -31,6 +31,9 @@ const getGraphQlSchema = async () => {
         articles: async () => {
           return (await Articles.find({}).toArray()).map(prepare);
         },
+        article: async (root, {_id}) => {
+          return prepare(await Articles.findOne(new mongodb.ObjectID(_id)));
+        }
       },
       Post: {
         comments: async ({_id}) => {

@@ -5,6 +5,7 @@ module.exports = [`
     comment(_id: String): Comment
     message: String
     articles: [Article]
+    article(_id: String): Article
   }
 
   type Article {

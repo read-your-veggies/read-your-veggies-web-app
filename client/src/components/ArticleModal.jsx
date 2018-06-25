@@ -8,8 +8,8 @@ import Voter from './Voter.jsx';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Badge from 'react-bootstrap/lib/Badge';
 import { DELETE_ARTICLE } from '../apollo/resolvers';
-import { GET_ARTICLES_FROM_SERVER } from '../apollo/serverQueries';
-import { Mutation } from "react-apollo";
+import { GET_ARTICLES_FROM_SERVER, GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
+import { Query, Mutation } from "react-apollo";
 
 class ArticleModal extends React.Component {
   constructor(props) {
@@ -26,9 +26,14 @@ class ArticleModal extends React.Component {
     
     const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
 
-    return (
-            <div>
-              <Modal show={this.props.show} onHide={this.props.handleClose}>
+    const FullArticle = ({ _id }) => (
+      <Query query={GET_ONE_FULL_ARTICLE}  variables={{ _id }}>
+        { ({ loading, error, data}) => {
+          if (loading) return null;
+          if (error) return 'Error!';
+
+          return (
+            <Modal show={this.props.show} onHide={this.props.handleClose}>
                 <Modal.Header closeButton>
                   <Modal.Title>{this.props.article.title}</Modal.Title>
                 </Modal.Header>
@@ -59,13 +64,23 @@ class ArticleModal extends React.Component {
                   <hr />
 
                   <h4>Fulltext</h4>
-                  <pre className='article-full-text'>{this.props.article.fullText}</pre>
+                  <pre className='article-full-text'>{data.article.fullText}</pre>
                 </Modal.Body>
                 <Voter articleId={this.props.article._id}/>
                 <Modal.Footer>
                   <Button onClick={this.props.handleClose}>Close</Button>
                 </Modal.Footer>
               </Modal>
+          );
+        }}
+      </Query>
+    )
+
+
+
+    return (
+          <div>
+            <FullArticle _id={this.props.article._id} />
           </div>
     );
   }
