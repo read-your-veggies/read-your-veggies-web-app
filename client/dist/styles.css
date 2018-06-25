@@ -7,9 +7,9 @@ html, body, #app, .app-container {
   background-color: rgb(236, 235, 235);
 }
 
-div {
+/* div {
   border: 1px solid red;
-}
+} */
 
 .grid {
   display: flex;
@@ -19,6 +19,9 @@ div {
 .article {
   width: 32%;
   margin: 0.5%;
+  background-color: seashell;
+  border-radius: 5px;
+  box-shadow:  6px 1px 6px rgba(0, 0, 0, .5);
 }
 
 .delete-article-button {
@@ -84,6 +87,17 @@ div {
 
 .speedometer g.label {
   display: none;
+}
+
+.small-speedometer-click-wrapper {
+  border-radius: 5px;
+  background-color: seashell;
+}
+
+.small-speedometer-click-wrapper:hover {
+  box-shadow:  6px 1px 6px rgba(0, 0, 0, .5);
+  background-color: #dff0d8;
+  cursor: pointer;
 }
 
 #logo-container {
