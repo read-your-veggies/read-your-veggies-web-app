@@ -1,4 +1,5 @@
 @import url("./UserInfo.css");
+@import url("./HealthSpeedometer.css");
 
 .header {
   display: flex;

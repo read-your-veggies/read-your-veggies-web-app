@@ -1,3 +1,5 @@
+@import url("./HealthSpeedometer.css");
+
 #user-info-container {
   flex-basis: 20%;
   display: flex;
@@ -8,6 +10,14 @@
 #profile-link {
   align-self: center;
   margin: 0;
+}
+
+#profile-link a {
+  color: black;
+}
+
+#profile-link a:hover {
+  color: red;
 }
 
 .small-speedometer-click-wrapper {

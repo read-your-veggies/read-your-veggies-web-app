@@ -28,7 +28,7 @@ class Header extends React.Component {
                   </div>
                   <div className="header-text">
                     <h1 onClick={() => this.goToDashboard(data.userInfo.displayName)} id="read-your-veggies">Read-Your-Veggies.com</h1>
-                    <h2>A news app for a balanced media diet</h2>
+                    <h2>Your news app for a balanced media diet</h2>
                   </div>
                   <UserInfo location={location} displayName={data.userInfo.displayName} />
                 </div>
