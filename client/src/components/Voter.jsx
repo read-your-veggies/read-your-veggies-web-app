@@ -1,7 +1,9 @@
 import React from 'react';
+import Panel from 'react-bootstrap/lib/Panel';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Radio from 'react-bootstrap/lib/Radio';
 import Button from 'react-bootstrap/lib/Button';
+import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import { UPDATE_ARTICLE_VOTES } from '../apollo/resolvers';
 import { Mutation } from "react-apollo";
 
@@ -15,32 +17,43 @@ class Voter extends React.Component {
       <Mutation mutation={UPDATE_ARTICLE_VOTES} >
         { (updateArticleVotes) => {
           return (
+            <Panel bsStyle="info" className="voting-panel">
+            <Panel.Heading>
+              <h3>Vote on this article!</h3>
+            </Panel.Heading>
+            <Panel.Body>
             <form className="voter-form">
               <FormGroup>
-                <Radio value="agree" inline>
+                <div className="voter-form-left">
+                <Radio value="agree" bsStyle="radio">
                   Agree
                 </Radio>
-                <Radio value="disagree" inline>
-                  Disagree
-                </Radio>
-                <Radio value="fun" inline>
+                <Radio value="fun">
                   Fun
                 </Radio>
-                <Radio name="bummer" inline>
-                  Bummer
-                </Radio>
-                <Radio name="mean" inline>
-                  Mean
-                </Radio>
-                <Radio name="worthyAdversary" inline>
+                <Radio name="worthyAdversary">
                   Worthy Adversary
                 </Radio>
+                </div>
+                <div className="voter-form-right">
+                <Radio value="disagree">
+                  Disagree
+                </Radio>
+                <Radio name="bummer">
+                  Bummer
+                </Radio>
+                <Radio name="mean">
+                  Mean
+                </Radio>
+                </div>
               </FormGroup>
-              <Button onClick={(e) => {
+              <Button bsStyle="primary" onClick={(e) => {
               e.preventDefault();
               console.log(e);
             }}>Submit</Button>
             </form>
+            </Panel.Body>
+            </Panel>
         )}}
       </Mutation>
     )

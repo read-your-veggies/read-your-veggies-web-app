@@ -27,43 +27,35 @@ class ArticleModal extends React.Component {
 
     return (
       <Modal show={this.props.show} onHide={this.props.handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>{this.props.article.title}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <h4>{this.props.article.description}</h4>
-            <p>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </p>
-
-            <h4>Popover in a modal</h4>
-            <p>
-              there is a{' '}
-              <OverlayTrigger overlay={popover}>
-                <a href="#popover">popover</a>
-              </OverlayTrigger>{' '}
-              here
-            </p>
-
-            <h4>Tooltips in a modal</h4>
-            <p>
-              there is a{' '}
-              <OverlayTrigger overlay={tooltip}>
-                <a href="#tooltip">tooltip</a>
-              </OverlayTrigger>{' '}
-              here
-            </p>
-
-            <hr />
-
-            <h4>Fulltext</h4>
-            <pre className='article-full-text'>{this.props.article.fullText}</pre>
-          </Modal.Body>
-          <Voter articleId={this.props.article._id}/>
-          <Modal.Footer>
-            <Button onClick={this.props.handleClose}>Close</Button>
-          </Modal.Footer>
-        </Modal>
+        <Modal.Header closeButton>
+          <Modal.Title>{this.props.article.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/* <h4>{this.props.article.description}</h4> */}
+          <div className="modal-body-left">
+            <img className="article-image" src={this.props.article.image} />
+            <Voter articleId={this.props.article._id}/>
+          </div>
+          <div className="modal-body-right">
+            <Panel>
+              <Panel.Body className="article-full-text">{this.props.article.fullText}</Panel.Body>
+            </Panel>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <p>
+            <OverlayTrigger overlay={popover}>
+              <a href="#popover">Reveal Source</a>
+            </OverlayTrigger>{' '}
+          </p>
+          <p>
+            <OverlayTrigger overlay={tooltip}>
+              <a href="#tooltip">Why this article?</a>
+            </OverlayTrigger>{' '}
+          </p>
+          <Button onClick={this.props.handleClose}>Close</Button>
+        </Modal.Footer>
+      </Modal>
     );
   }
 }
