@@ -8,7 +8,7 @@ import Voter from './Voter.jsx';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Badge from 'react-bootstrap/lib/Badge';
 import { DELETE_ARTICLE } from '../apollo/resolvers';
-import { GET_ARTICLES_FROM_SERVER } from '../apollo/serverQueries';
+import { GET_ARTICLES_FROM_SERVER, GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
 import { Mutation } from "react-apollo";
 
 class ArticleModal extends React.Component {

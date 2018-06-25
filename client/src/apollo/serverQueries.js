@@ -10,7 +10,7 @@ export const GET_ARTICLES_FROM_SERVER = gql`
     }
   }
 `
-const GET_ONE_FULL_ARTICLE = (articleId) => {gql`
+export const GET_ONE_FULL_ARTICLE = (articleId) => {gql`
   query {
     article(_id: ${articleId}){
       _id
