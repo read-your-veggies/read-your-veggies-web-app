@@ -38,7 +38,7 @@ class ArticleModal extends React.Component {
 
                   <div className="article-body">
                     <img className="article-image" src={this.props.article.image} />
-                    <pre className="article-full-text">{this.props.article.fullText}</pre>
+                    <p className="article-full-text">{this.props.article.fullText}</p>
                     <Voter articleId={this.props.article._id}/>
                   </div>
 

@@ -33,27 +33,31 @@ div {
   background-color: red;
 }
 
-.article-body {
-  
-}
-
-.article-full-text{
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400 !important;
+.article-full-text {
+  white-space: pre-wrap;
   overflow: scroll;
-  width: 50%;
-  display: inline-block;
-  white-space: pre-wrap;       /* Since CSS 2.1 */
-  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-  white-space: -pre-wrap;      /* Opera 4-6 */
-  white-space: -o-pre-wrap;    /* Opera 7 */ 
 }
 
 .article-image {
   width: 50%;
   float: left;
   padding-right: 1em;
-  display: inline-block;
+}
+
+.modal-dialog {
+  height: 100%;
+}
+
+.modal-content {
+  height: 100%;
+}
+
+.modal-body {
+  height: 80%;
+}
+
+.modal-header {
+  text-align: center;
 }
 
 .voter-form {
