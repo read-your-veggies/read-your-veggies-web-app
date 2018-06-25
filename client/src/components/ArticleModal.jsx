@@ -9,7 +9,7 @@ import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Badge from 'react-bootstrap/lib/Badge';
 import { DELETE_ARTICLE } from '../apollo/resolvers';
 import { GET_ARTICLES_FROM_SERVER, GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
-import { Query, Mutation } from "react-apollo";
+import { Query, ApolloConsumer } from "react-apollo";
 
 class ArticleModal extends React.Component {
   constructor(props) {
@@ -64,7 +64,7 @@ class ArticleModal extends React.Component {
                   <hr />
 
                   <h4>Fulltext</h4>
-                  <pre className='article-full-text'>{data.article.fullText}</pre>
+                  <pre className='article-full-text'>{this.props.article.fullText}</pre>
                 </Modal.Body>
                 <Voter articleId={this.props.article._id}/>
                 <Modal.Footer>
