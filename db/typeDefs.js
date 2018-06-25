@@ -52,6 +52,7 @@ module.exports = [`
   type Mutation {
     createPost(title: String, content: String): Post
     createComment(postId: String, content: String): Comment
+    updateArticleVotes(_id: String, title: String): Article
     deleteArticles: Article
     deleteArticle(_id: String): Article
     createArticle(url: String,
