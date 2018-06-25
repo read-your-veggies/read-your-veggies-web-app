@@ -31,7 +31,6 @@ class ArticleModal extends React.Component {
         { ({ loading, error, data}) => {
           if (loading) return null;
           if (error) return 'Error!';
-          console.log('data from query', data)
 
           return (
             <Modal show={this.props.show} onHide={this.props.handleClose}>
