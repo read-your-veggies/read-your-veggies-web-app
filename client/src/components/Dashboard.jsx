@@ -3,7 +3,7 @@ import { Route, withRouter } from "react-router-dom";
 import { Query } from "react-apollo";
 import { GET_ARTICLES_FROM_SERVER } from '../apollo/serverQueries';
 import { GET_TEAM_NAME_FROM_LOCAL_STATE } from '../apollo/localQueries';
-import Article from './Article.jsx';
+import ArticleCard from './ArticleCard.jsx';
 
 class Dashboard extends Component {
   render() {
@@ -19,7 +19,7 @@ class Dashboard extends Component {
             return (
               <div className="grid">
                 {data.articles.map((article) => (
-                  <Article article={article}/>
+                  <ArticleCard article={article}/>
                 ))}
               </div>
             );
