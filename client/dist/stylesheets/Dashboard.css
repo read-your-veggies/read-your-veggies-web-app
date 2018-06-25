@@ -1,0 +1,6 @@
+@import url("./ArticleCard.css");
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+}

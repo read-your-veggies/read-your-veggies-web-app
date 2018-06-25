@@ -1,0 +1,28 @@
+@import url("./Voter.css");
+
+.modal-dialog {
+  height: 100%;
+}
+
+.modal-content {
+  height: 100%;
+}
+
+.modal-body {
+  height: 80%;
+}
+
+.modal-header {
+  text-align: center;
+}
+
+.article-full-text {
+  white-space: pre-wrap;
+  overflow: scroll;
+}
+
+.article-image {
+  width: 50%;
+  float: left;
+  padding-right: 1em;
+}

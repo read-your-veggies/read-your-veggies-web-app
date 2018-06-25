@@ -17,7 +17,6 @@ class ArticleModal extends React.Component {
   }
 
   render() {
-    
     const popover = (
       <Popover id="modal-popover" title="popover">
         very popover. such engagement
@@ -31,42 +30,32 @@ class ArticleModal extends React.Component {
         { ({ loading, error, data}) => {
           if (loading) return null;
           if (error) return 'Error!';
-
           return (
             <Modal show={this.props.show} onHide={this.props.handleClose}>
                 <Modal.Header closeButton>
                   <Modal.Title>{this.props.article.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <h4>{this.props.article.description}</h4>
-                  <p>
-                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                  </p>
+                  {/* <h4>{this.props.article.description}</h4> */}
 
-                  <h4>Popover in a modal</h4>
+                  <div className="article-body">
+                    <img className="article-image" src={data.article.image} />
+                    <p className="article-full-text">{data.article.fullText}</p>
+                    <Voter articleId={this.props.article._id}/>
+                  </div>
+
                   <p>
-                    there is a{' '}
                     <OverlayTrigger overlay={popover}>
-                      <a href="#popover">popover</a>
+                      <a href="#popover">Reveal Source</a>
                     </OverlayTrigger>{' '}
-                    here
                   </p>
 
-                  <h4>Tooltips in a modal</h4>
                   <p>
-                    there is a{' '}
                     <OverlayTrigger overlay={tooltip}>
-                      <a href="#tooltip">tooltip</a>
+                      <a href="#tooltip">Why this article?</a>
                     </OverlayTrigger>{' '}
-                    here
                   </p>
-
-                  <hr />
-
-                  <h4>Fulltext</h4>
-                  <pre className='article-full-text'>{data.article.fullText}</pre>
                 </Modal.Body>
-                <Voter articleId={this.props.article._id}/>
                 <Modal.Footer>
                   <Button onClick={this.props.handleClose}>Close</Button>
                 </Modal.Footer>
@@ -75,7 +64,6 @@ class ArticleModal extends React.Component {
         }}
       </Query>
     )
-
 
 
     return (

@@ -10,6 +10,7 @@ const articleSchema = new Schema({
   description: String,
   fullText: String,
   articleStance: Number,
+  image: String,
   votes: {
     agree: {
       summedUserStance: Number,
