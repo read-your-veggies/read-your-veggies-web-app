@@ -33,12 +33,12 @@ class ArticleModal extends React.Component {
                   <Modal.Title>{this.props.article.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <h4>{this.props.article.description}</h4>
+                  {/* <h4>{this.props.article.description}</h4> */}
                   <hr />
 
-                  <div>
+                  <div className="article-body">
                     <img className="article-image" src={this.props.article.image} />
-                    <pre className='article-full-text'>{this.props.article.fullText}</pre>
+                    <pre className="article-full-text">{this.props.article.fullText}</pre>
                     <Voter articleId={this.props.article._id}/>
                   </div>
 

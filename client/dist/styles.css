@@ -33,22 +33,27 @@ div {
   background-color: red;
 }
 
+.article-body {
+  
+}
+
 .article-full-text{
   font-family: 'Roboto', sans-serif;
   font-weight: 400 !important;
+  overflow: scroll;
+  width: 50%;
+  display: inline-block;
   white-space: pre-wrap;       /* Since CSS 2.1 */
   white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
   white-space: -pre-wrap;      /* Opera 4-6 */
   white-space: -o-pre-wrap;    /* Opera 7 */ 
 }
 
-.modal {
-  height: 90%;
-}
-
 .article-image {
   width: 50%;
   float: left;
+  padding-right: 1em;
+  display: inline-block;
 }
 
 .voter-form {
