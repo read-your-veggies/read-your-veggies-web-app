@@ -66,7 +66,7 @@ class ArticleCard extends React.Component {
 
                   {/* Wrap this button in apollo consumer, the load the entire article into state.  Then pass the whole article down as a prop. */}
                   <ApolloConsumer>
-                    { () => (
+                    { client => (
                       <Button 
                         className="eat-me" 
                         bsStyle="info" 
@@ -78,8 +78,8 @@ class ArticleCard extends React.Component {
                           })
                           this.setState({
                             fullArticle: data.article,
+                            show: true,
                           })
-                          {this.handleShow}
                         }}
                       >
                       Eat me
