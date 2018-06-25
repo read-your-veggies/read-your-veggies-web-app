@@ -54,7 +54,9 @@ html, body, #app, .app-container {
 
 .header h2 {
   font-weight: 200 !important;
+  font-style: italic;
 }
+
 
 .header-text {
   text-align: center;
@@ -66,6 +68,11 @@ html, body, #app, .app-container {
   font-size: 4em;
 }
 
+#read-your-veggies:hover {
+  color: #337ab7;
+  cursor: pointer;
+}
+
 #user-info-container {
   flex-basis: 20%;
   display: flex;
@@ -74,8 +81,17 @@ html, body, #app, .app-container {
 }
 
 #profile-link {
+  font-style: normal;
   align-self: center;
   margin: 0;
+}
+
+#profile-link a {
+  color: black;
+}
+
+#profile-link a:hover {
+  color: red;
 }
 
 #logout-button{
@@ -98,7 +114,6 @@ html, body, #app, .app-container {
 
 .small-speedometer-click-wrapper:hover {
   box-shadow:  6px 1px 6px rgba(0, 0, 0, .5);
-  background-color: #dff0d8;
   cursor: pointer;
 }
 
@@ -112,6 +127,13 @@ html, body, #app, .app-container {
   height: 9em;
   align-self: center;
   max-width: 100%;
+  border-radius: 4.5em;
+}
+
+#logo:hover {
+  cursor: pointer;
+  background-color: #dff0d8;
+  box-shadow:  6px 1px 6px rgba(0, 0, 0, .5);
 }
 
 .eat-me {
