@@ -33,7 +33,10 @@ const getGraphQlSchema = async () => {
         },
         article: async (root, {_id}) => {
           return prepare(await Articles.findOne(new mongodb.ObjectID(_id)));
-        }
+        },
+        user: async (root, {_id}) => {
+          return prepare(await Users.findOne(new mongodb.ObjectID(_id)));
+        },
       },
       Post: {
         comments: async ({_id}) => {

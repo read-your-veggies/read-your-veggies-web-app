@@ -16,10 +16,16 @@
   text-align: center;
 }
 
+
 #read-your-veggies {
   font-family: 'Pacifico', cursive;
   color: #ff77e8;
   font-size: 4em;
+}
+
+#read-your-veggies:hover {
+  cursor: pointer;
+  color: #337ab7;
 }
 
 #logo-container {
@@ -32,4 +38,11 @@
   height: 9em;
   align-self: center;
   max-width: 100%;
+  border-radius: 4.5em;
+}
+
+#logo:hover {
+  box-shadow:  6px 1px 6px rgba(0, 0, 0, .5);
+  background-color: #dff0d8;
+  cursor: pointer;
 }
