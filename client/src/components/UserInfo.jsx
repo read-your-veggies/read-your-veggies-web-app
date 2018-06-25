@@ -1,6 +1,4 @@
 import React from 'react';
-import { Query } from "react-apollo";
-import { GET_USER_INFO } from '../apollo/localQueries.js';
 import { withRouter } from "react-router-dom";
 
 
@@ -13,20 +11,15 @@ class UserInfo extends React.Component {
   }
 
   handleSpeedometerClick() {
-    console.log('asdf');
-    this.props.history.push('/health');
+    if (this.props.displayName !== 'John Doe') {
+      this.props.history.push('/health');
+    }
   }
 
   render() {
     return (
       <div id='user-info-container'>
-        <Query query={GET_USER_INFO}>
-          {({ data, client }) => {
-            return (
-              <h2 id="profile-link">{data.userInfo.displayName}</h2>
-            );
-          }}
-        </Query>
+        <h2 id="profile-link">{this.props.displayName}</h2>
           <div className='small-speedometer-click-wrapper' onClick={this.handleSpeedometerClick}>
             <HealthSpeedometer 
               height={100}

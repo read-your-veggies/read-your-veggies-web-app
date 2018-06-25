@@ -48,6 +48,8 @@ html, body, #app, .app-container {
 .header {
   display: flex;
   justify-content: space-around;
+  box-shadow:  0 5px 6px rgba(25, 120, 29, .5);
+  margin-bottom: 20px;
 }
 
 .header h2 {
@@ -90,7 +92,7 @@ html, body, #app, .app-container {
 }
 
 .small-speedometer-click-wrapper {
-  border-radius: 5px;
+  border-radius: 100px;
   background-color: seashell;
 }
 
