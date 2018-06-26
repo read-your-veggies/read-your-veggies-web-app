@@ -78,7 +78,7 @@ class Voter extends React.Component {
                   "fun" : this.state.fun,  
                   "bummer" : this.state.bummer,  
                   "mean" : this.state.mean,  
-                  "worthyAdversary" : this.state.worthy,  
+                  "worthyAdversary" : this.state.worthyAdversary,  
                 }
                 e.preventDefault();
                 console.log('submitting vote', votes);
