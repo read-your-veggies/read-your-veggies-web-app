@@ -6,7 +6,6 @@ import Dashboard from './Dashboard.jsx';
 import Login from './Login.jsx';
 import HealthDashboard from './HealthDashboard.jsx';
 
-
 class App extends Component {
   constructor(props) {
     super(props);

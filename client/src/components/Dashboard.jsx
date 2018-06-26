@@ -3,12 +3,17 @@ import { withRouter } from "react-router-dom";
 import { Query } from "react-apollo";
 import { GET_TEAM_NAME_FROM_LOCAL_STATE } from '../apollo/localQueries';
 import ArticleCarousel from './ArticleCarousel.jsx';
+import OnboardModal from './OnboardModal.jsx';
+
 
 
 class Dashboard extends Component {
+
+  //run request to see if user is onboarded -- if not do ternary to render onboardmodal 
   render() {
     return(
-      <div> 
+      <div>
+        <OnboardModal />
         <ArticleCarousel />
         <Query query={GET_TEAM_NAME_FROM_LOCAL_STATE}>
           {({ data, client }) => {
