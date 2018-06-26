@@ -57,12 +57,22 @@ class ArticleCard extends React.Component {
           return (
             <div className="article">
               <Panel bsStyle="success">
+<<<<<<< HEAD
+                  <Panel.Heading>
+                    <button class='delete-article-button' onClick={() => deleteArticle({ variables: { _id: this.props.article._id } })}> X </button>
+                    {/* <Panel.Title>{this.props.article.title}</Panel.Title> */}
+=======
                   <Panel.Heading className='title'>
                     <button className='delete-article-button' onClick={() => deleteArticle({ variables: { _id: this.props.article._id } })}> X </button>
                     <Panel.Title>{this.props.article.title}</Panel.Title>
+>>>>>>> dev
                     <Badge pullRight bsStyle="danger">{this.props.article.articleStance}</Badge>
                   </Panel.Heading>
-                  <Panel.Body className='subtitle'>{this.props.article.description}</Panel.Body>
+                  <Panel.Body>
+                    <h3 className="article-card-title">{this.props.article.title}</h3>
+                    <img className="article-thumbnail" src={this.props.article.image} />
+                    {/* <p>{this.props.article.description}</p> */}
+                  </Panel.Body>
 
                   {/* Wrap this button in apollo consumer, the load the entire article into state.  Then pass the whole article down as a prop. */}
                   <ApolloConsumer>
