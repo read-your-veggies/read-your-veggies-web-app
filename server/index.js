@@ -88,5 +88,5 @@ if (process.env.DEPLOYED !== 'true') {
 }
 
 /*****************************WORKERS*****************************/
-articleHelpers.deleteArticles();
-articleHelpers.scrapeArticles();
+// articleHelpers.deleteArticles();
+// articleHelpers.scrapeArticles();
