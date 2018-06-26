@@ -6,6 +6,15 @@ require('dotenv').config();
 const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
+var PersonalityInsightsV3 = require('watson-developer-cloud/personality-insights/v3');
+
+var personalityInsights = new PersonalityInsightsV3({
+    version_date: '2017-10-13',
+    username: process.env.WATSON_USERNAME,
+    password: process.env.WATSON_PASSWORD,
+    url: 'https://gateway-fra.watsonplatform.net/personality-insights/api'
+});
+
 var getUrlsFromNewsAPI = () => {
   return new Promise((resolve, reject) => {
     newsapi.v2.topHeadlines({
@@ -102,6 +111,31 @@ var parseAndDecorateArticle = (article) => {
 var modifyArticleStance = (article) => {
   return new Promise((resolve, reject) => {
     console.log(article.articleStance);
+    // hit watson
+    console.log(personalityInsights);
+    var profileParams = {
+      // Get the content from the JSON file.
+      content: JSON.stringify({
+        contentItems: [
+          {
+            content: article.fullText,
+            contenttype: 'text/plain',
+            language: 'en',
+          }
+        ]
+      }),
+      content_type: 'application/json',
+      consumption_preferences: true,
+      raw_scores: true
+    };
+    
+    personalityInsights.profile(profileParams, function(error, profile) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(JSON.stringify(profile, null, 2));
+      }
+    });
     resolve(article);
   });
 }
