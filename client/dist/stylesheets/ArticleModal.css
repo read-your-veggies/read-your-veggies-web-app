@@ -6,6 +6,7 @@
 
 .modal-title {
   font-size: 2em;
+  font-weight: 200 !important;
 }
 
 .modal-body {
@@ -14,13 +15,13 @@
 }
 
 .modal-body-left {
-  width: 50%;
+  width: 30%;
   display: flex;
   flex-direction: column;
 }
 
 .modal-body-right{
-  width: 50%;
+  width: 70%;
   height: 500px;
   overflow: scroll;
 }
@@ -35,9 +36,11 @@
 }
 
 .article-full-text {
-  background-color: rgb(236, 235, 235);
-  font-size: 1.5em;
+  text-align: justify;
+  background-color: seashell;
+  font-size: 1.2em;
   white-space: pre-wrap;
+  font-weight: 300 !important;
 }
 
 .modal-footer p, .modal-footer .btn {

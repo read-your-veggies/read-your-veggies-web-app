@@ -6,6 +6,7 @@ module.exports = [`
     message: String
     articles: [Article]
     article(_id: String): Article
+    user(_id: String): User
   }
 
   type Article {
@@ -19,6 +20,24 @@ module.exports = [`
     votes: Vote
     articleStance: String
     image: String
+  }
+
+  type User {
+    _id: String
+    authenticationInfo: String
+    avatar: String
+    name: String
+    health: String
+    user_stance: String
+    recently_read: [String]
+    emails: String
+    facebookId: String
+    facebookUrl: String
+    birthday: String
+    location: String
+    hometown: String
+    age_range: String
+    onboard_information: String
   }
 
   type Vote {
@@ -60,6 +79,7 @@ module.exports = [`
       source: String,
       description: String,
       fullText: String): Article
+    onboardUser(_id: String, onboard_info: String): User
   }
 
   schema {
