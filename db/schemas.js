@@ -55,7 +55,7 @@ const userSchema = new Schema({
   location: String,
   hometown: String,
   age_range: String,
-  onboard_information: String,
+  onboard_information: { type: String, default: 'NEED_ON_BOARDING' },
 
 });
 

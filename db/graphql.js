@@ -99,7 +99,7 @@ const getGraphQlSchema = async () => {
         },
 
         onboardUser: async (root, args) => {
-          const res = await Users.findOneAndUpdate({_id: new mongodb.ObjectID(args._id)}, {onboard_information: args.onboard_info});
+          const res = await Users.findOneAndUpdate({_id: new mongodb.ObjectID(args._id)},{$set:{onboard_information: args.onboard_info}}, {returnOriginal:false});
           console.log(res);
           return res.value;
         }
