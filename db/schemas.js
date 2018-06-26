@@ -55,6 +55,7 @@ const userSchema = new Schema({
   location: String,
   hometown: String,
   age_range: String,
+  onboard_information: String,
 
 });
 

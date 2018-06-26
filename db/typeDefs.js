@@ -37,6 +37,7 @@ module.exports = [`
     location: String
     hometown: String
     age_range: String
+    onboard_information: String
   }
 
   type Vote {
@@ -79,6 +80,7 @@ module.exports = [`
       source: String,
       description: String,
       fullText: String): Article
+    onboardUser(_id: String, onboard_info: String): User
   }
 
   schema {

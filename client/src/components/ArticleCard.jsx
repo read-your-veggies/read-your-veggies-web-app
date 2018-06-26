@@ -62,7 +62,11 @@ class ArticleCard extends React.Component {
                     <Panel.Title>{this.props.article.title}</Panel.Title>
                     <Badge pullRight bsStyle="danger">{this.props.article.articleStance}</Badge>
                   </Panel.Heading>
-                  <Panel.Body className='subtitle'>{this.props.article.description}</Panel.Body>
+                  <Panel.Body>
+                    <h3 className="article-card-title">{this.props.article.title}</h3>
+                    <img className="article-thumbnail" src={this.props.article.image} />
+                    {/* <p>{this.props.article.description}</p> */}
+                  </Panel.Body>
 
                   <ApolloConsumer>
                     { client => (

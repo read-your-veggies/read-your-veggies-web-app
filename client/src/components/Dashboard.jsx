@@ -4,6 +4,7 @@ import { Query } from "react-apollo";
 import { GET_ARTICLES_FROM_SERVER, GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
 import { GET_TEAM_NAME_FROM_LOCAL_STATE } from '../apollo/localQueries';
 import ArticleCard from './ArticleCard.jsx';
+import Carousel from 'react-bootstrap/lib/Carousel';
 
 class Dashboard extends Component {
   render() {
@@ -15,14 +16,15 @@ class Dashboard extends Component {
           {({ loading, error, data }) => {
             if (loading) return "Loading...";
             if (error) return `Error! ${error.message}`;
-            // console.log('articles data', data);
 
             return (
-              <div className="grid">
+              <Carousel centerSlidePercentage={50}>
                 {data.articles.map((article) => (
-                  <ArticleCard article={article}/>
+                  <Carousel.Item >
+                    <ArticleCard article={article}/>
+                  </Carousel.Item>
                 ))}
-              </div>
+              </Carousel>
             );
           }}
         </Query>
