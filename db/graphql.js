@@ -74,10 +74,11 @@ const getGraphQlSchema = async () => {
           return res.value;
         },
 
-        updateArticleVotes: async (root, args, context, info) => {
-          console.log('updating article id', args._id)
-          const res = await Articles.findOneAndUpdate({_id: new mongodb.ObjectID(args._id)}, {title: args.title});
-          console.log(res);
+        updateArticleVotes: async (root, args) => {
+          const res = await Articles.findOneAndUpdate({_id: new mongodb.ObjectID(args._id)}, 
+                                                        {$set: {votes: args.votes }}, 
+                                                        {returnOriginal:false});
+          console.log('update article res', res);
           return res.value;
         },
 
@@ -85,6 +86,7 @@ const getGraphQlSchema = async () => {
           const res = await Comments.insert(args)
           return prepare(await Comments.findOne({_id: res.insertedIds[0]}))
         },
+
         onboardUser: async (root, args) => {
           const res = await Users.findOneAndUpdate({_id: new mongodb.ObjectID(args._id)}, {onboard_information: args.onboard_info});
           console.log(res);

@@ -49,7 +49,21 @@ module.exports = [`
     worthyAdversary: Tally
   }
 
+  input VoteInput {
+    agree: TallyInput
+    disagree: TallyInput
+    fun: TallyInput
+    bummer: TallyInput
+    mean: TallyInput
+    worthyAdversary: TallyInput
+  }
+
   type Tally {
+    summedUserStance: Int
+    totalVotes: Int
+  }
+
+  input TallyInput {
     summedUserStance: Int
     totalVotes: Int
   }
@@ -71,7 +85,6 @@ module.exports = [`
   type Mutation {
     createPost(title: String, content: String): Post
     createComment(postId: String, content: String): Comment
-    updateArticleVotes(_id: String!, title: String): Article
     deleteArticles: Article
     deleteArticle(_id: String): Article
     createArticle(url: String,
@@ -81,6 +94,8 @@ module.exports = [`
       description: String,
       fullText: String): Article
     onboardUser(_id: String, onboard_info: String): User
+    updateArticleVotes(_id: String, votes: VoteInput): Article
+
   }
 
   schema {
