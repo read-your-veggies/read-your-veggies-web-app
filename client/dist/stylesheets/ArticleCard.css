@@ -1,7 +1,6 @@
 @import url("./ArticleModal.css");
 
 .article {
-  width: 32%;
   margin: 0.5%;
   border-radius: 5px;
   box-shadow:  6px 1px 6px rgba(0, 0, 0, .5);

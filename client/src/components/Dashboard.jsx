@@ -4,7 +4,9 @@ import { Query } from "react-apollo";
 import { GET_ARTICLES_FROM_SERVER, GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
 import { GET_TEAM_NAME_FROM_LOCAL_STATE } from '../apollo/localQueries';
 import ArticleCard from './ArticleCard.jsx';
-import Carousel from 'react-bootstrap/lib/Carousel';
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
+
 
 class Dashboard extends Component {
   render() {
@@ -18,13 +20,22 @@ class Dashboard extends Component {
             if (error) return `Error! ${error.message}`;
 
             return (
-              <Carousel centerSlidePercentage={50}>
-                {data.articles.map((article) => (
-                  <Carousel.Item >
-                    <ArticleCard article={article}/>
-                  </Carousel.Item>
-                ))}
-              </Carousel>
+              <CarouselProvider
+                naturalSlideWidth={500}
+                naturalSlideHeight={600}
+                totalSlides={20}
+                visibleSlides={4}
+              >        
+                <Slider>
+                  {data.articles.map((article, i) => (
+                      <Slide index={i}>
+                        <ArticleCard article={article}/>
+                      </Slide>
+                  ))}
+                </Slider>
+                <ButtonBack>Back</ButtonBack>
+                <ButtonNext>Next</ButtonNext>
+              </CarouselProvider>
             );
           }}
         </Query>
