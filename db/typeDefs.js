@@ -46,7 +46,16 @@ module.exports = [`
     fun: Tally
     bummer: Tally
     mean: Tally
-    worthAdversary: Tally
+    worthyAdversary: Tally
+  }
+
+  input VoteInput {
+    agree: Boolean
+    disagree: Boolean
+    fun: Boolean
+    bummer: Boolean
+    mean: Boolean
+    worthyAdversary: Boolean
   }
 
   type Tally {
@@ -80,6 +89,8 @@ module.exports = [`
       description: String,
       fullText: String): Article
     onboardUser(_id: String, onboard_info: String): User
+    updateArticleVotes(_id: String, votes: VoteInput): Article
+
   }
 
   schema {
