@@ -76,6 +76,11 @@ const getGraphQlSchema = async () => {
         createComment: async (root, args) => {
           const res = await Comments.insert(args)
           return prepare(await Comments.findOne({_id: res.insertedIds[0]}))
+        },
+        onboardUser: async (root, args) => {
+          const res = await Users.findOneAndUpdate({_id: new mongodb.ObjectID(args._id)}, {onboard_information: args.onboard_info});
+          console.log(res);
+          return res.value;
         }
       }
     }
