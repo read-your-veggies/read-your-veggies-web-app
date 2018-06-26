@@ -14,17 +14,20 @@ export const DELETE_ARTICLE = gql`
   }
 `
 
-// todo:
+// We should tweak the output, but its not that important
 export const UPDATE_ARTICLE_VOTES = gql`
-  mutation updateArticleVotes($_id: String!) {
-    updateArticleVotes(_id: $_id) {
+  mutation ($_id: String!, $votes: VoteInput) {
+    updateArticleVotes(_id: $_id, votes: $votes) {
       _id
       url
       title
-      source
-      description
-      fullText
-      articleStance
+      votes{
+        agree{
+          summedUserStance
+          totalVotes
+        }
+      }
     }
   }
 `
+
