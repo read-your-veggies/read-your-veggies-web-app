@@ -14,16 +14,28 @@ class Voter extends React.Component {
     // The props include the article ID.
 
     this.state = {
-      Agree: false,
-      Disagree: false,
-      Fun: false,
-      Bummer: false,
-      Worthy: false,
-      Mean: false
+      agree: false,
+      disagree: false,
+      fun: false,
+      bummer: false,
+      worthy: false,
+      mean: false
     }
+
+    // func bindings here
+    this.handleRadioChange = this.handleRadioChange.bind(this);
   }
 
+  handleRadioChange (e) {
+    console.log('state', this.state);
+    this.setState({
+      [e.target.value]: !this.state[e.target.value]
+    });
+  }
+
+
   render() {
+    // These radio buttons aren't working properly and need a lot of work...
     return (
       <Mutation mutation={UPDATE_ARTICLE_VOTES} >
         { (updateArticleVotes) => {
@@ -36,24 +48,24 @@ class Voter extends React.Component {
             <form className="voter-form">
               <FormGroup>
                 <div className="voter-form-left">
-                <Radio value="agree" bsStyle="radio">
+                <Radio value="agree" bsStyle="radio" checked={this.state.agree} onChange={this.handleRadioChange}>
                   Agree
                 </Radio>
-                <Radio value="fun">
+                <Radio value="fun" checked={this.state.fun} onChange={this.handleRadioChange}>
                   Fun
                 </Radio>
-                <Radio name="worthyAdversary">
+                <Radio name="worthyAdversary" checked={this.state.worthy} onChange={this.handleRadioChange}>
                   Worthy Adversary
                 </Radio>
                 </div>
                 <div className="voter-form-right">
-                <Radio value="disagree">
+                <Radio value="disagree" checked={this.state.disagree} onChange={this.handleRadioChange}>
                   Disagree
                 </Radio>
-                <Radio name="bummer">
+                <Radio name="bummer" checked={this.state.bummer} onChange={this.handleRadioChange}>
                   Bummer
                 </Radio>
-                <Radio name="mean">
+                <Radio name="mean" checked={this.state.mean} onChange={this.handleRadioChange}>
                   Mean
                 </Radio>
                 </div>
