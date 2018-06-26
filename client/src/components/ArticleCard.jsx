@@ -57,15 +57,9 @@ class ArticleCard extends React.Component {
           return (
             <div className="article">
               <Panel bsStyle="success">
-<<<<<<< HEAD
-                  <Panel.Heading>
-                    <button class='delete-article-button' onClick={() => deleteArticle({ variables: { _id: this.props.article._id } })}> X </button>
-                    {/* <Panel.Title>{this.props.article.title}</Panel.Title> */}
-=======
                   <Panel.Heading className='title'>
                     <button className='delete-article-button' onClick={() => deleteArticle({ variables: { _id: this.props.article._id } })}> X </button>
                     <Panel.Title>{this.props.article.title}</Panel.Title>
->>>>>>> dev
                     <Badge pullRight bsStyle="danger">{this.props.article.articleStance}</Badge>
                   </Panel.Heading>
                   <Panel.Body>
