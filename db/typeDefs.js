@@ -63,11 +63,6 @@ module.exports = [`
     totalVotes: Int
   }
 
-  input TallyInput {
-    summedUserStance: Int
-    totalVotes: Int
-  }
-
   type Post {
     _id: String
     title: String

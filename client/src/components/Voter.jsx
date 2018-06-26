@@ -3,6 +3,7 @@ import Panel from 'react-bootstrap/lib/Panel';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Radio from 'react-bootstrap/lib/Radio';
 import Button from 'react-bootstrap/lib/Button';
+import Checkbox from 'react-bootstrap/lib/Checkbox';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import { UPDATE_ARTICLE_VOTES } from '../apollo/resolvers';
 import { Mutation } from "react-apollo";
@@ -18,16 +19,17 @@ class Voter extends React.Component {
       disagree: false,
       fun: false,
       bummer: false,
-      worthy: false,
+      worthyAdversary: false,
       mean: false
     }
 
     // func bindings here
-    this.handleRadioChange = this.handleRadioChange.bind(this);
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
   }
 
-  handleRadioChange (e) {
+  handleCheckboxChange (e) {
     console.log('state', this.state);
+    console.log('event', e.target);
     this.setState({
       [e.target.value]: !this.state[e.target.value]
     });
@@ -35,7 +37,6 @@ class Voter extends React.Component {
 
 
   render() {
-    // These radio buttons aren't working properly and need a lot of work...
     return (
       <Mutation mutation={UPDATE_ARTICLE_VOTES} >
         { (updateArticleVotes) => {
@@ -48,26 +49,26 @@ class Voter extends React.Component {
             <form className="voter-form">
               <FormGroup>
                 <div className="voter-form-left">
-                <Radio value="agree" bsStyle="radio" checked={this.state.agree} onChange={this.handleRadioChange}>
+                <Checkbox value="agree" checked={this.state.agree} onChange={this.handleCheckboxChange}>
                   Agree
-                </Radio>
-                <Radio value="fun" checked={this.state.fun} onChange={this.handleRadioChange}>
+                </Checkbox>
+                <Checkbox value="fun" checked={this.state.fun} onChange={this.handleCheckboxChange}>
                   Fun
-                </Radio>
-                <Radio name="worthyAdversary" checked={this.state.worthy} onChange={this.handleRadioChange}>
+                </Checkbox>
+                <Checkbox value="worthyAdversary" checked={this.state.worthyAdversary} onChange={this.handleCheckboxChange}>
                   Worthy Adversary
-                </Radio>
+                </Checkbox>
                 </div>
                 <div className="voter-form-right">
-                <Radio value="disagree" checked={this.state.disagree} onChange={this.handleRadioChange}>
+                <Checkbox value="disagree" checked={this.state.disagree} onChange={this.handleCheckboxChange}>
                   Disagree
-                </Radio>
-                <Radio name="bummer" checked={this.state.bummer} onChange={this.handleRadioChange}>
+                </Checkbox>
+                <Checkbox value="bummer" checked={this.state.bummer} onChange={this.handleCheckboxChange}>
                   Bummer
-                </Radio>
-                <Radio name="mean" checked={this.state.mean} onChange={this.handleRadioChange}>
+                </Checkbox>
+                <Checkbox value="mean" checked={this.state.mean} onChange={this.handleCheckboxChange}>
                   Mean
-                </Radio>
+                </Checkbox>
                 </div>
               </FormGroup>
               <Button bsStyle="primary" onClick={(e) => {

@@ -14,7 +14,7 @@ export const DELETE_ARTICLE = gql`
   }
 `
 
-// todo:
+// We should tweak the output, but its not that important
 export const UPDATE_ARTICLE_VOTES = gql`
   mutation ($_id: String!, $votes: VoteInput) {
     updateArticleVotes(_id: $_id, votes: $votes) {

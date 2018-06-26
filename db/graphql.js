@@ -75,11 +75,6 @@ const getGraphQlSchema = async () => {
         },
 
         updateArticleVotes: async (root, args) => {
-          console.log('received vote request', args.votes);
-          // We need to obtain the current args and then modify, then apply the findOneAndUpdate
-          // Not sure how async and await will fit into this.
-
-          // First do a regular findOne on Articles for this id.
           let currentState = prepare(await Articles.findOne(new mongodb.ObjectID(args._id)));
           console.log('record to be updated', currentState.votes);
           for (var key in currentState.votes) {
@@ -88,7 +83,7 @@ const getGraphQlSchema = async () => {
             }
           }
           console.log('updated record', currentState.votes);
-          console.log(args._id);
+          console.log('article ID', args._id);
 
 
           const res = await Articles.findOneAndUpdate({_id: new mongodb.ObjectID(args._id)}, 
