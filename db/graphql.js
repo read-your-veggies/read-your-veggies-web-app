@@ -68,11 +68,19 @@ const getGraphQlSchema = async () => {
         },
         //test function to allow client to delete article on click
         deleteArticle: async (root, args, context, info) => {
-          console.log(args._id)
+          console.log('deleting', args._id)
           const res = await Articles.findOneAndDelete({_id: new mongodb.ObjectID(args._id)});
           console.log(res);
           return res.value;
         },
+
+        updateArticleVotes: async (root, args, context, info) => {
+          console.log('updating article id', args._id)
+          const res = await Articles.findOneAndUpdate({_id: new mongodb.ObjectID(args._id)}, {title: args.title});
+          console.log(res);
+          return res.value;
+        },
+
         createComment: async (root, args) => {
           const res = await Comments.insert(args)
           return prepare(await Comments.findOne({_id: res.insertedIds[0]}))

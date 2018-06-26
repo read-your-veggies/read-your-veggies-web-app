@@ -24,12 +24,12 @@ export const UPDATE_ARTICLE_VOTES = gql`
   }
 `
 
-export const UPDATE_USER_INFO = gql`
-  mutation ($theDisplayName: String!, $theProvider: String!, $theProviderId: String! ) {
-    updateUserInfo(theDisplayName: $theDisplayName, theProvider: $theProvider, theProviderId: $theProviderId) @client {
-      displayName
-      provider
-      providerId
-    }
-  }
-`
+// export const UPDATE_USER_INFO = gql`
+//   mutation ($theDisplayName: String!, $theProvider: String!, $theProviderId: String! ) {
+//     updateUserInfo(theDisplayName: $theDisplayName, theProvider: $theProvider, theProviderId: $theProviderId) @client {
+//       displayName
+//       provider
+//       providerId
+//     }
+//   }
+// `
