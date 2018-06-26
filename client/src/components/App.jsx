@@ -5,6 +5,9 @@ import Header from './Header.jsx';
 import Dashboard from './Dashboard.jsx';
 import Login from './Login.jsx';
 import HealthDashboard from './HealthDashboard.jsx';
+import {GET_USER_INFO} from '../apollo/localQueries.js';
+import { Query } from "react-apollo";
+
 
 class App extends Component {
   constructor(props) {
@@ -18,12 +21,12 @@ class App extends Component {
         this.props.history.push('/dashboard');
         var user = (JSON.parse(res.headers.user));
         //TODO - Add user info to local store here.
-        console.log(res.headers);
+        // console.log(user._id);
         this.props.updateUserInfo({
           variables: {
             theDisplayName: user.name,
             theProvider: 'Facebook',
-            theProviderId: user.facebookId
+            theUserId: user._id,
           }
         })
       } else {
@@ -36,7 +39,14 @@ class App extends Component {
       <div className="app-container">
         <Header location={location} />
         <Switch>
-          <Route path='/dashboard' component={Dashboard} />
+          <Route path={"/dashboard"}
+            component={() => 
+              <Query query={GET_USER_INFO}>
+              {(getUserInfo => 
+                <Dashboard location = {location} getUserInfo = {getUserInfo} />)}
+              </Query>
+            }
+          />
           <Route path='/login' component={Login} />
           <Route path='/health' component={HealthDashboard} />
         </Switch>

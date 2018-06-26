@@ -6,7 +6,7 @@ const apolloStateDefaults = {
     __typename: 'userInfo',
     displayName: 'John Doe',
     provider: 'Facebook',
-    providerId: 1234567890,
+    userId: '1234567890',
   },
 }
 

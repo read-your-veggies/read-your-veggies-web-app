@@ -22,13 +22,13 @@ const stateLink = withClientState({
   defaults: apolloStateDefaults,
   resolvers: {
     Mutation: {
-      updateUserInfo: (_, { theDisplayName, theProvider, theProviderId }, { cache }) => {
-        console.log(theDisplayName, theProvider, theProviderId);
+      updateUserInfo: (_, { theDisplayName, theProvider, theUserId }, { cache }) => {
+        console.log(theDisplayName, theProvider, theUserId);
         client.writeData({ data: { userInfo: {
           __typename:'userInfo',
           displayName: theDisplayName,
           provider: theProvider,
-          providerId: theProviderId,
+          userId: theUserId,
         } } });
         console.log('written');
       }

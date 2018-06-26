@@ -25,3 +25,24 @@ export const GET_ONE_FULL_ARTICLE =  gql`
     }
   }
 `
+
+export const GET_USER_FROM_DB =  gql`
+  query user($_id: String!) {
+    user(_id: $_id){
+      _id
+      authenticationInfo
+      avatar
+      name
+      health
+      user_stance
+      emails
+      facebookId
+      facebookUrl
+      birthday
+      location
+      hometown
+      age_range
+      onboard_information
+    }
+  }
+`
