@@ -6,25 +6,14 @@ require('dotenv').config();
 const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
-var PersonalityInsightsV3 = require('watson-developer-cloud/personality-insights/v3');
-
-var personalityInsights = new PersonalityInsightsV3({
-    version_date: '2017-10-13',
-    username: process.env.WATSON_USERNAME,
-    password: process.env.WATSON_PASSWORD,
-    url: 'https://gateway-fra.watsonplatform.net/personality-insights/api'
-});
-
 var getUrlsFromNewsAPI = () => {
   return new Promise((resolve, reject) => {
     newsapi.v2.topHeadlines({
-      // category: 'politics',
-      // language: 'en',
-      // country: 'us'
       sources: Object.keys(sources).join(','),
+      //ultimately this should be 100
       pageSize: 50,
-    }).then(response => {
-      console.log('response.articles is', response.articles);
+    })
+    .then(response => {
       let articles = [];
       response.articles.forEach(article => {
         let articleObj = {
@@ -96,47 +85,12 @@ var parseAndDecorateArticle = (article) => {
       return article;
     })
     .then(article => {
-      return modifyArticleStance(article);
-    })
-    .then(decoratedArticle => {
-      resolve(decoratedArticle);
+      resolve(article);
     })
     .catch(err => {
       //reject(err);
       console.error(err);
     })
-  });
-}
-
-var modifyArticleStance = (article) => {
-  return new Promise((resolve, reject) => {
-    console.log(article.articleStance);
-    // hit watson
-    console.log(personalityInsights);
-    var profileParams = {
-      // Get the content from the JSON file.
-      content: JSON.stringify({
-        contentItems: [
-          {
-            content: article.fullText,
-            contenttype: 'text/plain',
-            language: 'en',
-          }
-        ]
-      }),
-      content_type: 'application/json',
-      consumption_preferences: true,
-      raw_scores: true
-    };
-    
-    personalityInsights.profile(profileParams, function(error, profile) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(JSON.stringify(profile, null, 2));
-      }
-    });
-    resolve(article);
   });
 }
 
