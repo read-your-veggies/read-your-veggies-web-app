@@ -50,12 +50,12 @@ module.exports = [`
   }
 
   input VoteInput {
-    agree: TallyInput
-    disagree: TallyInput
-    fun: TallyInput
-    bummer: TallyInput
-    mean: TallyInput
-    worthyAdversary: TallyInput
+    agree: Boolean
+    disagree: Boolean
+    fun: Boolean
+    bummer: Boolean
+    mean: Boolean
+    worthyAdversary: Boolean
   }
 
   type Tally {

@@ -71,10 +71,20 @@ class Voter extends React.Component {
                 </div>
               </FormGroup>
               <Button bsStyle="primary" onClick={(e) => {
-              e.preventDefault();
-              updateArticleVotes({ variables: { _id: this.props.articleId } })
-              console.log('Voting Event', e);
-            }}>Submit</Button>
+                let votes = {
+                  "agree" : this.state.agree, 
+                  "disagree" : this.state.disagree,  
+                  "fun" : this.state.fun,  
+                  "bummer" : this.state.bummer,  
+                  "mean" : this.state.mean,  
+                  "worthyAdversary" : this.state.worthy,  
+                }
+                e.preventDefault();
+                console.log('submitting vote', votes);
+                updateArticleVotes({ variables: { _id: this.props.articleId, votes: votes } })
+              }}>
+                Submit
+              </Button>
             </form>
             </Panel.Body>
             </Panel>
