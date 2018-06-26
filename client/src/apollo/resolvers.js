@@ -16,20 +16,18 @@ export const DELETE_ARTICLE = gql`
 
 // todo:
 export const UPDATE_ARTICLE_VOTES = gql`
-  mutation ($_id: String!, $title: String) {
-    updateArticleVotes(_id: $_id, title: $title) {
+  mutation ($_id: String!, $votes: VoteInput) {
+    updateArticleVotes(_id: $_id, votes: $votes) {
       _id
+      url
       title
+      votes{
+        agree{
+          summedUserStance
+          totalVotes
+        }
+      }
     }
   }
 `
 
-// export const UPDATE_USER_INFO = gql`
-//   mutation ($theDisplayName: String!, $theProvider: String!, $theProviderId: String! ) {
-//     updateUserInfo(theDisplayName: $theDisplayName, theProvider: $theProvider, theProviderId: $theProviderId) @client {
-//       displayName
-//       provider
-//       providerId
-//     }
-//   }
-// `

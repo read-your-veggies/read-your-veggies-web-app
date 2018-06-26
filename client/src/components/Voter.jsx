@@ -10,6 +10,17 @@ import { Mutation } from "react-apollo";
 class Voter extends React.Component {
   constructor(props) {
     super(props);
+    console.log('voter props', props);
+    // The props include the article ID.
+
+    this.state = {
+      Agree: false,
+      Disagree: false,
+      Fun: false,
+      Bummer: false,
+      Worthy: false,
+      Mean: false
+    }
   }
 
   render() {
@@ -49,7 +60,8 @@ class Voter extends React.Component {
               </FormGroup>
               <Button bsStyle="primary" onClick={(e) => {
               e.preventDefault();
-              console.log(e);
+              updateArticleVotes({ variables: { _id: this.props.articleId } })
+              console.log('Voting Event', e);
             }}>Submit</Button>
             </form>
             </Panel.Body>
