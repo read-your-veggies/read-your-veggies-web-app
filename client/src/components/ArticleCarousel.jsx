@@ -16,6 +16,8 @@ class ArticleCarousel extends Component {
 
           return (
             <CarouselProvider
+              lockOnWindowScroll={true}
+              isPlaying={true}
               naturalSlideWidth={500}
               naturalSlideHeight={600}
               totalSlides={20}

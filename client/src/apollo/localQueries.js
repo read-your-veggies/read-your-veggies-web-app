@@ -11,17 +11,17 @@ export const GET_USER_INFO = gql`
     userInfo @client {
       displayName
       provider
-      providerId
+      userId
     }
   }
 `
 
 export const UPDATE_USER_INFO = gql`
-  mutation ($theDisplayName: String!, $theProvider: String!, $theProviderId: String! ) {
-    updateUserInfo(theDisplayName: $theDisplayName, theProvider: $theProvider, theProviderId: $theProviderId) @client {
+  mutation ($theDisplayName: String!, $theProvider: String!, $theUserId: String! ) {
+    updateUserInfo(theDisplayName: $theDisplayName, theProvider: $theProvider, theUserId: $theUserId) @client {
       displayName
       provider
-      providerId
+      userId
     }
   }
 `
