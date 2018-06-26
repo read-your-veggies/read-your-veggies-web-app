@@ -20,7 +20,7 @@ class ArticleCarousel extends Component {
               isPlaying={true}
               naturalSlideWidth={500}
               naturalSlideHeight={600}
-              totalSlides={20}
+              totalSlides={50}
               visibleSlides={4}
             >        
               <Slider>
