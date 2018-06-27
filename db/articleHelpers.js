@@ -1,6 +1,7 @@
 const axios = require('axios');
 const extractor = require('unfluff');
 const Article = require('./schemas.js').Article;
+const Source = require('./schemas.js').Source;
 const sources = require('./data/sources.js');
 require('dotenv').config();
 const NewsAPI = require('newsapi');
@@ -88,22 +89,60 @@ var parseAndDecorateArticle = (article) => {
       resolve(article);
     })
     .catch(err => {
-      //reject(err);
-      console.error(err);
+      reject(err);
+      //console.error(err);
     })
   });
 }
 
-var insertArticlesIntoDb = (articles) => {
-  return new Promise((resolve, reject) => {
-    Article.insertMany(articles, (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
+var insertArticlesIntoSourceDb = (articles) => {
+  Source.find({}, (err, res) => {
+    if (err) {
+      console.error(err);
+    } else {
+      var sources = {};
+      articles.forEach(article => {
+        if (!sources[article.source]) {
+          sources[article.source] = {
+            articlesToBeScanned: {},
+            articlesAlreadyScanned: {},
+            personality: {},
+          }
+        }
+        if (sources[article.source].articlesToBeScanned[article.url] === undefined) {
+          sources[article.source].articlesToBeScanned[article.url] = {
+            url: {
+              title: article.title,
+              fullText: article.fullText,
+            }
+          }
+        }
+      });
+      
+      for (var key in sources) {
+        var params = {
+          name: key,
+          articlesToBeScanned: JSON.stringify(sources[key].articlesToBeScanned),
+          articlesAlreadyScanned: JSON.stringify(sources[key].articlesAlreadyScanned),
+          personality: JSON.stringify(sources[key].personality),
+        }
+        console.log('params is', params);
+        var newSource = new Source(params);
+        newSource.save(err => {
+          if (err) console.error('error');
+        })
       }
+    }
+  });
+}
+
+var insertArticlesIntoArticlesDb = (articles) => {
+  articles.forEach(article => {
+    var newArticle = new Article(article);
+    newArticle.save(err => {
+      if (err) console.log(`article already exists in db ${article.url}`);
     });
-  })   
+  });
 }
 
 var scrapeArticles = () => {
@@ -112,7 +151,8 @@ var scrapeArticles = () => {
     return generateArticles(urlList);
   })
   .then(articles => {
-    insertArticlesIntoDb(articles);
+    insertArticlesIntoArticlesDb(articles);
+    insertArticlesIntoSourceDb(articles);
     console.log('Articles Inserted');
   })
   .catch(err => {

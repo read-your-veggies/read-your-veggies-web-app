@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const articleSchema = new Schema({
-  url: String,
+  url: {type: String, unique: true},
   title: String,
   author: Array, // news api always returns an array of strings here
   source: String,
@@ -56,9 +56,17 @@ const userSchema = new Schema({
   hometown: String,
   age_range: String,
   onboard_information: { type: String, default: 'NEED_ON_BOARDING' },
-
 });
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = { Article, User }
+const sourceSchema = new Schema({
+  name: String,
+  articlesToBeScanned: String,
+  articlesAlreadyScanned: String,
+  personality: String,
+});
+
+const Source = mongoose.model('Source', sourceSchema);
+
+module.exports = { Article, User, Source }
