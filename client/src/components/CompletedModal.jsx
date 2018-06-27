@@ -41,8 +41,10 @@ class CompletedModal extends React.Component {
             <p class="text-center">
               <img id="trophy" width="100"  src="./assets/carrot.jpg" />
             </p>
-            <p class="text-center">
+            <p class="text-center"> 
+            <a href={this.props.article.url}>
               This article was written by {author} and originally published by {this.props.article.source}.
+            </a>
             </p>
           </div>
         </Modal.Body>
