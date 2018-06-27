@@ -1,7 +1,6 @@
 const axios = require('axios');
 const extractor = require('unfluff');
 const Article = require('./schemas.js').Article;
-const Source = require('./schemas.js').Source;
 const sources = require('./data/sources.js');
 require('dotenv').config();
 const NewsAPI = require('newsapi');
@@ -15,11 +14,13 @@ var getUrlsFromNewsAPI = () => {
       pageSize: 20,
     })
     .then(response => {
+      console.log(response.articles);
       let articles = [];
       response.articles.forEach(article => {
         let articleObj = {
           url: article.url,
           articleStance: sources[article.source.id],
+          source: article.source.name,
         }
         articles.push(articleObj);
       });
@@ -53,7 +54,6 @@ var parseAndDecorateArticle = (article) => {
       var webpage = extractor(response.data);
       article.title = webpage.title;
       article.author = webpage.author;
-      article.source = webpage.publisher;
       article.description = webpage.description;
       article.image = webpage.image;
       article.fullText = webpage.text;
@@ -95,48 +95,6 @@ var parseAndDecorateArticle = (article) => {
   });
 }
 
-var insertArticlesIntoSourceDb = (articles) => {
-  Source.find({}, (err, res) => {
-    if (err) {
-      console.error(err);
-    } else {
-      //console.log('res is', res);
-      var sources = {};
-      articles.forEach(article => {
-        if (!sources[article.source]) {
-          sources[article.source] = {
-            articlesToBeScanned: {},
-            articlesAlreadyScanned: {},
-            personality: {},
-          }
-        }
-        if (sources[article.source].articlesToBeScanned[article.url] === undefined) {
-          sources[article.source].articlesToBeScanned[article.url] = {
-            url: {
-              title: article.title,
-              fullText: article.fullText,
-            }
-          }
-        }
-      });
-      
-      for (var key in sources) {
-        var params = {
-          name: key,
-          articlesToBeScanned: JSON.stringify(sources[key].articlesToBeScanned),
-          articlesAlreadyScanned: JSON.stringify(sources[key].articlesAlreadyScanned),
-          personality: JSON.stringify(sources[key].personality),
-        }
-        //console.log('params is', params);
-        var newSource = new Source(params);
-        newSource.save(err => {
-          if (err) console.log('error saving to source');
-        })
-      }
-    }
-  });
-}
-
 var insertArticlesIntoArticlesDb = (articles) => {
   articles.forEach(article => {
     var newArticle = new Article(article);
@@ -153,7 +111,6 @@ var scrapeArticles = () => {
   })
   .then(articles => {
     insertArticlesIntoArticlesDb(articles);
-    insertArticlesIntoSourceDb(articles);
     console.log('Articles Inserted');
   })
   .catch(err => {
