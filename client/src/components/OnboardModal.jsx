@@ -7,8 +7,8 @@ import Modal from 'react-bootstrap/lib/Modal';
 import Voter from './Voter.jsx';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Badge from 'react-bootstrap/lib/Badge';
-import Slider from 'react-rangeslider'
-import 'react-rangeslider/lib/index.css'
+import Slider from 'react-rangeslider';
+import 'react-rangeslider/lib/index.css';
 
 
 class OnboardModal extends React.Component {

@@ -90,7 +90,7 @@ if (process.env.DEPLOYED !== 'true') {
 
 /*****************************WORKERS*****************************/
 // articleHelpers.deleteArticles();
-// articleHelpers.scrapeArticles();
+//articleHelpers.scrapeArticles();
 
 /*****************************WATSON*****************************/
 // getWatsonProfile(dummyTweets);
