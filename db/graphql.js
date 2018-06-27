@@ -75,6 +75,7 @@ const getGraphQlSchema = async () => {
         },
 
         updateArticleVotes: async (root, args) => {
+          console.log(args);
           let currentState = prepare(await Articles.findOne(new mongodb.ObjectID(args._id)));
           console.log('record to be updated', currentState.votes);
           for (var key in currentState.votes) {

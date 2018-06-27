@@ -12,7 +12,7 @@ import { Query } from "react-apollo";
 class App extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    console.log('App props', props);
   }
 
   componentDidMount() {
