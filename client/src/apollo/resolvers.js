@@ -52,3 +52,24 @@ export const ON_BOARD_USER = gql`
   }
 `
 
+export const OFF_BOARD_USER = gql`
+  mutation ($_id: String!) {
+    onboardUser(_id: $_id, onboard_info: "NEED_ON_BOARDING") {
+      _id
+      authenticationInfo
+      avatar
+      name
+      health
+      user_stance
+      emails
+      facebookId
+      facebookUrl
+      birthday
+      location
+      hometown
+      age_range
+      onboard_information
+    }
+  }
+`
+
