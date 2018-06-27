@@ -15,13 +15,7 @@ import { withRouter } from "react-router-dom";
 class CompletedModal extends React.Component {
   constructor(props) {
     super(props);
-    // console.log('completed modal props', props);
-   
-    this.state = {
-      veggies: 8,
-    }
 
-    // func bindings here
   }
 
   render() {
@@ -36,7 +30,7 @@ class CompletedModal extends React.Component {
         <Modal.Body>
           <div class="container">
             <p class="text-center">
-              Great job!  You earned {this.state.veggies} veggies!
+              Great job!  You earned {this.props.veggies} veggies!
             </p>
             <p class="text-center">
               <img id="trophy" width="100"  src="./assets/carrot.jpg" />

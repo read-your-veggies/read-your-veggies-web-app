@@ -128,7 +128,8 @@ class ArticleCard extends React.Component {
               <CompletedModal
                 show={this.state.showCompleted}
                 handleClose={this.handleClose}
-                article = {this.state.fullArticle}
+                article={this.state.fullArticle}
+                veggies={this.calculateNutritionalValue()}
               />
             </div>
           )}}
