@@ -7,6 +7,8 @@ import Checkbox from 'react-bootstrap/lib/Checkbox';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import { UPDATE_ARTICLE_VOTES } from '../apollo/resolvers';
 import { Mutation } from "react-apollo";
+import Modal from 'react-bootstrap/lib/Modal';
+
 
 class Voter extends React.Component {
   constructor(props) {
@@ -39,6 +41,7 @@ class Voter extends React.Component {
   render() {
     return (
       <Modal show={this.props.show} onHide={() => this.props.handleClose('voter')}>
+      <Modal.Body>
         <Mutation mutation={UPDATE_ARTICLE_VOTES} >
           { (updateArticleVotes) => {
             return (
@@ -92,6 +95,7 @@ class Voter extends React.Component {
               </Panel>
           )}}
         </Mutation>
+      </Modal.Body>
       </Modal>
     )
   }

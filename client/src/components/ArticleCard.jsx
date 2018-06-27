@@ -51,9 +51,10 @@ class ArticleCard extends React.Component {
   }
 
   handleShow(modalType) {
-    // We aren't actually using this func anywhere, maybe remove?
     if (modalType === 'article') {
       this.setState({ showArticle: true });
+    } else if (modalType === 'voter') {
+      this.setState({ showVoter: true})
     }
   }
 

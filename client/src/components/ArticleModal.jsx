@@ -21,6 +21,7 @@ class ArticleModal extends React.Component {
   completeArticle() {
     console.log("completed article");
     this.props.handleClose('article');
+    this.props.handleShow('voter');
   }
 
   render() {
