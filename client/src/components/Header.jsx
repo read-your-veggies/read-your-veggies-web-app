@@ -9,11 +9,18 @@ class Header extends React.Component {
     super(props);
 
     this.goToDashboard= this.goToDashboard.bind(this);
+    this.goToDashboard= this.goToAboutUs.bind(this);
   }
 
   goToDashboard(displayName) {
     if (displayName !== 'John Doe') {
       this.props.history.push('/dashboard');
+    }
+  }
+
+  goToAboutUs(displayName) {
+    if (displayName !== 'John Doe') {
+      this.props.history.push('/aboutus');
     }
   }
 
@@ -23,7 +30,7 @@ class Header extends React.Component {
             {({ data, client }) => {
               return (
                 <div className="header">
-                  <div onClick={() => this.goToDashboard(data.userInfo.displayName)} id='logo-container'>
+                  <div onClick={() => this.goToAboutUs(data.userInfo.displayName)} id='logo-container'>
                     <img id="logo" src="./assets/logo.png" />
                   </div>
                   <div className="header-text">

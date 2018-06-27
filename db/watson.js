@@ -9,7 +9,7 @@ var personalityInsights = new PersonalityInsightsV3({
     url: 'https://gateway.watsonplatform.net/personality-insights/api/',
 });
 
-var getWatsonProfile = (data) => {
+var getWatsonProfile = (data, callback) => {
   var profileParams = {
     content: data,
     content_type: 'application/json',
@@ -48,8 +48,7 @@ var insertArticlesIntoSourceDb = () => {
               existingArticles[article.url] = true;
             })
           });
-          console.log('articlesBysource is', articlesBySource);
-          console.log('existingArticles is', existingArticles);
+
           articlesFromDb.forEach(article => {
             if (articlesBySource[article.source] === undefined) {
               articlesBySource[article.source] = {
@@ -72,7 +71,7 @@ var insertArticlesIntoSourceDb = () => {
               });
             }
           });
-          console.log('articlesBysource is', articlesBySource);
+          
           var newSourceData = [];
           for (var source in articlesBySource) {
             newSourceData.push({
