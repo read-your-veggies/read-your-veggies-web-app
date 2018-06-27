@@ -7,14 +7,47 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 
 
 class ArticleCarousel extends Component {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      onboardSlant: 0,
+    }
+  }
+
+  componentDidMount() {
+    this.calculateOnboardSlant();
+  }
+
+  calculateOnboardSlant() {
+    var onboardInfo = JSON.parse(this.props.userData.onboard_information);
+    //slant: -100 : 100
+    var slant = onboardInfo.slantSlider;
+    //viewOnParents: -100 : 100
+    var viewOnParents = onboardInfo.parentSlider;
+
+    // if view of parents === 0, ignore it.
+    if (viewOnParents === 0) {
+      slant = slant / 100;
+    } else {
+      slant = (slant * Math.abs(viewOnParents)) / 10000;
+    }
+
+    console.log('the slant is', slant);
+    this.setState({
+      onboardSlant: slant,
+    }, console.log('the slant is', this.state))
+
+
+
+  }
   render() {
-    console.log('carousel props', this.props)
+    console.log('carousel rendering');
     return(
       <Query query={GET_ARTICLES_FROM_SERVER}>
         {({ loading, error, data }) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
-
           return (
             <CarouselProvider
               lockOnWindowScroll={true}
@@ -27,7 +60,7 @@ class ArticleCarousel extends Component {
               <Slider>
                 {data.articles.map((article, i) => (
                     <Slide index={i}>
-                      <ArticleCard article={article}/>
+                      <ArticleCard article={article} onboardSlant={this.state.onboardSlant}/>
                     </Slide>
                 ))}
               </Slider>

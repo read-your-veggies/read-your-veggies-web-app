@@ -33,7 +33,7 @@ class Voter extends React.Component {
   }
 
   handleCheckboxChange (e) {
-    // console.log('state', this.state);
+    console.log('state', this.state);
     // console.log('event', e.target);
     this.setState({
       [e.target.value]: !this.state[e.target.value]
@@ -94,7 +94,7 @@ class Voter extends React.Component {
                     "worthyAdversary" : this.state.worthyAdversary,  
                   }
                   e.preventDefault();
-                  console.log('submitting vote', votes);
+                  console.log('submitting id', this.props.articleId);
                   updateArticleVotes({ variables: { _id: this.props.articleId, votes: votes } })
                   // alert('Thank you!');
                   this.submitVote();

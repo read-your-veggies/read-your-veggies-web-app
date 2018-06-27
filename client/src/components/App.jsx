@@ -48,7 +48,14 @@ class App extends Component {
             }
           />
           <Route path='/login' component={Login} />
-          <Route path='/health' component={HealthDashboard} />
+          <Route path={"/health"}
+            component={() => 
+              <Query query={GET_USER_INFO}>
+              {(getUserInfo => 
+                <HealthDashboard  getUserInfo={getUserInfo} />)}
+              </Query>
+            }
+          />
         </Switch>
       </div>
     )

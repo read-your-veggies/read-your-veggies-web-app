@@ -31,3 +31,45 @@ export const UPDATE_ARTICLE_VOTES = gql`
   }
 `
 
+export const ON_BOARD_USER = gql`
+  mutation ($_id: String!, $onboard_info: String!) {
+    onboardUser(_id: $_id, onboard_info: $onboard_info) {
+      _id
+      authenticationInfo
+      avatar
+      name
+      health
+      user_stance
+      emails
+      facebookId
+      facebookUrl
+      birthday
+      location
+      hometown
+      age_range
+      onboard_information
+    }
+  }
+`
+
+export const OFF_BOARD_USER = gql`
+  mutation ($_id: String!) {
+    onboardUser(_id: $_id, onboard_info: "NEED_ON_BOARDING") {
+      _id
+      authenticationInfo
+      avatar
+      name
+      health
+      user_stance
+      emails
+      facebookId
+      facebookUrl
+      birthday
+      location
+      hometown
+      age_range
+      onboard_information
+    }
+  }
+`
+
