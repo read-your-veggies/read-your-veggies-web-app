@@ -37,8 +37,7 @@ class ArticleCard extends React.Component {
 
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
-
-
+    this.calculateNutritionalValue = this.calculateNutritionalValue.bind(this);
   }
 
   handleClose() {
@@ -47,6 +46,12 @@ class ArticleCard extends React.Component {
 
   handleShow() {
     this.setState({ show: true });
+  }
+
+  calculateNutritionalValue() {
+    var onboardStance = this.props.onboardSlant
+    var articleStance = this.props.article.articleStance;
+    return Math.abs(onboardStance - articleStance) / 2 * 10;
   }
 
   render() {
@@ -60,7 +65,7 @@ class ArticleCard extends React.Component {
                   <Panel.Heading className='title'>
                     <button className='delete-article-button' onClick={() => deleteArticle({ variables: { _id: this.props.article._id } })}> X </button>
                     <Panel.Title>{this.props.article.title}</Panel.Title>
-                    <Badge pullRight bsStyle="danger">{this.props.article.articleStance}</Badge>
+                    <Badge pullRight bsStyle="danger">{this.calculateNutritionalValue()}</Badge>
                   </Panel.Heading>
                   <Panel.Body>
                     <h3 className="article-card-title">{this.props.article.title}</h3>
