@@ -1,4 +1,5 @@
 @import url("./ArticleCard.css");
+@import url("./OnboardModal.css");
 
 .grid {
   display: flex;
