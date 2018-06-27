@@ -8,6 +8,8 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import { UPDATE_ARTICLE_VOTES } from '../apollo/resolvers';
 import { Mutation } from "react-apollo";
 import Modal from 'react-bootstrap/lib/Modal';
+import { withRouter } from "react-router-dom";
+
 
 
 class Voter extends React.Component {
@@ -87,6 +89,8 @@ class Voter extends React.Component {
                   e.preventDefault();
                   console.log('submitting vote', votes);
                   updateArticleVotes({ variables: { _id: this.props.articleId, votes: votes } })
+                  alert('Thank you!');
+                  this.props.handleClose('voter');
                 }}>
                   Submit
                 </Button>
@@ -102,4 +106,4 @@ class Voter extends React.Component {
   
 }
 
-export default Voter;
+export default withRouter(Voter);

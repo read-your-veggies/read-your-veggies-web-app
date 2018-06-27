@@ -8,6 +8,7 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 
 class ArticleCarousel extends Component {
   render() {
+    console.log('carousel props', this.props)
     return(
       <Query query={GET_ARTICLES_FROM_SERVER}>
         {({ loading, error, data }) => {

@@ -10,6 +10,8 @@ class Dashboard extends Component {
 
   constructor(props) {
     super(props);
+    console.log('dash props', props)
+
     this.state = {
       userId: null,
       onboardInformation: null,

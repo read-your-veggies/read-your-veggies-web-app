@@ -33,13 +33,12 @@ class ArticleCard extends React.Component {
     this.state = {
       showArticle: false,
       showVoter: false,
+      showCompleted: false,
       fullArticle: {},
     };
 
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
-
-
   }
 
   handleClose(modalType) {
@@ -47,6 +46,8 @@ class ArticleCard extends React.Component {
       this.setState({ showArticle: false });
     } else if (modalType === 'voter'){
       this.setState({ showVoter: false })
+    } else if (modalType === 'completed') {
+      this.setState({ showCompleted: false })
     }
   }
 
@@ -55,6 +56,8 @@ class ArticleCard extends React.Component {
       this.setState({ showArticle: true });
     } else if (modalType === 'voter') {
       this.setState({ showVoter: true})
+    } else if (modalType === 'completed') {
+      this.setState({ showCompleted: true })
     }
   }
 
@@ -110,6 +113,10 @@ class ArticleCard extends React.Component {
                 show={this.state.showVoter}
                 handleClose = {this.handleClose}
                 articleId={this.props._id}
+              />
+              <CompletedModal
+                show={this.state.showCompleted}
+                handleClose={this.handleClose}
               />
             </div>
           )}}
