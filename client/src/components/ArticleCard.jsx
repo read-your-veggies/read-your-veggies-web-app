@@ -31,7 +31,7 @@ class ArticleCard extends React.Component {
     super(props);
     
     this.state = {
-      show: false,
+      showArticle: false,
       fullArticle: {},
     };
 
@@ -42,11 +42,11 @@ class ArticleCard extends React.Component {
   }
 
   handleClose() {
-    this.setState({ show: false });
+    this.setState({ showArticle: false });
   }
 
   handleShow() {
-    this.setState({ show: true });
+    this.setState({ showArticle: true });
   }
 
   render() {
@@ -81,7 +81,7 @@ class ArticleCard extends React.Component {
                           })
                           this.setState({
                             fullArticle: data.article,
-                            show: true,
+                            showArticle: true,
                           })
                         }}
                       >
@@ -92,10 +92,14 @@ class ArticleCard extends React.Component {
 
               </Panel>
               <ArticleModal 
-                show={this.state.show} 
+                show={this.state.showArticle} 
                 handleClose = {this.handleClose}
-                handleSHow = {this.handleShow}
+                handleShow = {this.handleShow}
                 article = {this.state.fullArticle}
+              />
+              <Voter
+                articleId={this.props._id}
+
               />
             </div>
           )}}
