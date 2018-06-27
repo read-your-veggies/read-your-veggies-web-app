@@ -47,7 +47,11 @@ class ArticleModal extends React.Component {
           <div className="modal-body-right">
             <Panel>
               <Panel.Body className="article-full-text">{this.props.article.fullText}</Panel.Body>
-              <Button onClick={this.completeArticle}>Complete article!</Button>
+              <Button onClick={(e) => {
+                e.preventDefault();
+                this.completeArticle();
+              }}
+              >Complete article!</Button>
             </Panel>
           </div>
         </Modal.Body>
@@ -62,7 +66,11 @@ class ArticleModal extends React.Component {
               <a href="#tooltip">Why this article?</a>
             </OverlayTrigger>{' '}
           </p>
-          <Button onClick={() => this.props.handleClose('article')}>Close</Button>
+          <Button onClick={
+            (e) => {
+              e.preventDefault();
+              this.props.handleClose('article');
+          }}>Close</Button>
         </Modal.Footer>
       </Modal>
     );

@@ -103,7 +103,7 @@ class ArticleCard extends React.Component {
                   )}
                 </ApolloConsumer>
               </Panel>
-              
+
               <ArticleModal 
                 show={this.state.showArticle} 
                 handleClose = {this.handleClose}
@@ -119,6 +119,7 @@ class ArticleCard extends React.Component {
               <CompletedModal
                 show={this.state.showCompleted}
                 handleClose={this.handleClose}
+                article = {this.state.fullArticle}
               />
             </div>
           )}}

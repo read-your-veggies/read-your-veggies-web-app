@@ -31,13 +31,36 @@ class CompletedModal extends React.Component {
   render() {
     return (
       <Modal show={this.props.show} onHide={() => this.props.handleClose('completed')}>
-      <Modal.Body>
-        Testing son
-        <Button onClick={() => {
-          this.props.handleClose('completed');
-          this.props.history.push('/health');
-        }}>See your health report!</Button>
-      </Modal.Body>
+        <Modal.Header>
+          <Modal.Title>Thanks for reading "{this.props.article.title}"!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div class="container">
+            <p class="text-center">
+              Great job!  You earned {this.state.veggies} veggies!
+            </p>
+            <p class="text-center">
+              <img id="trophy" width="100"  src="./assets/carrot.jpg" />
+            </p>
+            <p class="text-center">
+              This article was written by John Doe and originally published in The Guardian.
+            </p>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+
+          <div>
+            <Button onClick={ (e) => {
+              e.preventDefault();
+              this.props.handleClose('completed')
+            }}>Close</Button>
+            <Button onClick={(e) => {
+              e.preventDefault();
+              this.props.history.push('/health');
+            }}>See your health report!</Button>
+          </div>
+        </Modal.Footer>
+        
       </Modal>
     )
   }
