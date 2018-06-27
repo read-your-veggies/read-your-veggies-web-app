@@ -1,0 +1,12 @@
+@import url("./ArticleCard.css");
+@import url("./OnboardModal.css");
+
+.grid {
+  display: flex;
+  /* flex-wrap: wrap; */
+  flex-direction: flex-start;
+}
+
+.carousel-control.left, .carousel-control.right {
+  background-image: none;
+}

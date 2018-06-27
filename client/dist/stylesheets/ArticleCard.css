@@ -1,0 +1,41 @@
+@import url("./ArticleModal.css");
+
+.article {
+  margin: 2%;
+  border-radius: 5px;
+  box-shadow:  6px 1px 6px rgba(0, 0, 0, .5);
+  font-weight: 200 !important;
+}
+
+.article > .panel {
+  height: 100%;
+}
+
+.article-card-title {
+  font-weight: 300 !important;
+}
+
+.delete-article-button {
+  float: right;
+  color: black;
+  background-color: lightcoral;
+  font-weight: 400 !important;
+}
+
+.article-thumbnail {
+  width: 50%;
+  height: auto;
+}
+
+.delete-article-button:hover {
+  background-color: red;
+}
+
+.eat-me {
+  display: block;
+  margin: auto;
+  margin-bottom: 1em;
+  vertical-align: bottom;
+}
+
+

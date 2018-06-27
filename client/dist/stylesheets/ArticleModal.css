@@ -1,0 +1,52 @@
+@import url("./Voter.css");
+
+.modal-header {
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 2em;
+  font-weight: 200 !important;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: flex-start;
+}
+
+.modal-body-left {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body-right{
+  width: 70%;
+  height: 500px;
+  overflow: scroll;
+}
+
+.article-image {
+  max-height: 250px;
+  width: auto;
+}
+
+.voting-panel {
+  height: 250px;
+}
+
+.article-full-text {
+  text-align: justify;
+  background-color: seashell;
+  font-size: 1.2em;
+  white-space: pre-wrap;
+  font-weight: 300 !important;
+}
+
+.modal-footer p, .modal-footer .btn {
+  display: inline;
+}
+
+.modal-footer p {
+  float: left;
+}
