@@ -116,7 +116,6 @@ var getWatsonPersonality = (source, type) => {
       }
     });
   }
-  
 }
 
 module.exports = { getWatsonProfile, insertArticlesIntoSourceDb, getWatsonPersonality }

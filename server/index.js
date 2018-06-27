@@ -95,4 +95,4 @@ if (process.env.DEPLOYED !== 'true') {
 /*****************************WATSON*****************************/
 //watson.getWatsonProfile(dummyTweets);
 //watson.insertArticlesIntoSourceDb();
-//watson.getWatsonPersonality('Bloomberg', 'fullTexts');
+//watson.getWatsonPersonality('The Huffington Post', 'titles');
