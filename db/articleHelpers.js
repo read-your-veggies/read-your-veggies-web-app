@@ -12,7 +12,7 @@ var getUrlsFromNewsAPI = () => {
     newsapi.v2.topHeadlines({
       sources: Object.keys(sources).join(','),
       //ultimately this should be 100
-      pageSize: 50,
+      pageSize: 20,
     })
     .then(response => {
       let articles = [];
@@ -89,8 +89,8 @@ var parseAndDecorateArticle = (article) => {
       resolve(article);
     })
     .catch(err => {
-      reject(err);
-      //console.error(err);
+      //reject(err);
+      console.log('error parsing article');
     })
   });
 }
@@ -100,6 +100,7 @@ var insertArticlesIntoSourceDb = (articles) => {
     if (err) {
       console.error(err);
     } else {
+      //console.log('res is', res);
       var sources = {};
       articles.forEach(article => {
         if (!sources[article.source]) {
@@ -126,10 +127,10 @@ var insertArticlesIntoSourceDb = (articles) => {
           articlesAlreadyScanned: JSON.stringify(sources[key].articlesAlreadyScanned),
           personality: JSON.stringify(sources[key].personality),
         }
-        console.log('params is', params);
+        //console.log('params is', params);
         var newSource = new Source(params);
         newSource.save(err => {
-          if (err) console.error('error');
+          if (err) console.log('error saving to source');
         })
       }
     }
@@ -156,14 +157,14 @@ var scrapeArticles = () => {
     console.log('Articles Inserted');
   })
   .catch(err => {
-    console.error(err);
+    console.log('error scraping articles');
   })
 }
 
 var deleteArticles = () => {
   Article.remove({}, err => {
     if (err) {
-      console.error(err);
+      console.error('error deleting articles');
     } else {
       console.log('deleted articles');
     }
