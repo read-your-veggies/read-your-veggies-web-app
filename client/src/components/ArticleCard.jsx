@@ -32,6 +32,7 @@ class ArticleCard extends React.Component {
     
     this.state = {
       showArticle: false,
+      showVoter: false,
       fullArticle: {},
     };
 
@@ -41,12 +42,19 @@ class ArticleCard extends React.Component {
 
   }
 
-  handleClose() {
-    this.setState({ showArticle: false });
+  handleClose(modalType) {
+    if (modalType === 'article') {
+      this.setState({ showArticle: false });
+    } else if (modalType === 'voter'){
+      this.setState({ showVoter: false })
+    }
   }
 
-  handleShow() {
-    this.setState({ showArticle: true });
+  handleShow(modalType) {
+    // We aren't actually using this func anywhere, maybe remove?
+    if (modalType === 'article') {
+      this.setState({ showArticle: true });
+    }
   }
 
   render() {
@@ -98,8 +106,9 @@ class ArticleCard extends React.Component {
                 article = {this.state.fullArticle}
               />
               <Voter
+                show={this.state.showVoter}
+                handleClose = {this.handleClose}
                 articleId={this.props._id}
-
               />
             </div>
           )}}

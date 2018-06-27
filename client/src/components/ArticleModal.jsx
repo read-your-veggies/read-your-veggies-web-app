@@ -14,6 +14,13 @@ import { Query, ApolloConsumer } from "react-apollo";
 class ArticleModal extends React.Component {
   constructor(props) {
     super(props);
+
+    this.completeArticle = this.completeArticle.bind(this);
+  }
+
+  completeArticle() {
+    console.log("completed article");
+    this.props.handleClose('article');
   }
 
   render() {
@@ -26,7 +33,7 @@ class ArticleModal extends React.Component {
     const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
 
     return (
-      <Modal show={this.props.show} onHide={this.props.handleClose}>
+      <Modal show={this.props.show} onHide={() => this.props.handleClose('voter')}>
         <Modal.Header closeButton>
           <Modal.Title>{this.props.article.title}</Modal.Title>
         </Modal.Header>
@@ -39,6 +46,7 @@ class ArticleModal extends React.Component {
           <div className="modal-body-right">
             <Panel>
               <Panel.Body className="article-full-text">{this.props.article.fullText}</Panel.Body>
+              <Button onClick={this.completeArticle}>Complete article!</Button>
             </Panel>
           </div>
         </Modal.Body>
@@ -53,7 +61,7 @@ class ArticleModal extends React.Component {
               <a href="#tooltip">Why this article?</a>
             </OverlayTrigger>{' '}
           </p>
-          <Button onClick={this.props.handleClose}>Close</Button>
+          <Button onClick={() => this.props.handleClose('article')}>Close</Button>
         </Modal.Footer>
       </Modal>
     );
