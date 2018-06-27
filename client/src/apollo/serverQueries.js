@@ -17,6 +17,7 @@ export const GET_ONE_FULL_ARTICLE =  gql`
       _id
       url
       title
+      author
       source
       description
       fullText

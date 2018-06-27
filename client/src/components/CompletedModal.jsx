@@ -17,7 +17,6 @@ class CompletedModal extends React.Component {
     super(props);
     // console.log('completed modal props', props);
    
-
     this.state = {
       veggies: 8,
     }
@@ -25,10 +24,10 @@ class CompletedModal extends React.Component {
     // func bindings here
   }
 
-
-
-
   render() {
+    let author;
+    this.props.article.author ? author = this.props.article.author[0] : author = '';
+
     return (
       <Modal show={this.props.show} onHide={() => this.props.handleClose('completed')}>
         <Modal.Header>
@@ -43,7 +42,7 @@ class CompletedModal extends React.Component {
               <img id="trophy" width="100"  src="./assets/carrot.jpg" />
             </p>
             <p class="text-center">
-              This article was written by John Doe and originally published in The Guardian.
+              This article was written by {author} and originally published by {this.props.article.source}.
             </p>
           </div>
         </Modal.Body>
