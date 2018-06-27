@@ -10,6 +10,11 @@ import Badge from 'react-bootstrap/lib/Badge';
 import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
 
+import { ON_BOARD_USER } from '../apollo/resolvers.js';
+import { Mutation } from "react-apollo";
+import { withRouter } from "react-router-dom";
+
+
 
 class OnboardModal extends React.Component {
   constructor(props) {
@@ -28,8 +33,6 @@ class OnboardModal extends React.Component {
     this.handleSlantChange = this.handleSlantChange.bind(this);
     this.handleParentChange = this.handleParentChange.bind(this);
     this.handleVeggieChange = this.handleVeggieChange.bind(this);
-
-    this.handleOnboardSubmit = this.handleOnboardSubmit.bind(this);
 
   }
   
@@ -57,10 +60,6 @@ class OnboardModal extends React.Component {
 
   handleShow() {
     this.setState({ show: true });
-  }
-
-  handleOnboardSubmit() {
-    //TODO: add this
   }
 
   render() {
@@ -157,11 +156,26 @@ class OnboardModal extends React.Component {
           </div>
         </Modal.Body>
         <Modal.Footer>
-        <Button id='submit-onboard' onClick={this.handleOnboardSubmit}>Submit!</Button>
+          <Mutation mutation={ON_BOARD_USER} >
+          { (onBoardUser) => {
+            return (
+              <Button
+                id='submit-onboard'
+                onClick={(e) => {
+                  e.preventDefault();
+                  onBoardUser({ variables: { _id: this.props.userId, onboard_info: JSON.stringify(this.state) } });
+                  console.log('onboarded!');
+                  this.handleClose();
+                  setTimeout(() => {
+                    this.props.history.push('/dashboard');
+                  }, 500)
+                }}>Submit!</Button>
+              )}}
+          </Mutation>
         </Modal.Footer>
       </Modal>
     );
   }
 }
 
-export default OnboardModal;
+export default withRouter(OnboardModal);

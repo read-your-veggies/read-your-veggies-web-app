@@ -9,6 +9,7 @@ import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Badge from 'react-bootstrap/lib/Badge';
 
 import ArticleModal from './ArticleModal.jsx';
+import CompletedModal from './CompletedModal.jsx';
 
 import { DELETE_ARTICLE } from '../apollo/resolvers';
 import { GET_ARTICLES_FROM_SERVER, GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
@@ -29,24 +30,44 @@ const updateCache = (cache, { data: { deleteArticle} }) => {
 class ArticleCard extends React.Component {
   constructor(props) {
     super(props);
+    console.log('article card props', props);
     
     this.state = {
-      show: false,
+      showArticle: false,
+      showVoter: false,
+      showCompleted: false,
       fullArticle: {},
     };
 
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
-
-
+    this.calculateNutritionalValue = this.calculateNutritionalValue.bind(this);
   }
 
-  handleClose() {
-    this.setState({ show: false });
+  handleClose(modalType) {
+    if (modalType === 'article') {
+      this.setState({ showArticle: false });
+    } else if (modalType === 'voter'){
+      this.setState({ showVoter: false })
+    } else if (modalType === 'completed') {
+      this.setState({ showCompleted: false })
+    }
   }
 
-  handleShow() {
-    this.setState({ show: true });
+  handleShow(modalType) {
+    if (modalType === 'article') {
+      this.setState({ showArticle: true });
+    } else if (modalType === 'voter') {
+      this.setState({ showVoter: true})
+    } else if (modalType === 'completed') {
+      this.setState({ showCompleted: true })
+    }
+  }
+
+  calculateNutritionalValue() {
+    var onboardStance = this.props.onboardSlant
+    var articleStance = this.props.article.articleStance;
+    return Math.abs(onboardStance - articleStance) / 2 * 10;
   }
 
   render() {
@@ -60,7 +81,7 @@ class ArticleCard extends React.Component {
                   <Panel.Heading className='title'>
                     <button className='delete-article-button' onClick={() => deleteArticle({ variables: { _id: this.props.article._id } })}> X </button>
                     <Panel.Title>{this.props.article.title}</Panel.Title>
-                    <Badge pullRight bsStyle="danger">{this.props.article.articleStance}</Badge>
+                    <Badge pullRight bsStyle="danger">{this.calculateNutritionalValue()}</Badge>
                   </Panel.Heading>
                   <Panel.Body>
                     <h3 className="article-card-title">{this.props.article.title}</h3>
@@ -81,7 +102,7 @@ class ArticleCard extends React.Component {
                           })
                           this.setState({
                             fullArticle: data.article,
-                            show: true,
+                            showArticle: true,
                           })
                         }}
                       >
@@ -89,12 +110,23 @@ class ArticleCard extends React.Component {
                     </Button>
                     )}
                   </ApolloConsumer>
-
               </Panel>
+
               <ArticleModal 
-                show={this.state.show} 
+                show={this.state.showArticle} 
                 handleClose = {this.handleClose}
-                handleSHow = {this.handleShow}
+                handleShow = {this.handleShow}
+                article = {this.state.fullArticle}
+              />
+              <Voter
+                show={this.state.showVoter}
+                handleClose = {this.handleClose}
+                handleShow = {this.handleShow}
+                articleId={this.props.article._id}
+              />
+              <CompletedModal
+                show={this.state.showCompleted}
+                handleClose={this.handleClose}
                 article = {this.state.fullArticle}
               />
             </div>

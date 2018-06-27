@@ -12,7 +12,7 @@ import { Query } from "react-apollo";
 class App extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    console.log('App props', props);
   }
 
   componentDidMount() {
@@ -48,7 +48,14 @@ class App extends Component {
             }
           />
           <Route path='/login' component={Login} />
-          <Route path='/health' component={HealthDashboard} />
+          <Route path={"/health"}
+            component={() => 
+              <Query query={GET_USER_INFO}>
+              {(getUserInfo => 
+                <HealthDashboard  getUserInfo={getUserInfo} />)}
+              </Query>
+            }
+          />
         </Switch>
       </div>
     )
