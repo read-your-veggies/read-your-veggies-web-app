@@ -29,6 +29,7 @@ class Voter extends React.Component {
 
     // func bindings here
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+    this.submitVote = this.submitVote.bind(this);
   }
 
   handleCheckboxChange (e) {
@@ -37,6 +38,12 @@ class Voter extends React.Component {
     this.setState({
       [e.target.value]: !this.state[e.target.value]
     });
+  }
+
+  submitVote() {
+    console.log("vote submitted");
+    this.props.handleClose('voter');
+    this.props.handleShow('completed');
   }
 
 
@@ -77,7 +84,7 @@ class Voter extends React.Component {
                   </Checkbox>
                   </div>
                 </FormGroup>
-                <Button bsStyle="primary" onClick={(e) => {
+                <Button bsStyle="primary" onClick={(e) => {  
                   let votes = {
                     "agree" : this.state.agree, 
                     "disagree" : this.state.disagree,  
@@ -89,8 +96,8 @@ class Voter extends React.Component {
                   e.preventDefault();
                   console.log('submitting vote', votes);
                   updateArticleVotes({ variables: { _id: this.props.articleId, votes: votes } })
-                  alert('Thank you!');
-                  this.props.handleClose('voter');
+                  // alert('Thank you!');
+                  this.submitVote();
                 }}>
                   Submit
                 </Button>

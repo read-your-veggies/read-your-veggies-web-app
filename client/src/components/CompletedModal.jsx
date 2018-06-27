@@ -15,10 +15,11 @@ import { withRouter } from "react-router-dom";
 class CompletedModal extends React.Component {
   constructor(props) {
     super(props);
+    // console.log('completed modal props', props);
    
 
     this.state = {
-
+      veggies: 8,
     }
 
     // func bindings here
@@ -29,9 +30,13 @@ class CompletedModal extends React.Component {
 
   render() {
     return (
-      <Modal show={this.props.show} onHide={}>
+      <Modal show={this.props.show} onHide={() => this.props.handleClose('completed')}>
       <Modal.Body>
         Testing son
+        <Button onClick={() => {
+          this.props.handleClose('completed');
+          this.props.history.push('/health');
+        }}>See your health report!</Button>
       </Modal.Body>
       </Modal>
     )

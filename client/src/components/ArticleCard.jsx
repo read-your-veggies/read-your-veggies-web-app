@@ -9,6 +9,7 @@ import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Badge from 'react-bootstrap/lib/Badge';
 
 import ArticleModal from './ArticleModal.jsx';
+import CompletedModal from './CompletedModal.jsx';
 
 import { DELETE_ARTICLE } from '../apollo/resolvers';
 import { GET_ARTICLES_FROM_SERVER, GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
@@ -69,40 +70,40 @@ class ArticleCard extends React.Component {
           return (
             <div className="article">
               <Panel bsStyle="success">
-                  <Panel.Heading className='title'>
-                    <button className='delete-article-button' onClick={() => deleteArticle({ variables: { _id: this.props.article._id } })}> X </button>
-                    <Panel.Title>{this.props.article.title}</Panel.Title>
-                    <Badge pullRight bsStyle="danger">{this.props.article.articleStance}</Badge>
-                  </Panel.Heading>
-                  <Panel.Body>
-                    <h3 className="article-card-title">{this.props.article.title}</h3>
-                    <img className="article-thumbnail" src={this.props.article.image} />
-                    {/* <p>{this.props.article.description}</p> */}
-                  </Panel.Body>
+                <Panel.Heading className='title'>
+                  <button className='delete-article-button' onClick={() => deleteArticle({ variables: { _id: this.props.article._id } })}> X </button>
+                  <Panel.Title>{this.props.article.title}</Panel.Title>
+                  <Badge pullRight bsStyle="danger">{this.props.article.articleStance}</Badge>
+                </Panel.Heading>
+                <Panel.Body>
+                  <h3 className="article-card-title">{this.props.article.title}</h3>
+                  <img className="article-thumbnail" src={this.props.article.image} />
+                  {/* <p>{this.props.article.description}</p> */}
+                </Panel.Body>
 
-                  <ApolloConsumer>
-                    { client => (
-                      <Button 
-                        className="eat-me" 
-                        bsStyle="info" 
-                        bsSize="large" 
-                        onClick={async () => {
-                          const {data} = await client.query({
-                            query: GET_ONE_FULL_ARTICLE,
-                            variables: {_id: this.props.article._id}
-                          })
-                          this.setState({
-                            fullArticle: data.article,
-                            showArticle: true,
-                          })
-                        }}
-                      >
-                      Eat me
-                    </Button>
-                    )}
-                  </ApolloConsumer>
-
+                <ApolloConsumer>
+                  { client => (
+                    <Button 
+                      className="eat-me" 
+                      bsStyle="info" 
+                      bsSize="large" 
+                      onClick={async () => {
+                        const {data} = await client.query({
+                          query: GET_ONE_FULL_ARTICLE,
+                          variables: {_id: this.props.article._id}
+                        })
+                        this.setState({
+                          fullArticle: data.article,
+                          showArticle: true,
+                        })
+                      }}
+                    >
+                    Eat me
+                  </Button>
+                  )}
+                </ApolloConsumer>
               </Panel>
+              
               <ArticleModal 
                 show={this.state.showArticle} 
                 handleClose = {this.handleClose}
@@ -112,6 +113,7 @@ class ArticleCard extends React.Component {
               <Voter
                 show={this.state.showVoter}
                 handleClose = {this.handleClose}
+                handleShow = {this.handleShow}
                 articleId={this.props._id}
               />
               <CompletedModal
