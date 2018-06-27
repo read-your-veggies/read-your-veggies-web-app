@@ -13,7 +13,7 @@ class Dashboard extends Component {
     this.state = {
       userId: null,
       onboardInformation: null,
-      userStance: null,
+      userData: null,
     }
   }
 
@@ -36,16 +36,26 @@ class Dashboard extends Component {
               if (error) return `Error! ${error.message}`;
               this.setState({
                 onboardInformation: data.user.onboard_information,
-                userStance: data.user.user_stance,
+                userData: data.user,
               }, () => console.log(this.state));
-              return (null);
+              return (
+                null
+              );
             }}
           </Query>
           :
           null
         }
-        {this.state.onboardInformation === 'NEED_ON_BOARDING' ? <OnboardModal /> : null}
-        <ArticleCarousel />
+        {this.state.onboardInformation === 'NEED_ON_BOARDING' ? <OnboardModal userId={this.state.userId} /> : null}
+        {this.state.onboardInformation === 'NEED_ON_BOARDING' || this.state.onboardInformation === null
+          ?
+          null
+          :
+          <div>
+            <h1>Your Weekly Goal: {JSON.parse(this.state.onboardInformation).veggieSlider}</h1>
+            <ArticleCarousel userData={this.state.userData}  />
+          </div>
+        }
         <Query query={GET_TEAM_NAME_FROM_LOCAL_STATE}>
           {({ data, client }) => {
             return (
