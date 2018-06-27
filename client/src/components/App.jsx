@@ -37,7 +37,10 @@ class App extends Component {
   render() {
     return (
       <div className="app-container">
-        <Header location={location} />
+        <Query query={GET_USER_INFO}>
+          {(getUserInfo => 
+            <Header location = {location} getUserInfo = {getUserInfo} />)}
+        </Query>
         <Switch>
           <Route path={"/dashboard"}
             component={() => 
