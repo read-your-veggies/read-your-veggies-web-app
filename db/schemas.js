@@ -62,9 +62,9 @@ const User = mongoose.model('User', userSchema);
 
 const sourceSchema = new Schema({
   name: String,
-  articlesToBeScanned: String,
-  articlesAlreadyScanned: String,
-  personality: String,
+  articles: [String],
+  titles: [String],
+  fullTexts: [String],
 });
 
 const Source = mongoose.model('Source', sourceSchema);

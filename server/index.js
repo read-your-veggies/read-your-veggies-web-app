@@ -12,7 +12,7 @@ var requestLogger = require('./utilities.js').requestLogger;
 var articleHelpers = require('../db/articleHelpers.js');
 var getGraphQlSchema = require('../db/graphql.js').getGraphQlSchema;
 var dummyTweets = require('../db/data/dummyTweets.json');
-var getWatsonProfile = require('../db/watson.js').getWatsonProfile;
+var watson = require('../db/watson.js');
 
 var app = express();
 app.use(requestLogger);
@@ -93,4 +93,6 @@ if (process.env.DEPLOYED !== 'true') {
 // articleHelpers.scrapeArticles();
 
 /*****************************WATSON*****************************/
-// getWatsonProfile(dummyTweets);
+//watson.getWatsonProfile(dummyTweets);
+//watson.insertArticlesIntoSourceDb();
+//watson.getWatsonPersonality('The Huffington Post', 'titles');
