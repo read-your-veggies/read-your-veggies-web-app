@@ -48,8 +48,8 @@ var insertArticlesIntoSourceDb = () => {
               existingArticles[article.url] = true;
             })
           });
-          console.log('articlesBysource is', articlesBySource);
-          console.log('existingArticles is', existingArticles);
+          // console.log('articlesBysource is', articlesBySource);
+          // console.log('existingArticles is', existingArticles);
           articlesFromDb.forEach(article => {
             if (articlesBySource[article.source] === undefined) {
               articlesBySource[article.source] = {

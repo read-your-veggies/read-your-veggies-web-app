@@ -30,7 +30,7 @@ const updateCache = (cache, { data: { deleteArticle} }) => {
 class ArticleCard extends React.Component {
   constructor(props) {
     super(props);
-    console.log('article card props', props);
+    // console.log('article card props', props);
     
     this.state = {
       showArticle: false,
@@ -100,6 +100,7 @@ class ArticleCard extends React.Component {
                             query: GET_ONE_FULL_ARTICLE,
                             variables: {_id: this.props.article._id}
                           })
+                          console.log('full article incoming', data.article);
                           this.setState({
                             fullArticle: data.article,
                             showArticle: true,
@@ -127,7 +128,8 @@ class ArticleCard extends React.Component {
               <CompletedModal
                 show={this.state.showCompleted}
                 handleClose={this.handleClose}
-                article = {this.state.fullArticle}
+                article={this.state.fullArticle}
+                veggies={this.calculateNutritionalValue()}
               />
             </div>
           )}}

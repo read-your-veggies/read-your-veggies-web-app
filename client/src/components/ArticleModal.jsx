@@ -14,6 +14,7 @@ import { Query, ApolloConsumer } from "react-apollo";
 class ArticleModal extends React.Component {
   constructor(props) {
     super(props);
+    // console.log('article modal props', props);
 
     this.completeArticle = this.completeArticle.bind(this);
   }
