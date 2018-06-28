@@ -19,7 +19,7 @@ class AboutUs extends React.Component {
               <Panel.Title toggle>About Us</Panel.Title>
             </Panel.Heading>
             <Panel.Body collapsible>
-              About Us
+              We are a fierce group of truth-speaking students fighting for justice and striving for transparency.
             </Panel.Body>
           </Panel>
           <Panel eventKey="2">
@@ -27,7 +27,7 @@ class AboutUs extends React.Component {
               <Panel.Title toggle>About You</Panel.Title>
             </Panel.Heading>
             <Panel.Body collapsible>
-              About You
+              You're probably wrong.
             </Panel.Body>
           </Panel>
           <Query query={GET_LIST_OF_SOURCES}>
