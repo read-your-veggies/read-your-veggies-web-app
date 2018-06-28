@@ -1,35 +1,43 @@
 import React from 'react';
-import AboutOurSourcesModal from './AboutOurSourcesModal.jsx';
-import Button from 'react-bootstrap/lib/Button';
+import AboutOurSourcesPanel from './AboutOurSourcesPanel.jsx';
+import PanelGroup from 'react-bootstrap/lib/PanelGroup';
+import Panel from 'react-bootstrap/lib/Panel';
+import { Query } from 'react-apollo';
+import { GET_LIST_OF_SOURCES } from '../apollo/serverQueries';
 
 class AboutUs extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      show: false,
-    }
-
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-  }
-
-  handleClose() {
-    this.setState({ show: false });
-  }
-
-  handleShow() {
-    this.setState({ show: true });
   }
 
   render() {
     return (
       <div>
-        <h1> About us </h1>
-        <h1> About you </h1>
-        <Button onClick={() => this.handleShow()}>
-          About Our Sources
-        </Button>
-        <AboutOurSourcesModal show={this.state.show} handleClose={this.handleClose}/>
+        <PanelGroup accordion id="accordion">
+          <Panel eventKey="1">
+            <Panel.Heading>
+              <Panel.Title toggle>About Us</Panel.Title>
+            </Panel.Heading>
+            <Panel.Body collapsible>
+              About Us
+            </Panel.Body>
+          </Panel>
+          <Panel eventKey="2">
+            <Panel.Heading>
+              <Panel.Title toggle>About You</Panel.Title>
+            </Panel.Heading>
+            <Panel.Body collapsible>
+              About You
+            </Panel.Body>
+          </Panel>
+          <Query query={GET_LIST_OF_SOURCES}>
+            {({ loading, error, data }) => {
+              if (loading) return "Loading...";
+              if (error) return `Error! ${error.message}`;
+              return <AboutOurSourcesPanel sources={data}/>
+            }}
+          </Query>
+        </PanelGroup>
       </div>
     )
   }

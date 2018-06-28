@@ -15,6 +15,7 @@ const getGraphQlSchema = async () => {
     const Comments = db.collection('comments');
     const Articles = db.collection('articles');
     const Users = db.collection('users');
+    const Sources = db.collection('sources');
 
     const resolvers = {
       Query: {
@@ -36,6 +37,12 @@ const getGraphQlSchema = async () => {
         },
         user: async (root, {_id}) => {
           return prepare(await Users.findOne(new mongodb.ObjectID(_id)));
+        },
+        sources: async () => {
+          return (await Sources.find({}).toArray()).map(prepare);
+        },
+        source: async (root, {name}) => {
+          return prepare(await Sources.findOne({name: name}));
         },
       },
       Post: {
