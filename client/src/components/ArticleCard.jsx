@@ -14,7 +14,7 @@ import CompletedModal from './CompletedModal.jsx';
 import { DELETE_ARTICLE } from '../apollo/resolvers';
 import { GET_ARTICLES_FROM_SERVER, GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
 import { Mutation, ApolloConsumer } from "react-apollo";
-import { calculateNutritionalValue } from '../lib/calculateSlant.js';
+import { calculateNutritionalValue } from '../lib/calculateStance.js';
 
 const updateCache = (cache, { data: { deleteArticle} }) => {
   console.log('cache', cache, deleteArticle);
@@ -66,7 +66,7 @@ class ArticleCard extends React.Component {
   }
 
   renderCarrots () {
-    var nutritionalValue = calculateNutritionalValue(this.props.onboardSlant, this.props.article.articleStance )
+    var nutritionalValue = calculateNutritionalValue(this.props.onboardStance, this.props.article.articleStance )
     return (<h3>{'🥕'.repeat(nutritionalValue)}</h3>);
 
   }

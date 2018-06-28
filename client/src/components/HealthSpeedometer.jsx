@@ -1,25 +1,25 @@
 import React from 'react';
 import ReactSpeedometer from "react-d3-speedometer";
-import { calculateOnboardSlant } from '../lib/calculateSlant.js';
+import { calculateOnboardStance } from '../lib/calculateStance.js';
 
 class HealthSpeedometer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      onboardSlant: 0,
+      onboardStance: 0,
     }
   }
 
   componentDidMount() {
     this.setState({
-      onboardSlant: calculateOnboardSlant(this.props.onboardString),
+      onboardStance: calculateOnboardStance(this.props.onboardString),
     });
   }
 
   UNSAFE_componentWillReceiveProps() {
     this.setState({
-      onboardSlant: calculateOnboardSlant(this.props.onboardString),
+      onboardStance: calculateOnboardStance(this.props.onboardString),
     });
   }
 
@@ -33,7 +33,7 @@ class HealthSpeedometer extends React.Component {
           maxValue={1}
           
           // this value will ultimately be a query for the user's score!
-          value={this.state.onboardSlant}
+          value={this.state.onboardStance}
           currentValueText='Media Health: ${value}'
 
           needleColor="rgb(25,120,29)"
