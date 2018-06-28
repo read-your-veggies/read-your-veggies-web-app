@@ -9,7 +9,7 @@ class Header extends React.Component {
     console.log('header', props);
 
     this.goToDashboard= this.goToDashboard.bind(this);
-    this.goToDashboard= this.goToAboutUs.bind(this);
+    this.goToAboutUs= this.goToAboutUs.bind(this);
   }
 
 
@@ -20,7 +20,7 @@ class Header extends React.Component {
   }
 
   goToAboutUs(displayName) {
-    if (displayName !== 'John Doe') {
+    if (displayName !== 'Login') {
       this.props.history.push('/aboutus');
     }
   }
