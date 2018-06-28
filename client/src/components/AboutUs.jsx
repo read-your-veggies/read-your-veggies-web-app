@@ -12,7 +12,7 @@ class AboutUs extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="about-us-container">
         <PanelGroup accordion id="accordion">
           <Panel eventKey="1">
             <Panel.Heading>
