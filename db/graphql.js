@@ -36,6 +36,7 @@ const getGraphQlSchema = async () => {
           return prepare(await Articles.findOne(new mongodb.ObjectID(_id)));
         },
         user: async (root, {_id}) => {
+          console.log(_id);
           return prepare(await Users.findOne(new mongodb.ObjectID(_id)));
         },
         sources: async () => {
@@ -83,19 +84,40 @@ const getGraphQlSchema = async () => {
 
         updateArticleVotes: async (root, args) => {
           let currentState = prepare(await Articles.findOne(new mongodb.ObjectID(args._id)));
-
+          
           for (var key in currentState.votes) {
             if (args.votes[key]) {
               currentState.votes[key].totalVotes++
             }
           }
-
           const res = await Articles.findOneAndUpdate(
             {_id: new mongodb.ObjectID(args._id)}, 
-            {$set: {votes: currentState.votes }},
+            {$set: {votes: currentState.votes }}, 
             {returnOriginal:false}
           );
           return res.value;
+        },
+
+        updateUserVotes: async (root, args) => {
+          let previouslyCompletedArticles = JSON.parse(prepare(await Users.findOne(new mongodb.ObjectID(args._id))).completed_articles);
+          console.log('previous')
+          console.log(JSON.stringify(previouslyCompletedArticles));
+          let incomingArticle = JSON.parse(args.completed_articles);
+          console.log('incoming')
+          console.log(JSON.stringify(incomingArticle));
+          let incomingArticleKey = Object.keys(incomingArticle)[0];
+          console.log('incoming key')
+          console.log(incomingArticleKey);
+          previouslyCompletedArticles[incomingArticleKey] = incomingArticle[incomingArticleKey];
+          console.log('updated')
+          console.log(JSON.stringify(previouslyCompletedArticles));
+
+          const res = await Users.findOneAndUpdate(
+            {_id: new mongodb.ObjectID(args._id)}, 
+            {$set: {completed_articles: JSON.stringify(previouslyCompletedArticles) }}, 
+            {returnOriginal:false}
+          );
+          return res.value
         },
 
         createComment: async (root, args) => {
@@ -105,7 +127,6 @@ const getGraphQlSchema = async () => {
 
         onboardUser: async (root, args) => {
           const res = await Users.findOneAndUpdate({_id: new mongodb.ObjectID(args._id)},{$set:{onboard_information: args.onboard_info}}, {returnOriginal:false});
-          console.log(res);
           return res.value;
         }
       }

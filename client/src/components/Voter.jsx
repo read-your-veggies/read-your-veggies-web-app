@@ -5,7 +5,7 @@ import Radio from 'react-bootstrap/lib/Radio';
 import Button from 'react-bootstrap/lib/Button';
 import Checkbox from 'react-bootstrap/lib/Checkbox';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import { UPDATE_ARTICLE_VOTES } from '../apollo/resolvers';
+import { UPDATE_ARTICLE_VOTES, UPDATE_USER_VOTES } from '../apollo/resolvers';
 import { Mutation } from "react-apollo";
 import Modal from 'react-bootstrap/lib/Modal';
 import { withRouter } from "react-router-dom";
@@ -41,7 +41,7 @@ class Voter extends React.Component {
   }
 
   submitVote() {
-    console.log("vote submitted");
+    // console.log(this.props);
     this.props.handleClose('voter');
     this.props.handleShow('completed');
   }
@@ -84,23 +84,37 @@ class Voter extends React.Component {
                   </Checkbox>
                   </div>
                 </FormGroup>
-                <Button bsStyle="primary" onClick={(e) => {  
-                  let votes = {
-                    "agree" : this.state.agree, 
-                    "disagree" : this.state.disagree,  
-                    "fun" : this.state.fun,  
-                    "bummer" : this.state.bummer,  
-                    "mean" : this.state.mean,  
-                    "worthyAdversary" : this.state.worthyAdversary,  
-                  }
-                  e.preventDefault();
-                  console.log('submitting id', this.props.articleId);
-                  updateArticleVotes({ variables: { _id: this.props.articleId, votes: votes } })
-                  // alert('Thank you!');
-                  this.submitVote();
-                }}>
-                  Submit
-                </Button>
+                <Mutation mutation={UPDATE_USER_VOTES}>
+                  {(updateUserVotes) => {
+                    return (
+                      <Button bsStyle="primary" onClick={(e) => {
+                        let { articleId, userId, articleStance, onboardStance, nutritionalValue } = this.props;  
+                        let votes = {
+                          "agree" : this.state.agree, 
+                          "disagree" : this.state.disagree,  
+                          "fun" : this.state.fun,  
+                          "bummer" : this.state.bummer,  
+                          "mean" : this.state.mean,  
+                          "worthyAdversary" : this.state.worthyAdversary,  
+                        }
+                        let userVoteInfo = {};
+                        userVoteInfo[articleId] = {
+                          'articleStance': articleStance,
+                          'votes': votes,
+                          'onboardStance': onboardStance,
+                          'completed': Date.now(),
+                          'nutritionalValue': nutritionalValue,
+                        }
+                        e.preventDefault();
+                        updateArticleVotes({ variables: { _id: this.props.articleId, votes: votes } })
+                        updateUserVotes({ variables: { _id: this.props.userId, completed_articles: JSON.stringify(userVoteInfo) } })
+                        this.submitVote();
+                      }}>
+                        Submit
+                      </Button>
+                    )
+                  }}
+                </Mutation >
               </form>
               </Panel.Body>
               </Panel>

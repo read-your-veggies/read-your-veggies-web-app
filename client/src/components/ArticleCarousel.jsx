@@ -17,6 +17,7 @@ class ArticleCarousel extends Component {
   }
 
   componentDidMount() {
+    console.log('carousel', this.props.userData._id);
     var onboardStance = calculateOnboardStance(this.props.userData.onboard_information);
     this.setState({
       onboardStance: onboardStance,
@@ -42,7 +43,11 @@ class ArticleCarousel extends Component {
               <Slider>
                 {data.articles.map((article, i) => (
                     <Slide index={i}>
-                      <ArticleCard article={article} onboardStance={this.state.onboardStance}/>
+                      <ArticleCard 
+                        article={article}
+                        userId={this.props.userData._id}
+                        onboardStance={this.state.onboardStance}
+                      />
                     </Slide>
                 ))}
               </Slider>
