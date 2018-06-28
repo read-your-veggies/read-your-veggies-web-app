@@ -93,6 +93,9 @@ if (process.env.DEPLOYED !== 'true') {
 // articleHelpers.scrapeArticles();
 
 /*****************************WATSON*****************************/
-//watson.getWatsonProfile(dummyTweets);
-//watson.insertArticlesIntoSourceDb();
-//watson.getWatsonPersonality('The Huffington Post', 'titles');
+// watson.getWatsonProfile(dummyTweets, personality => {
+//   console.log(personality);
+// });
+//watson.updateSourcesDb();
+//watson.updateSinglePersonality('The Huffington Post', 'fullTexts');
+//watson.updateAllPersonalities();
