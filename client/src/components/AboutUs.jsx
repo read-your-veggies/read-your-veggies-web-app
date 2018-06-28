@@ -31,7 +31,6 @@ class AboutUs extends React.Component {
           <AboutOurSourcesPanel />
         </PanelGroup>
       </div>
-
     )
   }
 }

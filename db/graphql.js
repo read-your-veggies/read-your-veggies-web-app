@@ -41,6 +41,9 @@ const getGraphQlSchema = async () => {
         sources: async () => {
           return (await Sources.find({}).toArray()).map(prepare);
         },
+        source: async (root, {name}) => {
+          return prepare(await Sources.findOne({name: name}));
+        },
       },
       Post: {
         comments: async ({_id}) => {

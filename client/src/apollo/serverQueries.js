@@ -27,6 +27,22 @@ export const GET_ONE_FULL_ARTICLE =  gql`
   }
 `
 
+export const GET_SOURCE_PERSONALITY = gql`
+  query($name: String) {
+    sources(name: $name) {
+      fullTextsPersonality
+    }
+  }
+`
+
+export const GET_LIST_OF_SOURCES = gql`
+  query {
+    sources {
+      name
+    }
+  }
+`
+
 export const GET_USER_FROM_DB =  gql`
   query user($_id: String!) {
     user(_id: $_id){

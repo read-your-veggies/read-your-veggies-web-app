@@ -4,7 +4,7 @@ import MenuItem from 'react-bootstrap/lib/MenuItem';
 import Panel from 'react-bootstrap/lib/Panel';
 import {BarChart} from 'react-easy-chart';
 import { ApolloConsumer } from "react-apollo";
-import { GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
+import { GET_LIST_OF_SOURCES, GET_SOURCE_PERSONALITY } from '../apollo/serverQueries';
 
 class AboutOurSourcesPanel extends React.Component {
   constructor(props) {
@@ -30,14 +30,14 @@ class AboutOurSourcesPanel extends React.Component {
                 toggle
                 onClick={async () => {
                   const {data} = await client.query({
-                    query: GET_ONE_FULL_ARTICLE,
-                    variables: {_id: "5b342a73cfd8db3c74632556"}
+                    query: GET_LIST_OF_SOURCES,
                   })
-                  console.log('full article incoming', data.article);
-                  // this.setState({
-                  //   fullArticle: data.article,
-                  //   showArticle: true,
-                  // })
+                  var sources = data.sources.map(source => {
+                    return source.name;
+                  });
+                  this.setState({
+                    sources: sources,
+                  });
                 }}
               >
               About Our Sources
@@ -46,16 +46,10 @@ class AboutOurSourcesPanel extends React.Component {
           </ApolloConsumer>
         </Panel.Heading>
         <Panel.Body collapsible>
-          <DropdownButton
-            bsSize="large"
-            title="Source"
-            id="dropdown-size-large"
-          >
-            <MenuItem eventKey="1">Action</MenuItem>
-            <MenuItem eventKey="2">Another action</MenuItem>
-            <MenuItem eventKey="3">Something else here</MenuItem>
-            <MenuItem divider />
-            <MenuItem eventKey="4">Separated link</MenuItem>
+          <DropdownButton bsSize="large" title="Source" id="dropdown-size-large" >
+            {this.state.sources.map((sourceName, index) => {
+              return <MenuItem eventKey={index}>{sourceName}</MenuItem>
+            })}
           </DropdownButton>    
           <BarChart
             axisLabels={{x: 'Personality Attribute', y: 'Percentage'}}
