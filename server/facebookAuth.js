@@ -2,6 +2,9 @@ const passport = require('passport');
 const FacebookStrategy = require('passport-facebook');
 const {User} = require('../db/schemas.js')
 const getPolRatio = require('./getRegionalPolitics.js');
+const countyConvert = require('../db/data/citiesCounties.js');
+const convert2012 = require('../db/data/countyResults2012.js');
+const convert2016 = require('../db/data/countyResults2016.js');
 
 require('dotenv').config();
 
@@ -26,16 +29,16 @@ passport.use(new FacebookStrategy({
 
         if (user) {
           return done(null, user);
-        } else {
+        } else { 
           var newUser = new User();
           newUser.facebookId = profile.id;
           newUser.name = profile.displayName;
           newUser.emails = profile._json.email;
           newUser.facebookUrl = profile.profileUrl;
           newUser.location = profile._json.location.name;
-          newUser.locPolRatio = 0; // We will run the getPolRatio function as a daily worker to fill this field in properly
+          newUser.locPolRatio = calculateLocPol(profile._json.location.name);
           newUser.hometown = profile._json.hometown.name;
-          newUser.homePolRatio = 0; // Will run getPolRatio func as a daily worker for this.
+          newUser.homePolRatio = calculateLocPol(profile._json.hometown.name);
           newUser.age_range = JSON.stringify(profile._json.age_range);
 
           console.log('new user to be saved', newUser);
@@ -50,5 +53,13 @@ passport.use(new FacebookStrategy({
     })
   }
 ));
+
+const calculateLocPol = function (city) {
+  let county = countyConvert[city];
+  let result12 = convert2012[county];
+  let result16 = convert2016[county];
+
+  return (result12 + result16) / 2;  
+}
 
 module.exports = passport;

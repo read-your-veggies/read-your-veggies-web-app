@@ -1,6 +1,6 @@
 // For each state/county, we list the ratio of Democratic votes to Republican votes
 
-{ 'AL/Autauga': 0.365887366117701,
+module.exports = { 'AL/Autauga': 0.365887366117701,
   'AL/Baldwin': 0.278674816031138,
   'AL/Barbour': 1.06029969308539,
   'AL/Bibb': 0.358832164410374,
