@@ -23,6 +23,9 @@ export const calculateOnboardSlant = function(onboardString) {
 
 
 //we will add to this function as we get more info! 
+  //regionalPolitics
+  //userVotes
+  //Watson insights
 export const calculateNutritionalValue = function(onboardSlant, articleSlant) {
   return Math.round(Math.abs(onboardSlant - articleSlant) / 2 * 10); 
 }
