@@ -1,7 +1,6 @@
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook');
 const {User} = require('../db/schemas.js')
-const getPolRatio = require('./getRegionalPolitics.js');
 const countyConvert = require('../db/data/citiesCounties.js');
 const convert2012 = require('../db/data/countyResults2012.js');
 const convert2016 = require('../db/data/countyResults2016.js');
