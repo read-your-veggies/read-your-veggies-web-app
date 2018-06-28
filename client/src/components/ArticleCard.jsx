@@ -124,7 +124,9 @@ class ArticleCard extends React.Component {
                 show={this.state.showVoter}
                 handleClose = {this.handleClose}
                 handleShow = {this.handleShow}
+                userId = {this.props.userId}
                 articleId={this.props.article._id}
+                articleStance={this.props.article.articleStance}
               />
               <CompletedModal
                 show={this.state.showCompleted}

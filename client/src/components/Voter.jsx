@@ -41,7 +41,7 @@ class Voter extends React.Component {
   }
 
   submitVote() {
-    console.log("vote submitted");
+    // console.log(this.props);
     this.props.handleClose('voter');
     this.props.handleShow('completed');
   }
@@ -96,7 +96,8 @@ class Voter extends React.Component {
                   e.preventDefault();
                   console.log('submitting id', this.props.articleId);
                   updateArticleVotes({ variables: { _id: this.props.articleId, votes: votes } })
-                  // alert('Thank you!');
+
+                  //updateUserVotes({ variables: { _id: this.props.articleId, votes: votes } })
                   this.submitVote();
                 }}>
                   Submit
