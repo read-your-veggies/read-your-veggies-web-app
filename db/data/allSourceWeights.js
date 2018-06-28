@@ -1549,10 +1549,10 @@ var biases = {
 
 var sources = {};
 
-for (var slant in sourceData) {
-  var sourcesArray = sourceData[slant].split('\n');
+for (var stance in sourceData) {
+  var sourcesArray = sourceData[stance].split('\n');
   for (var i = 0; i < sourcesArray.length; i++) {
-    sources[sourcesArray[i]] = biases[slant];
+    sources[sourcesArray[i]] = biases[stance];
   }
 }
 

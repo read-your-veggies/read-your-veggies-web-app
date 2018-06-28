@@ -64,7 +64,7 @@ app.get('/auth/facebook', passport.authenticate('facebook',{
 app.get('/dashboard', (req,res) => res.redirect('/'));
 app.get('/login', (req,res) => res.redirect('/'));
 app.get('/health', (req,res) => res.redirect('/'));
-app.get('/about', (req,res) => res.redirect('/'));
+app.get('/aboutus', (req,res) => res.redirect('/'));
 /*****************************GRAPHQL*****************************/
 async function startGraphQl() {
   var schema = await getGraphQlSchema();

@@ -22,7 +22,7 @@ class OnboardModal extends React.Component {
 
     this.state = {
       show: true,
-      slantSlider: 0,
+      stanceSlider: 0,
       parentSlider: 0,
       veggieSlider: 40,
     };
@@ -30,15 +30,15 @@ class OnboardModal extends React.Component {
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
 
-    this.handleSlantChange = this.handleSlantChange.bind(this);
+    this.handleStanceChange = this.handleStanceChange.bind(this);
     this.handleParentChange = this.handleParentChange.bind(this);
     this.handleVeggieChange = this.handleVeggieChange.bind(this);
 
   }
   
-  handleSlantChange(value){
+  handleStanceChange(value){
     this.setState({
-      slantSlider: value
+      stanceSlider: value
     })
   }
 
@@ -89,10 +89,10 @@ class OnboardModal extends React.Component {
               <p id='onboard-subtitle'>To get you started with the most nutritious articles possible, please tell us a little bit about yourself!</p> 
               <h3 id='slider-header'>Where would you place your current political stance?</h3>
                 <Slider
-                  className='slant-slider'
-                  value={this.state.slantSlider}
+                  className='stance-slider'
+                  value={this.state.stanceSlider}
                   orientation="horizontal"
-                  onChange={this.handleSlantChange}
+                  onChange={this.handleStanceChange}
                   min={-100}
                   max={100}
                   step={1}

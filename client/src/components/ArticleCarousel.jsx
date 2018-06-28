@@ -4,6 +4,7 @@ import { GET_ARTICLES_FROM_SERVER } from '../apollo/serverQueries';
 import ArticleCard from './ArticleCard.jsx';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
+import { calculateOnboardStance } from '../lib/calculateStance.js';
 
 
 class ArticleCarousel extends Component {
@@ -11,36 +12,17 @@ class ArticleCarousel extends Component {
     super(props);
     
     this.state = {
-      onboardSlant: 0,
+      onboardStance: 0,
     }
   }
 
   componentDidMount() {
-    this.calculateOnboardSlant();
-  }
-
-  calculateOnboardSlant() {
-    var onboardInfo = JSON.parse(this.props.userData.onboard_information);
-    //slant: -100 : 100
-    var slant = onboardInfo.slantSlider;
-    //viewOnParents: -100 : 100
-    var viewOnParents = onboardInfo.parentSlider;
-
-    // if view of parents === 0, ignore it.
-    if (viewOnParents === 0) {
-      slant = slant / 100;
-    } else {
-      slant = (slant * Math.abs(viewOnParents)) / 10000;
-    }
-
-    console.log('the slant is', slant);
+    var onboardStance = calculateOnboardStance(this.props.userData.onboard_information);
     this.setState({
-      onboardSlant: slant,
-    }, console.log('the slant is', this.state))
-
-
-
+      onboardStance: onboardStance,
+    })
   }
+
   render() {
     console.log('carousel rendering');
     return(
@@ -60,7 +42,7 @@ class ArticleCarousel extends Component {
               <Slider>
                 {data.articles.map((article, i) => (
                     <Slide index={i}>
-                      <ArticleCard article={article} onboardSlant={this.state.onboardSlant}/>
+                      <ArticleCard article={article} onboardStance={this.state.onboardStance}/>
                     </Slide>
                 ))}
               </Slider>
