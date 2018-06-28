@@ -1,5 +1,6 @@
 const countyConvert = require('../db/data/citiesCounties.js');
 const axios = require('axios');
+const {User} = require('../db/schemas.js')
 require('dotenv').config();
 
 // Write a function here that we will export to facebookAuth
