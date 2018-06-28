@@ -75,23 +75,41 @@ const getGraphQlSchema = async () => {
         },
 
         updateArticleVotes: async (root, args) => {
-          console.log(args);
           let currentState = prepare(await Articles.findOne(new mongodb.ObjectID(args._id)));
-          console.log('record to be updated', currentState.votes);
+          
           for (var key in currentState.votes) {
             if (args.votes[key]) {
               currentState.votes[key].totalVotes++
             }
           }
-          console.log('updated record', currentState.votes);
-          console.log('article ID', args._id);
-
-
-          const res = await Articles.findOneAndUpdate({_id: new mongodb.ObjectID(args._id)}, 
-                                                        {$set: {votes: currentState.votes }}, 
-                                                        {returnOriginal:false});
-          // console.log('update article res', res);
+          const res = await Articles.findOneAndUpdate(
+            {_id: new mongodb.ObjectID(args._id)}, 
+            {$set: {votes: currentState.votes }}, 
+            {returnOriginal:false}
+          );
           return res.value;
+        },
+
+        updateUserVotes: async (root, args) => {
+          let previouslyCompletedArticles = JSON.parse(prepare(await Users.findOne(new mongodb.ObjectID(args._id))).completed_articles);
+          console.log('previous')
+          console.log(JSON.stringify(previouslyCompletedArticles));
+          let incomingArticle = JSON.parse(args.completed_articles);
+          console.log('incoming')
+          console.log(JSON.stringify(incomingArticle));
+          let incomingArticleKey = Object.keys(incomingArticle)[0];
+          console.log('incoming key')
+          console.log(incomingArticleKey);
+          previouslyCompletedArticles[incomingArticleKey] = incomingArticle[incomingArticleKey];
+          console.log('updated')
+          console.log(JSON.stringify(previouslyCompletedArticles));
+
+          const res = await Users.findOneAndUpdate(
+            {_id: new mongodb.ObjectID(args._id)}, 
+            {$set: {completed_articles: JSON.stringify(previouslyCompletedArticles) }}, 
+            {returnOriginal:false}
+          );
+          return res.value
         },
 
         createComment: async (root, args) => {
@@ -101,7 +119,6 @@ const getGraphQlSchema = async () => {
 
         onboardUser: async (root, args) => {
           const res = await Users.findOneAndUpdate({_id: new mongodb.ObjectID(args._id)},{$set:{onboard_information: args.onboard_info}}, {returnOriginal:false});
-          console.log(res);
           return res.value;
         }
       }
