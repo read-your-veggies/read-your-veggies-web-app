@@ -50,6 +50,7 @@ module.exports = [`
     hometown: String
     age_range: String
     onboard_information: String
+    completed_articles: String
   }
 
   type Vote {
@@ -101,6 +102,7 @@ module.exports = [`
       description: String,
       fullText: String): Article
     onboardUser(_id: String, onboard_info: String): User
+    updateUserVotes(_id: String, completed_articles: String): User
     updateArticleVotes(_id: String, votes: VoteInput): Article
 
   }

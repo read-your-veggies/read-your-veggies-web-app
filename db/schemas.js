@@ -58,6 +58,9 @@ const userSchema = new Schema({
   homePolRatio: Number,
   age_range: String,
   onboard_information: { type: String, default: 'NEED_ON_BOARDING' },
+  
+  //this will be a HUGE object/string
+  completed_articles: { type: String, default: JSON.stringify({})}
 });
 
 const User = mongoose.model('User', userSchema);
