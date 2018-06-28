@@ -4,6 +4,7 @@ import axios from 'axios';
 import Header from './Header.jsx';
 import Dashboard from './Dashboard.jsx';
 import Login from './Login.jsx';
+import AboutUs from './AboutUs.jsx';
 import HealthDashboard from './HealthDashboard.jsx';
 import {GET_USER_INFO} from '../apollo/localQueries.js';
 import { Query } from "react-apollo";
@@ -42,6 +43,14 @@ class App extends Component {
             <Header location = {location} getUserInfo = {getUserInfo} />)}
         </Query>
         <Switch>
+          <Route path={"/aboutus"}
+            component={() => 
+              <Query query={GET_USER_INFO}>
+              {(getUserInfo => 
+                <AboutUs location = {location} getUserInfo = {getUserInfo} />)}
+              </Query>
+            }
+          />
           <Route path={"/dashboard"}
             component={() => 
               <Query query={GET_USER_INFO}>
