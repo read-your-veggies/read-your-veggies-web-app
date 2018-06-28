@@ -157,8 +157,8 @@ var updateAllPersonalities = () => {
   Source.find({}, 'name')
   .then(sourceNames => {
     sourceNames.forEach(source => {
-      updateWatsonPersonality(source.name, 'fullTexts');
-      updateWatsonPersonality(source.name, 'titles');
+      updateSinglePersonality(source.name, 'fullTexts');
+      updateSinglePersonality(source.name, 'titles');
     });
   })
   .catch(err => {

@@ -30,7 +30,7 @@ const updateCache = (cache, { data: { deleteArticle} }) => {
 class ArticleCard extends React.Component {
   constructor(props) {
     super(props);
-    console.log('article card props', props);
+    // console.log('article card props', props);
     
     this.state = {
       showArticle: false,
@@ -67,7 +67,9 @@ class ArticleCard extends React.Component {
   calculateNutritionalValue() {
     var onboardStance = this.props.onboardSlant
     var articleStance = this.props.article.articleStance;
-    return Math.abs(onboardStance - articleStance) / 2 * 10;
+
+    return (<h3>{'🥕'.repeat(Math.round(Math.abs(onboardStance - articleStance) / 2 * 10) )}</h3>);
+
   }
 
   render() {
@@ -81,7 +83,7 @@ class ArticleCard extends React.Component {
                   <Panel.Heading className='title'>
                     <button className='delete-article-button' onClick={() => deleteArticle({ variables: { _id: this.props.article._id } })}> X </button>
                     <Panel.Title>{this.props.article.title}</Panel.Title>
-                    <Badge pullRight bsStyle="danger">{this.calculateNutritionalValue()}</Badge>
+                    <Badge id='nutrition-count' bsStyle="danger">{this.calculateNutritionalValue()}</Badge>
                   </Panel.Heading>
                   <Panel.Body>
                     <h3 className="article-card-title">{this.props.article.title}</h3>
@@ -100,6 +102,7 @@ class ArticleCard extends React.Component {
                             query: GET_ONE_FULL_ARTICLE,
                             variables: {_id: this.props.article._id}
                           })
+                          console.log('full article incoming', data.article);
                           this.setState({
                             fullArticle: data.article,
                             showArticle: true,
@@ -127,7 +130,8 @@ class ArticleCard extends React.Component {
               <CompletedModal
                 show={this.state.showCompleted}
                 handleClose={this.handleClose}
-                article = {this.state.fullArticle}
+                article={this.state.fullArticle}
+                veggies={this.calculateNutritionalValue()}
               />
             </div>
           )}}

@@ -15,20 +15,13 @@ import { withRouter } from "react-router-dom";
 class CompletedModal extends React.Component {
   constructor(props) {
     super(props);
-    // console.log('completed modal props', props);
-   
 
-    this.state = {
-      veggies: 8,
-    }
-
-    // func bindings here
   }
 
-
-
-
   render() {
+    let author;
+    this.props.article.author ? author = this.props.article.author[0] : author = '';
+
     return (
       <Modal show={this.props.show} onHide={() => this.props.handleClose('completed')}>
         <Modal.Header>
@@ -37,13 +30,15 @@ class CompletedModal extends React.Component {
         <Modal.Body>
           <div class="container">
             <p class="text-center">
-              Great job!  You earned {this.state.veggies} veggies!
+              Great job!  You earned {this.props.veggies} veggies!
             </p>
             <p class="text-center">
               <img id="trophy" width="100"  src="./assets/carrot.jpg" />
             </p>
-            <p class="text-center">
-              This article was written by John Doe and originally published in The Guardian.
+            <p class="text-center"> 
+            <a href={this.props.article.url} target="_blank">
+              This article was written by {author} and originally published by {this.props.article.source}.
+            </a>
             </p>
           </div>
         </Modal.Body>
@@ -64,7 +59,6 @@ class CompletedModal extends React.Component {
       </Modal>
     )
   }
-  
 }
 
 export default withRouter(CompletedModal);
