@@ -1,4 +1,4 @@
-{ 'Prairie Ridge, Washington': 'WA/Pierce',
+module.exports = { 'Prairie Ridge, Washington': 'WA/Pierce',
   'Edison, Washington': 'WA/Skagit',
   'Packwood, Washington': 'WA/Lewis',
   'Wautauga Beach, Washington': 'WA/Kitsap',
