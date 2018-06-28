@@ -28,8 +28,8 @@ export const GET_ONE_FULL_ARTICLE =  gql`
 `
 
 export const GET_SOURCE_PERSONALITY = gql`
-  query($name: String) {
-    sources(name: $name) {
+  query source($name: String!) {
+    source(name: $name) {
       fullTextsPersonality
     }
   }
