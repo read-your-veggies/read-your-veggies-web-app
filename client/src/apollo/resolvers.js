@@ -48,9 +48,33 @@ export const ON_BOARD_USER = gql`
       hometown
       age_range
       onboard_information
+      completed_articles
     }
   }
 `
+
+export const UPDATE_USER_VOTES = gql`
+  mutation ($_id: String!, $completed_articles: String!) {
+    updateUserVotes(_id: $_id, completed_articles: $completed_articles) {
+      _id
+      authenticationInfo
+      avatar
+      name
+      health
+      user_stance
+      emails
+      facebookId
+      facebookUrl
+      birthday
+      location
+      hometown
+      age_range
+      onboard_information
+      completed_articles
+    }
+  }
+`
+
 
 export const OFF_BOARD_USER = gql`
   mutation ($_id: String!) {
