@@ -54,11 +54,10 @@ passport.use(new FacebookStrategy({
 ));
 
 const calculateLocPol = function (city) {
+  // For the user's city, find the county, then find county's election data for 2012 and 2016.
+  // The data is a ratio of Democrat to Republican votes in the presidential race.
   let county = countyConvert[city];
-  let result12 = convert2012[county];
-  let result16 = convert2016[county];
-
-  return (result12 + result16) / 2;  
+  return (convert2012[county] + convert2016[county]) / 2;  
 }
 
 module.exports = passport;
