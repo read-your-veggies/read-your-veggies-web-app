@@ -13,6 +13,8 @@
 
 .article-card-title {
   font-weight: 300 !important;
+  display: block;
+  margin: 0 auto;
 }
 
 .delete-article-button {
@@ -25,6 +27,8 @@
 .article-thumbnail {
   width: 50%;
   height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .delete-article-button:hover {
@@ -36,6 +40,17 @@
   margin: auto;
   margin-bottom: 1em;
   vertical-align: bottom;
+}
+
+#nutrition-count {
+  background-color: #3c763d91;
+  box-shadow:  6px 1px 6px rgba(0, 0, 0, .5);
+  display: block;
+  margin: 0 auto;
+}
+
+#nutrition-count h3 {
+  margin: 0;
 }
 
 

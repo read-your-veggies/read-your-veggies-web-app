@@ -67,7 +67,9 @@ class ArticleCard extends React.Component {
   calculateNutritionalValue() {
     var onboardStance = this.props.onboardSlant
     var articleStance = this.props.article.articleStance;
-    return Math.abs(onboardStance - articleStance) / 2 * 10;
+
+    return (<h3>{'🥕'.repeat(Math.round(Math.abs(onboardStance - articleStance) / 2 * 10) )}</h3>);
+
   }
 
   render() {
@@ -81,7 +83,7 @@ class ArticleCard extends React.Component {
                   <Panel.Heading className='title'>
                     <button className='delete-article-button' onClick={() => deleteArticle({ variables: { _id: this.props.article._id } })}> X </button>
                     <Panel.Title>{this.props.article.title}</Panel.Title>
-                    <Badge pullRight bsStyle="danger">{this.calculateNutritionalValue()}</Badge>
+                    <Badge id='nutrition-count' bsStyle="danger">{this.calculateNutritionalValue()}</Badge>
                   </Panel.Heading>
                   <Panel.Body>
                     <h3 className="article-card-title">{this.props.article.title}</h3>
