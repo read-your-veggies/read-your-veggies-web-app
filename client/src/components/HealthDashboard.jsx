@@ -35,7 +35,7 @@ class HealthDashboard extends React.Component {
             return (
               <div>
               <HealthSpeedometer 
-                userStats={data.user.onboard_information}
+                onboardString={data.user.onboard_information}
               />
               </div>
             );
