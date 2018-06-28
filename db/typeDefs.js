@@ -7,6 +7,8 @@ module.exports = [`
     articles: [Article]
     article(_id: String): Article
     user(_id: String): User
+    sources: [Source]
+    source(name: String): Source
   }
 
   type Article {
@@ -20,6 +22,16 @@ module.exports = [`
     votes: Vote
     articleStance: String
     image: String
+  }
+
+  type Source {
+    _id: String
+    name: String
+    articles: [String]
+    titles: [String]
+    fullTexts: [String]
+    titlesPersonality: String
+    fullTextsPersonality: String
   }
 
   type User {
