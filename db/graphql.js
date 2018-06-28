@@ -82,22 +82,19 @@ const getGraphQlSchema = async () => {
         },
 
         updateArticleVotes: async (root, args) => {
-          console.log(args);
           let currentState = prepare(await Articles.findOne(new mongodb.ObjectID(args._id)));
-          console.log('record to be updated', currentState.votes);
+
           for (var key in currentState.votes) {
             if (args.votes[key]) {
               currentState.votes[key].totalVotes++
             }
           }
-          console.log('updated record', currentState.votes);
-          console.log('article ID', args._id);
 
-
-          const res = await Articles.findOneAndUpdate({_id: new mongodb.ObjectID(args._id)}, 
-                                                        {$set: {votes: currentState.votes }}, 
-                                                        {returnOriginal:false});
-          // console.log('update article res', res);
+          const res = await Articles.findOneAndUpdate(
+            {_id: new mongodb.ObjectID(args._id)}, 
+            {$set: {votes: currentState.votes }},
+            {returnOriginal:false}
+          );
           return res.value;
         },
 
