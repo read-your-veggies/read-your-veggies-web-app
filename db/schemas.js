@@ -65,6 +65,8 @@ const sourceSchema = new Schema({
   articles: [String],
   titles: [String],
   fullTexts: [String],
+  titlesPersonality: String,
+  fullTextsPersonality: String,
 });
 
 const Source = mongoose.model('Source', sourceSchema);

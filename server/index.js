@@ -63,6 +63,8 @@ app.get('/auth/facebook', passport.authenticate('facebook',{
 //React Router Redirect Hack
 app.get('/dashboard', (req,res) => res.redirect('/'));
 app.get('/login', (req,res) => res.redirect('/'));
+app.get('/health', (req,res) => res.redirect('/'));
+app.get('/aboutus', (req,res) => res.redirect('/'));
 /*****************************GRAPHQL*****************************/
 async function startGraphQl() {
   var schema = await getGraphQlSchema();
@@ -89,10 +91,13 @@ if (process.env.DEPLOYED !== 'true') {
 }
 
 /*****************************WORKERS*****************************/
-articleHelpers.deleteArticles();
-articleHelpers.scrapeArticles();
+// articleHelpers.deleteArticles();
+//articleHelpers.scrapeArticles();
 
 /*****************************WATSON*****************************/
-//watson.getWatsonProfile(dummyTweets);
-//watson.insertArticlesIntoSourceDb();
-//watson.getWatsonPersonality('The Huffington Post', 'titles');
+// watson.getWatsonProfile(dummyTweets, personality => {
+//   console.log(personality);
+// });
+//watson.updateSourcesDb();
+//watson.updateSinglePersonality('The Huffington Post', 'fullTexts');
+//watson.updateAllPersonalities();

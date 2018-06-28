@@ -6,3 +6,4 @@ client/dist/bundle.js
 server.crt
 server.key
 sslConfig/
+.vscode/

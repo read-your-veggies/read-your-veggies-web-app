@@ -1,7 +1,8 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
-import { Mutation } from "react-apollo";
+import { Mutation, Query } from "react-apollo";
 import { OFF_BOARD_USER } from '../apollo/resolvers.js';
+import { GET_USER_FROM_DB } from '../apollo/serverQueries.js';
 import Button from 'react-bootstrap/lib/Button';
 import HealthSpeedometer from './HealthSpeedometer.jsx';
 
@@ -24,7 +25,22 @@ class HealthDashboard extends React.Component {
   render() {
     return (
       <div>
-      <HealthSpeedometer />
+        <Query
+          query={GET_USER_FROM_DB}
+          variables={{ _id: this.state.userId }}
+        >
+          {({ loading, error, data }) => {
+            if (loading) return "Loading...";
+            if (error) return `Error! ${error.message}`;
+            return (
+              <div>
+              <HealthSpeedometer 
+                onboardString={data.user.onboard_information}
+              />
+              </div>
+            );
+          }}
+        </Query>
       <Mutation mutation={OFF_BOARD_USER} >
         {(offBoardUser) => {
         return (
