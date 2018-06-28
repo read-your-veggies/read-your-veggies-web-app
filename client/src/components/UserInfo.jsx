@@ -50,7 +50,7 @@ class UserInfo extends React.Component {
                 <HealthSpeedometer 
                   height={100}
                   width={150}
-                  userStats={data.user.onboard_information}
+                  onboardString={data.user.onboard_information}
                 />
                 </div>
               );
