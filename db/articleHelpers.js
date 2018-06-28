@@ -14,7 +14,6 @@ var getUrlsFromNewsAPI = () => {
       pageSize: 20,
     })
     .then(response => {
-      console.log(response.articles);
       let articles = [];
       response.articles.forEach(article => {
         let articleObj = {
