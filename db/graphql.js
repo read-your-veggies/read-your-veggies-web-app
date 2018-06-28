@@ -36,6 +36,7 @@ const getGraphQlSchema = async () => {
           return prepare(await Articles.findOne(new mongodb.ObjectID(_id)));
         },
         user: async (root, {_id}) => {
+          console.log(_id);
           return prepare(await Users.findOne(new mongodb.ObjectID(_id)));
         },
         sources: async () => {
@@ -83,15 +84,15 @@ const getGraphQlSchema = async () => {
 
         updateArticleVotes: async (root, args) => {
           let currentState = prepare(await Articles.findOne(new mongodb.ObjectID(args._id)));
+          
           for (var key in currentState.votes) {
             if (args.votes[key]) {
               currentState.votes[key].totalVotes++
             }
           }
-
           const res = await Articles.findOneAndUpdate(
             {_id: new mongodb.ObjectID(args._id)}, 
-            {$set: {votes: currentState.votes }},
+            {$set: {votes: currentState.votes }}, 
             {returnOriginal:false}
           );
           return res.value;

@@ -58,7 +58,13 @@ const calculateLocPol = function (city) {
   let result12 = convert2012[county];
   let result16 = convert2016[county];
 
-  return (result12 + result16) / 2;  
+  var aggregateResult = (result12 + result16) / 2;
+
+  if (isNaN(aggregateResult)) {
+    return 0;
+  } else {
+    return aggregateResult;
+  }
 }
 
 module.exports = passport;
