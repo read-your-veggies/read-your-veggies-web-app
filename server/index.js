@@ -91,7 +91,7 @@ if (process.env.DEPLOYED !== 'true') {
 }
 
 /*****************************WORKERS*****************************/
-// articleHelpers.deleteArticles();
+//articleHelpers.deleteArticles();
 //articleHelpers.scrapeArticles();
 
 /*****************************WATSON*****************************/
