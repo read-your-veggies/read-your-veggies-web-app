@@ -53,7 +53,9 @@ const userSchema = new Schema({
   facebookUrl: String,
   birthday: String,
   location: String,
+  locPolRatio: Number,
   hometown: String,
+  homePolRatio: Number,
   age_range: String,
   onboard_information: { type: String, default: 'NEED_ON_BOARDING' },
 });
