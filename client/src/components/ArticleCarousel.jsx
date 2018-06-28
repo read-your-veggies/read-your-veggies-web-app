@@ -4,7 +4,7 @@ import { GET_ARTICLES_FROM_SERVER } from '../apollo/serverQueries';
 import ArticleCard from './ArticleCard.jsx';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-import { calculateOnboardSlant } from '../lib/calculateSlant.js';
+import { calculateOnboardStance } from '../lib/calculateStance.js';
 
 
 class ArticleCarousel extends Component {
@@ -12,14 +12,14 @@ class ArticleCarousel extends Component {
     super(props);
     
     this.state = {
-      onboardSlant: 0,
+      onboardStance: 0,
     }
   }
 
   componentDidMount() {
-    var onboardSlant = calculateOnboardSlant(this.props.userData.onboard_information);
+    var onboardStance = calculateOnboardStance(this.props.userData.onboard_information);
     this.setState({
-      onboardSlant: onboardSlant,
+      onboardStance: onboardStance,
     })
   }
 
@@ -42,7 +42,7 @@ class ArticleCarousel extends Component {
               <Slider>
                 {data.articles.map((article, i) => (
                     <Slide index={i}>
-                      <ArticleCard article={article} onboardSlant={this.state.onboardSlant}/>
+                      <ArticleCard article={article} onboardStance={this.state.onboardStance}/>
                     </Slide>
                 ))}
               </Slider>
