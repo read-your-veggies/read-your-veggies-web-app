@@ -106,50 +106,56 @@ class AboutOurSourcesPanel extends React.Component {
         </Panel.Heading>
 
         <Panel.Body collapsible>
+          <div className="about-our-sources-header">
+            <div className="about-our-sources-left-side">
+              <p>We source articles from a variety of major news outlets and build personality profiles over time using IBM Watson's Personality Insights.</p> 
+              <ApolloConsumer>
+                { client => (
+                  <FormGroup controlId="formControlsSelect">
+                    <ControlLabel>Source</ControlLabel>
+                    <FormControl 
+                      componentClass="select" 
+                      placeholder="select" 
+                      onChange={async (e) => {
+                        console.log('clicked', e.target.value);
+                        const {data} = await client.query({
+                          query: GET_SOURCE_PERSONALITY,
+                          variables: {name: e.target.value},
+                        })
+                        this.setPersonality(data);
+                      }}
+                    >
+                    {this.state.sources.map((sourceName, index) => {
+                      return <option value={sourceName}>{sourceName}</option>
+                    })}
+                  >
+                  </FormControl>
+                </FormGroup>
+                )}
+              </ApolloConsumer>
 
-          <ApolloConsumer>
-            { client => (
               <FormGroup controlId="formControlsSelect">
-                <ControlLabel>Source</ControlLabel>
+                <ControlLabel>Attribute</ControlLabel>
                 <FormControl 
                   componentClass="select" 
                   placeholder="select" 
-                  onChange={async (e) => {
-                    console.log('clicked', e.target.value);
-                    const {data} = await client.query({
-                      query: GET_SOURCE_PERSONALITY,
-                      variables: {name: e.target.value},
-                    })
-                    this.setPersonality(data);
-                  }}
+                  onChange={this.handleAttributeChange}
                 >
-                {this.state.sources.map((sourceName, index) => {
-                  return <option value={sourceName}>{sourceName}</option>
-                })}
-              >
-              </FormControl>
-            </FormGroup>
-            )}
-          </ApolloConsumer>
+                  {this.state.attributes.map((attributeName, index) => {
+                    return <option value={attributeName}>{attributeName}</option>
+                  })}    
+                </FormControl>
+              </FormGroup>
+            </div>
 
-          <FormGroup controlId="formControlsSelect">
-            <ControlLabel>Attribute</ControlLabel>
-            <FormControl 
-              componentClass="select" 
-              placeholder="select" 
-              onChange={this.handleAttributeChange}
-            >
-              {this.state.attributes.map((attributeName, index) => {
-                return <option value={attributeName}>{attributeName}</option>
-              })}    
-            </FormControl>
-          </FormGroup>
+            <img id="watson-logo" src='../assets/watson.png' /> 
+          </div>
 
           <BarChart
             axisLabels={{y: 'Percentile'}}
             yDomainRange={[0, 100]}
             width={1000}
-            height={500}
+            height={400}
             colorBars
             axes
             margin={{top: 20, right: 20, bottom: 30, left: 40}}
