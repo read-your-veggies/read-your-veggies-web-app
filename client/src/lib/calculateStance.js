@@ -21,6 +21,18 @@ export const calculateOnboardStance = function(onboardString) {
   return stance;
 };
 
+export const calculateRegionalPoliticalStance = function(hometownPoliticalStance, currentCityPoliticalStance) {
+  return (hometownPoliticalStance + currentCityPoliticalStance) / 2;
+}
+
+export const calculateReadingStance = function(previousReadingStance, completedArticleInformation) {
+  //do something here/
+}
+
+export const calculateUserStance = function(onboardingStance, regionalPoliticsStance, readingStance) {
+  return onboardingStance * 0.6 + regionalPoliticsStance * 0.2 + readingStance * 0.2;
+}
+
 
 //we will add to this function as we get more info! 
   //regionalPolitics
