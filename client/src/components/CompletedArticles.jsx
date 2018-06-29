@@ -1,11 +1,9 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
 import { Query } from "react-apollo";
-import { GET_USER_FROM_DB } from '../apollo/serverQueries.js';
+import { GET_USER_FROM_DB, GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries.js';
 import {GET_USER_INFO} from '../apollo/localQueries.js';
-
-
-
+import Panel from 'react-bootstrap/lib/Panel';
 
 class CompletedArticles extends React.Component {
   constructor(props) {
@@ -25,15 +23,26 @@ class CompletedArticles extends React.Component {
                   var completedArticleInfo = JSON.parse(data.user.completed_articles);
                   var completedArticleKeys = Object.keys(completedArticleInfo);
                   return (
-                    <div>{completedArticleKeys.map((articleId) => {
+                    <div className="completed-articles-container">{completedArticleKeys.map((articleId) => {
                       return (
-                        <ul>
-                          <li>Article ID: {articleId}</li>
-                          <li>Article Stance:{completedArticleInfo[articleId].articleStance}</li>
-                          <li>Date Completed: {completedArticleInfo[articleId].completed}</li>
-                          <li>Nutritional Value: {completedArticleInfo[articleId].nutritionalValue}</li>
-                          <li>Your Stance At Time: {completedArticleInfo[articleId].onboardStance}</li>
-                        </ul>
+                        <Query query={GET_ONE_FULL_ARTICLE} variables={{_id: articleId}}>
+                          {({ loading, error, data }) => {
+                            if (loading) return "Loading...";
+                            if (error) return `Error! ${error.message}`;
+                            var article = data.article;
+                            return (
+                              <Panel className="completed-article">
+                                <Panel.Heading className="completed-article-title">
+                                  <a href={article.url}>{article.title}</a>
+                                </Panel.Heading>
+                                <Panel.Body>
+                                  <p>Nutrition for you: {completedArticleInfo[articleId].nutritionalValue}</p>
+                                  <img src={article.image} />                             
+                                </Panel.Body>
+                              </Panel>
+                            )
+                          }}
+                        </Query>                       
                       );
                     })}
                     </div>

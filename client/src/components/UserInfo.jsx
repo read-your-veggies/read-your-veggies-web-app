@@ -51,6 +51,8 @@ class UserInfo extends React.Component {
                   height={100}
                   width={150}
                   onboardString={data.user.onboard_information}
+                  startColor="white"
+                  endColor="green"
                 />
                 </div>
               );
