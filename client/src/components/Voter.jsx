@@ -62,24 +62,24 @@ class Voter extends React.Component {
               <form className="voter-form">
                 <FormGroup>
                   <div className="voter-form-left">
-                  <Checkbox value="agree" checked={this.state.agree} onChange={this.handleCheckboxChange}>
+                  <Checkbox inline value="agree" checked={this.state.agree} onChange={this.handleCheckboxChange}>
                     Agree
                   </Checkbox>
-                  <Checkbox value="fun" checked={this.state.fun} onChange={this.handleCheckboxChange}>
+                  <Checkbox inline value="fun" checked={this.state.fun} onChange={this.handleCheckboxChange}>
                     Fun
                   </Checkbox>
-                  <Checkbox value="worthyAdversary" checked={this.state.worthyAdversary} onChange={this.handleCheckboxChange}>
+                  <Checkbox inline value="worthyAdversary" checked={this.state.worthyAdversary} onChange={this.handleCheckboxChange}>
                     Worthy Adversary
                   </Checkbox>
                   </div>
                   <div className="voter-form-right">
-                  <Checkbox value="disagree" checked={this.state.disagree} onChange={this.handleCheckboxChange}>
+                  <Checkbox inline value="disagree" checked={this.state.disagree} onChange={this.handleCheckboxChange}>
                     Disagree
                   </Checkbox>
-                  <Checkbox value="bummer" checked={this.state.bummer} onChange={this.handleCheckboxChange}>
+                  <Checkbox inline value="bummer" checked={this.state.bummer} onChange={this.handleCheckboxChange}>
                     Bummer
                   </Checkbox>
-                  <Checkbox value="mean" checked={this.state.mean} onChange={this.handleCheckboxChange}>
+                  <Checkbox inline value="mean" checked={this.state.mean} onChange={this.handleCheckboxChange}>
                     Mean
                   </Checkbox>
                   </div>

@@ -89,7 +89,7 @@ var parseAndDecorateArticle = (article) => {
     })
     .catch(err => {
       //reject(err);
-      console.log('error parsing article');
+      console.log('error parsing article', article);
     })
   });
 }
