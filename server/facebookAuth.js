@@ -39,6 +39,7 @@ passport.use(new FacebookStrategy({
           newUser.hometown = profile._json.hometown.name;
           newUser.homePolRatio = calculateLocPol(profile._json.hometown.name);
           newUser.age_range = JSON.stringify(profile._json.age_range);
+          newUser.health = 0;
 
           console.log('new user to be saved', newUser);
           newUser.save( (err) => {

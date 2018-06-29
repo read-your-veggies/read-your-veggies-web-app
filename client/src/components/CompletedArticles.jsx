@@ -24,6 +24,8 @@ class CompletedArticles extends React.Component {
                   if (error) return `Error! ${error.message}`;
                   var completedArticleInfo = JSON.parse(data.user.completed_articles);
                   var completedArticleKeys = Object.keys(completedArticleInfo);
+                  console.log(completedArticleInfo);
+                  console.log(completedArticleKeys);
                   return (
                     <div>{completedArticleKeys.map((articleId) => {
                       return (

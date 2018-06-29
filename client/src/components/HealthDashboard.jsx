@@ -37,6 +37,8 @@ class HealthDashboard extends React.Component {
               <div>
               <HealthSpeedometer 
                 onboardString={data.user.onboard_information}
+                startColor="white"
+                endColor="green"
               />
               </div>
             );
