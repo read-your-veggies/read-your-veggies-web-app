@@ -15,6 +15,7 @@ import { withRouter } from "react-router-dom";
 class CompletedModal extends React.Component {
   constructor(props) {
     super(props);
+    // console.log('completion props', props.veggies)
 
   }
 
@@ -30,11 +31,9 @@ class CompletedModal extends React.Component {
         <Modal.Body>
           <div class="container">
             <p class="text-center">
-              Great job!  You earned {this.props.veggies} veggies!
+              Great job!  You earned this many veggies! <br/> {this.props.veggies}
             </p>
-            <p class="text-center">
-              <img id="trophy" width="100"  src="./assets/carrot.jpg" />
-            </p>
+          
             <p class="text-center"> 
             <a href={this.props.article.url} target="_blank">
               This article was written by {author} and originally published by {this.props.article.source}.
