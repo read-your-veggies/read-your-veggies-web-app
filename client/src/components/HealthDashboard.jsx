@@ -26,6 +26,20 @@ class HealthDashboard extends React.Component {
   render() {
     return (
       <div>
+        <Mutation mutation={OFF_BOARD_USER} >
+          {(offBoardUser) => {
+          return (
+            <Button
+              id='submit-onboard'
+              onClick={(e) => {
+                e.preventDefault();
+                offBoardUser({ variables: { _id: this.state.userId } });
+                setTimeout(() => {
+                  this.props.history.push('/dashboard');
+                }, 200)
+              }}>Reconfigure Health Defaults</Button>
+            )}}
+        </Mutation>
         <Query
           query={GET_USER_FROM_DB}
           variables={{ _id: this.state.userId }}
@@ -34,32 +48,18 @@ class HealthDashboard extends React.Component {
             if (loading) return "Loading...";
             if (error) return `Error! ${error.message}`;
             return (
-              <div>
-              <HealthSpeedometer 
-                onboardString={data.user.onboard_information}
-                startColor="white"
-                endColor="green"
-              />
+              <div className="health-dashboard-speedometer">
+                <HealthSpeedometer 
+                  onboardString={data.user.onboard_information}
+                  startColor="white"
+                  endColor="green"
+                />
               </div>
             );
           }}
         </Query>
-      <Mutation mutation={OFF_BOARD_USER} >
-        {(offBoardUser) => {
-        return (
-          <Button
-            id='submit-onboard'
-            onClick={(e) => {
-              e.preventDefault();
-              offBoardUser({ variables: { _id: this.state.userId } });
-              setTimeout(() => {
-                this.props.history.push('/dashboard');
-              }, 200)
-            }}>Reconfigure Health Defaults</Button>
-          )}}
-      </Mutation>
-          <CompletedArticles />
-          </div>
+        <CompletedArticles />
+      </div>
     );
   }
 

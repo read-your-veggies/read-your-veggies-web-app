@@ -1,1 +1,14 @@
 @import url("./HealthSpeedometer.css");
+
+.health-dashboard-speedometer {
+  height: 200px;
+}
+
+#submit-onboard {
+  float: right;
+}
+
+.completed-articles-container {
+  display: flex;
+  flex-direction: flex-start;
+}
