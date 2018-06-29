@@ -8,18 +8,21 @@ class HealthSpeedometer extends React.Component {
 
     this.state = {
       onboardStance: 0,
+      health: 0,
     }
   }
 
   componentDidMount() {
     this.setState({
       onboardStance: calculateOnboardStance(this.props.onboardString),
+      health: this.props.health,
     });
   }
 
   UNSAFE_componentWillReceiveProps() {
     this.setState({
       onboardStance: calculateOnboardStance(this.props.onboardString),
+      health: this.props.health,
     });
   }
 
@@ -29,11 +32,11 @@ class HealthSpeedometer extends React.Component {
     return (
       <div className='speedometer-wrapper' style={{width: '100%', height: "100%"}}>
         <ReactSpeedometer
-          minValue={-1}
-          maxValue={1}
+          minValue={-0}
+          maxValue={50}
           
           // this value will ultimately be a query for the user's score!
-          value={this.state.onboardStance}
+          value={this.state.health}
           currentValueText='Media Health: ${value}'
 
           needleColor="rgb(25,120,29)"

@@ -44,10 +44,14 @@ module.exports = [`
     facebookUrl: String
     birthday: String
     location: String
+    locPolRatio: String
     hometown: String
+    homePolRatio: String
     age_range: String
+    onboard_stance: String
     onboard_information: String
     completed_articles: String
+    reading_stance: [String]
   }
 
   type Vote {
