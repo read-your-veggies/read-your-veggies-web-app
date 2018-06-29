@@ -1,11 +1,7 @@
 import React from 'react';
-import Popover from 'react-bootstrap/lib/Popover';
 import Panel from 'react-bootstrap/lib/Panel';
-import Tooltip from 'react-bootstrap/lib/Tooltip';
 import Button from 'react-bootstrap/lib/Button';
-import Modal from 'react-bootstrap/lib/Modal';
 import Voter from './Voter.jsx';
-import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Badge from 'react-bootstrap/lib/Badge';
 
 import ArticleModal from './ArticleModal.jsx';
