@@ -1,28 +1,24 @@
 import React from 'react';
 import ReactSpeedometer from "react-d3-speedometer";
-import { calculateOnboardStance } from '../lib/calculateStance.js';
 
 class HealthSpeedometer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      onboardStance: 0,
-      health: 0,
+      value: 0,
     }
   }
 
   componentDidMount() {
     this.setState({
-      onboardStance: calculateOnboardStance(this.props.onboardString),
-      health: this.props.health,
+      value: this.props.value,
     });
   }
 
   UNSAFE_componentWillReceiveProps() {
     this.setState({
-      onboardStance: calculateOnboardStance(this.props.onboardString),
-      health: this.props.health,
+      value: this.props.value,
     });
   }
 
@@ -32,11 +28,11 @@ class HealthSpeedometer extends React.Component {
     return (
       <div className='speedometer-wrapper' style={{width: '100%', height: "100%"}}>
         <ReactSpeedometer
-          minValue={-0}
-          maxValue={50}
+          minValue={this.props.min}
+          maxValue={this.props.max}
           
           // this value will ultimately be a query for the user's score!
-          value={this.state.health}
+          value={this.state.value}
           currentValueText='Media Health: ${value}'
 
           needleColor="rgb(25,120,29)"

@@ -51,9 +51,11 @@ class UserInfo extends React.Component {
                   height={100}
                   width={150}
                   onboardString={data.user.onboard_information}
-                  health = {data.user.health}
+                  value = {data.user.health}
                   startColor="white"
                   endColor="green"
+                  min={0}
+                  max={50}
                 />
                 </div>
               );

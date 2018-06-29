@@ -29,10 +29,46 @@ class AboutYou extends React.Component {
                   var readingStance = JSON.parse(data.user.reading_stance[0]);
                   return (
                     <div>
-                    <p>Your Overall Political Stance: {userStance}</p>
-                    <p>The Political Stance of Your Current City: {locPolRatio}</p>
-                    <p>The Political Stance of Your Hometown: {homePolRatio}</p>
-                    <p>The Political Stance of Your Reading Habits: {readingStance}</p>
+                    <h1>Your Overall Political Stance:</h1>
+                    <HealthSpeedometer 
+                      height={100}
+                      width={150}
+                      value = {userStance}
+                      startColor="blue"
+                      endColor="red"
+                      min={-1}
+                      max={1}
+                    />
+                    <h1>The Political Stance of Your Current City:</h1>
+                    <HealthSpeedometer 
+                      height={100}
+                      width={150}
+                      value = {locPolRatio}
+                      startColor="blue"
+                      endColor="red"
+                      min={-1}
+                      max={1}
+                    />
+                    <h1>The Political Stance of Your Hometown:</h1>
+                    <HealthSpeedometer 
+                      height={100}
+                      width={150}
+                      value = {homePolRatio}
+                      startColor="blue"
+                      endColor="red"
+                      min={-1}
+                      max={1}
+                    />
+                    <h1>The Political Stance of Your Reading Habits:</h1>
+                    <HealthSpeedometer 
+                      height={100}
+                      width={150}
+                      value = {readingStance}
+                      startColor="blue"
+                      endColor="red"
+                      min={-1}
+                      max={1}
+                    />
                     </div>
                   );
                 }}
