@@ -98,6 +98,6 @@ if (process.env.DEPLOYED !== 'true') {
 // watson.getWatsonProfile(dummyTweets, personality => {
 //   console.log(personality);
 // });
-//watson.updateSourcesDb();
+// watson.updateSourcesDb();
 //watson.updateSinglePersonality('The Huffington Post', 'fullTexts');
-//watson.updateAllPersonalities();
+// watson.updateAllPersonalities();

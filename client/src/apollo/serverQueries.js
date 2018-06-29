@@ -60,6 +60,7 @@ export const GET_USER_FROM_DB =  gql`
       hometown
       age_range
       onboard_information
+      completed_articles
     }
   }
 `

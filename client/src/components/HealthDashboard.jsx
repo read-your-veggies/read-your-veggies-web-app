@@ -5,6 +5,7 @@ import { OFF_BOARD_USER } from '../apollo/resolvers.js';
 import { GET_USER_FROM_DB } from '../apollo/serverQueries.js';
 import Button from 'react-bootstrap/lib/Button';
 import HealthSpeedometer from './HealthSpeedometer.jsx';
+import CompletedArticles from './CompletedArticles.jsx';
 
 class HealthDashboard extends React.Component {
   constructor(props) {
@@ -55,6 +56,7 @@ class HealthDashboard extends React.Component {
             }}>Reconfigure Health Defaults</Button>
           )}}
       </Mutation>
+          <CompletedArticles />
           </div>
     );
   }
