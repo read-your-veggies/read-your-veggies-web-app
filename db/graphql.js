@@ -108,13 +108,13 @@ const getGraphQlSchema = async () => {
           return res.value
         },
 
-        updateUserHealth: async (root, args) => {
-          let oldHealth = await Users.findOne({_id: new mongodb.ObjectID(args._id)});
-          if (!oldHealth) oldHealth = 0;
-          let newHealth = oldHealth.health + args.new_health;
-          const res = await Users.findOneAndUpdate({_id: new mongodb.ObjectID(args._id)},{$set:{health: newHealth}}, {returnOriginal:false});
-          return res.value;
-        },
+        // updateUserHealth: async (root, args) => {
+        //   let oldHealth = await Users.findOne({_id: new mongodb.ObjectID(args._id)});
+        //   if (!oldHealth) oldHealth = 0;
+        //   let newHealth = oldHealth.health + args.new_health;
+        //   const res = await Users.findOneAndUpdate({_id: new mongodb.ObjectID(args._id)},{$set:{health: newHealth}}, {returnOriginal:false});
+        //   return res.value;
+        // },
 
         onboardUser: async (root, args) => {
           console.log('onboardInfo: ', args.onboard_info);
