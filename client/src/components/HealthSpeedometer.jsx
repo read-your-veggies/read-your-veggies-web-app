@@ -37,9 +37,9 @@ class HealthSpeedometer extends React.Component {
           currentValueText='Media Health: ${value}'
 
           needleColor="rgb(25,120,29)"
-          startColor="blue"
+          startColor={this.props.startColor}
           segments={7}
-          endColor="red"
+          endColor={this.props.endColor}
           textColor='#ff77e8'
           needleTransitionDuration={10000}
           needleTransition="easeElastic"

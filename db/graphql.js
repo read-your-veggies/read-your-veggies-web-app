@@ -15,23 +15,12 @@ const prepare = (object) => {
 
 const getGraphQlSchema = async () => {
   try {
-    const Posts = db.collection('posts');
-    const Comments = db.collection('comments');
     const Articles = db.collection('articles');
     const Users = db.collection('users');
     const Sources = db.collection('sources');
 
     const resolvers = {
       Query: {
-        post: async (root, {_id}) => {
-          return prepare(await Posts.findOne(new mongodb.ObjectID(_id)));
-        },
-        posts: async () => {
-          return (await Posts.find({}).toArray()).map(prepare);
-        },
-        comment: async (root, {_id}) => {
-          return prepare(await Comments.findOne(ObjectId(_id)));
-        },
         message: () => 'Hello From GraphQL Server!',
         articles: async () => {
           return (await Articles.find({}).toArray()).map(prepare);
@@ -50,22 +39,7 @@ const getGraphQlSchema = async () => {
           return prepare(await Sources.findOne({name: name}));
         },
       },
-      Post: {
-        comments: async ({_id}) => {
-          return (await Comments.find({postId: _id}).toArray()).map(prepare)
-        }
-      },
-      Comment: {
-        post: async ({postId}) => {
-          return prepare(await Posts.findOne(ObjectId(postId)))
-        }
-      },
       Mutation: {
-        createPost: async (root, args, context, info) => {
-          const res = await Posts.insert(args);
-          console.log('res is', res);
-          return prepare(await Posts.findOne({_id: res.insertedIds[0]}))
-        },
         // probably should disable this for production:
         createArticle: async (root, args, context, info) => {
           const res = await Articles.insert(args);
@@ -134,9 +108,12 @@ const getGraphQlSchema = async () => {
           return res.value
         },
 
-        createComment: async (root, args) => {
-          const res = await Comments.insert(args)
-          return prepare(await Comments.findOne({_id: res.insertedIds[0]}))
+        updateUserHealth: async (root, args) => {
+          let oldHealth = await Users.findOne({_id: new mongodb.ObjectID(args._id)});
+          if (!oldHealth) oldHealth = 0;
+          let newHealth = oldHealth.health + args.new_health;
+          const res = await Users.findOneAndUpdate({_id: new mongodb.ObjectID(args._id)},{$set:{health: newHealth}}, {returnOriginal:false});
+          return res.value;
         },
 
         onboardUser: async (root, args) => {
@@ -153,7 +130,7 @@ const getGraphQlSchema = async () => {
             {returnOriginal:false}
           );
           return res.value;
-        }
+        },
       }
     }
 

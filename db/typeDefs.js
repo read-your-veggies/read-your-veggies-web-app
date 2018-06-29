@@ -1,8 +1,5 @@
 module.exports = [`
   type Query {
-    post(_id: String): Post
-    posts: [Post]
-    comment(_id: String): Comment
     message: String
     articles: [Article]
     article(_id: String): Article
@@ -39,7 +36,7 @@ module.exports = [`
     authenticationInfo: String
     avatar: String
     name: String
-    health: String
+    health: Int
     user_stance: String
     recently_read: [String]
     emails: String
@@ -80,23 +77,7 @@ module.exports = [`
     totalVotes: Int
   }
 
-  type Post {
-    _id: String
-    title: String
-    content: String
-    comments: [Comment]
-  }
-
-  type Comment {
-    _id: String
-    postId: String
-    content: String
-    post: Post
-  }
-
   type Mutation {
-    createPost(title: String, content: String): Post
-    createComment(postId: String, content: String): Comment
     deleteArticles: Article
     deleteArticle(_id: String): Article
     createArticle(url: String,
@@ -108,7 +89,7 @@ module.exports = [`
     onboardUser(_id: String, onboard_info: String): User
     updateUserVotes(_id: String, completed_articles: String): User
     updateArticleVotes(_id: String, votes: VoteInput): Article
-
+    updateUserHealth(_id: String, new_health: Int): User
   }
 
   schema {
