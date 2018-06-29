@@ -89,17 +89,21 @@ var parseAndDecorateArticle = (article) => {
     })
     .catch(err => {
       //reject(err);
-      console.log('error parsing article');
+      console.log('error parsing article', article);
     })
   });
 }
 
 var insertArticlesIntoArticlesDb = (articles) => {
   articles.forEach(article => {
-    var newArticle = new Article(article);
-    newArticle.save(err => {
-      if (err) console.log(`article already exists in db ${article.url}`);
-    });
+    if (article.fullText !== "") {
+      var newArticle = new Article(article);
+      newArticle.save(err => {
+        if (err) console.log(`article already exists in db ${article.url}`);
+      });
+    } else {
+      console.log('empty article', article);
+    }
   });
 }
 
