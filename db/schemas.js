@@ -45,22 +45,23 @@ const userSchema = new Schema({
   authenticationInfo: String,
   avatar: String,
   name: String,
-  health: Number,
-  user_stance: Number,
+  health: { type: Number, default: 0 },
+  user_stance: { type: Number, default: 0 },
   recently_read: [String],
   emails: String,
   facebookId: String,
   facebookUrl: String,
   birthday: String,
   location: String,
-  locPolRatio: Number,
+  locPolRatio: { type: Number, default: 0 },
   hometown: String,
-  homePolRatio: Number,
+  homePolRatio: { type: Number, default: 0 },
   age_range: String,
+  onboard_stance: { type: Number, default: 0 },
   onboard_information: { type: String, default: 'NEED_ON_BOARDING' },
-  
   //this will be a HUGE object/string
-  completed_articles: { type: String, default: JSON.stringify({})}
+  completed_articles: { type: String, default: JSON.stringify({})},
+  reading_stance: { type: [Number], default:[0,0] },
 });
 
 const User = mongoose.model('User', userSchema);

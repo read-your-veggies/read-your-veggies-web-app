@@ -4,6 +4,10 @@ typeDefs = require('./typeDefs.js');
 //needed to delete by _id
 const mongodb = require('mongodb');
 
+const calculateUserReadingStance = require('./data/calculateUserStance').calculateUserReadingStance;
+const calculateUserOnboardStance = require('./data/calculateUserStance').calculateUserOnboardStance;
+const calculateUserAggregateStance = require('./data/calculateUserStance').calculateUserAggregateStance;
+
 const prepare = (object) => {
   object._id = object._id.toString();
   return object;
@@ -99,24 +103,34 @@ const getGraphQlSchema = async () => {
         },
 
         updateUserVotes: async (root, args) => {
-          let previouslyCompletedArticles = JSON.parse(prepare(await Users.findOne(new mongodb.ObjectID(args._id))).completed_articles);
-          console.log('previous')
-          console.log(JSON.stringify(previouslyCompletedArticles));
+          
+          let userDocument = prepare(await Users.findOne(new mongodb.ObjectID(args._id)));
+          let previouslyCompletedArticles = JSON.parse(userDocument.completed_articles);
+          let currentReadingStance = userDocument.reading_stance;
+          
           let incomingArticle = JSON.parse(args.completed_articles);
-          console.log('incoming')
-          console.log(JSON.stringify(incomingArticle));
           let incomingArticleKey = Object.keys(incomingArticle)[0];
-          console.log('incoming key')
-          console.log(incomingArticleKey);
+
+          console.log('incomming art', incomingArticle[incomingArticleKey].nutritionalValue);
+          console.log('incomming art', typeof incomingArticle[incomingArticleKey].nutritionalValue);
+
           previouslyCompletedArticles[incomingArticleKey] = incomingArticle[incomingArticleKey];
-          console.log('updated')
-          console.log(JSON.stringify(previouslyCompletedArticles));
+          
+          var updatedReadingStance = calculateUserReadingStance(currentReadingStance, incomingArticle[incomingArticleKey]);
+          var updatedAggregateStance = calculateUserAggregateStance(userDocument.onboard_stance, userDocument.locPolRatio, userDocument.homePolRatio, updatedReadingStance);
 
           const res = await Users.findOneAndUpdate(
             {_id: new mongodb.ObjectID(args._id)}, 
-            {$set: {completed_articles: JSON.stringify(previouslyCompletedArticles) }}, 
+            {$set: {
+              completed_articles: JSON.stringify(previouslyCompletedArticles),
+              reading_stance: updatedReadingStance,
+              user_stance: updatedAggregateStance,
+              health: userDocument.health + incomingArticle[incomingArticleKey].nutritionalValue,
+              }
+            }, 
             {returnOriginal:false}
           );
+          console.log(res.value);
           return res.value
         },
 
@@ -126,7 +140,18 @@ const getGraphQlSchema = async () => {
         },
 
         onboardUser: async (root, args) => {
-          const res = await Users.findOneAndUpdate({_id: new mongodb.ObjectID(args._id)},{$set:{onboard_information: args.onboard_info}}, {returnOriginal:false});
+          console.log('onboardInfo: ', args.onboard_info);
+          console.log(typeof args.onboard_info);
+          var onboardStance = calculateUserOnboardStance(args.onboard_info);
+          const res = await Users.findOneAndUpdate(
+            {_id: new mongodb.ObjectID(args._id)},
+            {$set:{
+              onboard_information: args.onboard_info,
+              onboard_stance: onboardStance,
+              }
+            },
+            {returnOriginal:false}
+          );
           return res.value;
         }
       }

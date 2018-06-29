@@ -50,17 +50,22 @@ export const GET_USER_FROM_DB =  gql`
       authenticationInfo
       avatar
       name
-      health
+      health 
       user_stance
+      recently_read
       emails
       facebookId
       facebookUrl
       birthday
       location
+      locPolRatio
       hometown
+      homePolRatio
       age_range
+      onboard_stance
       onboard_information
       completed_articles
+      reading_stance
     }
   }
 `

@@ -4,6 +4,7 @@ import PanelGroup from 'react-bootstrap/lib/PanelGroup';
 import Panel from 'react-bootstrap/lib/Panel';
 import { Query } from 'react-apollo';
 import { GET_LIST_OF_SOURCES } from '../apollo/serverQueries';
+import AboutYou from './AboutYou.jsx';
 
 class AboutUs extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class AboutUs extends React.Component {
               <Panel.Title toggle>About You</Panel.Title>
             </Panel.Heading>
             <Panel.Body collapsible>
-              You're probably wrong.
+              <AboutYou />
             </Panel.Body>
           </Panel>
           <Query query={GET_LIST_OF_SOURCES}>
