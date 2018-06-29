@@ -24,6 +24,7 @@ class AboutYou extends React.Component {
                   if (loading) return "Loading...";
                   if (error) return `Error! ${error.message}`;
                   var userStance = JSON.parse(data.user.user_stance);
+                  var onboardStance = JSON.parse(data.user.onboard_stance);
                   var locPolRatio = JSON.parse(data.user.locPolRatio);
                   var homePolRatio = JSON.parse(data.user.homePolRatio);
                   var readingStance = JSON.parse(data.user.reading_stance[0]);
@@ -34,6 +35,16 @@ class AboutYou extends React.Component {
                       height={100}
                       width={150}
                       value = {userStance}
+                      startColor="blue"
+                      endColor="red"
+                      min={-1}
+                      max={1}
+                    />
+                    <h1>Your Self Reported Political Stance:</h1>
+                    <HealthSpeedometer 
+                      height={100}
+                      width={150}
+                      value = {onboardStance}
                       startColor="blue"
                       endColor="red"
                       min={-1}
