@@ -60,14 +60,19 @@ const getGraphQlSchema = async () => {
           return res.value;
         },
 
+        // We need to have this update the summed user stance fields as well.
         updateArticleVotes: async (root, args) => {
+          // We need to know the state of the current votes before we can update them.
           let currentState = prepare(await Articles.findOne(new mongodb.ObjectID(args._id)));
           
+          // Take the current state and update the vote fields as necessary.
           for (var key in currentState.votes) {
             if (args.votes[key]) {
               currentState.votes[key].totalVotes++
             }
           }
+
+          // Pass the updated votes object back into the database.
           const res = await Articles.findOneAndUpdate(
             {_id: new mongodb.ObjectID(args._id)}, 
             {$set: {votes: currentState.votes }}, 

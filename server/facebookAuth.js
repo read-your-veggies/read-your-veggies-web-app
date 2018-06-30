@@ -17,7 +17,7 @@ passport.deserializeUser( (user, done) => {
     done(null, user);
 });
 
-passport.use(new FacebookStrategy({
+passport.use(new FacebookStrategy({  // Passport can utilize many different 'strategies', we are using the Facebook Auth.
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: process.env.CALLBACK_URL,
@@ -59,7 +59,7 @@ passport.use(new FacebookStrategy({
 const calculateLocPol = function (city) {
   // For the user's city, find the county, then find county's election data for 2012 and 2016.
   // The data is a ratio of (GOP votes - Dem votes) / Total votes
-  // This is added to the new user profile above.
+  // This is added to the new user profile above as a regional politics field.
   let county = countyConvert[city];
   let result12 = convert2012[county];
   let result16 = convert2016[county];
