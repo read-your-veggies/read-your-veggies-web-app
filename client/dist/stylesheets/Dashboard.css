@@ -10,3 +10,9 @@
 .carousel-control.left, .carousel-control.right {
   background-image: none;
 }
+
+.articles-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
