@@ -38,6 +38,7 @@ class ArticleCard extends React.Component {
     this.renderCarrots = this.renderCarrots.bind(this);
   }
 
+  // There are three modals launched from ArticleCard.  Their closing and opening is handled by these functions.
   handleClose(modalType) {
     if (modalType === 'article') {
       this.setState({ showArticle: false });
@@ -96,6 +97,7 @@ class ArticleCard extends React.Component {
           </Panel.Body>
         </Panel>
 
+        {/* The card component has three modals that it launches in series.  Props are passed down from card to these modals */}
         <ArticleModal 
           show={this.state.showArticle} 
           handleClose = {this.handleClose}

@@ -33,11 +33,11 @@ class Voter extends React.Component {
     });
   }
 
+  // When done, close this modal, open the CompletedModal
   submitVote() {
     this.props.handleClose('voter');
     this.props.handleShow('completed');
   }
-
 
   render() {
     return (
@@ -80,25 +80,18 @@ class Voter extends React.Component {
                   {(updateUserVotes) => {
                     return (
                       <Button bsStyle="primary" onClick={(e) => {
-                        let { articleId, userId, articleStance, userStance, nutritionalValue } = this.props;  
-                        let votes = {
-                          "agree" : this.state.agree, 
-                          "disagree" : this.state.disagree,  
-                          "fun" : this.state.fun,  
-                          "bummer" : this.state.bummer,  
-                          "mean" : this.state.mean,  
-                          "worthyAdversary" : this.state.worthyAdversary,  
-                        }
+                        let { articleId, userId, articleStance, onboardStance, nutritionalValue } = this.props;  
+                  
                         let userVoteInfo = {};
                         userVoteInfo[articleId] = {
                           'articleStance': articleStance,
-                          'votes': votes,
-                          'userStance': userStance,
+                          'votes': this.state,
+                          'onboardStance': onboardStance,
                           'completed': Date.now(),
                           'nutritionalValue': nutritionalValue,
                         }
                         e.preventDefault();
-                        updateArticleVotes({ variables: { _id: this.props.articleId, votes: votes } })
+                        updateArticleVotes({ variables: { _id: this.props.articleId, votes: this.state } })
                         updateUserVotes({ variables: { _id: this.props.userId, completed_articles: JSON.stringify(userVoteInfo) } })
                         this.submitVote();
                       }}>
