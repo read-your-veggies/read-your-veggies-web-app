@@ -43,44 +43,44 @@ class Voter extends React.Component {
     return (
       <Modal show={this.props.show} onHide={() => this.props.handleClose('voter')}>
       <Modal.Body>
-        <Mutation mutation={UPDATE_ARTICLE_VOTES} >
-          { (updateArticleVotes) => {
-            return (
-              <Panel bsStyle="info" className="voting-panel">
-              <Panel.Heading>
-                <h3>Vote on this article!</h3>
-              </Panel.Heading>
-              <Panel.Body>
-              <form className="voter-form">
-                <FormGroup>
-                  <div className="voter-form-left">
-                  <Checkbox inline value="agree" checked={this.state.agree} onChange={this.handleCheckboxChange}>
-                    Agree
-                  </Checkbox>
-                  <Checkbox inline value="fun" checked={this.state.fun} onChange={this.handleCheckboxChange}>
-                    Fun
-                  </Checkbox>
-                  <Checkbox inline value="worthyAdversary" checked={this.state.worthyAdversary} onChange={this.handleCheckboxChange}>
-                    Worthy Adversary
-                  </Checkbox>
-                  </div>
-                  <div className="voter-form-right">
-                  <Checkbox inline value="disagree" checked={this.state.disagree} onChange={this.handleCheckboxChange}>
-                    Disagree
-                  </Checkbox>
-                  <Checkbox inline value="bummer" checked={this.state.bummer} onChange={this.handleCheckboxChange}>
-                    Bummer
-                  </Checkbox>
-                  <Checkbox inline value="mean" checked={this.state.mean} onChange={this.handleCheckboxChange}>
-                    Mean
-                  </Checkbox>
-                  </div>
-                </FormGroup>
+        <Panel bsStyle="info" className="voting-panel">
+        <Panel.Heading>
+          <h3>Vote on this article!</h3>
+        </Panel.Heading>
+        <Panel.Body>
+        <form className="voter-form">
+          <FormGroup>
+            <div className="voter-form-left">
+            <Checkbox inline value="agree" checked={this.state.agree} onChange={this.handleCheckboxChange}>
+              Agree
+            </Checkbox>
+            <Checkbox inline value="fun" checked={this.state.fun} onChange={this.handleCheckboxChange}>
+              Fun
+            </Checkbox>
+            <Checkbox inline value="worthyAdversary" checked={this.state.worthyAdversary} onChange={this.handleCheckboxChange}>
+              Worthy Adversary
+            </Checkbox>
+            </div>
+            <div className="voter-form-right">
+            <Checkbox inline value="disagree" checked={this.state.disagree} onChange={this.handleCheckboxChange}>
+              Disagree
+            </Checkbox>
+            <Checkbox inline value="bummer" checked={this.state.bummer} onChange={this.handleCheckboxChange}>
+              Bummer
+            </Checkbox>
+            <Checkbox inline value="mean" checked={this.state.mean} onChange={this.handleCheckboxChange}>
+              Mean
+            </Checkbox>
+            </div>
+          </FormGroup>
+          <Mutation mutation={UPDATE_ARTICLE_VOTES} >
+            { (updateArticleVotes) => {
+              return (
                 <Mutation mutation={UPDATE_USER_VOTES}>
                   {(updateUserVotes) => {
                     return (
                       <Button bsStyle="primary" onClick={(e) => {
-                        let { articleId, userId, articleStance, onboardStance, nutritionalValue } = this.props;  
+                        let { articleId, userId, articleStance, userStance, nutritionalValue } = this.props;  
                         let votes = {
                           "agree" : this.state.agree, 
                           "disagree" : this.state.disagree,  
@@ -93,7 +93,7 @@ class Voter extends React.Component {
                         userVoteInfo[articleId] = {
                           'articleStance': articleStance,
                           'votes': votes,
-                          'onboardStance': onboardStance,
+                          'userStance': userStance,
                           'completed': Date.now(),
                           'nutritionalValue': nutritionalValue,
                         }
@@ -107,11 +107,11 @@ class Voter extends React.Component {
                     )
                   }}
                 </Mutation >
+                )}}
+                </Mutation>
               </form>
               </Panel.Body>
               </Panel>
-          )}}
-        </Mutation>
       </Modal.Body>
       </Modal>
     )
