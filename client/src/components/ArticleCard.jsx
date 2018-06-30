@@ -68,7 +68,7 @@ class ArticleCard extends React.Component {
   render() {
     return (
       <div className="article">
-        <Panel bsStyle="success">
+        <Panel bsStyle="default">
           <Panel.Heading>
             {/* <Badge className='nutrition-count' style={{backgroundColor: 'transparent'}}pullRight>{this.renderCarrots()}</Badge> */}
             {this.renderCarrots()}
