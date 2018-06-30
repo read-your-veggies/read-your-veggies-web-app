@@ -8,7 +8,6 @@ import { withRouter } from "react-router-dom";
 class CompletedModal extends React.Component {
   constructor(props) {
     super(props);
-    // console.log('completion props', props.veggies)
 
   }
 
@@ -26,7 +25,7 @@ class CompletedModal extends React.Component {
             <p class="text-center">
               Great job!  You earned this many veggies! <br/> {this.props.veggies}
             </p>
-          
+            
             <p class="text-center"> 
             <a href={this.props.article.url} target="_blank">
               This article was written by {author} and originally published by {this.props.article.source}.
@@ -35,7 +34,6 @@ class CompletedModal extends React.Component {
           </div>
         </Modal.Body>
         <Modal.Footer>
-
           <div>
             <Button onClick={ (e) => {
               e.preventDefault();

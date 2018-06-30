@@ -30,7 +30,6 @@ class OnboardModal extends React.Component {
     this.handleStanceChange = this.handleStanceChange.bind(this);
     this.handleParentChange = this.handleParentChange.bind(this);
     this.handleVeggieChange = this.handleVeggieChange.bind(this);
-
   }
   
   handleStanceChange(value){
@@ -60,14 +59,6 @@ class OnboardModal extends React.Component {
   }
 
   render() {
-    const popover = (
-      <Popover id="modal-popover" title="popover">
-        very popover. such engagement
-      </Popover>
-    );
-    
-    const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
-
     return (
       <Modal id='onboard-modal' show={this.state.show} onHide={this.handleClose}>
         <Modal.Header >

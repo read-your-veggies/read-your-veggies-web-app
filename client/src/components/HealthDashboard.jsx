@@ -14,7 +14,6 @@ class HealthDashboard extends React.Component {
     this.state = {
       userId: null,
     }
-
   }
 
   componentDidMount() {
@@ -65,7 +64,6 @@ class HealthDashboard extends React.Component {
       </div>
     );
   }
-
 }
 
 export default withRouter(HealthDashboard);

@@ -10,7 +10,6 @@ import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 class ArticleModal extends React.Component {
   constructor(props) {
     super(props);
-    // console.log('article modal props', props);
 
     this.completeArticle = this.completeArticle.bind(this);
   }
@@ -22,14 +21,6 @@ class ArticleModal extends React.Component {
   }
 
   render() {
-    const popover = (
-      <Popover id="modal-popover" title="popover">
-        very popover. such engagement
-      </Popover>
-    );
-    
-    const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
-
     return (
       <Modal show={this.props.show} onHide={() => this.props.handleClose('voter')}>
         <Modal.Header closeButton>
@@ -53,16 +44,6 @@ class ArticleModal extends React.Component {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <p>
-            <OverlayTrigger overlay={popover}>
-              <a href="#popover">Reveal Source</a>
-            </OverlayTrigger>{' '}
-          </p>
-          <p>
-            <OverlayTrigger overlay={tooltip}>
-              <a href="#tooltip">Why this article?</a>
-            </OverlayTrigger>{' '}
-          </p>
           <Button onClick={
             (e) => {
               e.preventDefault();

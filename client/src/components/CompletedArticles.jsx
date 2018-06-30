@@ -11,7 +11,6 @@ class CompletedArticles extends React.Component {
   }
 
   render() {
-
     return (
       <Query query={GET_USER_INFO}>
           {(({data}) => {
@@ -55,7 +54,6 @@ class CompletedArticles extends React.Component {
         </Query>
     );
   }
-
 }
 
 export default withRouter(CompletedArticles);
