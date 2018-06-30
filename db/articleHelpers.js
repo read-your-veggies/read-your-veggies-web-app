@@ -6,6 +6,7 @@ require('dotenv').config();
 const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
+// fetches articles from news API, outputs [{url: 'washingtonpost.com...', articleStance: -0.5, source: 'The Washington Post}]
 var getUrlsFromNewsAPI = () => {
   return new Promise((resolve, reject) => {
     newsapi.v2.topHeadlines({
@@ -89,7 +90,7 @@ var parseAndDecorateArticle = (article) => {
     })
     .catch(err => {
       //reject(err);
-      console.log('error parsing article', article);
+      //console.log('error parsing article', article);
     })
   });
 }
@@ -99,10 +100,10 @@ var insertArticlesIntoArticlesDb = (articles) => {
     if (article.fullText !== "") {
       var newArticle = new Article(article);
       newArticle.save(err => {
-        if (err) console.log(`article already exists in db ${article.url}`);
+        //if (err) console.log(`article already exists in db ${article.url}`);
       });
     } else {
-      console.log('empty article', article);
+      //console.log('article had no fullText, was not inserted'); 
     }
   });
 }
@@ -131,5 +132,5 @@ var deleteArticles = () => {
   });
 }
 
-module.exports = { scrapeArticles, deleteArticles }
+module.exports = { scrapeArticles, deleteArticles, getUrlsFromNewsAPI, generateArticles, parseAndDecorateArticle, insertArticlesIntoArticlesDb }
 
