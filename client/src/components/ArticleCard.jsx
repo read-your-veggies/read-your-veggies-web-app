@@ -67,78 +67,107 @@ class ArticleCard extends React.Component {
 
   renderCarrots () {
     var nutritionalValue = calculateNutritionalValue(this.props.onboardStance, this.props.article.articleStance )
-    return (<h3>{'🥕'.repeat(nutritionalValue)}</h3>);
+    return (<h3 className="carrots">{'🥕'.repeat(nutritionalValue)}</h3>);
 
   }
 
   render() {
-  
     return (
-      <Mutation mutation={DELETE_ARTICLE} update={updateCache}>
-        { (deleteArticle) => {
-          return (
-            <div className="article">
-              <Panel bsStyle="success">
-                  <Panel.Heading className='title'>
-                    <button className='delete-article-button' onClick={() => deleteArticle({ variables: { _id: this.props.article._id } })}> X </button>
-                    <Panel.Title>{this.props.article.title}</Panel.Title>
-                    <Badge id='nutrition-count' bsStyle="danger">{this.renderCarrots()}</Badge>
-                  </Panel.Heading>
-                  <Panel.Body>
-                    <h3 className="article-card-title">{this.props.article.title}</h3>
-                    <img className="article-thumbnail" src={this.props.article.image} />
-                    {/* <p>{this.props.article.description}</p> */}
-                  </Panel.Body>
+      <div className="article">
+        <Panel bsStyle="success">
+          <Panel.Heading>
+            {/* <Badge className='nutrition-count' style={{backgroundColor: 'transparent'}}pullRight>{this.renderCarrots()}</Badge> */}
+            {this.renderCarrots()}
+          </Panel.Heading>
+          <Panel.Body>
+            <img className="article-thumbnail" src={this.props.article.image} />
+            <ApolloConsumer>
+              { client => (
+                <a       
+                  onClick={async () => {
+                    const {data} = await client.query({
+                      query: GET_ONE_FULL_ARTICLE,
+                      variables: {_id: this.props.article._id}
+                    })
+                    console.log('full article incoming', data.article);
+                    this.setState({
+                      fullArticle: data.article,
+                      showArticle: true,
+                    })
+                  }}
+                >
+                <h3 className="article-card-title">{this.props.article.title}</h3>
+              </a>
+              )}
+            </ApolloConsumer>    
+          </Panel.Body>
+        </Panel>
 
-                  <ApolloConsumer>
-                    { client => (
-                      <Button 
-                        className="eat-me" 
-                        bsStyle="info" 
-                        bsSize="large" 
-                        onClick={async () => {
-                          const {data} = await client.query({
-                            query: GET_ONE_FULL_ARTICLE,
-                            variables: {_id: this.props.article._id}
-                          })
-                          console.log('full article incoming', data.article);
-                          this.setState({
-                            fullArticle: data.article,
-                            showArticle: true,
-                          })
-                        }}
-                      >
-                      Eat me
-                    </Button>
-                    )}
-                  </ApolloConsumer>
-              </Panel>
+        <ArticleModal 
+          show={this.state.showArticle} 
+          handleClose = {this.handleClose}
+          handleShow = {this.handleShow}
+          article = {this.state.fullArticle}
+        />
+        <Voter
+          show={this.state.showVoter}
+          handleClose = {this.handleClose}
+          handleShow = {this.handleShow}
+          userId = {this.props.userId}
+          articleId={this.props.article._id}
+          articleStance={this.props.article.articleStance}
+          onboardStance={this.props.onboardStance}
+          nutritionalValue={calculateNutritionalValue(this.props.onboardStance, this.props.article.articleStance )}
+        />
+        <CompletedModal
+          show={this.state.showCompleted}
+          handleClose={this.handleClose}
+          article={this.state.fullArticle}
+          veggies={this.renderCarrots()}
+        />
+      </div>
 
-              <ArticleModal 
-                show={this.state.showArticle} 
-                handleClose = {this.handleClose}
-                handleShow = {this.handleShow}
-                article = {this.state.fullArticle}
-              />
-              <Voter
-                show={this.state.showVoter}
-                handleClose = {this.handleClose}
-                handleShow = {this.handleShow}
-                userId = {this.props.userId}
-                articleId={this.props.article._id}
-                articleStance={this.props.article.articleStance}
-                onboardStance={this.props.onboardStance}
-                nutritionalValue={calculateNutritionalValue(this.props.onboardStance, this.props.article.articleStance )}
-              />
-              <CompletedModal
-                show={this.state.showCompleted}
-                handleClose={this.handleClose}
-                article={this.state.fullArticle}
-                veggies={this.renderCarrots()}
-              />
-            </div>
-          )}}
-      </Mutation>
+      // <Mutation mutation={DELETE_ARTICLE} update={updateCache}>
+      // { (deleteArticle) => {
+      //   return (
+      //     <div className="article">
+      //       <Panel bsStyle="success">
+      //           <Panel.Heading className='title'>
+      //             <button className='delete-article-button' onClick={() => deleteArticle({ variables: { _id: this.props.article._id } })}> X </button>
+      //             <Panel.Title>{this.props.article.title}</Panel.Title>
+      //             <Badge id='nutrition-count' bsStyle="danger">{this.renderCarrots()}</Badge>
+      //           </Panel.Heading>
+      //           <Panel.Body>
+      //             <h3 className="article-card-title">{this.props.article.title}</h3>
+      //             <img className="article-thumbnail" src={this.props.article.image} />
+      //             {/* <p>{this.props.article.description}</p> */}
+      //           </Panel.Body>
+      //           <ApolloConsumer>
+      //             { client => (
+      //               <Button 
+      //                 className="eat-me" 
+      //                 bsStyle="info" 
+      //                 bsSize="large" 
+      //                 onClick={async () => {
+      //                   const {data} = await client.query({
+      //                     query: GET_ONE_FULL_ARTICLE,
+      //                     variables: {_id: this.props.article._id}
+      //                   })
+      //                   console.log('full article incoming', data.article);
+      //                   this.setState({
+      //                     fullArticle: data.article,
+      //                     showArticle: true,
+      //                   })
+      //                 }}
+      //               >
+      //               Eat me
+      //             </Button>
+      //             )}
+      //           </ApolloConsumer>
+      //       </Panel>
+      //     </div>
+      //   )}}
+      // </Mutation>
     );
   }
 }
