@@ -14,6 +14,7 @@ class ArticleModal extends React.Component {
     this.completeArticle = this.completeArticle.bind(this);
   }
 
+  // When finished, close this modal, launch the voter modal.
   completeArticle() {
     console.log("completed article");
     this.props.handleClose('article');
