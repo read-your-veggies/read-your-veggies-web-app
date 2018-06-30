@@ -1,16 +1,10 @@
 import React from 'react';
-import Popover from 'react-bootstrap/lib/Popover';
 import Panel from 'react-bootstrap/lib/Panel';
-import Tooltip from 'react-bootstrap/lib/Tooltip';
 import Button from 'react-bootstrap/lib/Button';
-import Modal from 'react-bootstrap/lib/Modal';
 import Voter from './Voter.jsx';
-import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Badge from 'react-bootstrap/lib/Badge';
-
 import ArticleModal from './ArticleModal.jsx';
 import CompletedModal from './CompletedModal.jsx';
-
 import { DELETE_ARTICLE } from '../apollo/resolvers';
 import { GET_ARTICLES_FROM_SERVER, GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
 import { Mutation, ApolloConsumer } from "react-apollo";
@@ -31,7 +25,6 @@ const updateCache = (cache, { data: { deleteArticle} }) => {
 class ArticleCard extends React.Component {
   constructor(props) {
     super(props);
-    // console.log('article card props', props);
     
     this.state = {
       showArticle: false,
@@ -73,6 +66,22 @@ class ArticleCard extends React.Component {
 
   render() {
     return (
+<<<<<<< HEAD
+      <Mutation mutation={DELETE_ARTICLE} update={updateCache}>
+        { (deleteArticle) => {
+          return (
+            <div className="article">
+              <Panel bsStyle="success">
+                  <Panel.Heading className='title'>
+                    <button className='delete-article-button' onClick={() => deleteArticle({ variables: { _id: this.props.article._id } })}> X </button>
+                    <Panel.Title>{this.props.article.title}</Panel.Title>
+                    <Badge id='nutrition-count' bsStyle="danger">{this.renderCarrots()}</Badge>
+                  </Panel.Heading>
+                  <Panel.Body>
+                    <h3 className="article-card-title">{this.props.article.title}</h3>
+                    <img className="article-thumbnail" src={this.props.article.image} />
+                  </Panel.Body>
+=======
       <div className="article">
         <Panel bsStyle="success">
           <Panel.Heading>
@@ -102,6 +111,7 @@ class ArticleCard extends React.Component {
             </ApolloConsumer>    
           </Panel.Body>
         </Panel>
+>>>>>>> dev
 
         <ArticleModal 
           show={this.state.showArticle} 

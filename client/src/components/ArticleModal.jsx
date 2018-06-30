@@ -6,15 +6,10 @@ import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
 import Voter from './Voter.jsx';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
-import Badge from 'react-bootstrap/lib/Badge';
-import { DELETE_ARTICLE } from '../apollo/resolvers';
-import { GET_ARTICLES_FROM_SERVER, GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
-import { Query, ApolloConsumer } from "react-apollo";
 
 class ArticleModal extends React.Component {
   constructor(props) {
     super(props);
-    // console.log('article modal props', props);
 
     this.completeArticle = this.completeArticle.bind(this);
   }
@@ -26,14 +21,6 @@ class ArticleModal extends React.Component {
   }
 
   render() {
-    const popover = (
-      <Popover id="modal-popover" title="popover">
-        very popover. such engagement
-      </Popover>
-    );
-    
-    const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
-
     return (
       <Modal show={this.props.show} onHide={() => this.props.handleClose('voter')}>
         <Modal.Header closeButton>
@@ -57,16 +44,6 @@ class ArticleModal extends React.Component {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <p>
-            <OverlayTrigger overlay={popover}>
-              <a href="#popover">Reveal Source</a>
-            </OverlayTrigger>{' '}
-          </p>
-          <p>
-            <OverlayTrigger overlay={tooltip}>
-              <a href="#tooltip">Why this article?</a>
-            </OverlayTrigger>{' '}
-          </p>
           <Button onClick={
             (e) => {
               e.preventDefault();

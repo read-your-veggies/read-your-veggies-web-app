@@ -1,10 +1,8 @@
 import React from 'react';
 import Panel from 'react-bootstrap/lib/Panel';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
-import Radio from 'react-bootstrap/lib/Radio';
 import Button from 'react-bootstrap/lib/Button';
 import Checkbox from 'react-bootstrap/lib/Checkbox';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import { UPDATE_ARTICLE_VOTES, UPDATE_USER_VOTES } from '../apollo/resolvers';
 import { Mutation } from "react-apollo";
 import Modal from 'react-bootstrap/lib/Modal';
@@ -15,8 +13,6 @@ import { withRouter } from "react-router-dom";
 class Voter extends React.Component {
   constructor(props) {
     super(props);
-    // console.log('voter props', props);
-    // The props include the article ID.
 
     this.state = {
       agree: false,
@@ -27,21 +23,17 @@ class Voter extends React.Component {
       mean: false
     }
 
-    // func bindings here
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.submitVote = this.submitVote.bind(this);
   }
 
   handleCheckboxChange (e) {
-    console.log('state', this.state);
-    // console.log('event', e.target);
     this.setState({
       [e.target.value]: !this.state[e.target.value]
     });
   }
 
   submitVote() {
-    // console.log(this.props);
     this.props.handleClose('voter');
     this.props.handleShow('completed');
   }

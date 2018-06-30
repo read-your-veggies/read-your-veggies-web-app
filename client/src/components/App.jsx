@@ -21,8 +21,8 @@ class App extends Component {
       if (res.headers.user !== undefined) {
         this.props.history.push('/dashboard');
         var user = (JSON.parse(res.headers.user));
-        //TODO - Add user info to local store here.
-        // console.log(user._id);
+        // TODO - Add user info to local store here.
+
         this.props.updateUserInfo({
           variables: {
             theDisplayName: user.name,

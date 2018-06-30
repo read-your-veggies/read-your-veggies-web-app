@@ -4,9 +4,6 @@ import Panel from 'react-bootstrap/lib/Panel';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
-import Voter from './Voter.jsx';
-import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
-import Badge from 'react-bootstrap/lib/Badge';
 import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
 
@@ -33,7 +30,6 @@ class OnboardModal extends React.Component {
     this.handleStanceChange = this.handleStanceChange.bind(this);
     this.handleParentChange = this.handleParentChange.bind(this);
     this.handleVeggieChange = this.handleVeggieChange.bind(this);
-
   }
   
   handleStanceChange(value){
@@ -63,14 +59,6 @@ class OnboardModal extends React.Component {
   }
 
   render() {
-    const popover = (
-      <Popover id="modal-popover" title="popover">
-        very popover. such engagement
-      </Popover>
-    );
-    
-    const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
-
     return (
       <Modal id='onboard-modal' show={this.state.show} onHide={this.handleClose}>
         <Modal.Header >

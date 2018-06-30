@@ -1,12 +1,5 @@
 import React from 'react';
-import Panel from 'react-bootstrap/lib/Panel';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import Radio from 'react-bootstrap/lib/Radio';
 import Button from 'react-bootstrap/lib/Button';
-import Checkbox from 'react-bootstrap/lib/Checkbox';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import { UPDATE_ARTICLE_VOTES } from '../apollo/resolvers';
-import { Mutation } from "react-apollo";
 import Modal from 'react-bootstrap/lib/Modal';
 import { withRouter } from "react-router-dom";
 
@@ -15,7 +8,6 @@ import { withRouter } from "react-router-dom";
 class CompletedModal extends React.Component {
   constructor(props) {
     super(props);
-    // console.log('completion props', props.veggies)
 
   }
 
@@ -33,7 +25,7 @@ class CompletedModal extends React.Component {
             <p class="text-center">
               Great job!  You earned this many veggies! <br/> {this.props.veggies}
             </p>
-          
+            
             <p class="text-center"> 
             <a href={this.props.article.url} target="_blank">
               This article was written by {author} and originally published by {this.props.article.source}.
@@ -42,7 +34,6 @@ class CompletedModal extends React.Component {
           </div>
         </Modal.Body>
         <Modal.Footer>
-
           <div>
             <Button onClick={ (e) => {
               e.preventDefault();

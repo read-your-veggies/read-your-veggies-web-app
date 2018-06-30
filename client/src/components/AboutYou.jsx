@@ -14,7 +14,6 @@ class AboutYou extends React.Component {
   }
 
   render() {
-
     return (
       <Query query={GET_USER_INFO}>
           {(({data}) => {
