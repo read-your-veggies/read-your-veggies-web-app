@@ -31,7 +31,6 @@ class ArticleModal extends React.Component {
           {/* <h4>{this.props.article.description}</h4> */}
           <div className="modal-body-left">
             <img className="article-image" src={this.props.article.image} />
-            <Voter articleId={this.props.article._id}/>
           </div>
           <div className="modal-body-right">
             <Panel>
