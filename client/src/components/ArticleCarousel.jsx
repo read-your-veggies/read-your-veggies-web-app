@@ -4,7 +4,6 @@ import { GET_ARTICLES_FROM_SERVER } from '../apollo/serverQueries';
 import ArticleCard from './ArticleCard.jsx';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-import { calculateOnboardStance } from '../lib/calculateStance.js';
 
 
 class ArticleCarousel extends Component {
@@ -12,16 +11,12 @@ class ArticleCarousel extends Component {
     super(props);
     
     this.state = {
-      onboardStance: 0,
+      user_stance: 0,
     }
   }
 
   componentDidMount() {
-    console.log('carousel', this.props.userData._id);
-    var onboardStance = calculateOnboardStance(this.props.userData.onboard_information);
-    this.setState({
-      onboardStance: onboardStance,
-    })
+    //
   }
 
   render() {
@@ -36,7 +31,7 @@ class ArticleCarousel extends Component {
                 <ArticleCard 
                   article={article}
                   userId={this.props.userData._id}
-                  onboardStance={this.state.onboardStance}
+                  userStance={this.props.userData.user_stance}
                 />
               ))}
             </div>

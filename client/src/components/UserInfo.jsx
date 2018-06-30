@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import HealthSpeedometer from './HealthSpeedometer.jsx';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
-import { GET_USER_FROM_DB } from '../apollo/serverQueries.js';
+import { GET_USER_HEALTH } from '../apollo/serverQueries.js';
 import { Query } from "react-apollo";
 
 
@@ -39,7 +39,7 @@ class UserInfo extends React.Component {
           {userId !== '1234567890' 
             ?
             <Query
-              query={GET_USER_FROM_DB}
+              query={GET_USER_HEALTH}
               variables={{ _id: userId }}
             >
             {({ loading, error, data }) => {
@@ -50,7 +50,6 @@ class UserInfo extends React.Component {
                 <HealthSpeedometer 
                   height={100}
                   width={150}
-                  onboardString={data.user.onboard_information}
                   value = {data.user.health}
                   startColor="white"
                   endColor="green"

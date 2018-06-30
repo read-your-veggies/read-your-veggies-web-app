@@ -69,3 +69,47 @@ export const GET_USER_FROM_DB =  gql`
     }
   }
 `
+
+export const GET_COMPLETED_ARTICLES =  gql`
+  query user($_id: String!) {
+    user(_id: $_id){
+      _id
+      completed_articles
+    }
+  }
+`
+export const GET_USER_STANCE_INFO =  gql`
+  query user($_id: String!) {
+    user(_id: $_id){
+      _id
+      name
+      health 
+      user_stance
+      location
+      locPolRatio
+      hometown
+      homePolRatio
+      onboard_stance
+      reading_stance
+    }
+  }
+`
+
+export const GET_USER_HEALTH =  gql`
+  query user($_id: String!) {
+    user(_id: $_id){
+      _id
+      health
+    }
+  }
+`
+
+export const GET_USER_ONBOARD_INFO_AND_STANCE =  gql`
+  query user($_id: String!) {
+    user(_id: $_id){
+      _id
+      user_stance
+      onboard_information
+    }
+  }
+`
