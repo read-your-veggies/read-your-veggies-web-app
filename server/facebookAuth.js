@@ -27,7 +27,7 @@ passport.use(new FacebookStrategy({
         if (err) return done(err);
 
         if (user) {
-          return done(null, user);
+          return done(null, {_id: user._id, name: user.name});
         } else { 
           var newUser = new User();
           newUser.facebookId = profile.id;
@@ -46,7 +46,7 @@ passport.use(new FacebookStrategy({
             if (err) {
               console.log(err);
             }
-            return done(null, newUser);
+            return done(null, {_id: newUser._id, name: newUser.name});
           })
         }
       })

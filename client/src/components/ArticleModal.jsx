@@ -22,7 +22,7 @@ class ArticleModal extends React.Component {
 
   render() {
     return (
-      <Modal show={this.props.show} onHide={() => this.props.handleClose('voter')}>
+      <Modal show={this.props.show} onHide={() => this.props.handleClose('article')}>
         <Modal.Header closeButton>
           <Modal.Title>{this.props.article.title}</Modal.Title>
         </Modal.Header>
