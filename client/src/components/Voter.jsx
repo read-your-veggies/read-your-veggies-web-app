@@ -33,11 +33,11 @@ class Voter extends React.Component {
     });
   }
 
+  // When done, close this modal, open the CompletedModal
   submitVote() {
     this.props.handleClose('voter');
     this.props.handleShow('completed');
   }
-
 
   render() {
     return (

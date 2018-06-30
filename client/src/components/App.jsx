@@ -19,6 +19,7 @@ class App extends Component {
   componentDidMount() {
     axios.get('/checkAuthHeaders').then((res) => {
       if (res.headers.user !== undefined) {
+        // Redirect user to /dashboard with react router.
         this.props.history.push('/dashboard');
         var user = (JSON.parse(res.headers.user));
 
@@ -73,4 +74,6 @@ class App extends Component {
   }
 }
 
+// withRouter makes this a Higher Order Component with additional props.  Such as history.push which we use to redirect.
+// We use this in several other components.
 export default withRouter(App);
