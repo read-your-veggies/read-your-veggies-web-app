@@ -1,11 +1,7 @@
 import React from 'react';
-import Popover from 'react-bootstrap/lib/Popover';
 import Panel from 'react-bootstrap/lib/Panel';
-import Tooltip from 'react-bootstrap/lib/Tooltip';
 import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
-import Voter from './Voter.jsx';
-import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 
 class ArticleModal extends React.Component {
   constructor(props) {
@@ -14,6 +10,7 @@ class ArticleModal extends React.Component {
     this.completeArticle = this.completeArticle.bind(this);
   }
 
+  // When finished, close this modal, launch the voter modal.
   completeArticle() {
     console.log("completed article");
     this.props.handleClose('article');
@@ -22,7 +19,7 @@ class ArticleModal extends React.Component {
 
   render() {
     return (
-      <Modal show={this.props.show} onHide={() => this.props.handleClose('voter')}>
+      <Modal show={this.props.show} onHide={() => this.props.handleClose('article')}>
         <Modal.Header closeButton>
           <Modal.Title>{this.props.article.title}</Modal.Title>
         </Modal.Header>
@@ -30,7 +27,6 @@ class ArticleModal extends React.Component {
           {/* <h4>{this.props.article.description}</h4> */}
           <div className="modal-body-left">
             <img className="article-image" src={this.props.article.image} />
-            <Voter articleId={this.props.article._id}/>
           </div>
           <div className="modal-body-right">
             <Panel>

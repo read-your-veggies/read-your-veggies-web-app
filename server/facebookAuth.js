@@ -7,28 +7,30 @@ const convert2016 = require('../db/data/countyResults2016.js');
 
 require('dotenv').config();
 
+// Serialize saves the User ID to the session.
 passport.serializeUser( (user, done) => {
   done(null, user);
 });
 
+// Deserialize takes the ID and adds the other necessary user info to the session.
 passport.deserializeUser( (user, done) => {
     done(null, user);
 });
 
-passport.use(new FacebookStrategy({
+passport.use(new FacebookStrategy({  // Passport can utilize many different 'strategies', we are using the Facebook Auth.
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: process.env.CALLBACK_URL,
     profileFields: ['email', 'birthday', 'location', 'displayName', 'hometown', 'age_range']
   },
-  function(accessToken, refreshToken, profile, done) {
+  function(accessToken, refreshToken, profile, done) {  // We obtain a profile object from the FacebookStrategy, passed into this callback func 
     process.nextTick( () => {
       User.findOne({facebookId: profile.id}, (err, user) => {
         if (err) return done(err);
 
-        if (user) {
-          return done(null, user);
-        } else { 
+        if (user) {  // User exists, we invoke done and pass information to the middleware.
+          return done(null, {_id: user._id, name: user.name});
+        } else { // User does not exist, we create a new user for the DB.
           var newUser = new User();
           newUser.facebookId = profile.id;
           newUser.name = profile.displayName;
@@ -45,8 +47,8 @@ passport.use(new FacebookStrategy({
           newUser.save( (err) => {
             if (err) {
               console.log(err);
-            }
-            return done(null, newUser);
+            }  // New user saved.  We can now invoke done, like we did for the previous case.
+            return done(null, {_id: newUser._id, name: newUser.name});
           })
         }
       })
@@ -56,7 +58,8 @@ passport.use(new FacebookStrategy({
 
 const calculateLocPol = function (city) {
   // For the user's city, find the county, then find county's election data for 2012 and 2016.
-  // The data is a ratio of Democrat to Republican votes in the presidential race.
+  // The data is a ratio of (GOP votes - Dem votes) / Total votes
+  // This is added to the new user profile above as a regional politics field.
   let county = countyConvert[city];
   let result12 = convert2012[county];
   let result16 = convert2016[county];

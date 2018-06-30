@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from "react-router-dom";
 import { Mutation, Query } from "react-apollo";
 import { OFF_BOARD_USER } from '../apollo/resolvers.js';
-import { GET_USER_FROM_DB } from '../apollo/serverQueries.js';
+import { GET_USER_HEALTH } from '../apollo/serverQueries.js';
 import Button from 'react-bootstrap/lib/Button';
 import HealthSpeedometer from './HealthSpeedometer.jsx';
 import CompletedArticles from './CompletedArticles.jsx';
@@ -40,7 +40,7 @@ class HealthDashboard extends React.Component {
             )}}
         </Mutation>
         <Query
-          query={GET_USER_FROM_DB}
+          query={GET_USER_HEALTH}
           variables={{ _id: this.state.userId }}
         >
           {({ loading, error, data }) => {
@@ -49,7 +49,6 @@ class HealthDashboard extends React.Component {
             return (
               <div className="health-dashboard-speedometer">
                 <HealthSpeedometer 
-                  onboardString={data.user.onboard_information}
                   value = {data.user.health}
                   startColor="white"
                   endColor="green"

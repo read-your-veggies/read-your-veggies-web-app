@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
 import { Query } from "react-apollo";
-import { GET_USER_FROM_DB, GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries.js';
+import { GET_ONE_FULL_ARTICLE, GET_COMPLETED_ARTICLES } from '../apollo/serverQueries.js';
 import {GET_USER_INFO} from '../apollo/localQueries.js';
 import Panel from 'react-bootstrap/lib/Panel';
 
@@ -15,7 +15,7 @@ class CompletedArticles extends React.Component {
       <Query query={GET_USER_INFO}>
           {(({data}) => {
             return (
-              <Query query={GET_USER_FROM_DB} variables={{ _id: data.userInfo.userId }}>
+              <Query query={GET_COMPLETED_ARTICLES} variables={{ _id: data.userInfo.userId }}>
                 {({ loading, error, data }) => {
                   if (loading) return "Loading...";
                   if (error) return `Error! ${error.message}`;

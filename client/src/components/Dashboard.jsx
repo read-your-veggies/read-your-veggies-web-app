@@ -4,7 +4,7 @@ import { Query } from "react-apollo";
 import { GET_TEAM_NAME_FROM_LOCAL_STATE } from '../apollo/localQueries';
 import ArticleCarousel from './ArticleCarousel.jsx';
 import OnboardModal from './OnboardModal.jsx';
-import { GET_USER_FROM_DB } from '../apollo/serverQueries.js';
+import { GET_USER_ONBOARD_INFO, GET_USER_ONBOARD_INFO_AND_STANCE } from '../apollo/serverQueries.js';
 
 class Dashboard extends Component {
 
@@ -32,7 +32,7 @@ class Dashboard extends Component {
       <div>
         {this.state.onboardInformation === null
           ?
-          <Query query={GET_USER_FROM_DB} variables={{ _id: this.state.userId }}>
+          <Query query={GET_USER_ONBOARD_INFO_AND_STANCE} variables={{ _id: this.state.userId }}>
             {({ loading, error, data }) => {
               if (loading) return "Loading...";
               if (error) return `Error! ${error.message}`;

@@ -12,7 +12,7 @@ class CompletedModal extends React.Component {
   }
 
   render() {
-    let author;
+    let author;  // If the author field is undefined, print an empty string instead.
     this.props.article.author ? author = this.props.article.author[0] : author = '';
 
     return (
@@ -41,6 +41,7 @@ class CompletedModal extends React.Component {
             }}>Close</Button>
             <Button onClick={(e) => {
               e.preventDefault();
+              // Redirect user to health report
               this.props.history.push('/health');
             }}>See your health report!</Button>
           </div>
