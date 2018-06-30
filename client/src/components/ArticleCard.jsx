@@ -59,7 +59,7 @@ class ArticleCard extends React.Component {
   }
 
   renderCarrots () {
-    var nutritionalValue = calculateNutritionalValue(this.props.onboardStance, this.props.article.articleStance )
+    var nutritionalValue = calculateNutritionalValue(this.props.userStance, this.props.article.articleStance )
     return (<h3 className="carrots">{'🥕'.repeat(nutritionalValue)}</h3>);
 
   }
@@ -109,8 +109,8 @@ class ArticleCard extends React.Component {
           userId = {this.props.userId}
           articleId={this.props.article._id}
           articleStance={this.props.article.articleStance}
-          onboardStance={this.props.onboardStance}
-          nutritionalValue={calculateNutritionalValue(this.props.onboardStance, this.props.article.articleStance )}
+          userStance={this.props.userStance}
+          nutritionalValue={calculateNutritionalValue(this.props.userStance, this.props.article.articleStance )}
         />
         <CompletedModal
           show={this.state.showCompleted}

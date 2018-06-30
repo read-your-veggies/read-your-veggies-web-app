@@ -27,9 +27,9 @@ module.exports = {
     var tally = 0;
     // console.log('current reading stance:', currentStance)
     // console.log(completedArticle);
-    let { onboardStance, articleStance, votes, nutritionalValue } = completedArticle;
+    let { userStance, articleStance, votes, nutritionalValue } = completedArticle;
     // calculate chasm 
-    var chasm = Math.abs(onboardStance - articleStance) / 2;
+    var chasm = Math.abs(userStance - articleStance) / 2;
     // add things
     if (votes.fun === true) {
       tally += chasm;
