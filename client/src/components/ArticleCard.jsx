@@ -66,22 +66,6 @@ class ArticleCard extends React.Component {
 
   render() {
     return (
-<<<<<<< HEAD
-      <Mutation mutation={DELETE_ARTICLE} update={updateCache}>
-        { (deleteArticle) => {
-          return (
-            <div className="article">
-              <Panel bsStyle="success">
-                  <Panel.Heading className='title'>
-                    <button className='delete-article-button' onClick={() => deleteArticle({ variables: { _id: this.props.article._id } })}> X </button>
-                    <Panel.Title>{this.props.article.title}</Panel.Title>
-                    <Badge id='nutrition-count' bsStyle="danger">{this.renderCarrots()}</Badge>
-                  </Panel.Heading>
-                  <Panel.Body>
-                    <h3 className="article-card-title">{this.props.article.title}</h3>
-                    <img className="article-thumbnail" src={this.props.article.image} />
-                  </Panel.Body>
-=======
       <div className="article">
         <Panel bsStyle="success">
           <Panel.Heading>
@@ -111,7 +95,6 @@ class ArticleCard extends React.Component {
             </ApolloConsumer>    
           </Panel.Body>
         </Panel>
->>>>>>> dev
 
         <ArticleModal 
           show={this.state.showArticle} 
