@@ -54,11 +54,11 @@ class Dashboard extends Component {
           null
           :
           <div>
-            <h1>Your Weekly Goal: {JSON.parse(this.state.onboardInformation).veggieSlider}</h1>
+            {/* <h1>Your Weekly Goal: {JSON.parse(this.state.onboardInformation).veggieSlider}</h1> */}
             <ArticleCarousel userData={this.state.userData}  />
           </div>
         }
-        <Query query={GET_TEAM_NAME_FROM_LOCAL_STATE}>
+        {/* <Query query={GET_TEAM_NAME_FROM_LOCAL_STATE}>
           {({ data, client }) => {
             return (
               <h1 onClick={() =>  {
@@ -67,7 +67,7 @@ class Dashboard extends Component {
               >{data.teamName}</h1>
             );
           }}
-        </Query>
+        </Query> */}
       </div>
     );
   }

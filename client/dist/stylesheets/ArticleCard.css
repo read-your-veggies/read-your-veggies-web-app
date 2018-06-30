@@ -1,10 +1,21 @@
 @import url("./ArticleModal.css");
 
 .article {
-  margin: 2%;
+  width: 22%;
+  margin: 1%;
   border-radius: 5px;
-  box-shadow:  6px 1px 6px rgba(0, 0, 0, .5);
+  box-shadow:  6px 1px 6px rgba(0, 0, 0, .1);
   font-weight: 200 !important;
+}
+
+/* .article .panel-heading {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+} */
+
+.article .panel-body {
+  padding: 0;
 }
 
 .article > .panel {
@@ -13,44 +24,43 @@
 
 .article-card-title {
   font-weight: 300 !important;
-  display: block;
+  /* display: block; */
   margin: 0 auto;
+  text-align: left;
+  padding: 0.75em;
+  line-height: 1.4em;
+  cursor: pointer;
 }
 
-.delete-article-button {
+/* .delete-article-button {
   float: right;
   color: black;
   background-color: lightcoral;
   font-weight: 400 !important;
-}
+} */
 
 .article-thumbnail {
-  width: 50%;
+  width: 100%;
   height: auto;
   display: block;
   margin: 0 auto;
 }
 
-.delete-article-button:hover {
+/* .delete-article-button:hover {
   background-color: red;
-}
+} */
 
-.eat-me {
+/* .eat-me {
   display: block;
   margin: auto;
   margin-bottom: 1em;
   vertical-align: bottom;
-}
+} */
 
-#nutrition-count {
-  background-color: #3c763d91;
-  box-shadow:  6px 1px 6px rgba(0, 0, 0, .5);
-  display: block;
-  margin: 0 auto;
-}
-
-#nutrition-count h3 {
+.carrots {
   margin: 0;
+  padding: 0;
+  text-align: right;
 }
 
 
