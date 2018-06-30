@@ -13,8 +13,6 @@ import { withRouter } from "react-router-dom";
 class Voter extends React.Component {
   constructor(props) {
     super(props);
-    // console.log('voter props', props);
-    // The props include the article ID.
 
     this.state = {
       agree: false,
@@ -25,21 +23,17 @@ class Voter extends React.Component {
       mean: false
     }
 
-    // func bindings here
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.submitVote = this.submitVote.bind(this);
   }
 
   handleCheckboxChange (e) {
-    console.log('state', this.state);
-    // console.log('event', e.target);
     this.setState({
       [e.target.value]: !this.state[e.target.value]
     });
   }
 
   submitVote() {
-    // console.log(this.props);
     this.props.handleClose('voter');
     this.props.handleShow('completed');
   }
