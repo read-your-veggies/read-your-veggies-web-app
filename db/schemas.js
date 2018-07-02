@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
+
+const db = require('./index.js').db;
+const articleDbConn = require('./index.js').articleDbConn;
+const userDbConn = require('./index.js').userDbConn;
+const sourceDbConn = require('./index.js').sourceDbConn;
 
 const articleSchema = new Schema({
   url: {type: String, unique: true},
@@ -39,7 +43,7 @@ const articleSchema = new Schema({
   },
 });
 
-const Article = mongoose.model('Article', articleSchema);
+const Article = articleDbConn.model('Article', articleSchema);
 
 const userSchema = new Schema({
   authenticationInfo: String,
@@ -64,7 +68,7 @@ const userSchema = new Schema({
   reading_stance: { type: [Number], default:[0,0] },
 });
 
-const User = mongoose.model('User', userSchema);
+const User = userDbConn.model('User', userSchema);
 
 const sourceSchema = new Schema({
   name: String,
@@ -75,6 +79,6 @@ const sourceSchema = new Schema({
   fullTextsPersonality: String,
 });
 
-const Source = mongoose.model('Source', sourceSchema);
+const Source = sourceDbConn.model('Source', sourceSchema);
 
 module.exports = { Article, User, Source }

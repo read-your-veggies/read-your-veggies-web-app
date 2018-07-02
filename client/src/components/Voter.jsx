@@ -80,13 +80,13 @@ class Voter extends React.Component {
                   {(updateUserVotes) => {
                     return (
                       <Button bsStyle="primary" onClick={(e) => {
-                        let { articleId, userId, articleStance, onboardStance, nutritionalValue } = this.props;  
+                        let { articleId, userId, articleStance, userStance, nutritionalValue } = this.props;  
                   
                         let userVoteInfo = {};
                         userVoteInfo[articleId] = {
                           'articleStance': articleStance,
                           'votes': this.state,
-                          'onboardStance': onboardStance,
+                          'userStance': userStance,
                           'completed': Date.now(),
                           'nutritionalValue': nutritionalValue,
                         }
