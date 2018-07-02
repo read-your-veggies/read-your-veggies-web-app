@@ -22,7 +22,12 @@ class Dashboard extends Component {
   componentDidMount() {
     var id = this.props.getUserInfo.data.userInfo.userId;
     if (id !== '1234567890') {
-      this.setState({userId: id}, () => console.log(this.state));
+      this.setState({userId: id}, () => {
+        console.log(this.state);
+        // set the local storage
+        // clear the local storage
+        console.log('local storage!',localStorage.getItem('readYourVeggies').split(','));
+      });
     }
   }
 
