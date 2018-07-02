@@ -1,5 +1,9 @@
 var makeExecutableSchema = require('graphql-tools').makeExecutableSchema;
 const db = require('./index.js').db;
+const userDbConn = require('./index.js').userDbConn;
+const articleDbConn = require('./index.js').articleDbConn;
+const sourceDbConn = require('./index.js').sourceDbConn;
+
 typeDefs = require('./typeDefs.js');
 //needed to delete by _id
 const mongodb = require('mongodb');
@@ -15,9 +19,9 @@ const prepare = (object) => {
 
 const getGraphQlSchema = async () => {
   try {
-    const Articles = db.collection('articles');
-    const Users = db.collection('users');
-    const Sources = db.collection('sources');
+    const Articles = articleDbConn.collection('articles');
+    const Users = userDbConn.collection('users');
+    const Sources = sourceDbConn.collection('sources');
 
     const resolvers = {
       Query: {
