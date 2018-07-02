@@ -12,7 +12,8 @@
 }
 
 .articles-container {
+  width: 35%;
+  margin: auto;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  flex-direction: column;
 }

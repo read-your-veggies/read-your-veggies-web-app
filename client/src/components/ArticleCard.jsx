@@ -69,12 +69,13 @@ class ArticleCard extends React.Component {
     return (
       <div className="article">
         <Panel bsStyle="default">
-          <Panel.Heading>
+          {/* <Panel.Heading> */}
             {/* <Badge className='nutrition-count' style={{backgroundColor: 'transparent'}}pullRight>{this.renderCarrots()}</Badge> */}
-            {this.renderCarrots()}
-          </Panel.Heading>
+            
+          {/* </Panel.Heading> */}
           <Panel.Body>
-            <img className="article-thumbnail" src={this.props.article.image} />
+            {this.renderCarrots()}
+            <img className="article-thumbnail blurred" src={this.props.article.image} /> 
             <ApolloConsumer>
               { client => (
                 <a       
@@ -90,10 +91,10 @@ class ArticleCard extends React.Component {
                     })
                   }}
                 >
-                <h3 className="article-card-title">{this.props.article.title}</h3>
+                <h3 className="article-card-title blurred">{this.props.article.title}</h3>
               </a>
               )}
-            </ApolloConsumer>    
+            </ApolloConsumer>  
           </Panel.Body>
         </Panel>
 
