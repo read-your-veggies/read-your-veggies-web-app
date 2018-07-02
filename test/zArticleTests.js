@@ -11,10 +11,14 @@ describe('articles', () => {
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection to test database error'));
     db.once('open', function() {
-      console.log('We are connected to test database!');
+      console.log('Connected to test database for articles tests');
       done();
     });
   });
+
+  // after(() => {
+  //   db.close();
+  // })
 
   describe('article helpers', () => {
     it('should fetch articles from the News API', done => {
