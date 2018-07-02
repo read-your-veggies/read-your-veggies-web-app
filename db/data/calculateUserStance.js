@@ -28,6 +28,9 @@ module.exports = {
     // console.log('current reading stance:', currentStance)
     // console.log(completedArticle);
     let { userStance, articleStance, votes, nutritionalValue } = completedArticle;
+
+    console.log('currentStance', currentReadingStance);
+    console.log('completedArticle', completedArticle);
     // calculate chasm 
     var chasm = Math.abs(userStance - articleStance) / 2;
     // add things
