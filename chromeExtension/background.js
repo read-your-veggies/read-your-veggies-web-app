@@ -24,16 +24,6 @@ chrome.runtime.onStartup.addListener(function() {
   });
 })
 
-// chrome.runtime.onMessageExternal.addListener(
-//   function(request, sender, sendResponse) {
-//     console.log(request);
-//     if (sender.url == blocklistedWebsite)
-//       return;  // don't allow this web page access
-//     if (request.openUrlInEditor)
-//       openUrl(request.openUrlInEditor);
-//   }
-// );
-
 
 //sometimes onVisited fires multiple times
 //by keeping track of the 'last visited'
@@ -48,7 +38,7 @@ function handleSiteVisit(details) {
   if (lastVisitedPage !== currentUrl) {
     lastVisitedPage = currentUrl;
 
-    if (details.title === 'Read Your Veggies') {
+    if (details.url.includes('https://localhost:5000/login')) {
       chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.executeScript(
             tabs[0].id,
@@ -56,8 +46,10 @@ function handleSiteVisit(details) {
       });
       console.log('dumping history', browsingHistory);
     } else {
-      browsingHistory.push(details.url);
-      chrome.storage.sync.set({read_your_veggies_web_cache: browsingHistory});
+      if (!details.url.includes('https://localhost:5000/')) {
+        browsingHistory.push(details.url);
+        chrome.storage.sync.set({read_your_veggies_web_cache: browsingHistory});
+      }
     }
   }
 }
