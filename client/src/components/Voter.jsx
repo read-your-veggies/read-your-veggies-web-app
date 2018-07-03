@@ -14,24 +14,12 @@ class Voter extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {    // Remove these state variables.
-      agree: false,
-      disagree: false,
-      fun: false,
-      bummer: false,
-      worthyAdversary: false,
-      mean: false
-    }
+    // State was no longer needed and has been removed.
 
-    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);  // Removing checkboxes
     this.submitVote = this.submitVote.bind(this);
   }
 
-  handleCheckboxChange (e) {     // Removing checkboxes
-    this.setState({
-      [e.target.value]: !this.state[e.target.value]
-    });
-  }
+
 
   // When done, close this modal, open the CompletedModal
   submitVote() {    // Submit vote will take arguments for agree/disagree, and enjoyed/disliked
@@ -57,7 +45,6 @@ class Voter extends React.Component {
         <Panel.Body>
         <form className="voter-form">
 
-          {/* How much of the button functionality can be offloaded to a helper function? */}
           <Mutation mutation={UPDATE_ARTICLE_VOTES} >
             { (updateArticleVotes) => {
               return (
@@ -74,13 +61,12 @@ class Voter extends React.Component {
                               let userVoteInfo = {};
                               userVoteInfo[articleId] = {
                                 'articleStance': articleStance,
-                                'votes': this.state,
+                                'votes': button.votes,
                                 'userStance': userStance,
                                 'completed': Date.now(),
                                 'nutritionalValue': nutritionalValue,
                               }
                               e.preventDefault();
-                              // The updateArticleVotes votes argument may need to be changed.
                               updateArticleVotes({ variables: { _id: this.props.articleId, votes: button.votes, userStance: userStance } })
                               updateUserVotes({ variables: { _id: this.props.userId, completed_articles: JSON.stringify(userVoteInfo) } })
                               this.submitVote();
