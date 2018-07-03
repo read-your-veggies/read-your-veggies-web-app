@@ -1,8 +1,6 @@
 import React from 'react';
 import Panel from 'react-bootstrap/lib/Panel';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Button from 'react-bootstrap/lib/Button';
-import Checkbox from 'react-bootstrap/lib/Checkbox';
 import { UPDATE_ARTICLE_VOTES, UPDATE_USER_VOTES } from '../apollo/resolvers';
 import { Mutation } from "react-apollo";
 import Modal from 'react-bootstrap/lib/Modal';
@@ -19,10 +17,8 @@ class Voter extends React.Component {
     this.submitVote = this.submitVote.bind(this);
   }
 
-
-
   // When done, close this modal, open the CompletedModal
-  submitVote() {    // Submit vote will take arguments for agree/disagree, and enjoyed/disliked
+  submitVote() {
     this.props.handleClose('voter');
     this.props.handleShow('completed');
   }
@@ -43,8 +39,6 @@ class Voter extends React.Component {
           <h3>Vote on this article!</h3>
         </Panel.Heading>
         <Panel.Body>
-        <form className="voter-form">
-
           <Mutation mutation={UPDATE_ARTICLE_VOTES} >
             { (updateArticleVotes) => {
               return (
@@ -80,9 +74,9 @@ class Voter extends React.Component {
                     )
                   }}
                 </Mutation >
-                )}}
+              )
+            }}
                 </Mutation>
-              </form>
               </Panel.Body>
               </Panel>
       </Modal.Body>
