@@ -15,19 +15,18 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 let lastVisitedPage = '';
+//sometimes onVisited fires multiple times
+//by keeping track of the 'last visited'
+//we can filter out this noise.
 let browsingHistory = [];
 
 chrome.runtime.onStartup.addListener(function() {
   chrome.storage.sync.get(['read_your_veggies_web_cache'], function(result) {
     browsingHistory = result.read_your_veggies_web_cache;
-    console.log(browsingHistory);
+    // console.log(browsingHistory);
   });
 })
 
-
-//sometimes onVisited fires multiple times
-//by keeping track of the 'last visited'
-//we can filter out this noise.
 
 function handleSiteVisit(details) {
   
@@ -48,7 +47,7 @@ function handleSiteVisit(details) {
     } else if (details.url.includes('https://localhost:5000/dashboard')) {
       browsingHistory = [];
     } else if (!details.url.includes('https://localhost:5000/')) {
-        browsingHistory.push(details.url);
+        browsingHistory.push(details.title);
         chrome.storage.sync.set({read_your_veggies_web_cache: browsingHistory});
     }
   }

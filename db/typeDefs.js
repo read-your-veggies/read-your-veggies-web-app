@@ -53,6 +53,8 @@ module.exports = [`
     completed_articles: String
     reading_stance: [String]
     browsing_history: [String]
+    browsing_history_stance: [String]
+
   }
 
   type Vote {
