@@ -12,8 +12,9 @@
 }
 
 .articles-container {
-  width: 35%;
+  width: 70%;
   margin: auto;
-  display: flex;
-  flex-direction: column;
+  text-align: center;
+  /* display: flex;
+  flex-direction: column; */
 }

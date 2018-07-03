@@ -27,36 +27,38 @@ class ArticleCarousel extends Component {
           if (error) return `Error! ${error.message}`;
           return (
             <div className="articles-container">
-              {data.articles.map((article, i) => (
+              {/* {data.articles.map((article, i) => (
                 <ArticleCard 
                   article={article}
                   userId={this.props.userData._id}
                   userStance={this.props.userData.user_stance}
                 />
-              ))}
+              ))} */}
+            
+            {/* <h1>CLICK ON THE PLATE TO EXPLORE</h1> */}
+            <CarouselProvider
+              lockOnWindowScroll={true}
+              isPlaying={false}
+              naturalSlideWidth={500}
+              naturalSlideHeight={250}
+              totalSlides={50}
+              visibleSlides={1}
+            >        
+              <Slider>
+                {data.articles.map((article, i) => (
+                    <Slide index={i}>
+                      <ArticleCard 
+                        article={article}
+                        userId={this.props.userData._id}
+                        userStance={this.props.userData.user_stance}
+                      />
+                    </Slide>
+                ))}
+              </Slider>
+              {/* <ButtonBack>Back</ButtonBack> */}
+              <ButtonNext className="btn btn-info" >Nah, show me another article</ButtonNext>
+            </CarouselProvider>
             </div>
-            // <CarouselProvider
-            //   lockOnWindowScroll={true}
-            //   isPlaying={true}
-            //   naturalSlideWidth={500}
-            //   naturalSlideHeight={600}
-            //   totalSlides={50}
-            //   visibleSlides={4}
-            // >        
-            //   <Slider>
-            //     {data.articles.map((article, i) => (
-            //         <Slide index={i}>
-            //           <ArticleCard 
-            //             article={article}
-            //             userId={this.props.userData._id}
-            //             onboardStance={this.state.onboardStance}
-            //           />
-            //         </Slide>
-            //     ))}
-            //   </Slider>
-            //   <ButtonBack>Back</ButtonBack>
-            //   <ButtonNext>Next</ButtonNext>
-            // </CarouselProvider>
           );
         }}
       </Query>

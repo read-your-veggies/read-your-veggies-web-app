@@ -7,8 +7,9 @@ import ArticleModal from './ArticleModal.jsx';
 import CompletedModal from './CompletedModal.jsx';
 import { DELETE_ARTICLE } from '../apollo/resolvers';
 import { GET_ARTICLES_FROM_SERVER, GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
-import { Mutation, ApolloConsumer } from "react-apollo";
+import { Query, Mutation, ApolloConsumer } from "react-apollo";
 import { calculateNutritionalValue } from '../lib/calculateStance.js';
+import { TagCloud } from "react-tagcloud";
 
 const updateCache = (cache, { data: { deleteArticle} }) => {
   console.log('cache', cache, deleteArticle);
@@ -36,6 +37,7 @@ class ArticleCard extends React.Component {
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.renderCarrots = this.renderCarrots.bind(this);
+    this.processData = this.processData.bind(this);
   }
 
   // There are three modals launched from ArticleCard.  Their closing and opening is handled by these functions.
@@ -65,20 +67,86 @@ class ArticleCard extends React.Component {
 
   }
 
+  processData(data) {
+    var words = data.article.fullText.split(' ');
+    // var words = data.split(' ');
+    var badWords = {
+      'a': true, 
+      'the': true, 
+      'to': true, 
+      'and': true, 
+      'of': true, 
+      'in': true, 
+      'him': true, 
+      'her': true, 
+      'at': true,
+      'as': true,
+      'was': true,
+      'on': true,
+      'who': true,
+      'she': true,
+      'he': true,
+      'said': true,
+      'is': true,
+      'said': true,
+      'be': true,
+      'or': true,
+      'that': true,
+      'for': true,
+      '-': true,
+    };
+    var wordsObj = {};
+    words.forEach(word => {
+      if (badWords[word] === undefined) {
+        if (wordsObj[word]) {
+          wordsObj[word]++;
+        } else {
+          wordsObj[word] = 1;
+        }
+      }  
+    })
+    var results = [];
+    for (var key in wordsObj) {
+      if (wordsObj[key] > 2) {
+        results.push({
+          value: key,
+          count: wordsObj[key]
+        })
+      }  
+    }
+    return results;
+  }
+
   render() {
     return (
       <div className="article">
-        <Panel bsStyle="default">
-          {/* <Panel.Heading> */}
+        <div className="article-thumbnail">
+          <img className="article-thumbnail-image" src={this.props.article.image} /> 
+        </div>
+        <Panel bsStyle="default" className="article-panel">
+          <Panel.Heading>
             {/* <Badge className='nutrition-count' style={{backgroundColor: 'transparent'}}pullRight>{this.renderCarrots()}</Badge> */}
-            
-          {/* </Panel.Heading> */}
-          <Panel.Body>
             {this.renderCarrots()}
-            <img className="article-thumbnail blurred" src={this.props.article.image} /> 
+          </Panel.Heading>
+          <Panel.Body>
+            <Query
+              query={GET_ONE_FULL_ARTICLE}
+              variables={{ _id: this.props.article._id}}
+            >
+              {({ loading, error, data }) => {
+                if (loading) return "Loading...";
+                if (error) return `Error! ${error.message}`;
+                //console.log(data);
+                return (         
+                  <TagCloud minSize={30} maxSize={50} colorOptions={{hue: 'blue'}} tags={this.processData(data)}/>
+                )
+              }}
+            </Query>
+            {/* <TagCloud minSize={45} maxSize={45} colorOptions={{hue: 'blue'}} tags={this.processData(this.props.article.title)}/> */}
+            {/* <h3 className="article-card-title">{this.props.article.title}</h3> */}
             <ApolloConsumer>
               { client => (
-                <a       
+                <Button className="btn btn-success"       
                   onClick={async () => {
                     const {data} = await client.query({
                       query: GET_ONE_FULL_ARTICLE,
@@ -91,8 +159,8 @@ class ArticleCard extends React.Component {
                     })
                   }}
                 >
-                <h3 className="article-card-title blurred">{this.props.article.title}</h3>
-              </a>
+                Read Now
+              </Button>
               )}
             </ApolloConsumer>  
           </Panel.Body>
