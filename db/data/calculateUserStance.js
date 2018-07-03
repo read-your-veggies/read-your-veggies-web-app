@@ -63,11 +63,6 @@ module.exports = {
     return [aggregateNewStance, totalArticlesRead + 1];
   },
 
-  calculateUserAggregateStance: (onboardingStance, localPolStance, homePolStance, readingStance) => {
-    // console.log('stances:', onboardingStance, localPolStance, homePolStance, readingStance)
-    return onboardingStance * 0.6 + localPolStance * 0.1 + homePolStance * 0.1 + readingStance[0] * 0.2;
-  },
-
   calculateUserBrowsingStance: (incomingBrowsingHistory, currentBrowsingStance) => {
 
     incomingBrowsingStance = 0;
@@ -91,8 +86,11 @@ module.exports = {
     console.log('updatedbrowsingstance', updatedBrowsingStance);
     //returns stance between -1,1 and total articles read
     return [updatedBrowsingStance, currentBrowsingStance[1] + incomingArticles];
-  }
-  
-  
+  },
+
+  calculateUserAggregateStance: (onboardingStance, localPolStance, homePolStance, readingStance) => {
+    // console.log('stances:', onboardingStance, localPolStance, homePolStance, readingStance)
+    return onboardingStance * 0.6 + localPolStance * 0.1 + homePolStance * 0.1 + readingStance[0] * 0.2;
+  }, 
   
 }

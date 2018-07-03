@@ -6,8 +6,6 @@ import {GET_USER_INFO} from '../apollo/localQueries.js';
 import HealthSpeedometer from './HealthSpeedometer.jsx';
 
 
-
-
 class AboutYou extends React.Component {
   constructor(props) {
     super(props);
