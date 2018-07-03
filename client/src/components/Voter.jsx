@@ -81,7 +81,7 @@ class Voter extends React.Component {
                               }
                               e.preventDefault();
                               // The updateArticleVotes votes argument may need to be changed.
-                              updateArticleVotes({ variables: { _id: this.props.articleId, votes: button.votes } })
+                              updateArticleVotes({ variables: { _id: this.props.articleId, votes: button.votes, userStance: userStance } })
                               updateUserVotes({ variables: { _id: this.props.userId, completed_articles: JSON.stringify(userVoteInfo) } })
                               this.submitVote();
                             }}>
