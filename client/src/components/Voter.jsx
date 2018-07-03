@@ -14,7 +14,7 @@ class Voter extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
+    this.state = {    // Remove these state variables.
       agree: false,
       disagree: false,
       fun: false,
@@ -23,18 +23,18 @@ class Voter extends React.Component {
       mean: false
     }
 
-    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);  // Removing checkboxes
     this.submitVote = this.submitVote.bind(this);
   }
 
-  handleCheckboxChange (e) {
+  handleCheckboxChange (e) {     // Removing checkboxes
     this.setState({
       [e.target.value]: !this.state[e.target.value]
     });
   }
 
   // When done, close this modal, open the CompletedModal
-  submitVote() {
+  submitVote() {    // Submit vote will take arguments for agree/disagree, and enjoyed/disliked
     this.props.handleClose('voter');
     this.props.handleShow('completed');
   }
@@ -49,36 +49,15 @@ class Voter extends React.Component {
         </Panel.Heading>
         <Panel.Body>
         <form className="voter-form">
-          <FormGroup>
-            <div className="voter-form-left">
-            <Checkbox inline value="agree" checked={this.state.agree} onChange={this.handleCheckboxChange}>
-              Agree
-            </Checkbox>
-            <Checkbox inline value="fun" checked={this.state.fun} onChange={this.handleCheckboxChange}>
-              Fun
-            </Checkbox>
-            <Checkbox inline value="worthyAdversary" checked={this.state.worthyAdversary} onChange={this.handleCheckboxChange}>
-              Worthy Adversary
-            </Checkbox>
-            </div>
-            <div className="voter-form-right">
-            <Checkbox inline value="disagree" checked={this.state.disagree} onChange={this.handleCheckboxChange}>
-              Disagree
-            </Checkbox>
-            <Checkbox inline value="bummer" checked={this.state.bummer} onChange={this.handleCheckboxChange}>
-              Bummer
-            </Checkbox>
-            <Checkbox inline value="mean" checked={this.state.mean} onChange={this.handleCheckboxChange}>
-              Mean
-            </Checkbox>
-            </div>
-          </FormGroup>
+
+          {/* How much of the button functionality can be offloaded to a helper function? */}
           <Mutation mutation={UPDATE_ARTICLE_VOTES} >
             { (updateArticleVotes) => {
               return (
                 <Mutation mutation={UPDATE_USER_VOTES}>
                   {(updateUserVotes) => {
                     return (
+                      <div>
                       <Button bsStyle="primary" onClick={(e) => {
                         let { articleId, userId, articleStance, userStance, nutritionalValue } = this.props;  
                   
@@ -91,12 +70,71 @@ class Voter extends React.Component {
                           'nutritionalValue': nutritionalValue,
                         }
                         e.preventDefault();
-                        updateArticleVotes({ variables: { _id: this.props.articleId, votes: this.state } })
+                        // The updateArticleVotes votes argument may need to be changed.
+                        updateArticleVotes({ variables: { _id: this.props.articleId, votes: {agree: true, fun: true} } })
                         updateUserVotes({ variables: { _id: this.props.userId, completed_articles: JSON.stringify(userVoteInfo) } })
                         this.submitVote();
                       }}>
-                        Submit
+                        Agreed and Enjoyed
                       </Button>
+                     
+                      <Button bsStyle="primary" onClick={(e) => {
+                        let { articleId, userId, articleStance, userStance, nutritionalValue } = this.props;  
+                  
+                        let userVoteInfo = {};
+                        userVoteInfo[articleId] = {
+                          'articleStance': articleStance,
+                          'votes': this.state,
+                          'userStance': userStance,
+                          'completed': Date.now(),
+                          'nutritionalValue': nutritionalValue,
+                        }
+                        e.preventDefault();
+                        updateArticleVotes({ variables: { _id: this.props.articleId, votes: {agree: true, bummer: true} } })
+                        updateUserVotes({ variables: { _id: this.props.userId, completed_articles: JSON.stringify(userVoteInfo) } })
+                        this.submitVote();
+                      }}>
+                        Agreed and Disliked
+                      </Button>
+                    
+                      <Button bsStyle="primary" onClick={(e) => {
+                        let { articleId, userId, articleStance, userStance, nutritionalValue } = this.props;  
+                  
+                        let userVoteInfo = {};
+                        userVoteInfo[articleId] = {
+                          'articleStance': articleStance,
+                          'votes': this.state,
+                          'userStance': userStance,
+                          'completed': Date.now(),
+                          'nutritionalValue': nutritionalValue,
+                        }
+                        e.preventDefault();
+                        updateArticleVotes({ variables: { _id: this.props.articleId, votes: {disagree: true, fun: true} } })
+                        updateUserVotes({ variables: { _id: this.props.userId, completed_articles: JSON.stringify(userVoteInfo) } })
+                        this.submitVote();
+                      }}>
+                        Disagreed and Enjoyed
+                      </Button>   
+                     
+                      <Button bsStyle="primary" onClick={(e) => {
+                        let { articleId, userId, articleStance, userStance, nutritionalValue } = this.props;  
+                  
+                        let userVoteInfo = {};
+                        userVoteInfo[articleId] = {
+                          'articleStance': articleStance,
+                          'votes': this.state,
+                          'userStance': userStance,
+                          'completed': Date.now(),
+                          'nutritionalValue': nutritionalValue,
+                        }
+                        e.preventDefault();
+                        updateArticleVotes({ variables: { _id: this.props.articleId, votes: {disagree: true, bummer: true} } })
+                        updateUserVotes({ variables: { _id: this.props.userId, completed_articles: JSON.stringify(userVoteInfo) } })
+                        this.submitVote();
+                      }}>
+                        Disagreed and Disliked
+                      </Button> 
+                      </div>
                     )
                   }}
                 </Mutation >
