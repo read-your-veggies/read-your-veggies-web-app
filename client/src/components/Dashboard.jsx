@@ -24,9 +24,16 @@ class Dashboard extends Component {
   componentDidMount() {
     var id = this.props.getUserInfo.data.userInfo.userId;
     if (id !== '1234567890') {
+      let userBrowsingHistory = [];
+      try {
+        userBrowsingHistory = localStorage.getItem('readYourVeggies').split(',');
+      }
+      catch(error) {
+        console.warn('No browsing history in local storage', error);
+      }
       this.setState({
         userId: id,
-        browsingHistory: localStorage.getItem('readYourVeggies').split(','),
+        browsingHistory: userBrowsingHistory,
       }, () => {
         localStorage.setItem('readYourVeggies', '');
       });
