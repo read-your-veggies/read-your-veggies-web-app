@@ -67,6 +67,7 @@ const userSchema = new Schema({
   completed_articles: { type: String, default: JSON.stringify({})},
   reading_stance: { type: [Number], default:[0,0] },
   browsing_history: [String],
+  browsing_history_stance: { type: [Number], default:[0,0] },
 });
 
 const User = userDbConn.model('User', userSchema);
