@@ -124,11 +124,11 @@ class ArticleCard extends React.Component {
           <img className="article-thumbnail-image" src={this.props.article.image} /> 
         </div>
         <Panel bsStyle="default" className="article-panel">
-          <Panel.Heading>
+          <Panel.Heading className="article-panel-heading">
             {/* <Badge className='nutrition-count' style={{backgroundColor: 'transparent'}}pullRight>{this.renderCarrots()}</Badge> */}
             {this.renderCarrots()}
           </Panel.Heading>
-          <Panel.Body>
+          <Panel.Body className="article-panel-body">
             <Query
               query={GET_ONE_FULL_ARTICLE}
               variables={{ _id: this.props.article._id}}

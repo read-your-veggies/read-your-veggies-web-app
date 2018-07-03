@@ -1,10 +1,12 @@
 @import url("./ArticleCard.css");
 @import url("./OnboardModal.css");
 
-.grid {
-  display: flex;
-  /* flex-wrap: wrap; */
-  flex-direction: flex-start;
+.dashboard {
+  height: 80%;
+}
+
+.carouel, .carousel > div, .carousel > ul, .carousel > li {
+  height: 100%;
 }
 
 .carousel-control.left, .carousel-control.right {
@@ -13,8 +15,10 @@
 
 .articles-container {
   width: 70%;
+  height: 100%;
   margin: auto;
-  text-align: center;
+  
   /* display: flex;
   flex-direction: column; */
 }
+

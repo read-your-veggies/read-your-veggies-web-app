@@ -15,16 +15,12 @@
   transform: scale(1.2, 1);
 } */
 
-/* .article .panel-heading {
-  padding-left: 0;
-  padding-right: 0;
-  padding-bottom: 0;
-} */
+.article-panel-heading {
+  height: 20%;
+}
 
-.article-panel {
-  height: 100%;
-  padding: 0;
-  margin-left: 150px;
+.article-panel-body {
+  height: 80%;
 }
 
 .article-card-title {
