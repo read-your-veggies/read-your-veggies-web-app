@@ -51,7 +51,7 @@
   margin-left: 150px;
   padding: 1%;
   max-height: 80%;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .carrots {

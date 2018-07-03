@@ -108,6 +108,7 @@ class ArticleCard extends React.Component {
       'AP': true,
       'will': true,
       'it': true,
+      'I': true,
     };
     var wordsObj = {};
     words.forEach(word => {
