@@ -1,5 +1,5 @@
 .dashboard {
-  height: 65%;
+  height: 350px;
 }
 
 .dashboard-container, .carousel, .carousel div, .carousel ul, .carousel li {
@@ -11,12 +11,33 @@
 }
 
 .articles-container {
-  width: 70%;
+  width: 50%;
   height: 100%;
   margin: auto;
 }
 
-.next-article {
-  text-align: center;
-  margin-left: 150px;
+.next-article-wrapper {
+  padding-top: 20px;
+}
+
+.next-article-wrapper button {
+  background-color: white !important;
+  border: 1px solid black;
+  color: black;
+  display: block;
+  margin: 0 auto;
+}
+
+.next-article-wrapper button:hover {
+  background-color: black !important;
+  color: white;
+}
+
+.next-article-wrapper button:focus {
+  background-color: white !important;
+  border: 1px solid black;
+  color: black;
+  display: block;
+  margin: 0 auto;
+  outline: none;
 }
