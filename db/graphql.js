@@ -74,6 +74,7 @@ const getGraphQlSchema = async () => {
           for (var key in currentState.votes) {
             if (args.votes[key]) {
               currentState.votes[key].totalVotes++
+              currentState.votes[key].summedUserStance += args.userStance
             }
           }
 
