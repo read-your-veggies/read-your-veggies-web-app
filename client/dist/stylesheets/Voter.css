@@ -3,3 +3,31 @@
   text-align: center;
   width: 100%
 }
+
+button {
+  margin: 13px 0px 12px 0px;
+}
+
+.agree-enjoy {
+  position: absolute;
+  top: 35%;
+  left: 25%;
+}
+
+.agree-dislike {
+  position: absolute;
+  top: 35%;
+  right: 25%;
+}
+
+.disagree-enjoy {
+  position: absolute;
+  bottom: 25%;
+  left: 25%;
+}
+
+.disagree-dislike {
+  position: absolute;
+  bottom: 25%;
+  right: 25%;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import Panel from 'react-bootstrap/lib/Panel';
 import Button from 'react-bootstrap/lib/Button';
+import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import { UPDATE_ARTICLE_VOTES, UPDATE_USER_VOTES } from '../apollo/resolvers';
 import { Mutation } from "react-apollo";
 import Modal from 'react-bootstrap/lib/Modal';
@@ -25,10 +26,10 @@ class Voter extends React.Component {
 
   render() {
     const buttons = [
-      {label: "Agreed and Enjoyed", votes: {agree: true, fun: true}},
-      {label: "Agreed and Disliked", votes: {agree: true, bummer: true}},
-      {label: "Disagreed and Enjoyed", votes: {disagree: true, fun: true}},
-      {label: "Disagreed and Disliked", votes: {disagree: true, bummer: true}},      
+      {label: "Agreed and Enjoyed", votes: {agree: true, fun: true}, class: "agree-enjoy", style: "success"},
+      {label: "Agreed and Disliked", votes: {agree: true, bummer: true}, class: "agree-dislike", style: "primary"},
+      {label: "Disagreed and Enjoyed", votes: {disagree: true, fun: true}, class: "disagree-enjoy", style: "warning"},
+      {label: "Disagreed and Disliked", votes: {disagree: true, bummer: true}, class: "disagree-dislike", style: "danger"},      
     ]
 
     return (
@@ -49,7 +50,7 @@ class Voter extends React.Component {
                       {
                         buttons.map( (button) => {
                           return (
-                            <Button bsStyle="primary" onClick={(e) => {
+                            <Button bsStyle={button.style} className={button.class} onClick={(e) => {
                               let { articleId, userId, articleStance, userStance, nutritionalValue } = this.props;  
                         
                               let userVoteInfo = {};
@@ -76,14 +77,13 @@ class Voter extends React.Component {
                 </Mutation >
               )
             }}
-                </Mutation>
-              </Panel.Body>
-              </Panel>
+          </Mutation>
+        </Panel.Body>
+        </Panel>
       </Modal.Body>
       </Modal>
     )
   }
-  
 }
 
 export default withRouter(Voter);
