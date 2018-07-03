@@ -1,3 +1,6 @@
+const sourceWeights = require('./allSourceWeights.js');
+const webSiteArray = Object.keys(sourceWeights);
+
 module.exports = {
 
   calculateUserOnboardStance: (onboardString) => {
@@ -63,6 +66,30 @@ module.exports = {
   calculateUserAggregateStance: (onboardingStance, localPolStance, homePolStance, readingStance) => {
     // console.log('stances:', onboardingStance, localPolStance, homePolStance, readingStance)
     return onboardingStance * 0.6 + localPolStance * 0.1 + homePolStance * 0.1 + readingStance[0] * 0.2;
+  },
+
+  calculateUserBrowsingStance: (incomingBrowsingHistory, currentBrowsingStance) => {
+
+    incomingBrowsingStance = 0;
+    incomingArticles = 0;
+
+    incomingBrowsingHistory.forEach((title) => {
+      webSiteArray.forEach((site) => {
+        if (title.includes(site)) {
+          incomingBrowsingStance += sourceWeights[site];
+          incomingArticles ++;
+        }
+      });
+    });
+
+    const normalizedBrowsingStance = currentBrowsingStance[0] * currentBrowsingStance[1];
+    console.log(normalizedBrowsingStance);
+    let updatedBrowsingStance =  (normalizedBrowsingStance + incomingBrowsingStance) / (currentBrowsingStance[1] + incomingArticles);
+    if (isNaN(updatedBrowsingStance)) {
+      updatedBrowsingStance = 0;
+    }
+    //returns stance between -1,1 and total articles read
+    return [updatedBrowsingStance, currentBrowsingStance[1] + incomingArticles];
   }
   
   

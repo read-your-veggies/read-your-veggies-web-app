@@ -11,6 +11,7 @@ const mongodb = require('mongodb');
 const calculateUserReadingStance = require('./data/calculateUserStance').calculateUserReadingStance;
 const calculateUserOnboardStance = require('./data/calculateUserStance').calculateUserOnboardStance;
 const calculateUserAggregateStance = require('./data/calculateUserStance').calculateUserAggregateStance;
+const calculateUserBrowsingStance = require('./data/calculateUserStance').calculateUserBrowsingStance;
 
 const prepare = (object) => {
   object._id = object._id.toString();
@@ -144,8 +145,11 @@ const getGraphQlSchema = async () => {
         updateUserBrowsingHistory: async (root, args) => {
 
           const userDocument = prepare(await Users.findOne(new mongodb.ObjectID(args._id)));
-          const updatedBrowsingHistory = userDocument.browsing_history.concat(args.browsing_history);
-          console.log(updatedBrowsingHistory);
+          const incomingBrowsingHistory = args.browsing_history.filter((item) => item !== '');
+          //update me!
+          console.log('calculated history', calculateUserBrowsingStance(incomingBrowsingHistory, [0,0]));
+          const updatedBrowsingHistory = userDocument.browsing_history.concat(incomingBrowsingHistory);
+          // console.log(updatedBrowsingHistory);
           const res = await Users.findOneAndUpdate(
             {_id: new mongodb.ObjectID(args._id)}, 
             {$set: {
@@ -154,7 +158,7 @@ const getGraphQlSchema = async () => {
             }, 
             {returnOriginal:false}
           );
-          console.log(res.value);
+          // console.log(res.value);
           return res.value;
         }
       }
