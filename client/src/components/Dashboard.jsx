@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import { Query } from "react-apollo";
+import { Query, Mutation } from "react-apollo";
 import { GET_TEAM_NAME_FROM_LOCAL_STATE } from '../apollo/localQueries';
 import ArticleCarousel from './ArticleCarousel.jsx';
 import OnboardModal from './OnboardModal.jsx';
 import { GET_USER_ONBOARD_INFO, GET_USER_ONBOARD_INFO_AND_STANCE } from '../apollo/serverQueries.js';
+import {UPDATE_USER_BROWSING_HISTORY} from '../apollo/resolvers.js'
 
 class Dashboard extends Component {
 
@@ -16,13 +17,19 @@ class Dashboard extends Component {
       userId: null,
       onboardInformation: null,
       userData: null,
+      browsingHistory: [],
     }
   }
 
   componentDidMount() {
     var id = this.props.getUserInfo.data.userInfo.userId;
     if (id !== '1234567890') {
-      this.setState({userId: id}, () => console.log(this.state));
+      this.setState({
+        userId: id,
+        browsingHistory: localStorage.getItem('readYourVeggies').split(','),
+      }, () => {
+        localStorage.setItem('readYourVeggies', '');
+      });
     }
   }
 
@@ -32,19 +39,30 @@ class Dashboard extends Component {
       <div>
         {this.state.onboardInformation === null
           ?
-          <Query query={GET_USER_ONBOARD_INFO_AND_STANCE} variables={{ _id: this.state.userId }}>
-            {({ loading, error, data }) => {
-              if (loading) return "Loading...";
-              if (error) return `Error! ${error.message}`;
-              this.setState({
-                onboardInformation: data.user.onboard_information,
-                userData: data.user,
-              }, () => console.log(this.state));
+          <div>
+            <Query query={GET_USER_ONBOARD_INFO_AND_STANCE} variables={{ _id: this.state.userId }}>
+              {({ loading, error, data }) => {
+                if (loading) return "Loading...";
+                if (error) return `Error! ${error.message}`;
+                this.setState({
+                  onboardInformation: data.user.onboard_information,
+                  userData: data.user,
+                }, () => console.log(this.state));
+                return (
+                  null
+                );
+              }}
+            </Query>
+            {/* UPDATE USER BROWSING HISTORY FROM CHROME EXTENSION */}
+            <Mutation mutation={UPDATE_USER_BROWSING_HISTORY} >
+            {(updateUserBrowsingHistory) => {
+              updateUserBrowsingHistory({ variables: { _id: this.state.userId, browsing_history: this.state.browsingHistory } });
+              //remove browsing history after it has been added to the db;
               return (
                 null
-              );
-            }}
-          </Query>
+                )}}
+            </Mutation>
+          </div>
           :
           null
         }

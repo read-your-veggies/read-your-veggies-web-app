@@ -140,6 +140,23 @@ const getGraphQlSchema = async () => {
           );
           return res.value;
         },
+
+        updateUserBrowsingHistory: async (root, args) => {
+
+          const userDocument = prepare(await Users.findOne(new mongodb.ObjectID(args._id)));
+          const updatedBrowsingHistory = userDocument.browsing_history.concat(args.browsing_history);
+          console.log(updatedBrowsingHistory);
+          const res = await Users.findOneAndUpdate(
+            {_id: new mongodb.ObjectID(args._id)}, 
+            {$set: {
+              browsing_history: updatedBrowsingHistory,
+              }
+            }, 
+            {returnOriginal:false}
+          );
+          console.log(res.value);
+          return res.value;
+        }
       }
     }
 
