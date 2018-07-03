@@ -59,3 +59,11 @@ export const OFF_BOARD_USER = gql`
   }
 `
 
+export const UPDATE_USER_BROWSING_HISTORY = gql`
+  mutation ($_id: String!, $browsing_history: [String]!) {
+    updateUserBrowsingHistory(_id: $_id, browsing_history: $browsing_history) {
+      _id
+      browsing_history
+    }
+  }
+`
