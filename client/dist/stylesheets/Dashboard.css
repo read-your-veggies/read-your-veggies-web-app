@@ -1,10 +1,9 @@
-@import url("./ArticleCard.css");
-@import url("./OnboardModal.css");
+.dashboard {
+  height: 65%;
+}
 
-.grid {
-  display: flex;
-  /* flex-wrap: wrap; */
-  flex-direction: flex-start;
+.dashboard-container, .carousel, .carousel div, .carousel ul, .carousel li {
+  height: 100%;
 }
 
 .carousel-control.left, .carousel-control.right {
@@ -12,7 +11,12 @@
 }
 
 .articles-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  width: 70%;
+  height: 100%;
+  margin: auto;
+}
+
+.next-article {
+  text-align: center;
+  margin-left: 150px;
 }

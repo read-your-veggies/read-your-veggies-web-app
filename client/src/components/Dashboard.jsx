@@ -43,7 +43,7 @@ class Dashboard extends Component {
   //run request to see if user is onboarded -- if not do ternary to render onboardmodal 
   render() {
     return(
-      <div>
+      <div className="dashboard">
         {this.state.onboardInformation === null
           ?
           <div>
@@ -64,7 +64,6 @@ class Dashboard extends Component {
             <Mutation mutation={UPDATE_USER_BROWSING_HISTORY} >
             {(updateUserBrowsingHistory) => {
               updateUserBrowsingHistory({ variables: { _id: this.state.userId, browsing_history: this.state.browsingHistory } });
-              //remove browsing history after it has been added to the db;
               return (
                 null
                 )}}
@@ -78,7 +77,7 @@ class Dashboard extends Component {
           ?
           null
           :
-          <div>
+          <div className="dashboard-container">
             {/* <h1>Your Weekly Goal: {JSON.parse(this.state.onboardInformation).veggieSlider}</h1> */}
             <ArticleCarousel userData={this.state.userData}  />
           </div>
