@@ -83,11 +83,12 @@ module.exports = {
     });
 
     const normalizedBrowsingStance = currentBrowsingStance[0] * currentBrowsingStance[1];
-    console.log(normalizedBrowsingStance);
+    // console.log(normalizedBrowsingStance);
     let updatedBrowsingStance =  (normalizedBrowsingStance + incomingBrowsingStance) / (currentBrowsingStance[1] + incomingArticles);
     if (isNaN(updatedBrowsingStance)) {
       updatedBrowsingStance = 0;
     }
+    console.log('updatedbrowsingstance', updatedBrowsingStance);
     //returns stance between -1,1 and total articles read
     return [updatedBrowsingStance, currentBrowsingStance[1] + incomingArticles];
   }

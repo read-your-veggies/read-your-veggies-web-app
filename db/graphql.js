@@ -147,18 +147,18 @@ const getGraphQlSchema = async () => {
           const userDocument = prepare(await Users.findOne(new mongodb.ObjectID(args._id)));
           const incomingBrowsingHistory = args.browsing_history.filter((item) => item !== '');
           //update me!
-          console.log('calculated history', calculateUserBrowsingStance(incomingBrowsingHistory, [0,0]));
-          const updatedBrowsingHistory = userDocument.browsing_history.concat(incomingBrowsingHistory);
+          var updatedBrowsingHistoryStance = calculateUserBrowsingStance(incomingBrowsingHistory, userDocument.browsing_history_stance );
+          // const updatedBrowsingHistory = userDocument.browsing_history.concat(incomingBrowsingHistory);
           // console.log(updatedBrowsingHistory);
           const res = await Users.findOneAndUpdate(
             {_id: new mongodb.ObjectID(args._id)}, 
             {$set: {
-              browsing_history: updatedBrowsingHistory,
+              // browsing_history: updatedBrowsingHistory,
+              browsing_history_stance: updatedBrowsingHistoryStance,
               }
             }, 
             {returnOriginal:false}
           );
-          // console.log(res.value);
           return res.value;
         }
       }
