@@ -32,14 +32,6 @@ const articleSchema = new Schema({
       summedUserStance: Number,
       totalVotes: Number,
     },
-    mean: {
-      summedUserStance: Number,
-      totalVotes: Number,
-    },
-    worthyAdversary: {
-      summedUserStance: Number,
-      totalVotes: Number,
-    },
   },
 });
 

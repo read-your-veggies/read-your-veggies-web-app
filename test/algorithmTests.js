@@ -46,7 +46,245 @@ describe('helpers', () => {
   })
 
   describe('calculateUserReadingStance', () => {
-    
+    it('conservative reader likes liberal article, 2 votes', done => {
+      //reading stance of 0, 10 articles read
+      var currentStance = [0, 9];
+      var newArticle = {
+        userStance: 1,
+        articleStance: -1,
+        votes: {
+          fun: true,
+          agree: true,
+          bummer: false,
+          disagree: false,
+        }
+      }
+      var readingStance = helpers.calculateUserReadingStance(currentStance, newArticle);
+      expect(readingStance).to.eql([-0.1, 10]);
+      done();
+    })
+
+    it('conservative reader likes liberal article, 1 vote', done => {
+      //reading stance of 0, 10 articles read
+      var currentStance = [0, 9];
+      var newArticle = {
+        userStance: 1,
+        articleStance: -1,
+        votes: {
+          fun: true,
+          agree: false,
+          bummer: false,
+          disagree: false,
+        }
+      }
+      var readingStance = helpers.calculateUserReadingStance(currentStance, newArticle);
+      expect(readingStance).to.eql([-0.05, 10]);
+      done();
+    })
+
+    it('liberal reader likes conservative article, 2 votes', done => {
+      var currentStance = [0, 9];
+      var newArticle = {
+        userStance: -1,
+        articleStance: 1,
+        votes: {
+          fun: true,
+          agree: true,
+          bummer: false,
+          disagree: false,
+        }
+      }
+      var readingStance = helpers.calculateUserReadingStance(currentStance, newArticle);
+      expect(readingStance).to.eql([0.1, 10]);
+      done();
+    })
+
+    it('liberal reader likes conservative article, 1 vote', done => {
+      var currentStance = [0, 9];
+      var newArticle = {
+        userStance: -1,
+        articleStance: 1,
+        votes: {
+          fun: true,
+          agree: false,
+          bummer: false,
+          disagree: false,
+        }
+      }
+      var readingStance = helpers.calculateUserReadingStance(currentStance, newArticle);
+      expect(readingStance).to.eql([0.05, 10]);
+      done();
+    })
+
+    it('moderately liberal reader likes moderately conservative article', done => {
+      var currentStance = [0, 9];
+      var newArticle = {
+        userStance: -0.5,
+        articleStance: 0.5,
+        votes: {
+          fun: true,
+          agree: true,
+          bummer: false,
+          disagree: false,
+        }
+      }
+      var readingStance = helpers.calculateUserReadingStance(currentStance, newArticle);
+      expect(readingStance).to.eql([0.05, 10]);
+      done();
+    })
+
+    it('moderately conservative reader likes moderately liberal article', done => {
+      var currentStance = [0, 9];
+      var newArticle = {
+        userStance: 0.5,
+        articleStance: -0.5,
+        votes: {
+          fun: true,
+          agree: true,
+          bummer: false,
+          disagree: false,
+        }
+      }
+      var readingStance = helpers.calculateUserReadingStance(currentStance, newArticle);
+      expect(readingStance).to.eql([-0.05, 10]);
+      done();
+    })
+
+    it('liberal reader dislikes liberal article', done => {
+      var currentStance = [0, 9];
+      var newArticle = {
+        userStance: -0.5,
+        articleStance: -1,
+        votes: {
+          fun: false,
+          agree: false,
+          bummer: true,
+          disagree: true,
+        }
+      }
+      var readingStance = helpers.calculateUserReadingStance(currentStance, newArticle);
+      expect(readingStance).to.eql([0.025, 10]);
+      done();
+    })
+
+    it('conservative reader dislikes conservative article', done => {
+      var currentStance = [0, 9];
+      var newArticle = {
+        userStance: 0.5,
+        articleStance: 1,
+        votes: {
+          fun: false,
+          agree: false,
+          bummer: true,
+          disagree: true,
+        }
+      }
+      var readingStance = helpers.calculateUserReadingStance(currentStance, newArticle);
+      expect(readingStance).to.eql([-0.025, 10]);
+      done();
+    })
+
+    it('liberal reader dislikes conservative article', done => {
+      var currentStance = [0, 9];
+      var newArticle = {
+        userStance: -0.5,
+        articleStance: 0.5,
+        votes: {
+          fun: false,
+          agree: false,
+          bummer: true,
+          disagree: true,
+        }
+      }
+      var readingStance = helpers.calculateUserReadingStance(currentStance, newArticle);
+      expect(readingStance).to.eql([-0.05, 10]);
+      done();
+    })
+
+    it('conservative reader dislikes liberal article', done => {
+      var currentStance = [0, 9];
+      var newArticle = {
+        userStance: 0.5,
+        articleStance: -0.5,
+        votes: {
+          fun: false,
+          agree: false,
+          bummer: true,
+          disagree: true,
+        }
+      }
+      var readingStance = helpers.calculateUserReadingStance(currentStance, newArticle);
+      expect(readingStance).to.eql([0.05, 10]);
+      done();
+    })
+
+    it('neutral reader likes liberal article, 2 votes', done => {
+      var currentStance = [0, 9];
+      var newArticle = {
+        userStance: 0,
+        articleStance: -1,
+        votes: {
+          fun: true,
+          agree: true,
+          bummer: false,
+          disagree: false,
+        }
+      }
+      var readingStance = helpers.calculateUserReadingStance(currentStance, newArticle);
+      expect(readingStance).to.eql([-0.05, 10]);
+      done();
+    })
+
+    it('neutral reader dislikes liberal article, 1 vote', done => {
+      var currentStance = [0, 9];
+      var newArticle = {
+        userStance: 0,
+        articleStance: -1,
+        votes: {
+          fun: false,
+          agree: false,
+          bummer: false,
+          disagree: true,
+        }
+      }
+      var readingStance = helpers.calculateUserReadingStance(currentStance, newArticle);
+      expect(readingStance).to.eql([0.025, 10]);
+      done();
+    })
+
+    it('neutral reader likes conservative article, 2 votes', done => {
+      var currentStance = [0, 9];
+      var newArticle = {
+        userStance: 0,
+        articleStance: 1,
+        votes: {
+          fun: true,
+          agree: true,
+          bummer: false,
+          disagree: false,
+        }
+      }
+      var readingStance = helpers.calculateUserReadingStance(currentStance, newArticle);
+      expect(readingStance).to.eql([0.05, 10]);
+      done();
+    })
+
+    it('neutral reader likes conservative article, 1 vote', done => {
+      var currentStance = [0, 9];
+      var newArticle = {
+        userStance: 0,
+        articleStance: 1,
+        votes: {
+          fun: true,
+          agree: false,
+          bummer: false,
+          disagree: false,
+        }
+      }
+      var readingStance = helpers.calculateUserReadingStance(currentStance, newArticle);
+      expect(readingStance).to.eql([0.025, 10]);
+      done();
+    })
   })
 })
 

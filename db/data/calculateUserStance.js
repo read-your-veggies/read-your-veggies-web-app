@@ -19,60 +19,58 @@ module.exports = {
     } else {
       stance = (stance * Math.abs(viewOnParents)) / 10000;
     }
-    console.log(stance);
     return stance;
-
   },
 
   calculateUserReadingStance: (currentStance, completedArticle) => {
     var currentReadingStance = currentStance[0];
     var totalArticlesRead = currentStance[1];
     var tally = 0;
-    // console.log('current reading stance:', currentStance)
-    // console.log(completedArticle);
+
     let { userStance, articleStance, votes, nutritionalValue } = completedArticle;
 
-    console.log('currentStance', currentReadingStance);
-    console.log('completedArticle', completedArticle);
     // calculate chasm 
     var chasm = Math.abs(userStance - articleStance) / 2;
+
     // add things
     if (votes.fun === true) {
-      tally += chasm;
+      tally += chasm / 2;
     }
     if (votes.agree === true) {
-      tally += chasm;
-    }
-    if (votes.worthyAdversary === true) {
-      tally += chasm;
+      tally += chasm / 2;
     }
     //subtract things
     if (votes.bummer === true) {
-      tally -= chasm;
+      tally -= chasm / 2;
     }
     if (votes.disagree === true) {
-      tally -= chasm;
+      tally -= chasm / 2;
     }
-    if (votes.mean === true) {
-      tally -= chasm;
+
+    // flip it if needed
+    if (userStance > articleStance) {
+      tally = tally * -1;
     }
+
     //get new average
     var aggregateOldStance = currentReadingStance * totalArticlesRead;
     var aggregateNewStance = (aggregateOldStance + tally) / (totalArticlesRead + 1);
-    // console.log('new reading stance:', [aggregateNewStance, totalArticlesRead + 1])
+  
     return [aggregateNewStance, totalArticlesRead + 1];
   },
 
   calculateUserBrowsingStance: (incomingBrowsingHistory, currentBrowsingStance) => {
+    console.log('incomingBrowsingHistory is', incomingBrowsingHistory);
+    console.log('currentBrowsingStance is', currentBrowsingStance);
 
-    incomingBrowsingStance = 0;
-    incomingArticles = 0;
+    var incomingBrowsingStance = 0;
+    var incomingArticles = 0;
 
     incomingBrowsingHistory.forEach((title) => {
       webSiteArray.forEach((site) => {
         if (title.includes(site)) {
           incomingBrowsingStance += sourceWeights[site];
-          incomingArticles ++;
+          incomingArticles++;
         }
       });
     });

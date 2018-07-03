@@ -19,8 +19,6 @@ class Voter extends React.Component {
       disagree: false,
       fun: false,
       bummer: false,
-      worthyAdversary: false,
-      mean: false
     }
 
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);  // Removing checkboxes
