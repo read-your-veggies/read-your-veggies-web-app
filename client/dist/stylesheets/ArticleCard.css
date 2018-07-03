@@ -1,33 +1,21 @@
 .article {
   width: 100%;
-  /* margin: 1%; */
-  /* border-radius: 5px; */
-  /* box-shadow:  6px 1px 6px rgba(0, 0, 0, .1); */
   font-weight: 200 !important;
   height: 100%;
   padding-left: 150px;
   padding-bottom: 2%;
   padding-right: 1%;
-  /* position: relative; */
-  /* transition: transform .3s; */
 }
-
-/* .article:hover {
-  transform: scale(1.2, 1);
-} */
 
 .article-panel {
   margin: 0;
   padding: 0;
-  /* border: 1px solid grey !important; */
 }
 
 
 .article-thumbnail {
   height: 300px !important;
   width: 300px !important;
-  /* display: inline; */
-  /* margin: 0 auto; */
   float: left;
   position: absolute;
   border-radius: 150px;
@@ -59,24 +47,6 @@
   cursor: pointer;
 }
 
-/* .delete-article-button {
-  float: right;
-  color: black;
-  background-color: lightcoral;
-  font-weight: 400 !important;
-} */
-
-/* .delete-article-button:hover {
-  background-color: red;
-} */
-
-/* .eat-me {
-  display: block;
-  margin: auto;
-  margin-bottom: 1em;
-  vertical-align: bottom;
-} */
-
 .tag-cloud {
   margin-left: 150px;
   padding: 1%;
@@ -85,17 +55,10 @@
 }
 
 .carrots {
-  /* margin: 0;
-  padding: 0;
-  text-align: right; */
-  /* position: absolute;
-  top: 25%;
-  left: 25%; */
   padding: 0;
   margin: 0;
   font-size: 5em;
   text-align: right;
-  /* z-index: 10; */
 }
 
 .read-now {

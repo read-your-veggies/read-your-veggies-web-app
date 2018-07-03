@@ -32,12 +32,12 @@ class ArticleCard extends React.Component {
       showVoter: false,
       showCompleted: false,
       fullArticle: {},
+      wordCloud: [],
     };
 
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.renderCarrots = this.renderCarrots.bind(this);
-    this.processData = this.processData.bind(this);
   }
 
   // There are three modals launched from ArticleCard.  Their closing and opening is handled by these functions.
@@ -67,9 +67,8 @@ class ArticleCard extends React.Component {
 
   }
 
-  processData(data) {
-    var words = data.article.fullText.split(' ');
-    // var words = data.split(' ');
+  componentDidMount() {
+    var words = this.props.article.fullText.split(' ');
     var badWords = {
       'a': true, 
       'the': true, 
@@ -94,6 +93,21 @@ class ArticleCard extends React.Component {
       'that': true,
       'for': true,
       '-': true,
+      '--': true,
+      'with': true,
+      'been': true,
+      'this': true,
+      'are': true,
+      'The': true,
+      'by': true,
+      'such': true,
+      'which': true,
+      'has': true,
+      'his': true,
+      'had': true,
+      'AP': true,
+      'will': true,
+      'it': true,
     };
     var wordsObj = {};
     words.forEach(word => {
@@ -114,7 +128,9 @@ class ArticleCard extends React.Component {
         })
       }  
     }
-    return results;
+    this.setState({
+      wordCloud: results,
+    })
   }
 
   render() {
@@ -129,21 +145,7 @@ class ArticleCard extends React.Component {
             {this.renderCarrots()}
           </Panel.Heading>
           <Panel.Body className="article-panel-body">
-            <Query
-              query={GET_ONE_FULL_ARTICLE}
-              variables={{ _id: this.props.article._id}}
-            >
-              {({ loading, error, data }) => {
-                if (loading) return "Loading...";
-                if (error) return `Error! ${error.message}`;
-                //console.log(data);
-                return (         
-                  <TagCloud minSize={30} maxSize={50} colorOptions={{hue: 'blue'}} tags={this.processData(data)}/>
-                )
-              }}
-            </Query>
-            {/* <TagCloud minSize={45} maxSize={45} colorOptions={{hue: 'blue'}} tags={this.processData(this.props.article.title)}/> */}
-            {/* <h3 className="article-card-title">{this.props.article.title}</h3> */}
+            <TagCloud minSize={30} maxSize={50} colorOptions={{hue: 'blue'}} tags={this.state.wordCloud}/>
             <ApolloConsumer>
               { client => (
                 <p className="read-now">

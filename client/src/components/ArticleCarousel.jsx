@@ -15,10 +15,6 @@ class ArticleCarousel extends Component {
     }
   }
 
-  componentDidMount() {
-    //
-  }
-
   render() {
     return (
       <Query query={GET_ARTICLES_FROM_SERVER}>
@@ -34,8 +30,6 @@ class ArticleCarousel extends Component {
                   userStance={this.props.userData.user_stance}
                 />
               ))} */}
-            
-            {/* <h1>CLICK ON THE PLATE TO EXPLORE</h1> */}
             <CarouselProvider
               lockOnWindowScroll={true}
               isPlaying={false}
