@@ -109,6 +109,9 @@ class ArticleCard extends React.Component {
       'will': true,
       'it': true,
       'I': true,
+      'its': true,
+      'these': true,
+      'but': true,
     };
     var wordsObj = {};
     words.forEach(word => {
@@ -122,7 +125,7 @@ class ArticleCard extends React.Component {
     })
     var results = [];
     for (var key in wordsObj) {
-      if (wordsObj[key] > 2) {
+      if (wordsObj[key] > 1) {
         results.push({
           value: key,
           count: wordsObj[key]
@@ -142,14 +145,15 @@ class ArticleCard extends React.Component {
         </div>
         <Panel bsStyle="default" className="article-panel">
           <Panel.Heading className="article-panel-heading">
+            
             {/* <Badge className='nutrition-count' style={{backgroundColor: 'transparent'}}pullRight>{this.renderCarrots()}</Badge> */}
             {this.renderCarrots()}
           </Panel.Heading>
           <Panel.Body className="article-panel-body">
-            <TagCloud minSize={30} maxSize={50} colorOptions={{hue: 'blue'}} tags={this.state.wordCloud}/>
+            <TagCloud minSize={40} maxSize={60} colorOptions={{hue: 'blue'}} tags={this.state.wordCloud}/>
             <ApolloConsumer>
               { client => (
-                <p className="read-now">
+                <div className="read-now-wrapper">
                 <Button bsSize="large" bsStyle="success" className="read-now"       
                   onClick={async () => {
                     const {data} = await client.query({
@@ -165,7 +169,7 @@ class ArticleCard extends React.Component {
                 >
                 Read Now
               </Button>
-              </p>
+              </div>
               )}
             </ApolloConsumer>  
           </Panel.Body>
