@@ -146,7 +146,8 @@ class ArticleCard extends React.Component {
             {/* <h3 className="article-card-title">{this.props.article.title}</h3> */}
             <ApolloConsumer>
               { client => (
-                <Button className="btn btn-success"       
+                <p className="read-now">
+                <Button bsSize="large" bsStyle="success" className="read-now"       
                   onClick={async () => {
                     const {data} = await client.query({
                       query: GET_ONE_FULL_ARTICLE,
@@ -161,6 +162,7 @@ class ArticleCard extends React.Component {
                 >
                 Read Now
               </Button>
+              </p>
               )}
             </ApolloConsumer>  
           </Panel.Body>

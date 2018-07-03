@@ -77,7 +77,7 @@ class Dashboard extends Component {
           ?
           null
           :
-          <div className="dashboard">
+          <div className="dashboard-container">
             {/* <h1>Your Weekly Goal: {JSON.parse(this.state.onboardInformation).veggieSlider}</h1> */}
             <ArticleCarousel userData={this.state.userData}  />
           </div>

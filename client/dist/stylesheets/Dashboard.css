@@ -1,11 +1,8 @@
-@import url("./ArticleCard.css");
-@import url("./OnboardModal.css");
-
 .dashboard {
-  height: 80%;
+  height: 65%;
 }
 
-.carouel, .carousel > div, .carousel > ul, .carousel > li {
+.dashboard-container, .carousel, .carousel div, .carousel ul, .carousel li {
   height: 100%;
 }
 
@@ -22,3 +19,7 @@
   flex-direction: column; */
 }
 
+.next-article {
+  text-align: center;
+  margin-left: 150px;
+}

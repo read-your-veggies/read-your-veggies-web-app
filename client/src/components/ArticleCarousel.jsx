@@ -40,7 +40,7 @@ class ArticleCarousel extends Component {
               lockOnWindowScroll={true}
               isPlaying={false}
               naturalSlideWidth={500}
-              naturalSlideHeight={250}
+              naturalSlideHeight={200}
               totalSlides={50}
               visibleSlides={1}
             >        
@@ -56,7 +56,9 @@ class ArticleCarousel extends Component {
                 ))}
               </Slider>
               {/* <ButtonBack>Back</ButtonBack> */}
-              <ButtonNext className="btn btn-info" >Nah, show me another article</ButtonNext>
+              <p className="next-article">
+                <ButtonNext className="btn btn-info btn-sm" >Nah, show me another article</ButtonNext>
+              </p>
             </CarouselProvider>
             </div>
           );
