@@ -1,0 +1,23 @@
+.health-dashboard-speedometer {
+  height: 200px;
+}
+
+#submit-onboard {
+  float: right;
+  margin-right: 2%;
+}
+
+.completed-articles-container {
+  display: flex;
+  flex-direction: flex-start;
+  overflow: auto;
+}
+
+.completed-article img {
+  height: 100px;
+  width: 200px;
+}
+
+.completed-article-title {
+  text-align: center;
+}

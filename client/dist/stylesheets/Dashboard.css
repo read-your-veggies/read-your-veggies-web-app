@@ -1,0 +1,22 @@
+.dashboard {
+  height: 65%;
+}
+
+.dashboard-container, .carousel, .carousel div, .carousel ul, .carousel li {
+  height: 100%;
+}
+
+.carousel-control.left, .carousel-control.right {
+  background-image: none;
+}
+
+.articles-container {
+  width: 70%;
+  height: 100%;
+  margin: auto;
+}
+
+.next-article {
+  text-align: center;
+  margin-left: 150px;
+}

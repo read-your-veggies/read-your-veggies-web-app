@@ -1,0 +1,33 @@
+.panel-group {
+  width: 80%;
+  margin: auto;
+}
+
+.panel-title {
+  text-align: center;
+}
+
+.about-our-sources-header {
+  display: flex;
+  flex-direction: flex-start;
+  justify-content: space-between;
+}
+
+.about-our-sources-left-side {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+#watson-logo {
+  width: 200px;
+  height: 200px;
+}
+
+.form-group {
+  display: inline;
+}
+
+.tick text {
+  font-size: 1.5em;
+}

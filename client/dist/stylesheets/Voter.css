@@ -1,0 +1,18 @@
+.form-group {
+  display: flex;
+  flex-direction: flex-start;
+}
+
+.voter-form-left, .voter-form-right {
+  font-size: 1em;
+}
+
+.voter-form button {
+  display: block;
+  margin: 0 auto;
+}
+
+.voting-panel div h3 {
+  font-weight: 200 !important;
+  text-align: center;
+}

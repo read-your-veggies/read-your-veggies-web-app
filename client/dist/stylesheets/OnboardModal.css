@@ -1,0 +1,56 @@
+.onboard-modal h1, h2, h3, h4, p {
+  text-align: center;
+}
+
+
+.rangeslider-horizontal {
+  width: 80% !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+.stance-slider {
+  background-color: lightblue !important;
+}
+
+.stance-slider .rangeslider__fill {
+  background-color: indianred !important;
+}
+
+.parents-slider .rangeslider__label-item {
+  font-size: 2em !important;
+}
+
+.parents-slider   {
+  background-color: #7cb342 !important;
+}
+
+.veggie-slider, .veggie-slider .rangeslider__fill {
+  background-color: #ff77e8 !important;
+}
+
+.onboard-image {
+  width: 60%;
+  display: block;
+  margin: 0 auto;
+}
+
+.slider-prompt-container {
+  min-height: 120px;
+  padding: 10px;
+}
+
+#onboard-greeting, #onboard-subtitle {
+  text-align: center;
+}
+
+#onboard-title {
+  font-family: 'Pacifico', cursive;
+  color: #ff77e8;
+  font-size: 2.5em;
+}
+
+#submit-onboard {
+  display: block;
+  margin: 0 auto;
+}

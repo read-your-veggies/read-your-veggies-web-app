@@ -1,0 +1,34 @@
+#user-info-container {
+  flex-basis: 20%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+#profile-link {
+  align-self: center;
+  margin: 0;
+}
+
+#profile-link a {
+  color: black;
+}
+
+#profile-link a:hover {
+  color: red;
+}
+
+.small-speedometer-click-wrapper {
+  border-radius: 100px;
+  background-color: seashell;
+}
+
+.small-speedometer-click-wrapper:hover {
+  box-shadow:  6px 1px 6px rgba(0, 0, 0, .5);
+  background-color: #dff0d8;
+  cursor: pointer;
+}
+
+#logout-button{
+  align-self: center;
+}
