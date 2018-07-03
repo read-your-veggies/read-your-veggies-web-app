@@ -52,6 +52,7 @@ module.exports = [`
     onboard_information: String
     completed_articles: String
     reading_stance: [String]
+    browsing_history: [String]
   }
 
   type Vote {
@@ -90,6 +91,7 @@ module.exports = [`
     updateUserVotes(_id: String, completed_articles: String): User
     updateArticleVotes(_id: String, votes: VoteInput): Article
     updateUserHealth(_id: String, new_health: Int): User
+    updateUserBrowsingHistory(_id: String, browsing_history: [String]): User
   }
 
   schema {
