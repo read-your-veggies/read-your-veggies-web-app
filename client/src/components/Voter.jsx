@@ -40,6 +40,13 @@ class Voter extends React.Component {
   }
 
   render() {
+    const buttons = [
+      {label: "Agreed and Enjoyed", votes: {agree: true, fun: true}},
+      {label: "Agreed and Disliked", votes: {agree: true, bummer: true}},
+      {label: "Disagreed and Enjoyed", votes: {disagree: true, fun: true}},
+      {label: "Disagreed and Disliked", votes: {disagree: true, bummer: true}},      
+    ]
+
     return (
       <Modal show={this.props.show} onHide={() => this.props.handleClose('voter')}>
       <Modal.Body>
@@ -58,82 +65,31 @@ class Voter extends React.Component {
                   {(updateUserVotes) => {
                     return (
                       <div>
-                      <Button bsStyle="primary" onClick={(e) => {
-                        let { articleId, userId, articleStance, userStance, nutritionalValue } = this.props;  
-                  
-                        let userVoteInfo = {};
-                        userVoteInfo[articleId] = {
-                          'articleStance': articleStance,
-                          'votes': this.state,
-                          'userStance': userStance,
-                          'completed': Date.now(),
-                          'nutritionalValue': nutritionalValue,
-                        }
-                        e.preventDefault();
-                        // The updateArticleVotes votes argument may need to be changed.
-                        updateArticleVotes({ variables: { _id: this.props.articleId, votes: {agree: true, fun: true} } })
-                        updateUserVotes({ variables: { _id: this.props.userId, completed_articles: JSON.stringify(userVoteInfo) } })
-                        this.submitVote();
-                      }}>
-                        Agreed and Enjoyed
-                      </Button>
-                     
-                      <Button bsStyle="primary" onClick={(e) => {
-                        let { articleId, userId, articleStance, userStance, nutritionalValue } = this.props;  
-                  
-                        let userVoteInfo = {};
-                        userVoteInfo[articleId] = {
-                          'articleStance': articleStance,
-                          'votes': this.state,
-                          'userStance': userStance,
-                          'completed': Date.now(),
-                          'nutritionalValue': nutritionalValue,
-                        }
-                        e.preventDefault();
-                        updateArticleVotes({ variables: { _id: this.props.articleId, votes: {agree: true, bummer: true} } })
-                        updateUserVotes({ variables: { _id: this.props.userId, completed_articles: JSON.stringify(userVoteInfo) } })
-                        this.submitVote();
-                      }}>
-                        Agreed and Disliked
-                      </Button>
-                    
-                      <Button bsStyle="primary" onClick={(e) => {
-                        let { articleId, userId, articleStance, userStance, nutritionalValue } = this.props;  
-                  
-                        let userVoteInfo = {};
-                        userVoteInfo[articleId] = {
-                          'articleStance': articleStance,
-                          'votes': this.state,
-                          'userStance': userStance,
-                          'completed': Date.now(),
-                          'nutritionalValue': nutritionalValue,
-                        }
-                        e.preventDefault();
-                        updateArticleVotes({ variables: { _id: this.props.articleId, votes: {disagree: true, fun: true} } })
-                        updateUserVotes({ variables: { _id: this.props.userId, completed_articles: JSON.stringify(userVoteInfo) } })
-                        this.submitVote();
-                      }}>
-                        Disagreed and Enjoyed
-                      </Button>   
-                     
-                      <Button bsStyle="primary" onClick={(e) => {
-                        let { articleId, userId, articleStance, userStance, nutritionalValue } = this.props;  
-                  
-                        let userVoteInfo = {};
-                        userVoteInfo[articleId] = {
-                          'articleStance': articleStance,
-                          'votes': this.state,
-                          'userStance': userStance,
-                          'completed': Date.now(),
-                          'nutritionalValue': nutritionalValue,
-                        }
-                        e.preventDefault();
-                        updateArticleVotes({ variables: { _id: this.props.articleId, votes: {disagree: true, bummer: true} } })
-                        updateUserVotes({ variables: { _id: this.props.userId, completed_articles: JSON.stringify(userVoteInfo) } })
-                        this.submitVote();
-                      }}>
-                        Disagreed and Disliked
-                      </Button> 
+                      {
+                        buttons.map( (button) => {
+                          return (
+                            <Button bsStyle="primary" onClick={(e) => {
+                              let { articleId, userId, articleStance, userStance, nutritionalValue } = this.props;  
+                        
+                              let userVoteInfo = {};
+                              userVoteInfo[articleId] = {
+                                'articleStance': articleStance,
+                                'votes': this.state,
+                                'userStance': userStance,
+                                'completed': Date.now(),
+                                'nutritionalValue': nutritionalValue,
+                              }
+                              e.preventDefault();
+                              // The updateArticleVotes votes argument may need to be changed.
+                              updateArticleVotes({ variables: { _id: this.props.articleId, votes: button.votes, userStance: userStance } })
+                              updateUserVotes({ variables: { _id: this.props.userId, completed_articles: JSON.stringify(userVoteInfo) } })
+                              this.submitVote();
+                            }}>
+                              {button.label}
+                            </Button>
+                          )
+                        })
+                      }
                       </div>
                     )
                   }}

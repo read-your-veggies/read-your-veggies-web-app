@@ -76,7 +76,7 @@ module.exports = [`
   }
 
   type Tally {
-    summedUserStance: Int
+    summedUserStance: Float
     totalVotes: Int
   }
 
@@ -91,7 +91,7 @@ module.exports = [`
       fullText: String): Article
     onboardUser(_id: String, onboard_info: String): User
     updateUserVotes(_id: String, completed_articles: String): User
-    updateArticleVotes(_id: String, votes: VoteInput): Article
+    updateArticleVotes(_id: String, votes: VoteInput, userStance: Float): Article
     updateUserHealth(_id: String, new_health: Int): User
     updateUserBrowsingHistory(_id: String, browsing_history: [String]): User
   }
