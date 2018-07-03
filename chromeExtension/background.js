@@ -41,15 +41,15 @@ function handleSiteVisit(details) {
     if (details.url.includes('https://localhost:5000/login')) {
       chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.executeScript(
-            tabs[0].id,
-            {code: `localStorage.setItem('readYourVeggies', '${browsingHistory}');`});
+          tabs[0].id,
+          {code: `localStorage.setItem('readYourVeggies', '${browsingHistory}');`});
       });
       console.log('dumping history', browsingHistory);
-    } else {
-      if (!details.url.includes('https://localhost:5000/')) {
+    } else if (details.url.includes('https://localhost:5000/dashboard')) {
+      browsingHistory = [];
+    } else if (!details.url.includes('https://localhost:5000/')) {
         browsingHistory.push(details.url);
         chrome.storage.sync.set({read_your_veggies_web_cache: browsingHistory});
-      }
     }
   }
 }

@@ -27,6 +27,8 @@ class Dashboard extends Component {
       this.setState({
         userId: id,
         browsingHistory: localStorage.getItem('readYourVeggies').split(','),
+      }, () => {
+        localStorage.setItem('readYourVeggies', '');
       });
     }
   }
@@ -54,8 +56,8 @@ class Dashboard extends Component {
             {/* UPDATE USER BROWSING HISTORY FROM CHROME EXTENSION */}
             <Mutation mutation={UPDATE_USER_BROWSING_HISTORY} >
             {(updateUserBrowsingHistory) => {
-              console.log('browsing history:', this.state.browsingHistory)
               updateUserBrowsingHistory({ variables: { _id: this.state.userId, browsing_history: this.state.browsingHistory } });
+              //remove browsing history after it has been added to the db;
               return (
                 null
                 )}}
