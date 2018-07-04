@@ -108,6 +108,7 @@ class ArticleCard extends React.Component {
       'AP': true,
       'will': true,
       'it': true,
+      'I': true,
       'its': true,
       'these': true,
       'but': true,

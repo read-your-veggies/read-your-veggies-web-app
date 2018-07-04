@@ -73,8 +73,8 @@ const getGraphQlSchema = async () => {
           // Take the current state and update the vote fields as necessary.
           for (var key in currentState.votes) {
             if (args.votes[key]) {
-              currentState.votes[key].totalVotes++
-              currentState.votes[key].summedUserStance += args.userStance
+              currentState.votes[key].totalVotes++;
+              currentState.votes[key].summedUserStance += args.userStance;
             }
           }
 
@@ -96,13 +96,18 @@ const getGraphQlSchema = async () => {
           let incomingArticle = JSON.parse(args.completed_articles);
           let incomingArticleKey = Object.keys(incomingArticle)[0];
 
-          console.log('incomming art', incomingArticle[incomingArticleKey].nutritionalValue);
-          console.log('incomming art', typeof incomingArticle[incomingArticleKey].nutritionalValue);
-
           previouslyCompletedArticles[incomingArticleKey] = incomingArticle[incomingArticleKey];
           
           var updatedReadingStance = calculateUserReadingStance(currentReadingStance, incomingArticle[incomingArticleKey]);
-          var updatedAggregateStance = calculateUserAggregateStance(userDocument.onboard_stance, userDocument.locPolRatio, userDocument.homePolRatio, updatedReadingStance);
+
+          var aggregates = {
+            onboardingStance: userDocument.onboard_stance,
+            localPolStance: userDocument.locPolRatio,
+            homePolStance: userDocument.homePolRatio,
+            browsingStance: userDocument.browsing_history_stance,
+            readingStance: updatedReadingStance,
+          }
+          var updatedAggregateStance = calculateUserAggregateStance(aggregates);
 
           const res = await Users.findOneAndUpdate(
             {_id: new mongodb.ObjectID(args._id)}, 
@@ -115,7 +120,7 @@ const getGraphQlSchema = async () => {
             }, 
             {returnOriginal:false}
           );
-          console.log(res.value);
+          
           return res.value
         },
 
@@ -128,38 +133,58 @@ const getGraphQlSchema = async () => {
         // },
 
         onboardUser: async (root, args) => {
-          console.log('onboardInfo: ', args.onboard_info);
-          console.log(typeof args.onboard_info);
+          let userDocument = prepare(await Users.findOne(new mongodb.ObjectID(args._id)));
+
           var onboardStance = calculateUserOnboardStance(args.onboard_info);
-          const res = await Users.findOneAndUpdate(
-            {_id: new mongodb.ObjectID(args._id)},
-            {$set:{
-              onboard_information: args.onboard_info,
-              onboard_stance: onboardStance,
-              }
-            },
-            {returnOriginal:false}
-          );
-          return res.value;
-        },
 
-        updateUserBrowsingHistory: async (root, args) => {
+          var aggregates = {
+            onboardingStance: onboardStance,
+            localPolStance: userDocument.locPolRatio,
+            homePolStance: userDocument.homePolRatio,
+            browsingStance: userDocument.browsing_history_stance,
+            readingStance: userDocument.reading_stance,
+          }
+          var updatedAggregateStance = calculateUserAggregateStance(aggregates);
 
-          const userDocument = prepare(await Users.findOne(new mongodb.ObjectID(args._id)));
-          const incomingBrowsingHistory = args.browsing_history.filter((item) => item !== '');
-          //update me!
-          var updatedBrowsingHistoryStance = calculateUserBrowsingStance(incomingBrowsingHistory, userDocument.browsing_history_stance );
-          // const updatedBrowsingHistory = userDocument.browsing_history.concat(incomingBrowsingHistory);
-          // console.log(updatedBrowsingHistory);
           const res = await Users.findOneAndUpdate(
             {_id: new mongodb.ObjectID(args._id)}, 
             {$set: {
-              // browsing_history: updatedBrowsingHistory,
-              browsing_history_stance: updatedBrowsingHistoryStance,
+              onboard_information: args.onboard_info,
+              onboard_stance: onboardStance,
+              user_stance: updatedAggregateStance,
               }
             }, 
             {returnOriginal:false}
           );
+          
+          return res.value;
+        },
+
+        updateUserBrowsingHistory: async (root, args) => {
+          const userDocument = prepare(await Users.findOne(new mongodb.ObjectID(args._id)));
+          const incomingBrowsingHistory = args.browsing_history.filter((item) => item !== '');
+          
+          var updatedBrowsingHistoryStance = calculateUserBrowsingStance(incomingBrowsingHistory, userDocument.browsing_history_stance);
+
+          var aggregates = {
+            onboardingStance: userDocument.onboard_stance,
+            localPolStance: userDocument.locPolRatio,
+            homePolStance: userDocument.homePolRatio,
+            browsingStance: updatedBrowsingHistoryStance,
+            readingStance: userDocument.reading_stance,
+          }
+          var updatedAggregateStance = calculateUserAggregateStance(aggregates);
+
+          const res = await Users.findOneAndUpdate(
+            {_id: new mongodb.ObjectID(args._id)}, 
+            {$set: {
+              browsing_history_stance: updatedBrowsingHistoryStance,
+              user_stance: updatedAggregateStance,
+              }
+            }, 
+            {returnOriginal:false}
+          );
+          
           return res.value;
         }
       }

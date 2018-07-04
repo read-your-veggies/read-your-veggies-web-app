@@ -101,7 +101,7 @@ Groopspeak
 Guardian Liberty Voice
 Guardians of Democracy
 Happy Foxie
-Huffington Post (HuffPost)
+HuffPost
 Impeach Donald Trump
 In Defence of Marxism
 Independent Reporter (Ir.Net)

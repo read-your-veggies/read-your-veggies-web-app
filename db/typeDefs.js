@@ -62,8 +62,6 @@ module.exports = [`
     disagree: Tally
     fun: Tally
     bummer: Tally
-    mean: Tally
-    worthyAdversary: Tally
   }
 
   input VoteInput {
