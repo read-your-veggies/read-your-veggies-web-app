@@ -28,6 +28,6 @@ export const calculateUserStance = function(onboardingStance, regionalPoliticsSt
 }
 
 
-export const calculateNutritionalValue = function(onboardStance, articleStance) {
-  return Math.round(Math.abs(onboardStance - articleStance) / 2 * 10); 
+export const calculateNutritionalValue = function(userStance, articleStance) {
+  return Math.round(Math.abs(userStance - articleStance) / 2 * 10); 
 }
