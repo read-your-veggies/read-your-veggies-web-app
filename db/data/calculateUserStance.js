@@ -1,3 +1,6 @@
+const sourceWeights = require('./allSourceWeights.js');
+const webSiteArray = Object.keys(sourceWeights);
+
 module.exports = {
 
   calculateUserOnboardStance: (onboardString) => {
@@ -16,52 +19,79 @@ module.exports = {
     } else {
       stance = (stance * Math.abs(viewOnParents)) / 10000;
     }
-    console.log(stance);
     return stance;
-
   },
 
   calculateUserReadingStance: (currentStance, completedArticle) => {
     var currentReadingStance = currentStance[0];
     var totalArticlesRead = currentStance[1];
     var tally = 0;
-    // console.log('current reading stance:', currentStance)
-    // console.log(completedArticle);
+
     let { userStance, articleStance, votes, nutritionalValue } = completedArticle;
+
     // calculate chasm 
     var chasm = Math.abs(userStance - articleStance) / 2;
+
     // add things
     if (votes.fun === true) {
-      tally += chasm;
+      tally += chasm / 2;
     }
     if (votes.agree === true) {
-      tally += chasm;
-    }
-    if (votes.worthyAdversary === true) {
-      tally += chasm;
+      tally += chasm / 2;
     }
     //subtract things
     if (votes.bummer === true) {
-      tally -= chasm;
+      tally -= chasm / 2;
     }
     if (votes.disagree === true) {
-      tally -= chasm;
+      tally -= chasm / 2;
     }
-    if (votes.mean === true) {
-      tally -= chasm;
+
+    // flip it if needed
+    if (userStance > articleStance) {
+      tally = tally * -1;
     }
+
     //get new average
     var aggregateOldStance = currentReadingStance * totalArticlesRead;
     var aggregateNewStance = (aggregateOldStance + tally) / (totalArticlesRead + 1);
-    // console.log('new reading stance:', [aggregateNewStance, totalArticlesRead + 1])
+  
     return [aggregateNewStance, totalArticlesRead + 1];
   },
 
-  calculateUserAggregateStance: (onboardingStance, localPolStance, homePolStance, readingStance) => {
-    // console.log('stances:', onboardingStance, localPolStance, homePolStance, readingStance)
-    return onboardingStance * 0.6 + localPolStance * 0.1 + homePolStance * 0.1 + readingStance[0] * 0.2;
-  }
-  
-  
+  calculateUserBrowsingStance: (incomingBrowsingHistory, currentBrowsingStance) => {
+    var incomingBrowsingStance = 0;
+    var incomingArticles = 0;
+
+    incomingBrowsingHistory.forEach(title => {
+      for (var i = 0; i < webSiteArray.length; i++) {
+        if (title.includes(webSiteArray[i])) {
+          incomingBrowsingStance += sourceWeights[webSiteArray[i]];
+          incomingArticles++;
+          break;
+        }
+      }
+    });
+
+    const normalizedBrowsingStance = currentBrowsingStance[0] * currentBrowsingStance[1];
+   
+    let updatedBrowsingStance =  (normalizedBrowsingStance + incomingBrowsingStance) / (currentBrowsingStance[1] + incomingArticles);
+    if (isNaN(updatedBrowsingStance)) {
+      updatedBrowsingStance = 0;
+    }
+
+    //returns stance between -1,1 and total articles read
+    return [updatedBrowsingStance, currentBrowsingStance[1] + incomingArticles];
+  },
+
+  calculateUserAggregateStance: ({onboardingStance, localPolStance, homePolStance, readingStance, browsingStance}) => {
+    onboardingStance = onboardingStance || 0;
+    localPolStance = localPolStance || 0;
+    homePolStance = homePolStance || 0;
+    readingStance = readingStance || [0, 0];
+    browsingStance = browsingStance || [0, 0];
+
+    return onboardingStance * 0.5 + localPolStance * 0.1 + homePolStance * 0.1 + readingStance[0] * 0.1 + browsingStance[0] * 0.2;
+  }, 
   
 }

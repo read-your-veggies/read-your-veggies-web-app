@@ -17,8 +17,8 @@ export const DELETE_ARTICLE = gql`
 
 // We should tweak the output, but its not that important
 export const UPDATE_ARTICLE_VOTES = gql`
-  mutation ($_id: String!, $votes: VoteInput) {
-    updateArticleVotes(_id: $_id, votes: $votes) {
+  mutation ($_id: String!, $votes: VoteInput, $userStance: Float) {
+    updateArticleVotes(_id: $_id, votes: $votes, userStance: $userStance) {
       _id
       url
       title
@@ -59,3 +59,11 @@ export const OFF_BOARD_USER = gql`
   }
 `
 
+export const UPDATE_USER_BROWSING_HISTORY = gql`
+  mutation ($_id: String!, $browsing_history: [String]!) {
+    updateUserBrowsingHistory(_id: $_id, browsing_history: $browsing_history) {
+      _id
+      browsing_history
+    }
+  }
+`

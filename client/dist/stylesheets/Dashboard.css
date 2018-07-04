@@ -1,10 +1,9 @@
-@import url("./ArticleCard.css");
-@import url("./OnboardModal.css");
+.dashboard {
+  height: 350px;
+}
 
-.grid {
-  display: flex;
-  /* flex-wrap: wrap; */
-  flex-direction: flex-start;
+.dashboard-container, .carousel, .carousel div, .carousel ul, .carousel li {
+  height: 100%;
 }
 
 .carousel-control.left, .carousel-control.right {
@@ -12,7 +11,33 @@
 }
 
 .articles-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  width: 50%;
+  height: 100%;
+  margin: auto;
+}
+
+.next-article-wrapper {
+  padding-top: 20px;
+}
+
+.next-article-wrapper button {
+  background-color: white !important;
+  border: 1px solid black;
+  color: black;
+  display: block;
+  margin: 0 auto;
+}
+
+.next-article-wrapper button:hover {
+  background-color: black !important;
+  color: white;
+}
+
+.next-article-wrapper button:focus {
+  background-color: white !important;
+  border: 1px solid black;
+  color: black;
+  display: block;
+  margin: 0 auto;
+  outline: none;
 }

@@ -7,8 +7,9 @@ import ArticleModal from './ArticleModal.jsx';
 import CompletedModal from './CompletedModal.jsx';
 import { DELETE_ARTICLE } from '../apollo/resolvers';
 import { GET_ARTICLES_FROM_SERVER, GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
-import { Mutation, ApolloConsumer } from "react-apollo";
+import { Query, Mutation, ApolloConsumer } from "react-apollo";
 import { calculateNutritionalValue } from '../lib/calculateStance.js';
+import { TagCloud } from "react-tagcloud";
 
 const updateCache = (cache, { data: { deleteArticle} }) => {
   console.log('cache', cache, deleteArticle);
@@ -31,6 +32,7 @@ class ArticleCard extends React.Component {
       showVoter: false,
       showCompleted: false,
       fullArticle: {},
+      wordCloud: [],
     };
 
     this.handleShow = this.handleShow.bind(this);
@@ -65,19 +67,94 @@ class ArticleCard extends React.Component {
 
   }
 
+  componentDidMount() {
+    var words = this.props.article.fullText.split(' ');
+    var badWords = {
+      'a': true, 
+      'the': true, 
+      'to': true, 
+      'and': true, 
+      'of': true, 
+      'in': true, 
+      'him': true, 
+      'her': true, 
+      'at': true,
+      'as': true,
+      'was': true,
+      'on': true,
+      'who': true,
+      'she': true,
+      'he': true,
+      'said': true,
+      'is': true,
+      'said': true,
+      'be': true,
+      'or': true,
+      'that': true,
+      'for': true,
+      '-': true,
+      '--': true,
+      'with': true,
+      'been': true,
+      'this': true,
+      'are': true,
+      'The': true,
+      'by': true,
+      'such': true,
+      'which': true,
+      'has': true,
+      'his': true,
+      'had': true,
+      'AP': true,
+      'will': true,
+      'it': true,
+      'I': true,
+      'its': true,
+      'these': true,
+      'but': true,
+    };
+    var wordsObj = {};
+    words.forEach(word => {
+      if (badWords[word] === undefined) {
+        if (wordsObj[word]) {
+          wordsObj[word]++;
+        } else {
+          wordsObj[word] = 1;
+        }
+      }  
+    })
+    var results = [];
+    for (var key in wordsObj) {
+      if (wordsObj[key] > 1) {
+        results.push({
+          value: key,
+          count: wordsObj[key]
+        })
+      }  
+    }
+    this.setState({
+      wordCloud: results,
+    })
+  }
+
   render() {
     return (
       <div className="article">
-        <Panel bsStyle="default">
-          <Panel.Heading>
+        <div className="article-thumbnail">
+          <img className="article-thumbnail-image" src={this.props.article.image} /> 
+        </div>
+        <Panel bsStyle="default" className="article-panel">
+          <Panel.Heading className="article-panel-heading">
+            
             {/* <Badge className='nutrition-count' style={{backgroundColor: 'transparent'}}pullRight>{this.renderCarrots()}</Badge> */}
             {this.renderCarrots()}
           </Panel.Heading>
-          <Panel.Body>
-            <img className="article-thumbnail" src={this.props.article.image} />
+          <Panel.Body className="article-panel-body">
+            <TagCloud minSize={40} maxSize={60} colorOptions={{hue: 'blue'}} tags={this.state.wordCloud}/>
             <ApolloConsumer>
               { client => (
-                <a       
+                <div className="read-now-wrapper">
+                <Button bsSize="large" bsStyle="success" className="read-now"       
                   onClick={async () => {
                     const {data} = await client.query({
                       query: GET_ONE_FULL_ARTICLE,
@@ -90,10 +167,11 @@ class ArticleCard extends React.Component {
                     })
                   }}
                 >
-                <h3 className="article-card-title">{this.props.article.title}</h3>
-              </a>
+                Read Now
+              </Button>
+              </div>
               )}
-            </ApolloConsumer>    
+            </ApolloConsumer>  
           </Panel.Body>
         </Panel>
 
