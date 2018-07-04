@@ -285,6 +285,108 @@ describe('helpers', () => {
       expect(readingStance).to.eql([0.025, 10]);
       done();
     })
+
+    it('handles pre-existing stances', done => {
+      var currentStance = [0.5, 9];
+      var newArticle = {
+        userStance: -0.5,
+        articleStance: 1,
+        votes: {
+          fun: true,
+          agree: true,
+          bummer: false,
+          disagree: false,
+        }
+      }
+      var readingStance = helpers.calculateUserReadingStance(currentStance, newArticle);
+      expect(readingStance).to.eql([0.525, 10]);
+      done();
+    })
+  })
+
+  describe('calculateUserBrowsingStance', () => {
+    it('liberal reader reads liberal sites', done => {
+      var currentStance = [-0.5, 8];
+      var history = [ 'The New York Times - Breaking News', 'Trump Administration Reverses Obama on Affirmative Action - The New York Times' ];
+      var stance = helpers.calculateUserBrowsingStance(history, currentStance);
+      expect(stance).to.eql([-0.5, 10]);
+      done();
+    })
+
+    it('liberal reader reads conservative sites', done => {
+      var currentStance = [-0.5, 8];
+      var history = [ 'Breitbart News Network', 'National Review' ];
+      var stance = helpers.calculateUserBrowsingStance(history, currentStance);
+      expect(stance).to.eql([-0.2, 10]);
+      done();
+    })
+
+    it('conservative reader reads liberal sites', done => {
+      var currentStance = [0.5, 8];
+      var history = [ 'The New York Times - Breaking News', 'Trump Administration Reverses Obama on Affirmative Action - The New York Times' ];
+      var stance = helpers.calculateUserBrowsingStance(history, currentStance);
+      expect(stance).to.eql([0.3, 10]);
+      done();
+    })
+
+    it('conservative reader reads conservative sites', done => {
+      var currentStance = [0.5, 8];
+      var history = [ 'Breitbart News Network', 'National Review' ];
+      var stance = helpers.calculateUserBrowsingStance(history, currentStance);
+      expect(stance).to.eql([0.6, 10]);
+      done();
+    })
+
+    it('ignores non-news sites', done => {
+      var currentStance = [-0.5, 8];
+      var history = [ 'The New York Times - Breaking News', 'Google Keep', 'Trump Administration Reverses Obama on Affirmative Action - The New York Times' ];
+      var stance = helpers.calculateUserBrowsingStance(history, currentStance);
+      expect(stance).to.eql([-0.5, 10]);
+      done();
+    })
+
+    it('does not exceed -1', done => {
+      var currentStance = [-1, 8];
+      var history = [ 'HuffPost' ];
+      var stance = helpers.calculateUserBrowsingStance(history, currentStance);
+      expect(stance).to.eql([-1, 9]);
+      done();
+    })
+
+    it('does not exceed 1', done => {
+      var currentStance = [1, 8];
+      var history = [ 'Fox News' ];
+      var stance = helpers.calculateUserBrowsingStance(history, currentStance);
+      expect(stance).to.eql([1, 9]);
+      done();
+    })
+  })
+
+  describe('calculateAggregateStance', () => {
+    it('calculates aggregate stance', done => {
+      var aggregates = {
+        onboardingStance: -0.5,
+        localPolStance: -0.7,
+        homePolStance: 0.1,
+        browsingStance: [-0.2, 10],
+        readingStance: [0.8, 10],
+      }
+      var stance = helpers.calculateUserAggregateStance(aggregates);
+      expect(stance).to.equal(-0.27);
+      done();
+    })
+
+    it('is unaffected by a missing value', done => {
+      var aggregates = {
+        onboardingStance: -0.5,
+        localPolStance: -0.7,
+        homePolStance: 0.1,
+        browsingStance: [-0.2, 10],
+      }
+      var stance = helpers.calculateUserAggregateStance(aggregates);
+      expect(stance).to.equal(-0.35);
+      done();
+    })
   })
 })
 

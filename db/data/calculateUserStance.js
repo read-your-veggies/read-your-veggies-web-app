@@ -60,35 +60,38 @@ module.exports = {
   },
 
   calculateUserBrowsingStance: (incomingBrowsingHistory, currentBrowsingStance) => {
-    console.log('incomingBrowsingHistory is', incomingBrowsingHistory);
-    console.log('currentBrowsingStance is', currentBrowsingStance);
-
     var incomingBrowsingStance = 0;
     var incomingArticles = 0;
 
-    incomingBrowsingHistory.forEach((title) => {
-      webSiteArray.forEach((site) => {
-        if (title.includes(site)) {
-          incomingBrowsingStance += sourceWeights[site];
+    incomingBrowsingHistory.forEach(title => {
+      for (var i = 0; i < webSiteArray.length; i++) {
+        if (title.includes(webSiteArray[i])) {
+          incomingBrowsingStance += sourceWeights[webSiteArray[i]];
           incomingArticles++;
+          break;
         }
-      });
+      }
     });
 
     const normalizedBrowsingStance = currentBrowsingStance[0] * currentBrowsingStance[1];
-    // console.log(normalizedBrowsingStance);
+   
     let updatedBrowsingStance =  (normalizedBrowsingStance + incomingBrowsingStance) / (currentBrowsingStance[1] + incomingArticles);
     if (isNaN(updatedBrowsingStance)) {
       updatedBrowsingStance = 0;
     }
-    console.log('updatedbrowsingstance', updatedBrowsingStance);
+
     //returns stance between -1,1 and total articles read
     return [updatedBrowsingStance, currentBrowsingStance[1] + incomingArticles];
   },
 
-  calculateUserAggregateStance: (onboardingStance, localPolStance, homePolStance, readingStance) => {
-    // console.log('stances:', onboardingStance, localPolStance, homePolStance, readingStance)
-    return onboardingStance * 0.6 + localPolStance * 0.1 + homePolStance * 0.1 + readingStance[0] * 0.2;
+  calculateUserAggregateStance: ({onboardingStance, localPolStance, homePolStance, readingStance, browsingStance}) => {
+    onboardingStance = onboardingStance || 0;
+    localPolStance = localPolStance || 0;
+    homePolStance = homePolStance || 0;
+    readingStance = readingStance || [0, 0];
+    browsingStance = browsingStance || [0, 0];
+
+    return onboardingStance * 0.5 + localPolStance * 0.1 + homePolStance * 0.1 + readingStance[0] * 0.1 + browsingStance[0] * 0.2;
   }, 
   
 }
