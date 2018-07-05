@@ -1,16 +1,14 @@
 require('dotenv').config();
+const mongoose = require('mongoose');
 
-var mongoose = require('mongoose');
-
-
-//connect to local db
-// const db = mongoose.createConnection('mongodb://localhost/readyourveggies');
-// db.on('error', function(err){
-//   if(err) throw err;
-// });
-// db.once('open', function callback () {
-//   console.info('connected to local db');
-// });
+//connect to local test db
+const testDbConn = mongoose.createConnection('mongodb://localhost:27017/testDatabase');
+testDbConn.on('error', function(err){
+  if(err) throw err;
+});
+testDbConn.once('open', function callback () {
+  console.info('connected to local test db');
+});
 
 //connect to user db
 const userDbConn = mongoose.createConnection(process.env.USERS_DATABASE_PATH);
@@ -39,4 +37,4 @@ sourceDbConn.once('open', function callback () {
   console.info('connected to sources db');
 });
 
-module.exports = { userDbConn, articleDbConn, sourceDbConn  };
+module.exports = { userDbConn, articleDbConn, sourceDbConn, testDbConn  };

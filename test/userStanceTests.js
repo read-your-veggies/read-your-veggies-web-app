@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const helpers = require('../db/data/calculateUserStance.js');
+const helpers = require('../db/data/helpers.js');
 
 describe('helpers', () => {
   describe('calculateUserOnboardStance', () => {
