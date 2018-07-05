@@ -1,20 +1,59 @@
 const expect = require('chai').expect;
-const helpers = require('../db/data/calculateUserStance.js');
-const testDatabasePath = process.env.TEST_DATABASE_PATH || 'mongodb://localhost/testDatabase';
+const testDbConn = require('../db/index.js').testDbConn;
+const Articles = testDbConn.collection('articles');
+const Users = testDbConn.collection('users');
+const Sources = testDbConn.collection('sources');
+const resolvers = require('../db/resolvers.js');
 
 describe('graphQl resolvers', () => {
   before(done => {
-    mongoose.connect(testDatabasePath);
-    const db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'connection to test database error'));
-    db.once('open', function() {
-      console.log('Connected to test database for graphQl resolvers tests');
-      done();
-    });
+   let dummyArticles = [
+     {
+      _id: 1,
+      title: "Test title 1",
+     },
+     {
+      _id: 2,
+      title: "Test title 2",
+     },
+   ];
+   let dummyUsers = [
+     {
+       _id: 3,
+       name: "Chuck",
+     },
+     {
+       _id: 4,
+       name: "Phil",
+     }
+   ];
+   let dummySources = [
+     {
+       _id: 5,
+       name: "Test source 1",
+     },
+     {
+       _id: 6,
+       name: "Test source 2",
+     }
+   ];
+   Articles.insertMany(dummyArticles);
+   Users.insertMany(dummyUsers);
+   Sources.insertMany(dummySources);
+   done();
   });
 
-  describe('onboarding', () => {
-    
+  after(() => {
+    Articles.remove({});
+    Users.remove({});
+    Sources.remove({});
+  });
+
+  describe('queries', () => {
+    it('message', done => {
+      expect(resolvers.Query.message()).to.equal('Hello From GraphQL Server!');
+      done();
+    });
   })
 
 })

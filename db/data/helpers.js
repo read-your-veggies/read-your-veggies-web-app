@@ -2,7 +2,7 @@ const sourceWeights = require('./allSourceWeights.js');
 const webSiteArray = Object.keys(sourceWeights);
 
 module.exports = {
-
+  
   calculateUserOnboardStance: (onboardString) => {
     if (onboardString == undefined || onboardString === 'NEED_ON_BOARDING') {
       return 0;
