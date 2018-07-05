@@ -19,7 +19,7 @@
 }
 
 .small-speedometer-click-wrapper {
-  border-radius: 100px;
+  border-radius: 10px;
   background-color: #dff0d8;
   padding: 5px;
 }
@@ -38,4 +38,14 @@
 
 #logout-button{
   align-self: center;
+}
+
+#line-start{
+  float: left;
+  padding-left: 10%;
+}
+
+#line-end{
+  float: right;
+  padding-right: 10%;
 }
