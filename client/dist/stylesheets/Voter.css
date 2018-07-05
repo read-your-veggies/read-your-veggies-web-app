@@ -1,12 +1,23 @@
+.modal-body {
+  display: flex;
+  flex-direction: flex-start;
+}
+
+
 .voting-panel {
   font-weight: 200 !important;
   text-align: center;
-  width: 100%
+  width: 100%;
+  height: 600px;
+}
+
+.button {
+  height: 75px;
 }
 
 .agree-enjoy {
   position: absolute;
-  top: 35%;
+  top: 25%;
   left: 25%;
   /* width: 100px;
   height: 100px;
@@ -15,7 +26,7 @@
 
 .agree-dislike {
   position: absolute;
-  top: 35%;
+  top: 25%;
   right: 25%;
 }
 
