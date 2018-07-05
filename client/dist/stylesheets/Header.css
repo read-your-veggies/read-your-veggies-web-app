@@ -1,8 +1,10 @@
 .header {
   display: flex;
   justify-content: space-around;
-  box-shadow:  0 5px 6px rgba(25, 120, 29, .5);
+  /* box-shadow:  0 5px 6px rgb(25, 120, 29); */
+  border-bottom: 4px solid grey;
   margin-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .header h2 {
@@ -16,13 +18,12 @@
 
 #read-your-veggies {
   font-family: 'Pacifico', cursive;
-  color: #ff77e8;
-  font-size: 4em;
+  font-size: 3em;
 }
 
 #read-your-veggies:hover {
   cursor: pointer;
-  color: #337ab7;
+  color: #ff77e8;
 }
 
 #logo-container {
@@ -35,7 +36,6 @@
   height: 9em;
   align-self: center;
   max-width: 100%;
-  border-radius: 4.5em;
 }
 
 #logo:hover {

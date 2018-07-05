@@ -13,7 +13,12 @@ class Voter extends React.Component {
   constructor(props) {
     super(props);
 
-    // State was no longer needed and has been removed.
+    this.state = {    // Remove these state variables.
+      agree: false,
+      disagree: false,
+      fun: false,
+      bummer: false,
+    }
 
     this.submitVote = this.submitVote.bind(this);
   }
