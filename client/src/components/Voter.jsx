@@ -58,6 +58,11 @@ class Voter extends React.Component {
                   {(updateUserVotes) => {
                     return (
                       <div>
+                        <div className="agree">Agree</div>
+                        <div className="disagree">Disagree</div>
+                        <div className="like">Like</div>
+                        <div className="dislike">Dislike</div>
+
                       {
                         buttons.map( (button) => {
                           return (
