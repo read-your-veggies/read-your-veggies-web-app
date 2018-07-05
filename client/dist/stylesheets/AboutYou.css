@@ -5,6 +5,5 @@
 
 #about-you-inner-content {
   flex-basis: 80%;
-  overflow: scroll;
-  height: 100%;
+  overflow-y: scroll;
 }

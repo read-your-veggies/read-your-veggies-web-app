@@ -10,13 +10,20 @@ import Sidebar from './Sidebar.jsx';
 class AboutYou extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      divHeight: '',
+    }
+  }
+
+  componentDidMount() {
+    this.setState({divHeight: window.innerHeight - 147 + 'px'});
   }
 
   render() {
     return (
       <div id='about-you-dash'>
         <Sidebar />
-        <div id='about-you-inner-content'>
+        <div id='about-you-inner-content' style={{height: this.state.divHeight}}>
           <Query query={GET_USER_INFO}>
               {(({data}) => {
                 return (

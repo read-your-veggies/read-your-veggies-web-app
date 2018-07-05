@@ -16,6 +16,8 @@ class Sidebar extends Component {
       divHeight: ''
     };
     this.handleSpeedometerClick = this.handleSpeedometerClick.bind(this);
+    this.goToAboutUs= this.goToAboutUs.bind(this);
+
   }
 
   componentDidMount() {
@@ -25,6 +27,12 @@ class Sidebar extends Component {
 
   handleSpeedometerClick() {
     this.props.history.push('/report');
+  }
+
+  goToAboutUs(displayName) {
+    if (displayName !== 'Login') {
+      this.props.history.push('/about');
+    }
   }
 
   render() {
@@ -58,7 +66,7 @@ class Sidebar extends Component {
                           </div>
                         </OverlayTrigger>
                       {' '}</a>
-                      <div id='sidebar-about-container'>
+                      <div id='sidebar-about-container' onClick={this.goToAboutUs}>
                         <h3>About</h3>
                       </div>
                     </div>
