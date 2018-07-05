@@ -9,10 +9,7 @@ var session = require('express-session');
 var path = require('path');
 var authMiddleware = require('./authMiddleware.js');
 var requestLogger = require('./utilities.js').requestLogger;
-var articleHelpers = require('../db/articleHelpers.js');
 var getGraphQlSchema = require('../db/graphql.js').getGraphQlSchema;
-var dummyTweets = require('../db/data/dummyTweets.json');
-var watson = require('../db/watson.js');
 
 var app = express();
 app.use(requestLogger);
@@ -89,15 +86,3 @@ if (process.env.DEPLOYED !== 'true') {
     console.log(`listening on port ${port}!`);
   });
 }
-
-/*****************************WORKERS*****************************/
-// articleHelpers.deleteArticles();
-// articleHelpers.scrapeArticles();
-
-/*****************************WATSON*****************************/
-// watson.getWatsonProfile(dummyTweets, personality => {
-//   console.log(personality);
-// });
-// watson.updateSourcesDb();
-//watson.updateSinglePersonality('The Huffington Post', 'fullTexts');
-// watson.updateAllPersonalities();
