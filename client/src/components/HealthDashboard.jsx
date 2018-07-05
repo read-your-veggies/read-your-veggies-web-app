@@ -6,6 +6,7 @@ import { GET_USER_HEALTH } from '../apollo/serverQueries.js';
 import Button from 'react-bootstrap/lib/Button';
 import HealthSpeedometer from './HealthSpeedometer.jsx';
 import CompletedArticles from './CompletedArticles.jsx';
+import Sidebar from './Sidebar.jsx';
 
 class HealthDashboard extends React.Component {
   constructor(props) {
@@ -24,7 +25,9 @@ class HealthDashboard extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id='health-dashboard'>
+        <Sidebar />
+          <div id='health-dashboard-inner-content'>
         <Mutation mutation={OFF_BOARD_USER} >
           {(offBoardUser) => {
           return (
@@ -60,6 +63,7 @@ class HealthDashboard extends React.Component {
           }}
         </Query>
         <CompletedArticles />
+        </div>
       </div>
     );
   }

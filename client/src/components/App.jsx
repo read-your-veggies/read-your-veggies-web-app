@@ -8,6 +8,7 @@ import AboutUs from './AboutUs.jsx';
 import HealthDashboard from './HealthDashboard.jsx';
 import {GET_USER_INFO} from '../apollo/localQueries.js';
 import { Query } from "react-apollo";
+import AboutYou from './AboutYou.jsx';
 
 
 class App extends Component {
@@ -48,6 +49,14 @@ class App extends Component {
               <Query query={GET_USER_INFO}>
               {(getUserInfo => 
                 <AboutUs location = {location} getUserInfo = {getUserInfo} />)}
+              </Query>
+            }
+          />
+          <Route path={"/report"}
+            component={() => 
+              <Query query={GET_USER_INFO}>
+              {(getUserInfo => 
+                <AboutYou location = {location} getUserInfo = {getUserInfo} />)}
               </Query>
             }
           />
