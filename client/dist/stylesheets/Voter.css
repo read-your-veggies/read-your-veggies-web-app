@@ -20,24 +20,28 @@
   position: absolute;
   top: 35%;
   left: 15%;
+  font-size: 1.5em;
 }
 
 .disagree {
   position: absolute;
-  top: 70%;
+  top: 68%;
   left: 15%;
+  font-size: 1.5em;
 }
 
 .like {
   position: absolute;
   top: 20%;
   left: 34%;
+  font-size: 1.5em;
 }
 
 .dislike {
   position: absolute;
   top: 20%;
   right: 33%;
+  font-size: 1.5em;
 }
 
 .agree-enjoy {
