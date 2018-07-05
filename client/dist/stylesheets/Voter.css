@@ -1,18 +1,65 @@
-.form-group {
+.modal-body {
   display: flex;
   flex-direction: flex-start;
 }
 
-.voter-form-left, .voter-form-right {
-  font-size: 1em;
-}
 
-.voter-form button {
-  display: block;
-  margin: 0 auto;
-}
-
-.voting-panel div h3 {
+.voting-panel {
   font-weight: 200 !important;
   text-align: center;
+  width: 100%;
+  height: 700px;
+}
+
+.button {
+  height: 0px;
+  border: none;
+}
+
+.agree {
+  position: absolute;
+  top: 35%;
+  left: 15%;
+}
+
+.disagree {
+  position: absolute;
+  top: 70%;
+  left: 15%;
+}
+
+.like {
+  position: absolute;
+  top: 20%;
+  left: 34%;
+}
+
+.dislike {
+  position: absolute;
+  top: 20%;
+  right: 33%;
+}
+
+.agree-enjoy {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+}
+
+.agree-dislike {
+  position: absolute;
+  top: 25%;
+  right: 25%;
+}
+
+.disagree-enjoy {
+  position: absolute;
+  bottom: 40%;
+  left: 25%;
+}
+
+.disagree-dislike {
+  position: absolute;
+  bottom: 40%;
+  right: 25%;
 }
