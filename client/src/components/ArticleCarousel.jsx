@@ -4,6 +4,8 @@ import { GET_ARTICLES_FROM_SERVER } from '../apollo/serverQueries';
 import ArticleCard from './ArticleCard.jsx';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
+import { calculateNutritionalValue } from '../lib/calculateStance.js';
+
 
 
 class ArticleCarousel extends Component {
@@ -39,15 +41,24 @@ class ArticleCarousel extends Component {
               visibleSlides={1}
             >        
               <Slider>
-                {data.articles.map((article, i) => (
-                    <Slide index={i}>
+                {console.log('user data for carousel', this.props.userData)}
+                {data.articles.map((article, i) => {
+
+                  let carrotCount = calculateNutritionalValue(this.props.userData.user_stance, article.articleStance);
+                  // IF article meets certain criteria THEN we display it here.
+                  // Need to know how many carrots.
+                  if (carrotCount > 0) {
+                    return (
+                      <Slide index={i}>
                       <ArticleCard 
                         article={article}
                         userId={this.props.userData._id}
                         userStance={this.props.userData.user_stance}
                       />
-                    </Slide>
-                ))}
+                      </Slide>
+                    )
+                  }
+                })}
               </Slider>
               {/* <ButtonBack>Back</ButtonBack> */}
               <div className="next-article-wrapper">

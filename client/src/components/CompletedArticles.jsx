@@ -17,6 +17,7 @@ class CompletedArticles extends React.Component {
             return (
               <Query query={GET_COMPLETED_ARTICLES} variables={{ _id: data.userInfo.userId }}>
                 {({ loading, error, data }) => {
+                  console.log('articles completed', data);
                   if (loading) return "Loading...";
                   if (error) return `Error! ${error.message}`;
                   var completedArticleInfo = JSON.parse(data.user.completed_articles);
