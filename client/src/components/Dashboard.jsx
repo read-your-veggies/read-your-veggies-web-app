@@ -6,6 +6,7 @@ import ArticleCarousel from './ArticleCarousel.jsx';
 import OnboardModal from './OnboardModal.jsx';
 import { GET_USER_ONBOARD_INFO, GET_USER_ONBOARD_INFO_AND_STANCE } from '../apollo/serverQueries.js';
 import {UPDATE_USER_BROWSING_HISTORY} from '../apollo/resolvers.js'
+import Sidebar from './Sidebar.jsx';
 
 class Dashboard extends Component {
 
@@ -18,6 +19,7 @@ class Dashboard extends Component {
       onboardInformation: null,
       userData: null,
       browsingHistory: [],
+      divHeight: '',
     }
   }
 
@@ -34,6 +36,8 @@ class Dashboard extends Component {
       this.setState({
         userId: id,
         browsingHistory: userBrowsingHistory,
+        //subtract 147 px (size of header);
+        divHeight: window.innerHeight - 147 + 'px',
       }, () => {
         localStorage.setItem('readYourVeggies', '');
       });
@@ -44,6 +48,7 @@ class Dashboard extends Component {
   render() {
     return(
       <div className="dashboard">
+        <Sidebar />
         {this.state.onboardInformation === null
           ?
           <div>
@@ -77,7 +82,7 @@ class Dashboard extends Component {
           ?
           null
           :
-          <div className="dashboard-container">
+          <div className="dashboard-container" style={{height: this.state.divHeight}}>
             {/* <h1>Your Weekly Goal: {JSON.parse(this.state.onboardInformation).veggieSlider}</h1> */}
             <ArticleCarousel userData={this.state.userData}  />
           </div>
