@@ -16,8 +16,14 @@ class ArticleCarousel extends Component {
     
     this.state = {
       user_stance: 0,
-      completedArticleKeys: [],
+      currentArticleId: null,
     }
+
+    this.setCurrentArticleId = this.setCurrentArticleId.bind(this);
+  }
+
+  setCurrentArticleId(id) {
+    this.setState({currentArticleId: id});
   }
 
   render() {
@@ -32,6 +38,7 @@ class ArticleCarousel extends Component {
           return (
             <Query query={GET_ARTICLES_FROM_SERVER}>
               {({ loading, error, data }) => {
+                console.log(completedArticleKeys)
                 if (loading) return "Loading...";
                 if (error) return `Error! ${error.message}`;
                 return (
@@ -43,27 +50,25 @@ class ArticleCarousel extends Component {
                     // naturalSlideHeight={200}
                     totalSlides={50}
                     visibleSlides={1}
-                    >        
+                  >        
                     <Slider>
                       {data.articles.map((article, i) => {
-                        
                         let carrotCount = calculateNutritionalValue(this.props.userData.user_stance, article.articleStance);
-                        // IF article meets certain criteria THEN we display it here.
-                        // Need to know how many carrots.
-                        if (carrotCount > 0) {
+                        
+                        if ( (carrotCount > 0 && completedArticleKeys.indexOf(article._id) < 0) || this.state.currentArticleId === article._id ) {
                           return (
                             <Slide index={i}>
-                            <ArticleCard 
-                              article={article}
-                              userId={this.props.userData._id}
-                              userStance={this.props.userData.user_stance}
+                              <ArticleCard 
+                                article={article}
+                                userId={this.props.userData._id}
+                                userStance={this.props.userData.user_stance}
+                                setCurrentArticleId={this.setCurrentArticleId}
                               />
                             </Slide>
                           )
                         }
                       })}
                     </Slider>
-                    {/* <ButtonBack>Back</ButtonBack> */}
                     <div className="next-article-wrapper">
                       <ButtonNext className="btn btn-info btn-sm" >Nah, show me another article</ButtonNext>
                     </div>
