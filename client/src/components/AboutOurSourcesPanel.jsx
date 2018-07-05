@@ -48,7 +48,7 @@ class AboutOurSourcesPanel extends React.Component {
   }
 
   setPersonality(data) {
-    if (data.source.fullTextsPersonality !== null) {
+    if (data.source.fullTextsPersonality) {
       var parsedData = JSON.parse(data.source.fullTextsPersonality);
       var newData = {};
   
