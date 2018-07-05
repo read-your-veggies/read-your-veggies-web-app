@@ -40,7 +40,5 @@
 }
 
 #logo:hover {
-  box-shadow:  6px 1px 6px rgba(0, 0, 0, .5);
-  background-color: #dff0d8;
   cursor: pointer;
 }

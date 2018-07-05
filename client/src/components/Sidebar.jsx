@@ -5,6 +5,7 @@ import {GET_USER_INFO} from '../apollo/localQueries.js';
 import HealthSpeedometer from './HealthSpeedometer.jsx';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -14,6 +15,9 @@ class Sidebar extends Component {
     this.state = {
       divHeight: ''
     };
+    this.handleSpeedometerClick = this.handleSpeedometerClick.bind(this);
+    this.goToAboutUs= this.goToAboutUs.bind(this);
+
   }
 
   componentDidMount() {
@@ -21,8 +25,18 @@ class Sidebar extends Component {
     this.setState({divHeight: window.innerHeight - 147 + 'px'});
   }
 
+  handleSpeedometerClick() {
+    this.props.history.push('/report');
+  }
+
+  goToAboutUs(displayName) {
+    if (displayName !== 'Login') {
+      this.props.history.push('/about');
+    }
+  }
+
   render() {
-    var tooltip = <Tooltip id="modal-tooltip">Learn More</Tooltip>;
+    var tooltip = <Tooltip id="modal-tooltip">See Your Report</Tooltip>;
 
     return (
       <div id='dash-sidebar' style={{height: this.state.divHeight}}>
@@ -35,11 +49,11 @@ class Sidebar extends Component {
                   if (error) return `Error! ${error.message}`;
                   var userStance = JSON.parse(data.user.user_stance);
                   return (
-                    <div>
-                      <a href='#'>{' '}
+                    <div id='dash-sidebar-inner'>
+                      <a onClick = {this.handleSpeedometerClick}>{' '}
                         <OverlayTrigger overlay={tooltip}>
                           <div id='sidebar-pol-stance'>
-                            <h3 id='stance-title'>Your Read-Your-Veggies Stance:</h3>
+                            <h3 id='stance-title'>Your Veggies Stance:</h3>
                             <HealthSpeedometer 
                               height={100}
                               width={150}
@@ -52,6 +66,9 @@ class Sidebar extends Component {
                           </div>
                         </OverlayTrigger>
                       {' '}</a>
+                      <div id='sidebar-about-container' onClick={this.goToAboutUs}>
+                        <h3>About</h3>
+                      </div>
                     </div>
                   );
                 }}
@@ -65,4 +82,4 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar;
+export default withRouter(Sidebar);
