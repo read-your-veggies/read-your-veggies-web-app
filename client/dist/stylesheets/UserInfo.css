@@ -20,13 +20,20 @@
 
 .small-speedometer-click-wrapper {
   border-radius: 100px;
-  background-color: seashell;
+  background-color: #dff0d8;
+  padding: 5px;
 }
 
 .small-speedometer-click-wrapper:hover {
-  box-shadow:  6px 1px 6px rgba(0, 0, 0, .5);
-  background-color: #dff0d8;
+  background-color: #bbdfad;
   cursor: pointer;
+}
+
+.rc-progress-line {
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+  padding-bottom: 10px;
 }
 
 #logout-button{

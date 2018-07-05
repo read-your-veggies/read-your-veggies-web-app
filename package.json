@@ -44,6 +44,7 @@
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "pure-react-carousel": "^1.13.2",
+    "rc-progress": "^2.2.5",
     "react": "16.4.0",
     "react-apollo": "^2.1.6",
     "react-bootstrap": "^0.32.1",
@@ -52,6 +53,7 @@
     "react-easy-chart": "^1.0.0",
     "react-rangeslider": "^2.2.0",
     "react-router-dom": "^4.3.1",
+    "react-sidebar": "^2.3.2",
     "react-tagcloud": "^1.2.1",
     "unfluff": "^3.0.1",
     "watson-developer-cloud": "^3.5.1"

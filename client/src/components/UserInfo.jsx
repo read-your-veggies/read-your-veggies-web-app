@@ -5,6 +5,7 @@ import Tooltip from 'react-bootstrap/lib/Tooltip';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import { GET_USER_HEALTH } from '../apollo/serverQueries.js';
 import { Query } from "react-apollo";
+import { Line } from 'rc-progress';
 
 
 
@@ -47,15 +48,8 @@ class UserInfo extends React.Component {
               if (error) return `Error! ${error.message}`;
               return (
                 <div>
-                <HealthSpeedometer 
-                  height={100}
-                  width={150}
-                  value = {data.user.health}
-                  startColor="white"
-                  endColor="green"
-                  min={0}
-                  max={50}
-                />
+                  <p>Weekly Media Health:</p>
+                  <Line percent={data.user.health / 50} strokeWidth={4} trailWidth={4} strokeColor="red" />
                 </div>
               );
             }}

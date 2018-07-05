@@ -1,8 +1,10 @@
 import React from 'react';
 import Panel from 'react-bootstrap/lib/Panel';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
 import Button from 'react-bootstrap/lib/Button';
-import Checkbox from 'react-bootstrap/lib/Checkbox';
+import Grid from 'react-bootstrap/lib/Grid';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
+import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import { UPDATE_ARTICLE_VOTES, UPDATE_USER_VOTES } from '../apollo/resolvers';
 import { Mutation } from "react-apollo";
 import Modal from 'react-bootstrap/lib/Modal';
@@ -21,41 +23,34 @@ class Voter extends React.Component {
       bummer: false,
     }
 
-    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);  // Removing checkboxes
     this.submitVote = this.submitVote.bind(this);
   }
 
-  handleCheckboxChange (e) {     // Removing checkboxes
-    this.setState({
-      [e.target.value]: !this.state[e.target.value]
-    });
-  }
-
   // When done, close this modal, open the CompletedModal
-  submitVote() {    // Submit vote will take arguments for agree/disagree, and enjoyed/disliked
+  submitVote() {
     this.props.handleClose('voter');
     this.props.handleShow('completed');
   }
 
   render() {
     const buttons = [
-      {label: "Agreed and Enjoyed", votes: {agree: true, fun: true}},
-      {label: "Agreed and Disliked", votes: {agree: true, bummer: true}},
-      {label: "Disagreed and Enjoyed", votes: {disagree: true, fun: true}},
-      {label: "Disagreed and Disliked", votes: {disagree: true, bummer: true}},      
+      {label: "grin.png", votes: {agree: true, fun: true}, class: "agree-enjoy", style: "success"},
+      {label: "meh.png", votes: {agree: true, bummer: true}, class: "agree-dislike", style: "primary"},
+      {label: "think.png", votes: {disagree: true, fun: true}, class: "disagree-enjoy", style: "warning"},
+      {label: "argh.png", votes: {disagree: true, bummer: true}, class: "disagree-dislike", style: "danger"},      
     ]
 
     return (
-      <Modal show={this.props.show} onHide={() => this.props.handleClose('voter')}>
+      <Modal bsSize="large" show={this.props.show} onHide={() => this.props.handleClose('voter')}>
       <Modal.Body>
         <Panel bsStyle="info" className="voting-panel">
         <Panel.Heading>
-          <h3>Vote on this article!</h3>
+          <h3>How did you feel about the article?</h3>
         </Panel.Heading>
         <Panel.Body>
-        <form className="voter-form">
 
-          {/* How much of the button functionality can be offloaded to a helper function? */}
+
+      
           <Mutation mutation={UPDATE_ARTICLE_VOTES} >
             { (updateArticleVotes) => {
               return (
@@ -63,27 +58,31 @@ class Voter extends React.Component {
                   {(updateUserVotes) => {
                     return (
                       <div>
+                        <div className="agree">Agree</div>
+                        <div className="disagree">Disagree</div>
+                        <div className="like">Like</div>
+                        <div className="dislike">Dislike</div>
+
                       {
                         buttons.map( (button) => {
                           return (
-                            <Button bsStyle="primary" onClick={(e) => {
+                            <Button className={"button " + button.class} onClick={(e) => {
                               let { articleId, userId, articleStance, userStance, nutritionalValue } = this.props;  
                         
                               let userVoteInfo = {};
                               userVoteInfo[articleId] = {
                                 'articleStance': articleStance,
-                                'votes': this.state,
+                                'votes': button.votes,
                                 'userStance': userStance,
                                 'completed': Date.now(),
                                 'nutritionalValue': nutritionalValue,
                               }
                               e.preventDefault();
-                              // The updateArticleVotes votes argument may need to be changed.
                               updateArticleVotes({ variables: { _id: this.props.articleId, votes: button.votes, userStance: userStance } })
                               updateUserVotes({ variables: { _id: this.props.userId, completed_articles: JSON.stringify(userVoteInfo) } })
                               this.submitVote();
                             }}>
-                              {button.label}
+                              <img id="button" src={`./assets/${button.label}`} />
                             </Button>
                           )
                         })
@@ -92,16 +91,17 @@ class Voter extends React.Component {
                     )
                   }}
                 </Mutation >
-                )}}
-                </Mutation>
-              </form>
-              </Panel.Body>
-              </Panel>
+              )
+            }}
+          </Mutation>
+        </Panel.Body>
+        </Panel>
       </Modal.Body>
+      <Modal.Footer>
+      </Modal.Footer>
       </Modal>
     )
   }
-  
 }
 
 export default withRouter(Voter);
