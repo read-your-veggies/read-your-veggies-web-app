@@ -5,6 +5,8 @@ import ArticleCard from './ArticleCard.jsx';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { calculateNutritionalValue } from '../lib/calculateStance.js';
+import { GET_ONE_FULL_ARTICLE, GET_COMPLETED_ARTICLES } from '../apollo/serverQueries.js';
+
 
 
 
@@ -14,59 +16,63 @@ class ArticleCarousel extends Component {
     
     this.state = {
       user_stance: 0,
+      completedArticleKeys: [],
     }
   }
 
   render() {
     return (
-      <Query query={GET_ARTICLES_FROM_SERVER}>
+      <Query query={GET_COMPLETED_ARTICLES} variables={{ _id: this.props.userData._id }}>
         {({ loading, error, data }) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
-          return (
-            <div className="articles-container">
-              {/* {data.articles.map((article, i) => (
-                <ArticleCard 
-                  article={article}
-                  userId={this.props.userData._id}
-                  userStance={this.props.userData.user_stance}
-                />
-              ))} */}
-            <CarouselProvider
-              lockOnWindowScroll={true}
-              isPlaying={false}
-              // naturalSlideWidth={500}
-              // naturalSlideHeight={200}
-              totalSlides={50}
-              visibleSlides={1}
-            >        
-              <Slider>
-                {console.log('user data for carousel', this.props.userData)}
-                {data.articles.map((article, i) => {
+          var completedArticleInfo = JSON.parse(data.user.completed_articles);
+          var completedArticleKeys = Object.keys(completedArticleInfo);
 
-                  let carrotCount = calculateNutritionalValue(this.props.userData.user_stance, article.articleStance);
-                  // IF article meets certain criteria THEN we display it here.
-                  // Need to know how many carrots.
-                  if (carrotCount > 0) {
-                    return (
-                      <Slide index={i}>
-                      <ArticleCard 
-                        article={article}
-                        userId={this.props.userData._id}
-                        userStance={this.props.userData.user_stance}
-                      />
-                      </Slide>
-                    )
-                  }
-                })}
-              </Slider>
-              {/* <ButtonBack>Back</ButtonBack> */}
-              <div className="next-article-wrapper">
-                <ButtonNext className="btn btn-info btn-sm" >Nah, show me another article</ButtonNext>
-              </div>
-            </CarouselProvider>
-            </div>
-          );
+          return (
+            <Query query={GET_ARTICLES_FROM_SERVER}>
+              {({ loading, error, data }) => {
+                if (loading) return "Loading...";
+                if (error) return `Error! ${error.message}`;
+                return (
+                  <div className="articles-container">
+                  <CarouselProvider
+                    lockOnWindowScroll={true}
+                    isPlaying={false}
+                    // naturalSlideWidth={500}
+                    // naturalSlideHeight={200}
+                    totalSlides={50}
+                    visibleSlides={1}
+                    >        
+                    <Slider>
+                      {data.articles.map((article, i) => {
+                        
+                        let carrotCount = calculateNutritionalValue(this.props.userData.user_stance, article.articleStance);
+                        // IF article meets certain criteria THEN we display it here.
+                        // Need to know how many carrots.
+                        if (carrotCount > 0) {
+                          return (
+                            <Slide index={i}>
+                            <ArticleCard 
+                              article={article}
+                              userId={this.props.userData._id}
+                              userStance={this.props.userData.user_stance}
+                              />
+                            </Slide>
+                          )
+                        }
+                      })}
+                    </Slider>
+                    {/* <ButtonBack>Back</ButtonBack> */}
+                    <div className="next-article-wrapper">
+                      <ButtonNext className="btn btn-info btn-sm" >Nah, show me another article</ButtonNext>
+                    </div>
+                  </CarouselProvider>
+                  </div>
+                );
+              }}
+            </Query>
+          )
         }}
       </Query>
     );
