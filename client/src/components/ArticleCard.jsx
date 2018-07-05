@@ -165,6 +165,7 @@ class ArticleCard extends React.Component {
                       fullArticle: data.article,
                       showArticle: true,
                     })
+                    this.props.setCurrentArticleId(this.props.article._id);
                   }}
                 >
                 Read Now
@@ -197,6 +198,7 @@ class ArticleCard extends React.Component {
           handleClose={this.handleClose}
           article={this.state.fullArticle}
           veggies={this.renderCarrots()}
+          setCurrentArticleId ={this.props.setCurrentArticleId}
         />
       </div>
 
