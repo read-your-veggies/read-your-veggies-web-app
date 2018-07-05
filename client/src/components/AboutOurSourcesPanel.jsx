@@ -48,39 +48,41 @@ class AboutOurSourcesPanel extends React.Component {
   }
 
   setPersonality(data) {
-    var parsedData = JSON.parse(data.source.fullTextsPersonality);
-    var newData = {};
-
-    for (var key in parsedData) {
-      if (key === 'needs' || key === 'values') {
-        newData[key] = [];
-        parsedData[key].forEach(trait => {
-          newData[key].push({
-            x: trait.name,
-            y: trait.percentile * 100,
-          })
-        })
-      } else if (key === 'personality') {
-        newData['personality'] = [];
-        newData['traits'] = [];
-        parsedData.personality.forEach(bigTrait => {
-          newData['personality'].push({
-            x: bigTrait.name,
-            y: bigTrait.percentile * 100,
-          })
-          bigTrait.children.forEach(smallTrait => {
-            newData['traits'].push({
-              x: smallTrait.name,
-              y: smallTrait.percentile * 100,
+    if (data.source.fullTextsPersonality !== null) {
+      var parsedData = JSON.parse(data.source.fullTextsPersonality);
+      var newData = {};
+  
+      for (var key in parsedData) {
+        if (key === 'needs' || key === 'values') {
+          newData[key] = [];
+          parsedData[key].forEach(trait => {
+            newData[key].push({
+              x: trait.name,
+              y: trait.percentile * 100,
             })
           })
-        })
+        } else if (key === 'personality') {
+          newData['personality'] = [];
+          newData['traits'] = [];
+          parsedData.personality.forEach(bigTrait => {
+            newData['personality'].push({
+              x: bigTrait.name,
+              y: bigTrait.percentile * 100,
+            })
+            bigTrait.children.forEach(smallTrait => {
+              newData['traits'].push({
+                x: smallTrait.name,
+                y: smallTrait.percentile * 100,
+              })
+            })
+          })
+        }
       }
+  
+      this.setState({
+        data: newData,
+      });
     }
-
-    this.setState({
-      data: newData,
-    });
   }
 
   render() {

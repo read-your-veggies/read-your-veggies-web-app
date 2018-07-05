@@ -101,6 +101,7 @@ export const GET_USER_HEALTH =  gql`
     user(_id: $_id){
       _id
       health
+      onboard_information
     }
   }
 `

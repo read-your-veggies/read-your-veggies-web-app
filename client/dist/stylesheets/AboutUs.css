@@ -1,3 +1,13 @@
+.about-us-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+#about-us-inner-content {
+  flex-basis: 80%;
+  overflow-y: scroll;
+}
+
 .panel-group {
   width: 80%;
   margin: auto;

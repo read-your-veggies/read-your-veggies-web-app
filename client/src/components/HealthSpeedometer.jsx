@@ -33,7 +33,7 @@ class HealthSpeedometer extends React.Component {
           maxValue={this.props.max}
           
           // this value will ultimately be a query for the user's score!
-          value={this.state.value}
+          value={this.state.value.toPrecision(3)}
 
           needleColor="rgb(51,51,51)"
           startColor={this.props.startColor}
