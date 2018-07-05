@@ -34,13 +34,12 @@ class HealthSpeedometer extends React.Component {
           
           // this value will ultimately be a query for the user's score!
           value={this.state.value}
-          currentValueText='Media Health: ${value}'
 
-          needleColor="rgb(25,120,29)"
+          needleColor="rgb(51,51,51)"
           startColor={this.props.startColor}
-          segments={7}
+          segments={5}
           endColor={this.props.endColor}
-          textColor='#ff77e8'
+          textColor='rgb(51,51,51)'
           needleTransitionDuration={10000}
           needleTransition="easeElastic"
           width={this.props.width}
