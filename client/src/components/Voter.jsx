@@ -33,7 +33,7 @@ class Voter extends React.Component {
     ]
 
     return (
-      <Modal show={this.props.show} onHide={() => this.props.handleClose('voter')}>
+      <Modal bsSize="large" show={this.props.show} onHide={() => this.props.handleClose('voter')}>
       <Modal.Body>
         <Panel bsStyle="info" className="voting-panel">
         <Panel.Heading>
@@ -50,7 +50,7 @@ class Voter extends React.Component {
                       {
                         buttons.map( (button) => {
                           return (
-                            <Button bsStyle={button.style} className={button.class} onClick={(e) => {
+                            <Button className={button.class} bsStyle={button.style} onClick={(e) => {
                               let { articleId, userId, articleStance, userStance, nutritionalValue } = this.props;  
                         
                               let userVoteInfo = {};
@@ -81,6 +81,9 @@ class Voter extends React.Component {
         </Panel.Body>
         </Panel>
       </Modal.Body>
+      <Modal.Footer>
+        say whaaaat?
+      </Modal.Footer>
       </Modal>
     )
   }
