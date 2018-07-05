@@ -27,7 +27,6 @@ export const calculateUserStance = function(onboardingStance, regionalPoliticsSt
   return onboardingStance * 0.6 + regionalPoliticsStance * 0.2 + readingStance * 0.2;
 }
 
-
 export const calculateNutritionalValue = function(userStance, articleStance) {
   return Math.round(Math.abs(userStance - articleStance) / 2 * 10); 
 }
