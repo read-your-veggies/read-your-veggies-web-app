@@ -48,7 +48,7 @@ class UserInfo extends React.Component {
               var mediaHealth = data.user.health / veggieGoal * 100;
               var healthBarColor;
 
-              var healthBarTip = <Tooltip id="modal-tooltip">{data.user.health} Veggies</Tooltip>;
+              var healthBarTip = <Tooltip id="modal-tooltip">{data.user.health} Veggies See Health</Tooltip>;
               
               if (mediaHealth <= 39) {
                 healthBarColor = 'red';

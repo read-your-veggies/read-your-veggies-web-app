@@ -1,0 +1,10 @@
+#about-you-dash {
+  display: flex;
+  justify-content: space-between;
+}
+
+#about-you-inner-content {
+  flex-basis: 80%;
+  overflow: scroll;
+  height: 100%;
+}
