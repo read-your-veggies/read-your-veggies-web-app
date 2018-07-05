@@ -11,10 +11,12 @@ describe('graphQl resolvers', () => {
      {
       _id: 1,
       title: "Test title 1",
+      url: "Test url 1",
      },
      {
       _id: 2,
       title: "Test title 2",
+      url: "Test url 2",
      },
    ];
    let dummyUsers = [
@@ -37,10 +39,16 @@ describe('graphQl resolvers', () => {
        name: "Test source 2",
      }
    ];
-   Articles.insertMany(dummyArticles);
-   Users.insertMany(dummyUsers);
-   Sources.insertMany(dummySources);
-   done();
+   Articles.insertMany(dummyArticles, (err, res) => {
+    if (err) console.error(err);
+    Users.insertMany(dummyUsers, (err, res) => {
+      if (err) console.error(err);
+      Sources.insertMany(dummySources, (err, res) => {
+        if(err) console.error(err);
+        done();
+      });
+    })
+   }) 
   });
 
   after(() => {
@@ -52,6 +60,11 @@ describe('graphQl resolvers', () => {
   describe('queries', () => {
     it('message', done => {
       expect(resolvers.Query.message()).to.equal('Hello From GraphQL Server!');
+      done();
+    });
+
+    it('message', done => {
+      expect(resolvers.Query.articles()).to.equal('Hello From GraphQL Server!');
       done();
     });
   })
