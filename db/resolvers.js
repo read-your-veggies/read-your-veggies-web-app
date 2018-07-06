@@ -17,7 +17,7 @@ module.exports = {
   Query: {
     message: () => 'Hello From GraphQL Server!',
     articles: async () => {
-      return (await Articles.find({}).sort({'timestamp': -1}).limit(20).toArray()).map(prepare);    
+      return (await Articles.find({}).sort({'timestamp': -1}).limit(40).toArray()).map(prepare);    
     },
     article: async (root, {_id}) => {
       return prepare(await Articles.findOne(new mongodb.ObjectID(_id)));
