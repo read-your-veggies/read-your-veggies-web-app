@@ -12,8 +12,8 @@ class CompletedModal extends React.Component {
   }
 
   render() {
-    let author;  // If the author field is undefined, print an empty string instead.
-    this.props.article.author ? author = this.props.article.author[0] : author = '';
+    // let author;  // If the author field is undefined, print an empty string instead.
+    // this.props.article.author ? author = this.props.article.author[0] : author = '';
 
     return (
       <Modal show={this.props.show} onHide={() => this.props.handleClose('completed')}>
@@ -28,7 +28,7 @@ class CompletedModal extends React.Component {
             
             <p class="text-center"> 
             <a href={this.props.article.url} target="_blank">
-              This article was written by {author} and originally published by {this.props.article.source}.
+              This article was originally published by {this.props.article.source}.
             </a>
             </p>
           </div>
