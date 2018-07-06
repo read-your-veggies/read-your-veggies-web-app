@@ -41,17 +41,12 @@ class ArticleCarousel extends Component {
           return (
             <Query query={GET_ARTICLES_FROM_SERVER}>
               {({ loading, error, data }) => {
-<<<<<<< HEAD
-                if (loading) return "Loading...";
-                if (error) return `Error! ${error.message}`;
-=======
                 if (loading) return <Loading />
                 if (error) {
                   console.log(`Error! ${error.message}`);
                   return <Error />
                 }
                 console.log('articles data', data.articles);
->>>>>>> dev
 
                 // let shuffledArticles = data.articles.slice();
                 // for (var i = 0; i < shuffledArticles.length; i++) {
