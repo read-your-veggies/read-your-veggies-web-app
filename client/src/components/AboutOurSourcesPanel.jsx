@@ -153,10 +153,10 @@ class AboutOurSourcesPanel extends React.Component {
             <img id="watson-logo" src='../assets/watson.png' /> 
           </div>
 
-          <BarChart
+          <BarChart className="bar-graph"
             axisLabels={{y: 'Percentile'}}
             yDomainRange={[0, 100]}
-            width={1000}
+            width={800}
             height={400}
             colorBars
             axes

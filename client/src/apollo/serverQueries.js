@@ -93,6 +93,7 @@ export const GET_USER_STANCE_INFO =  gql`
       homePolRatio
       onboard_stance
       reading_stance
+      browsing_history_stance
     }
   }
 `
