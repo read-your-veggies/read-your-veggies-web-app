@@ -5,6 +5,7 @@ import { GET_USER_STANCE_INFO } from '../apollo/serverQueries.js';
 import {GET_USER_INFO} from '../apollo/localQueries.js';
 import HealthSpeedometer from './HealthSpeedometer.jsx';
 import Sidebar from './Sidebar.jsx';
+import {PieChart} from 'react-easy-chart'; 
 
 
 class AboutYou extends React.Component {
@@ -13,10 +14,16 @@ class AboutYou extends React.Component {
     this.state = {
       divHeight: '',
     }
+
+    this.getColor = this.getColor.bind(this);
   }
 
   componentDidMount() {
     this.setState({divHeight: window.innerHeight - 147 + 'px'});
+  }
+
+  getColor(value) {
+
   }
 
   render() {
@@ -36,8 +43,20 @@ class AboutYou extends React.Component {
                       var locPolRatio = JSON.parse(data.user.locPolRatio);
                       var homePolRatio = JSON.parse(data.user.homePolRatio);
                       var readingStance = JSON.parse(data.user.reading_stance[0]);
+                      var browsingStance = JSON.parse(data.user.browsing_history_stance[0]);
                       return (
                         <div>
+                        <PieChart
+                          labels
+                          data={[
+                            { key: 'A', value: 100, color: '#aaac84' },
+                            { key: 'B', value: 200, color: '#dce7c5' },
+                            { key: 'C', value: 50, color: '#e3a51a' },
+                            { key: 'A', value: 100, color: '#aaac84' },
+                            { key: 'B', value: 200, color: '#dce7c5' },
+                            { key: 'C', value: 50, color: '#e3a51a' }
+                          ]}
+                        />
                         <h1>Your Overall Political Stance:</h1>
                         <HealthSpeedometer 
                           height={100}
@@ -83,6 +102,16 @@ class AboutYou extends React.Component {
                           height={100}
                           width={150}
                           value = {readingStance}
+                          startColor="blue"
+                          endColor="red"
+                          min={-1}
+                          max={1}
+                        />
+                        <h1>The Political Stance of Your Browsing History:</h1>
+                        <HealthSpeedometer 
+                          height={100}
+                          width={150}
+                          value = {browsingStance}
                           startColor="blue"
                           endColor="red"
                           min={-1}
