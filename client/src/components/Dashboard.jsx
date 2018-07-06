@@ -7,6 +7,7 @@ import OnboardModal from './OnboardModal.jsx';
 import { GET_USER_ONBOARD_INFO, GET_USER_ONBOARD_INFO_AND_STANCE } from '../apollo/serverQueries.js';
 import {UPDATE_USER_BROWSING_HISTORY} from '../apollo/resolvers.js'
 import Sidebar from './Sidebar.jsx';
+import Loading from './Loading.jsx';
 
 class Dashboard extends Component {
 

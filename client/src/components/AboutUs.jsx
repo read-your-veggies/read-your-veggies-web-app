@@ -6,6 +6,7 @@ import { Query } from 'react-apollo';
 import { GET_LIST_OF_SOURCES } from '../apollo/serverQueries';
 import AboutYou from './AboutYou.jsx';
 import Sidebar from './Sidebar.jsx';
+import Loading from './Loading.jsx';
 
 class AboutUs extends React.Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class AboutUs extends React.Component {
             </Panel>
             <Query query={GET_LIST_OF_SOURCES}>
               {({ loading, error, data }) => {
-                if (loading) return "Loading...";
+                if (loading) return <Loading />;
                 if (error) return `Error! ${error.message}`;
                 return <AboutOurSourcesPanel sources={data}/>
               }}
