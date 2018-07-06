@@ -27,7 +27,20 @@ class HealthSpeedometer extends React.Component {
 
 
   render() {
-    console.log('speedometer', this.props);
+    // console.log('speedometer', this.props);
+    let polValueString = '';
+    
+    if (this.state.value < -0.6) {
+      polValueString = 'Very Liberal';
+    } else if (this.state.value < -0.2) {
+      polValueString = 'Leaning Liberal';
+    } else if (this.state.value < 0.2) {
+      polValueString = 'Mostly Centrist';
+    } else if (this.state.value < 0.6) {
+      polValueString = 'Leaning Conservative';
+    } else if (this.state.value <= 1) {
+      polValueString = 'Very Conservative';
+    }
     return (
       <div className='speedometer-wrapper' style={{width: '100%', height: "100%"}}>
         <ReactSpeedometer
@@ -36,7 +49,7 @@ class HealthSpeedometer extends React.Component {
           
           // this value will ultimately be a query for the user's score!
           value={this.state.value.toPrecision(3)}
-
+          currentValueText={polValueString}
           needleColor="rgb(51,51,51)"
           startColor={this.props.startColor}
           segments={5}
