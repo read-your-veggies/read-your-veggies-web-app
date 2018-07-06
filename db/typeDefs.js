@@ -19,6 +19,7 @@ module.exports = [`
     votes: Vote
     articleStance: String
     image: String
+    timestamp: String
   }
 
   type Source {
