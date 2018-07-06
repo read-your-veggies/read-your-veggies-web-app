@@ -27,7 +27,7 @@ module.exports = {
     var totalArticlesRead = currentStance[1];
     var tally = 0;
 
-    let { userStance, articleStance, votes, nutritionalValue } = completedArticle;
+    let { userStance, articleStance, votes } = completedArticle;
 
     // calculate chasm 
     var chasm = Math.abs(userStance - articleStance) / 2;
@@ -84,14 +84,30 @@ module.exports = {
     return [updatedBrowsingStance, currentBrowsingStance[1] + incomingArticles];
   },
 
-  calculateUserAggregateStance: ({onboardingStance, localPolStance, homePolStance, readingStance, browsingStance}) => {
-    onboardingStance = onboardingStance || 0;
-    localPolStance = localPolStance || 0;
-    homePolStance = homePolStance || 0;
-    readingStance = readingStance || [0, 0];
-    browsingStance = browsingStance || [0, 0];
+  calculateUserAggregateStance: (scores) => {
+    var weights = 0;
+    var stance = 0;
 
-    return onboardingStance * 0.5 + localPolStance * 0.1 + homePolStance * 0.1 + readingStance[0] * 0.1 + browsingStance[0] * 0.2;
+    for (var key in scores) {
+      if (key === 'onboardingStance' && scores[key] !== 0) {
+        weights += 5;
+        stance += 5 * scores.onboardingStance;
+      } else if (key === 'localPolStance' && scores[key] !== 0) {
+        weights += 1;
+        stance += 1 * scores.localPolStance; 
+      } else if (key === 'homePolStance' && scores[key] !== 0) {
+        weights += 1;
+        stance += 1 * scores.homePolStance;
+      } else if (key === 'readingStance' && scores[key][0] !== 0) {
+        weights += 1;
+        stance += 1 * scores.readingStance[0];
+      } else if (key === 'browsingStance' && scores[key][0] !== 0) {
+        weights += 2;
+        stance += 2 * scores.browsingStance[0];
+      }
+    }
+    
+    return stance / weights;
   }, 
   
 }
