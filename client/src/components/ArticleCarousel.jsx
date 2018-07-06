@@ -38,9 +38,19 @@ class ArticleCarousel extends Component {
           return (
             <Query query={GET_ARTICLES_FROM_SERVER}>
               {({ loading, error, data }) => {
-                console.log(completedArticleKeys)
                 if (loading) return "Loading...";
                 if (error) return `Error! ${error.message}`;
+                console.log('articles data', data.articles);
+
+                let shuffledArticles = data.articles.slice();
+                for (var i = 0; i < shuffledArticles.length; i++) {
+                  var randomIdx = Math.floor( Math.random() * shuffledArticles.length);
+                  var swapper = shuffledArticles[randomIdx];
+                  shuffledArticles[randomIdx] = shuffledArticles[i];
+                  shuffledArticles[i] = swapper;
+                }
+                console.log('randomized articles', shuffledArticles);
+
                 return (
                   <div className="articles-container">
                   <CarouselProvider
@@ -52,7 +62,7 @@ class ArticleCarousel extends Component {
                     visibleSlides={1}
                   >        
                     <Slider>
-                      {data.articles.map((article, i) => {
+                      {shuffledArticles.map((article, i) => {
                         let carrotCount = calculateNutritionalValue(this.props.userData.user_stance, article.articleStance);
                         
                         if ( (carrotCount > 0 && completedArticleKeys.indexOf(article._id) < 0) || this.state.currentArticleId === article._id ) {
