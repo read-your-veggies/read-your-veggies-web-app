@@ -1,0 +1,69 @@
+.modal-body {
+  display: flex;
+  flex-direction: flex-start;
+}
+
+
+.voting-panel {
+  font-weight: 200 !important;
+  text-align: center;
+  width: 100%;
+  height: 700px;
+}
+
+.button {
+  height: 0px;
+  border: none;
+}
+
+.agree {
+  position: absolute;
+  top: 35%;
+  left: 15%;
+  font-size: 1.5em;
+}
+
+.disagree {
+  position: absolute;
+  top: 68%;
+  left: 15%;
+  font-size: 1.5em;
+}
+
+.like {
+  position: absolute;
+  top: 20%;
+  left: 34%;
+  font-size: 1.5em;
+}
+
+.dislike {
+  position: absolute;
+  top: 20%;
+  right: 33%;
+  font-size: 1.5em;
+}
+
+.agree-enjoy {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+}
+
+.agree-dislike {
+  position: absolute;
+  top: 25%;
+  right: 25%;
+}
+
+.disagree-enjoy {
+  position: absolute;
+  bottom: 40%;
+  left: 25%;
+}
+
+.disagree-dislike {
+  position: absolute;
+  bottom: 40%;
+  right: 25%;
+}
