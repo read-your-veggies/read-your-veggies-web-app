@@ -6,8 +6,8 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-re
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { calculateNutritionalValue } from '../lib/calculateStance.js';
 import { GET_ONE_FULL_ARTICLE, GET_COMPLETED_ARTICLES } from '../apollo/serverQueries.js';
-
-
+import Loading from './Loading.jsx';
+import Error from './Error.jsx';
 
 
 class ArticleCarousel extends Component {
@@ -30,7 +30,7 @@ class ArticleCarousel extends Component {
     return (
       <Query query={GET_COMPLETED_ARTICLES} variables={{ _id: this.props.userData._id }}>
         {({ loading, error, data }) => {
-          if (loading) return "Loading...";
+          if (loading) return <Loading />;
           if (error) return `Error! ${error.message}`;
           var completedArticleInfo = JSON.parse(data.user.completed_articles);
           var completedArticleKeys = Object.keys(completedArticleInfo);
@@ -39,7 +39,10 @@ class ArticleCarousel extends Component {
             <Query query={GET_ARTICLES_FROM_SERVER}>
               {({ loading, error, data }) => {
                 if (loading) return "Loading...";
-                if (error) return `Error! ${error.message}`;
+                if (error) {
+                  console.log(`Error! ${error.message}`);
+                  return <Error />
+                }
                 console.log('articles data', data.articles);
 
                 let shuffledArticles = data.articles.slice();

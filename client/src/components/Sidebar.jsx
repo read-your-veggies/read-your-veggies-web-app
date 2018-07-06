@@ -6,7 +6,7 @@ import HealthSpeedometer from './HealthSpeedometer.jsx';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import { withRouter } from 'react-router-dom';
-
+import Loading from './Loading.jsx';
 
 
 class Sidebar extends Component {
@@ -45,7 +45,7 @@ class Sidebar extends Component {
             return (
               <Query fetchPolicy='network-only' query={GET_USER_STANCE_INFO} variables={{ _id: data.userInfo.userId }}>
                 {({ loading, error, data }) => {
-                  if (loading) return "Loading...";
+                  if (loading) return <Loading />;
                   if (error) return `Error! ${error.message}`;
                   var userStance = JSON.parse(data.user.user_stance);
                   return (
