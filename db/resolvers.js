@@ -96,7 +96,7 @@ module.exports = {
         readingStance: updatedReadingStance,
       }
       var updatedAggregateStance = helpers.calculateUserAggregateStance(aggregates);
-
+      
       const res = await Users.findOneAndUpdate(
         {_id: new mongodb.ObjectID(args._id)}, 
         {$set: {

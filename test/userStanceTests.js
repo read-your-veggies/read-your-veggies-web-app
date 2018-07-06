@@ -380,10 +380,23 @@ describe('helpers', () => {
         onboardingStance: -0.5,
         localPolStance: -0.7,
         homePolStance: 0.1,
-        browsingStance: [-0.2, 10],
+        readingStance: [-0.2, 10],
       }
       var stance = helpers.calculateUserAggregateStance(aggregates);
-      expect(stance).to.equal(-0.35);
+      expect(stance).to.equal(-0.41250000000000003);
+      done();
+    })
+
+    it('ignores 0 values', done => {
+      var aggregates = {
+        onboardingStance: -0.5,
+        localPolStance: -0.7,
+        homePolStance: 0.1,
+        readingStance: [-0.2, 10],
+        browsingStance: [0, 0],
+      }
+      var stance = helpers.calculateUserAggregateStance(aggregates);
+      expect(stance).to.equal(-0.41250000000000003);
       done();
     })
   })
