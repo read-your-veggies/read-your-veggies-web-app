@@ -56,10 +56,7 @@ class Dashboard extends Component {
           <div>
             <Query query={GET_USER_ONBOARD_INFO_AND_STANCE} variables={{ _id: this.state.userId }}>
               {({ loading, error, data }) => {
-                if (error) {
-                  console.log(`Error! ${error.message}`);
-                  return <Error />
-                }
+                if (loading) return <Loading />
                 if (error) return `Error! ${error.message}`;
                 this.setState({
                   onboardInformation: data.user.onboard_information,
