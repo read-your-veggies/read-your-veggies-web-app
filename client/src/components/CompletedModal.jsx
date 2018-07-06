@@ -37,6 +37,7 @@ class CompletedModal extends React.Component {
           <div>
             <Button onClick={ (e) => {
               e.preventDefault();
+              this.props.setCurrentArticleId(null);
               this.props.handleClose('completed')
             }}>Close</Button>
             <Button onClick={(e) => {
