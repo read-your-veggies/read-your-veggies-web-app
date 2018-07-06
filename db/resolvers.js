@@ -7,6 +7,8 @@ const Articles = articleDbConn.collection('articles');
 const Users = userDbConn.collection('users');
 const Sources = sourceDbConn.collection('sources');
 const helpers = require('./data/helpers.js');
+const sourceBiases = require('./data/sources.js');
+const sourceConvert = require('./data/sourceConvert.js')
 
 const prepare = (object) => {
   object._id = object._id.toString();
@@ -57,6 +59,7 @@ module.exports = {
     updateArticleVotes: async (root, args) => {
       // We need to know the state of the current votes before we can update them.
       let currentState = prepare(await Articles.findOne(new mongodb.ObjectID(args._id)));
+      let sourceStance = sourceBiases[ sourceConvert [currentState.source] ]
       
       // Take the current state and update the vote fields as necessary.
       for (var key in currentState.votes) {
@@ -66,17 +69,39 @@ module.exports = {
         }
       }
 
-      // Pass the updated votes object back into the database.
+      let avgVoteStances = {}; 
+      let totalVotes = 0;
+      for (var key in currentState.votes) {
+        if (currentState.votes[key].totalVotes !== 0) {
+          avgVoteStances[key] = currentState.votes[key].summedUserStance / currentState.votes[key].totalVotes;
+          totalVotes += currentState.votes[key].totalVotes;
+        } else {
+          avgVoteStances[key] = 0;
+        }
+      }
+
+      let voteStanceSummed = (avgVoteStances.agree - avgVoteStances.disagree + avgVoteStances.fun - avgVoteStances.bummer) / 2;
+      let newArticleStance; 
+      if (totalVotes <= 20) {
+        newArticleStance = voteStanceSummed * 0.1 + sourceStance * 0.9;
+      } else if (totalVotes <= 100) {
+        newArticleStance = voteStanceSummed * 0.25 + sourceStance * 0.75;
+      } else if (totalVotes < 1000) {
+        newArticleStance = voteStanceSummed * 0.5 + sourceStance * 0.5;
+      } else {
+        newArticleStance = voteStanceSummed * 0.8 + sourceStance * 0.2;
+      }
+
+      // Pass the updated votes object and article stance back into the database.
       const res = await Articles.findOneAndUpdate(
         {_id: new mongodb.ObjectID(args._id)}, 
-        {$set: {votes: currentState.votes }}, 
+        {$set: {votes: currentState.votes, articleStance: newArticleStance }}, 
         {returnOriginal:false}
       );
       return res.value;
     },
 
     updateUserVotes: async (root, args) => {
-      
       let userDocument = prepare(await Users.findOne(new mongodb.ObjectID(args._id)));
       let previouslyCompletedArticles = JSON.parse(userDocument.completed_articles);
       let currentReadingStance = userDocument.reading_stance;
