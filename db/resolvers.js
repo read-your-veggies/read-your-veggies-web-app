@@ -69,10 +69,27 @@ module.exports = {
         }
       }
 
+      console.log('votes', currentState.votes)
+      console.log('source stance', sourceStance)
+      let avgVoteStances = {}; 
+      for (var key in currentState.votes) {
+        if (currentState.votes[key].totalVotes !== 0) {
+          avgVoteStances[key] = currentState.votes[key].summedUserStance / currentState.votes[key].totalVotes;
+        } else {
+          avgVoteStances[key] = 0;
+        }
+      }
+      console.log(avgVoteStances);
+
+      let newArticleStance = sourceStance;
+      // We can define the algorithm to alter the article state here.
+      // The inputs will be the source stance and te currentState.votes object
+      // The out put will be article Stance
+
       // Pass the updated votes object back into the database.
       const res = await Articles.findOneAndUpdate(
         {_id: new mongodb.ObjectID(args._id)}, 
-        {$set: {votes: currentState.votes }}, 
+        {$set: {votes: currentState.votes, articleStance: newArticleStance }}, 
         {returnOriginal:false}
       );
       return res.value;
