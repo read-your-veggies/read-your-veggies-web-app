@@ -8,6 +8,7 @@ const Users = userDbConn.collection('users');
 const Sources = sourceDbConn.collection('sources');
 const helpers = require('./data/helpers.js');
 const sourceBiases = require('./data/sources.js');
+const sourceConvert = require('./data/sourceConvert.js')
 
 const prepare = (object) => {
   object._id = object._id.toString();
@@ -58,8 +59,7 @@ module.exports = {
     updateArticleVotes: async (root, args) => {
       // We need to know the state of the current votes before we can update them.
       let currentState = prepare(await Articles.findOne(new mongodb.ObjectID(args._id)));
-      console.log('incoming article state', currentState.source, currentState.articleStance);
-      console.log('sources bias', sourceBiases );
+      let sourceStance = sourceBiases[ sourceConvert [currentState.source] ]
       
       // Take the current state and update the vote fields as necessary.
       for (var key in currentState.votes) {
