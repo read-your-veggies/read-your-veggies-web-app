@@ -1,7 +1,5 @@
 import React from 'react';
-import Popover from 'react-bootstrap/lib/Popover';
 import Panel from 'react-bootstrap/lib/Panel';
-import Tooltip from 'react-bootstrap/lib/Tooltip';
 import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
 import Slider from 'react-rangeslider';
@@ -72,7 +70,6 @@ class OnboardModal extends React.Component {
           <div className="modal-body-right">
             <Panel>
               <Panel.Body className="article-full-text">
-              <h2 id='onboard-greeting'>Hi There!</h2>
               <div className='slider-prompt-container'>
               <p id='onboard-subtitle'>To get you started with the most nutritious articles possible, please tell us a little bit about yourself!</p> 
               <h3 id='slider-header'>Where would you place your current political stance?</h3>

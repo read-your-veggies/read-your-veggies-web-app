@@ -7,7 +7,11 @@ import OnboardModal from './OnboardModal.jsx';
 import { GET_USER_ONBOARD_INFO, GET_USER_ONBOARD_INFO_AND_STANCE } from '../apollo/serverQueries.js';
 import {UPDATE_USER_BROWSING_HISTORY} from '../apollo/resolvers.js'
 import Sidebar from './Sidebar.jsx';
+<<<<<<< HEAD
 import Loading from './Loading.jsx';
+=======
+import WelcomeModal from './WelcomeModal.jsx';
+>>>>>>> dev
 
 class Dashboard extends Component {
 
@@ -78,7 +82,7 @@ class Dashboard extends Component {
           :
           null
         }
-        {this.state.onboardInformation === 'NEED_ON_BOARDING' ? <OnboardModal userId={this.state.userId} /> : null}
+        {this.state.onboardInformation === 'NEED_ON_BOARDING' ? <WelcomeModal userId={this.state.userId} /> : null}
         {this.state.onboardInformation === 'NEED_ON_BOARDING' || this.state.onboardInformation === null
           ?
           null

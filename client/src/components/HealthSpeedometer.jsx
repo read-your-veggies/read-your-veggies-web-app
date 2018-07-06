@@ -17,10 +17,12 @@ class HealthSpeedometer extends React.Component {
   }
 
   // This function will be deprecated in later versions of React.
-  UNSAFE_componentWillReceiveProps() {
-    this.setState({
-      value: this.props.value,
-    });
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (this.props.value !== nextProps.value) {
+      this.setState({
+        value: nextProps.value,
+      });
+    }
   }
 
 
