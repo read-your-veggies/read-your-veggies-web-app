@@ -74,7 +74,7 @@ export const GET_USER_FROM_DB =  gql`
 
 export const GET_COMPLETED_ARTICLES =  gql`
   query user($_id: String!) {
-    user(_id: $_id){
+    user(_id: $_id) {
       _id
       completed_articles
     }
