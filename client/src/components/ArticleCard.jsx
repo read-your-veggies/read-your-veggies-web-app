@@ -64,7 +64,6 @@ class ArticleCard extends React.Component {
   renderCarrots () {
     var nutritionalValue = calculateNutritionalValue(this.props.userStance, this.props.article.articleStance )
     return (<h3 className="carrots">{'🥕'.repeat(nutritionalValue)}</h3>);
-
   }
 
   componentDidMount() {

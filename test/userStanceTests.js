@@ -400,4 +400,41 @@ describe('helpers', () => {
       done();
     })
   })
+
+  // copied from client/src/lib/calculateStance.js
+  const calculateNutritionalValue = function(userStance, articleStance) {
+    return Math.round(Math.abs(userStance - articleStance) / 2 * 10); 
+  }
+
+  describe('calculateNutritionalValue', () => {
+    it('liberal reading liberal', done => {
+      var result = calculateNutritionalValue(-0.7, -0.9);
+      expect(result).to.equal(1);
+      done();
+    })
+
+    it('liberal reading conservative', done => {
+      var result = calculateNutritionalValue(-0.6, 0.6);
+      expect(result).to.equal(6);
+      done();
+    })
+
+    it('conservative reading liberal', done => {
+      var result = calculateNutritionalValue(0.7, -0.4);
+      expect(result).to.equal(6);
+      done();
+    })
+
+    it('conservative reading conservative', done => {
+      var result = calculateNutritionalValue(0.9, 0.7);
+      expect(result).to.equal(1);
+      done();
+    })
+
+    it('returns whole numbers', done => {
+      var result = calculateNutritionalValue(-0.6432, 0.432);
+      expect(result % 1).to.equal(0);
+      done()
+    })
+  })
 })
