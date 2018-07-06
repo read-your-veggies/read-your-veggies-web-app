@@ -23,7 +23,10 @@ class ArticleCarousel extends Component {
   }
 
   setCurrentArticleId(id) {
-    this.setState({currentArticleId: id});
+    this.setState(
+      {currentArticleId: id},
+      ()=> {console.log(this.state)}
+    );
   }
 
   render() {
@@ -40,16 +43,15 @@ class ArticleCarousel extends Component {
               {({ loading, error, data }) => {
                 if (loading) return "Loading...";
                 if (error) return `Error! ${error.message}`;
-                console.log('articles data', data.articles);
 
-                let shuffledArticles = data.articles.slice();
-                for (var i = 0; i < shuffledArticles.length; i++) {
-                  var randomIdx = Math.floor( Math.random() * shuffledArticles.length);
-                  var swapper = shuffledArticles[randomIdx];
-                  shuffledArticles[randomIdx] = shuffledArticles[i];
-                  shuffledArticles[i] = swapper;
-                }
-                console.log('randomized articles', shuffledArticles);
+                // let shuffledArticles = data.articles.slice();
+                // for (var i = 0; i < shuffledArticles.length; i++) {
+                //   var randomIdx = Math.floor( Math.random() * shuffledArticles.length);
+                //   var swapper = shuffledArticles[randomIdx];
+                //   shuffledArticles[randomIdx] = shuffledArticles[i];
+                //   shuffledArticles[i] = swapper;
+                // }
+                // console.log('randomized articles', shuffledArticles);
 
                 return (
                   <div className="articles-container">
@@ -62,7 +64,7 @@ class ArticleCarousel extends Component {
                     visibleSlides={1}
                   >        
                     <Slider>
-                      {shuffledArticles.map((article, i) => {
+                      {data.articles.map((article, i) => {
                         let carrotCount = calculateNutritionalValue(this.props.userData.user_stance, article.articleStance);
                         
                         if ( (carrotCount > 0 && completedArticleKeys.indexOf(article._id) < 0) || this.state.currentArticleId === article._id ) {
