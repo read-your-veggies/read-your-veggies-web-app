@@ -39,7 +39,7 @@ class AboutUs extends React.Component {
                 <Panel.Title toggle>About You</Panel.Title>
               </Panel.Heading>
               <Panel.Body collapsible>
-                <AboutYou />
+                {/* <AboutYou /> */}
               </Panel.Body>
             </Panel>
             <Query query={GET_LIST_OF_SOURCES}>

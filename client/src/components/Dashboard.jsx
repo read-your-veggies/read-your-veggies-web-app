@@ -7,11 +7,8 @@ import OnboardModal from './OnboardModal.jsx';
 import { GET_USER_ONBOARD_INFO, GET_USER_ONBOARD_INFO_AND_STANCE } from '../apollo/serverQueries.js';
 import {UPDATE_USER_BROWSING_HISTORY} from '../apollo/resolvers.js'
 import Sidebar from './Sidebar.jsx';
-<<<<<<< HEAD
 import Loading from './Loading.jsx';
-=======
 import WelcomeModal from './WelcomeModal.jsx';
->>>>>>> dev
 
 class Dashboard extends Component {
 
@@ -59,7 +56,10 @@ class Dashboard extends Component {
           <div>
             <Query query={GET_USER_ONBOARD_INFO_AND_STANCE} variables={{ _id: this.state.userId }}>
               {({ loading, error, data }) => {
-                if (loading) return "Loading...";
+                if (error) {
+                  console.log(`Error! ${error.message}`);
+                  return <Error />
+                }
                 if (error) return `Error! ${error.message}`;
                 this.setState({
                   onboardInformation: data.user.onboard_information,

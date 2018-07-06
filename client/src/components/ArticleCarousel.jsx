@@ -7,6 +7,7 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import { calculateNutritionalValue } from '../lib/calculateStance.js';
 import { GET_ONE_FULL_ARTICLE, GET_COMPLETED_ARTICLES } from '../apollo/serverQueries.js';
 import Loading from './Loading.jsx';
+import Error from './Error.jsx';
 
 
 class ArticleCarousel extends Component {
@@ -39,7 +40,10 @@ class ArticleCarousel extends Component {
               {({ loading, error, data }) => {
                 console.log(completedArticleKeys)
                 if (loading) return <Loading />;
-                if (error) return `Error! ${error.message}`;
+                if (error) {
+                  console.log(`Error! ${error.message}`);
+                  return <Error />
+                }
                 return (
                   <div className="articles-container">
                   <CarouselProvider
