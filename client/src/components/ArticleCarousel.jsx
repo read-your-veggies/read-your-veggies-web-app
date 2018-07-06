@@ -38,7 +38,7 @@ class ArticleCarousel extends Component {
           return (
             <Query query={GET_ARTICLES_FROM_SERVER}>
               {({ loading, error, data }) => {
-                if (loading) return "Loading...";
+                if (loading) return <Loading />
                 if (error) {
                   console.log(`Error! ${error.message}`);
                   return <Error />
