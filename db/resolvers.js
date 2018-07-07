@@ -90,11 +90,11 @@ module.exports = {
 
       let voteStanceSummed = (avgVoteStances.agree - avgVoteStances.disagree + avgVoteStances.fun - avgVoteStances.bummer) / 2;
       let newArticleStance; 
-      if (totalVotes <= 20) {
+      if (totalVotes <= 5) {
         newArticleStance = voteStanceSummed * 0.1 + sourceStance * 0.9;
-      } else if (totalVotes <= 100) {
+      } else if (totalVotes <= 10) {
         newArticleStance = voteStanceSummed * 0.25 + sourceStance * 0.75;
-      } else if (totalVotes < 1000) {
+      } else if (totalVotes <= 50) {
         newArticleStance = voteStanceSummed * 0.5 + sourceStance * 0.5;
       } else {
         newArticleStance = voteStanceSummed * 0.8 + sourceStance * 0.2;
