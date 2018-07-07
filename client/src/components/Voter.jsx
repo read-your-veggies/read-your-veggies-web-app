@@ -49,8 +49,6 @@ class Voter extends React.Component {
         </Panel.Heading>
         <Panel.Body>
 
-
-      
           <Mutation mutation={UPDATE_ARTICLE_VOTES} >
             { (updateArticleVotes) => {
               return (

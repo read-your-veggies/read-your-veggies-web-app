@@ -1,0 +1,9 @@
+.modal-body {
+  display: flex;
+  flex-direction: flex-start;
+}
+
+.button {
+  height: 0px;
+  border: none;
+}
