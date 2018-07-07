@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
-import HealthSpeedometer from './HealthSpeedometer.jsx';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import { GET_USER_HEALTH } from '../apollo/serverQueries.js';
