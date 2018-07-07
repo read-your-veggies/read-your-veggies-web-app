@@ -168,7 +168,6 @@ class AboutOurSourcesPanel extends React.Component {
           </div>
 
           <BarChart className="bar-graph"
-            axisLabels={{y: 'Percentile'}}
             yDomainRange={[0, 100]}
             width={800}
             height={400}

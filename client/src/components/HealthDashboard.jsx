@@ -25,13 +25,13 @@ class HealthDashboard extends React.Component {
     })
   }
 
-
   render() {
     return (
       <div id='health-dashboard' style={{height: this.state.divHeight}}>
         <Sidebar />
           <div id='health-dashboard-inner-content'>
-        <Mutation mutation={OFF_BOARD_USER} >
+            <h2>My Recent Veggies</h2>
+        {/* <Mutation mutation={OFF_BOARD_USER} >
           {(offBoardUser) => {
           return (
             <Button
@@ -44,8 +44,8 @@ class HealthDashboard extends React.Component {
                 }, 200)
               }}>Reconfigure Health Defaults</Button>
             )}}
-        </Mutation>
-        <Query
+        </Mutation> */}
+        {/* <Query
           query={GET_USER_HEALTH}
           variables={{ _id: this.state.userId }}
         >
@@ -64,7 +64,7 @@ class HealthDashboard extends React.Component {
               </div>
             );
           }}
-        </Query>
+        </Query> */}
         <CompletedArticles />
         </div>
       </div>
