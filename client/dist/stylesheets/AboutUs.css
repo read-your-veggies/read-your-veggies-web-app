@@ -8,15 +8,6 @@
   overflow-y: scroll;
 }
 
-.panel-group {
-  width: 80%;
-  margin: auto;
-}
-
-.panel-title {
-  text-align: center;
-}
-
 .about-our-sources-panel {
   margin-bottom: 0;
 }

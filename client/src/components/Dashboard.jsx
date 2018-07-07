@@ -83,7 +83,6 @@ class Dashboard extends Component {
           null
           :
           <div className="dashboard-container" style={{height: this.state.divHeight}}>
-            {/* <h1>Your Weekly Goal: {JSON.parse(this.state.onboardInformation).veggieSlider}</h1> */}
             <ArticleCarousel userData={this.state.userData}  />
           </div>
         }

@@ -42,15 +42,10 @@ class CompletedArticles extends React.Component {
                               <Panel className="completed-article">
                                 <Panel.Heading>
                                   <p className="completed-article-carrots">{'🥕'.repeat(completedArticleInfo[articleId].nutritionalValue)}</p>
-                                 
                                 </Panel.Heading>
                                 <Panel.Body className="completed-article-body">
-                                <img className="completed-article-image" src={article.image} />
+                                  <img className="completed-article-image" src={article.image} />
                                   <a href={article.url}><h3 className="completed-article-title">{article.title.slice(0, 45)}...</h3></a>
-                                  
-                                  {/* <p>Nutrition for you: {completedArticleInfo[articleId].nutritionalValue}</p> */}
-                                  
-                                                               
                                 </Panel.Body>
                               </Panel>
                             )
@@ -64,8 +59,8 @@ class CompletedArticles extends React.Component {
               </Query>
             );
           }
-          )}
-        </Query>
+        )}
+      </Query>
     );
   }
 }

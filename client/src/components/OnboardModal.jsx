@@ -10,7 +10,6 @@ import { Mutation } from "react-apollo";
 import GettingStartedModal from './GettingStartedModal.jsx';
 
 
-
 class OnboardModal extends React.Component {
   constructor(props) {
     super(props);

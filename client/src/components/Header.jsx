@@ -30,7 +30,7 @@ class Header extends React.Component {
           <img id="logo" src="./assets/logo.png" />
         </div>
         <div className="header-text">
-          <h1 onClick={() => this.goToDashboard(displayName)} id="read-your-veggies">Read-Your-Veggies.com</h1>
+          <h1 onClick={() => this.goToDashboard(displayName)} id="read-your-veggies">Read-Your-Veggies</h1>
           <h2>Your news app for a balanced media diet</h2>
         </div> 
         <UserInfo location={location} displayName={displayName} userId={userId} />

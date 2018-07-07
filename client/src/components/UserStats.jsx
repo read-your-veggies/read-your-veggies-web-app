@@ -28,6 +28,8 @@ class UserStats extends React.Component {
   render() {
     var chromeTip = <Tooltip id="modal-tooltip">Get the Chrome Extension</Tooltip>;
     var readingTip = <Tooltip id="modal-tooltip">Read Some Veggies!</Tooltip>;
+    var onboardTip = <Tooltip id="modal-tooltip">Reset Your Stance</Tooltip>;
+
     return (
       <div>
       <Query query={GET_USER_STANCE_INFO} variables={{ _id: this.props.userId } } fetchPolicy='network-only'>
@@ -49,23 +51,24 @@ class UserStats extends React.Component {
                 <h3 className='data'>Your Stance</h3>
                 <h3 className = 'multiplier'>Weight</h3>
               </div>
-              <div className='partial-user-stance-container'>
-                
+              <div className='partial-user-stance-container'>               
                 <Mutation mutation={OFF_BOARD_USER} >
                   {(offBoardUser) => {
                   return (
                     <h3 className='category'>
                       Your{' '}
-                      <a
-                        id='submit-onboard'
-                        onClick={(e) => {
-                          e.preventDefault();
-                          offBoardUser({ variables: { _id: this.props.userId } });
-                          setTimeout(() => {
-                            this.props.history.push('/dashboard');
-                          }, 200)
-                        }}><strong>Self Reported</strong>
-                      </a>
+                      <OverlayTrigger overlay={onboardTip} placement="bottom">
+                        <a
+                          id='submit-onboard'
+                          onClick={(e) => {
+                            e.preventDefault();
+                            offBoardUser({ variables: { _id: this.props.userId } });
+                            setTimeout(() => {
+                              this.props.history.push('/dashboard');
+                            }, 200)
+                          }}><strong>Self Reported</strong>
+                        </a>
+                      </OverlayTrigger>
                       Political Stance:</h3>
                     )}}
                 </Mutation>
