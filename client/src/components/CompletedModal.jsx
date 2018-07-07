@@ -18,12 +18,12 @@ class CompletedModal extends React.Component {
     return (
       <Modal show={this.props.show} onHide={() => this.props.handleClose('completed')}>
         <Modal.Header>
-          <Modal.Title>Thanks for reading "{this.props.article.title}"</Modal.Title>
+          <Modal.Title>Thanks for reading "{this.props.article.title}".</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div class="container">
             <p className="congrats">
-              Great job!  You earned this many veggies! <br/><br/> 
+              Great job!  You earned this many veggies: <br/><br/> 
             </p>
             <p>
               {this.props.veggies}
