@@ -26,6 +26,7 @@ class CompletedArticles extends React.Component {
                   }
                   var completedArticleInfo = JSON.parse(data.user.completed_articles);
                   var completedArticleKeys = Object.keys(completedArticleInfo);
+                  completedArticleKeys.reverse();
                   return (
                     <div className="completed-articles-container">{completedArticleKeys.map((articleId) => {
                       return (
