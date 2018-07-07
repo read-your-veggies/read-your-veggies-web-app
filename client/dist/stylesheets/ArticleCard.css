@@ -64,17 +64,23 @@
   text-align: justify !important;
 }
 
-.carrots {
+.carrots-right {
   padding: 0;
   margin: 0;
   font-size: 3.5em;
   text-align: right;
 }
 
+.carrots-center {
+  padding: 0;
+  margin: 0;
+  font-size: 5.5em;
+  text-align: center;
+}
+
 .read-now-wrapper {
   height: fit-content !important;
 }
-
 
 .read-now-wrapper button {
   display: block;
