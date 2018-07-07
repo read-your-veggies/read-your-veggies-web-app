@@ -70,8 +70,7 @@ class ArticleCarousel extends Component {
                     <Slider>
                       {data.articles.map((article, i) => {
                         let carrotCount = calculateNutritionalValue(this.props.userData.user_stance, article.articleStance);
-                        
-                        if ( (carrotCount > 0 && completedArticleKeys.indexOf(article._id) < 0) || this.state.currentArticleId === article._id ) {
+                        if ( (carrotCount > 0 && completedArticleKeys.indexOf(article._id) < 0 && article.fullText.length > 300) || this.state.currentArticleId === article._id ) {
                           return (
                             <Slide index={i}>
                               <ArticleCard 

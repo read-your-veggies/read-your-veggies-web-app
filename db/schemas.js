@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 //const db = require('./index.js').db;
 const articleDbConn = require('./index.js').articleDbConn;
 const userDbConn = require('./index.js').userDbConn;
-//const sourceDbConn = require('./index.js').sourceDbConn;
+const sourceDbConn = require('./index.js').sourceDbConn;
 
 const articleSchema = new Schema({
   url: {type: String, unique: true},
@@ -64,15 +64,15 @@ const userSchema = new Schema({
 
 const User = userDbConn.model('User', userSchema);
 
-// const sourceSchema = new Schema({
-//   name: String,
-//   articles: [String],
-//   titles: [String],
-//   fullTexts: [String],
-//   titlesPersonality: String,
-//   fullTextsPersonality: String,
-// });
+const sourceSchema = new Schema({
+  name: String,
+  articles: [String],
+  titles: [String],
+  fullTexts: [String],
+  titlesPersonality: String,
+  fullTextsPersonality: String,
+});
 
-// const Source = sourceDbConn.model('Source', sourceSchema);
+const Source = sourceDbConn.model('Source', sourceSchema);
 
-module.exports = { User, Article }
+module.exports = { User, Article, Source }

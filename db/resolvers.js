@@ -6,6 +6,7 @@ const sourceDbConn = require('./index.js').sourceDbConn;
 const Articles = articleDbConn.collection('articles');
 const Users = userDbConn.collection('users');
 const Sources = sourceDbConn.collection('sources');
+const Source = require('./schemas.js').Source;
 const helpers = require('./data/helpers.js');
 const sourceBiases = require('./data/sources.js');
 const sourceConvert = require('./data/sourceConvert.js')
@@ -27,8 +28,15 @@ module.exports = {
     user: async (root, {_id}) => {
       return prepare(await Users.findOne(new mongodb.ObjectID(_id)));
     },
-    sources: async () => {
-      return (await Sources.find({}).toArray()).map(prepare);
+    sources: () => {
+      return Source.find({}).select('name')
+      .then(res => {    
+        var data = res.map(prepare);
+        return data;
+      })
+      .catch(err => {
+        return err;
+      })
     },
     source: async (root, {name}) => {
       return prepare(await Sources.findOne({name: name}));
