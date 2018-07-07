@@ -63,13 +63,8 @@ class OnboardModal extends React.Component {
           <Modal.Title>Welcome!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="modal-body-left">
-            <img className="onboard-image" src="./assets/logo.png" />
-            <p id='onboard-title'>Read Your Veggies</p>
-          </div>
-          <div className="modal-body-right">
-            <Panel>
-              <Panel.Body className="article-full-text">
+            <Panel className='onboard-modal-body'>
+              <Panel.Body>
               <div className='slider-prompt-container'>
               <p id='onboard-subtitle'>To get you started with the most nutritious articles possible, please tell us a little bit about yourself!</p> 
               <h3 id='slider-header'>Where would you place your current political stance?</h3>
@@ -138,7 +133,6 @@ class OnboardModal extends React.Component {
               </div>
               </Panel.Body>
             </Panel>
-          </div>
         </Modal.Body>
         <Modal.Footer>
           <Mutation mutation={ON_BOARD_USER} >

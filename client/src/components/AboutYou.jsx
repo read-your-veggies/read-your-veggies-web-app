@@ -46,73 +46,126 @@ class AboutYou extends React.Component {
                 var onboardStance = JSON.parse(data.user.onboard_stance);
                 var locPolRatio = JSON.parse(data.user.locPolRatio);
                 var homePolRatio = JSON.parse(data.user.homePolRatio);
-                var readingStance = JSON.parse(data.user.reading_stance[0]);
-                var browsingStance = JSON.parse(data.user.browsing_history_stance[0]);
+                var readingStance = data.user.reading_stance;
+                var browsingStance = data.user.browsing_history_stance;
                 
                 return (
                   <div>
-                  <PieChart
+                    <p>Your user stance is calculated from the following categories</p>
+                  {/* <PieChart
                     labels
                     data={[
                       { key: 'Self-report', value: 5, color: this.getColor(onboardStance)},
                       { key: 'Current city', value: 1, color: this.getColor(locPolRatio) },
                       { key: 'Hometown', value: 1, color: this.getColor(homePolRatio) },
-                      { key: 'Veggies reading', value: 1, color: this.getColor(readingStance) },
-                      { key: 'Browsing', value: 2, color: this.getColor(browsingStance) }
+                      { key: 'Veggies reading', value: 1, color: this.getColor(Number(readingStance[0])) },
+                      { key: 'Browsing', value: 2, color: this.getColor(Number(browsingStance[0])) }
                     ]}
-                  />
-                  <h1>Your Overall Political Stance:</h1>
-                  <HealthSpeedometer 
-                    height={100}
-                    width={150}
-                    value = {userStance}
-                    startColor="blue"
-                    endColor="red"
-                    min={-1}
-                    max={1}
-                  />
-                  <h1>Your Self Reported Political Stance:</h1>
-                  <p>{onboardStance}</p>
-                  <HealthSpeedometer 
-                    height={100}
-                    width={150}
-                    value = {onboardStance}
-                    startColor="blue"
-                    endColor="red"
-                    min={-1}
-                    max={1}
-                  />
-                  <h1>The Political Stance of Your Current City ({data.user.location}):</h1>
-                  <HealthSpeedometer 
-                    height={100}
-                    width={150}
-                    value = {locPolRatio}
-                    startColor="blue"
-                    endColor="red"
-                    min={-1}
-                    max={1}
-                  />
-                  <h1>The Political Stance of Your Hometown ({data.user.hometown}):</h1>
-                  <HealthSpeedometer 
-                    height={100}
-                    width={150}
-                    value = {homePolRatio}
-                    startColor="blue"
-                    endColor="red"
-                    min={-1}
-                    max={1}
-                  />
-                  <h1>The Political Stance of Your Reading Habits:</h1>
-                  <HealthSpeedometer 
-                    height={100}
-                    width={150}
-                    value = {readingStance}
-                    startColor="blue"
-                    endColor="red"
-                    min={-1}
-                    max={1}
-                  />
+                  /> */}
+                  <div className='user-stances'>
+                    <div className='partial-user-stance-container'>
+                      <h3 className='category'>Stance Subcategory</h3>
+                      <h3 className='data'>Your Stance</h3>
+                      <h3 className = 'multiplier'>Weight</h3>
+                    </div>
+                    {/* <div className='partial-user-stance-container'>
+                      <h3 className='category'>Your Overall Political Stance:</h3>
+                      <HealthSpeedometer
+                        className='data' 
+                        height={100}
+                        width={150}
+                        value = {userStance}
+                        startColor="blue"
+                        endColor="red"
+                        min={-1}
+                        max={1}
+                      />
+                      <h3 className = 'multiplier'>50%</h3>
+                    </div> */}
+                    <div className='partial-user-stance-container'>
+                      <h3 className='category'>Your Self Reported Political Stance:</h3>
+                      <HealthSpeedometer
+                        className='data'
+                        height={100}
+                        width={150}
+                        value = {onboardStance}
+                        startColor="blue"
+                        endColor="red"
+                        min={-1}
+                        max={1}
+                      />
+                      <h3 className = 'multiplier'>50%</h3>
+                    </div>
+                    <div className='partial-user-stance-container'>
+                      <h3 className='category'>The Political Stance of Your Reading Habits (based off of {readingStance[1]} articles):</h3>
+                      <HealthSpeedometer
+                        className='data'
+                        height={100}
+                        width={150}
+                        value = {Number(readingStance[0])}
+                        startColor="blue"
+                        endColor="red"
+                        min={-1}
+                        max={1}
+                      />
+                      <h3 className = 'multiplier'>10%</h3>
+                    </div>
+                    <div className='partial-user-stance-container'>
+                      <h3 className='category'>The Political Stance of Your Browsing Habits (based off of {browsingStance[1]} web pages):</h3>
+                      <HealthSpeedometer
+                        className='data'
+                        height={100}
+                        width={150}
+                        value = {Number(browsingStance[0])}
+                        startColor="blue"
+                        endColor="red"
+                        min={-1}
+                        max={1}
+                      />
+                      <h3 className = 'multiplier'>20%</h3>
+                    </div>
+                    <div className='partial-user-stance-container'>
+                      <h3 className='category'>The Political Stance of Your Current City ({data.user.location}):</h3>
+                      <HealthSpeedometer 
+                        className='data'
+                        height={100}
+                        width={150}
+                        value = {locPolRatio}
+                        startColor="blue"
+                        endColor="red"
+                        min={-1}
+                        max={1}
+                      />
+                      <h3 className = 'multiplier'>10%</h3>
+                    </div>
+                    <div className='partial-user-stance-container'>
+                      <h3 className='category'>The Political Stance of Your Hometown ({data.user.hometown}):</h3>
+                      <HealthSpeedometer 
+                        className='data'
+                        height={100}
+                        width={150}
+                        value = {homePolRatio}
+                        startColor="blue"
+                        endColor="red"
+                        min={-1}
+                        max={1}
+                      />
+                      <h3 className = 'multiplier'>10%</h3>
+                    </div>
                   </div>
+                  <div className='aggregate-stance'>
+                    <HealthSpeedometer
+                          className='data' 
+                          height={200}
+                          width={300}
+                          value = {userStance}
+                          startColor="blue"
+                          endColor="red"
+                          min={-1}
+                          max={1}
+                        />
+                  </div>
+                </div>
                 );
               }}
             </Query>
