@@ -45,7 +45,7 @@ class Sidebar extends Component {
             return (
               <Query fetchPolicy='network-only' query={GET_USER_STANCE_INFO} variables={{ _id: data.userInfo.userId }}>
                 {({ loading, error, data }) => {
-                  if (loading) return <Loading />;
+                  if (loading) return null;
                   if (error) return `Error! ${error.message}`;
                   var userStance = JSON.parse(data.user.user_stance);
                   return (
