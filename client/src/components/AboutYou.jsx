@@ -20,8 +20,6 @@ class AboutYou extends React.Component {
     this.setState({divHeight: window.innerHeight - 147 + 'px'});
   }
 
-
-
   render() {
     return (
       <div id='about-you-dash'>

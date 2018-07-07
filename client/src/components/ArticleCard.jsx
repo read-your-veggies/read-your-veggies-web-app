@@ -144,8 +144,6 @@ class ArticleCard extends React.Component {
         </div>
         <Panel bsStyle="default" className="article-panel">
           <Panel.Heading className="article-panel-heading">
-            
-            {/* <Badge className='nutrition-count' style={{backgroundColor: 'transparent'}}pullRight>{this.renderCarrots()}</Badge> */}
             {this.renderCarrots('carrots-right')}
           </Panel.Heading>
           <Panel.Body className="article-panel-body">

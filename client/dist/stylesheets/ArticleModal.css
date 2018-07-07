@@ -4,30 +4,21 @@
   overflow: scroll;
 }
 
-.modal-header {
+.article-header {
   text-align: center;
+  
 }
 
-.modal-title {
+.article-title {
   font-size: 1.7em;
-  font-weight: 200 !important;
+  font-weight: 200 !important; 
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 .modal-body {
   display: flex;
   flex-direction: flex-start;
-}
-
-.modal-body-left {
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-body-right{
-  width: 70%;
-  /* height: 500px; */
-  overflow: scroll;
 }
 
 .article-image {
@@ -45,14 +36,10 @@
 }
 
 .article-full-text {
-  /* text-align: justify; */
-  /* background-color: seashell; */
   font-family: 'Amiri', serif;
   font-size: 1.7em;
   line-height: 1.4em;
   white-space: pre-wrap;
-  /* max-height: 300px; */
-  /* overflow: scroll; */
 }
 
 .modal-footer p, .modal-footer .btn {
