@@ -16,3 +16,6 @@ html, body, #app, .app-container {
     display: none;
   }
 }
+
+::-webkit-scrollbar { width: 0 !important }
+

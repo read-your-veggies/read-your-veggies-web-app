@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { Query, Mutation } from "react-apollo";
-import { GET_TEAM_NAME_FROM_LOCAL_STATE } from '../apollo/localQueries';
 import ArticleCarousel from './ArticleCarousel.jsx';
-import OnboardModal from './OnboardModal.jsx';
-import { GET_USER_ONBOARD_INFO, GET_USER_ONBOARD_INFO_AND_STANCE } from '../apollo/serverQueries.js';
+import { GET_USER_ONBOARD_INFO_AND_STANCE } from '../apollo/serverQueries.js';
 import {UPDATE_USER_BROWSING_HISTORY} from '../apollo/resolvers.js'
 import Sidebar from './Sidebar.jsx';
 import Loading from './Loading.jsx';
@@ -89,16 +87,6 @@ class Dashboard extends Component {
             <ArticleCarousel userData={this.state.userData}  />
           </div>
         }
-        {/* <Query query={GET_TEAM_NAME_FROM_LOCAL_STATE}>
-          {({ data, client }) => {
-            return (
-              <h1 onClick={() =>  {
-                client.writeData({ data: { teamName: data.teamName + 1 } })
-              }}
-              >{data.teamName}</h1>
-            );
-          }}
-        </Query> */}
       </div>
     );
   }
