@@ -6,6 +6,7 @@ const sourceDbConn = require('./index.js').sourceDbConn;
 const Articles = articleDbConn.collection('articles');
 const Users = userDbConn.collection('users');
 const Sources = sourceDbConn.collection('sources');
+const Source = require('./schemas.js').Source;
 const helpers = require('./data/helpers.js');
 const sourceBiases = require('./data/sources.js');
 const sourceConvert = require('./data/sourceConvert.js')
@@ -27,8 +28,15 @@ module.exports = {
     user: async (root, {_id}) => {
       return prepare(await Users.findOne(new mongodb.ObjectID(_id)));
     },
-    sources: async () => {
-      return (await Sources.find({}).toArray()).map(prepare);
+    sources: () => {
+      return Source.find({}).select('name')
+      .then(res => {    
+        var data = res.map(prepare);
+        return data;
+      })
+      .catch(err => {
+        return err;
+      })
     },
     source: async (root, {name}) => {
       return prepare(await Sources.findOne({name: name}));
@@ -82,11 +90,11 @@ module.exports = {
 
       let voteStanceSummed = (avgVoteStances.agree - avgVoteStances.disagree + avgVoteStances.fun - avgVoteStances.bummer) / 2;
       let newArticleStance; 
-      if (totalVotes <= 20) {
+      if (totalVotes <= 5) {
         newArticleStance = voteStanceSummed * 0.1 + sourceStance * 0.9;
-      } else if (totalVotes <= 100) {
+      } else if (totalVotes <= 10) {
         newArticleStance = voteStanceSummed * 0.25 + sourceStance * 0.75;
-      } else if (totalVotes < 1000) {
+      } else if (totalVotes <= 50) {
         newArticleStance = voteStanceSummed * 0.5 + sourceStance * 0.5;
       } else {
         newArticleStance = voteStanceSummed * 0.8 + sourceStance * 0.2;

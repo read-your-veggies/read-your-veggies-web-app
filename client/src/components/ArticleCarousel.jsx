@@ -20,6 +20,7 @@ class ArticleCarousel extends Component {
     }
 
     this.setCurrentArticleId = this.setCurrentArticleId.bind(this);
+    this.shuffle = this.shuffle.bind(this);
   }
 
   setCurrentArticleId(id) {
@@ -27,6 +28,17 @@ class ArticleCarousel extends Component {
       {currentArticleId: id},
       ()=> {console.log(this.state)}
     );
+  }
+
+  shuffle(data) {
+    let articles = data.slice();
+    for (var i = 0; i < articles.length; i++) {
+      let randomIdx = Math.floor( Math.random() * articles.length);
+      let temp = articles[randomIdx];
+      articles[randomIdx] = articles[i];
+      articles[i] = temp;
+    }
+    return articles;  
   }
 
   render() {
@@ -46,16 +58,7 @@ class ArticleCarousel extends Component {
                   console.log(`Error! ${error.message}`);
                   return <Error />
                 }
-                console.log('articles data', data.articles);
-
-                // let shuffledArticles = data.articles.slice();
-                // for (var i = 0; i < shuffledArticles.length; i++) {
-                //   var randomIdx = Math.floor( Math.random() * shuffledArticles.length);
-                //   var swapper = shuffledArticles[randomIdx];
-                //   shuffledArticles[randomIdx] = shuffledArticles[i];
-                //   shuffledArticles[i] = swapper;
-                // }
-                // console.log('randomized articles', shuffledArticles);
+                let shuffled = this.shuffle(data.articles);
 
                 return (
                   <div className="articles-container">
@@ -68,10 +71,9 @@ class ArticleCarousel extends Component {
                     visibleSlides={1}
                   >        
                     <Slider>
-                      {data.articles.map((article, i) => {
+                      {shuffled.map((article, i) => {
                         let carrotCount = calculateNutritionalValue(this.props.userData.user_stance, article.articleStance);
-                        
-                        if ( (carrotCount > 0 && completedArticleKeys.indexOf(article._id) < 0) || this.state.currentArticleId === article._id ) {
+                        if ( (carrotCount > 0 && completedArticleKeys.indexOf(article._id) < 0 && article.fullText.length > 1000) || this.state.currentArticleId === article._id ) {
                           return (
                             <Slide index={i}>
                               <ArticleCard 

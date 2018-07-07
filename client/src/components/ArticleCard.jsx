@@ -61,9 +61,9 @@ class ArticleCard extends React.Component {
     }
   }
 
-  renderCarrots () {
+  renderCarrots (align) {
     var nutritionalValue = calculateNutritionalValue(this.props.userStance, this.props.article.articleStance )
-    return (<h3 className="carrots">{'🥕'.repeat(nutritionalValue)}</h3>);
+    return (<h3 className={align}>{'🥕'.repeat(nutritionalValue)}</h3>);
   }
 
   componentDidMount() {
@@ -146,7 +146,7 @@ class ArticleCard extends React.Component {
           <Panel.Heading className="article-panel-heading">
             
             {/* <Badge className='nutrition-count' style={{backgroundColor: 'transparent'}}pullRight>{this.renderCarrots()}</Badge> */}
-            {this.renderCarrots()}
+            {this.renderCarrots('carrots-right')}
           </Panel.Heading>
           <Panel.Body className="article-panel-body">
             <TagCloud minSize={40} maxSize={60} colorOptions={{hue: 'blue'}} tags={this.state.wordCloud}/>
@@ -196,7 +196,7 @@ class ArticleCard extends React.Component {
           show={this.state.showCompleted}
           handleClose={this.handleClose}
           article={this.state.fullArticle}
-          veggies={this.renderCarrots()}
+          veggies={this.renderCarrots('carrots-center')}
           setCurrentArticleId ={this.props.setCurrentArticleId}
         />
       </div>
