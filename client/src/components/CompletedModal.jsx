@@ -22,11 +22,13 @@ class CompletedModal extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <div class="container">
-            <p class="text-center">
-              Great job!  You earned this many veggies! <br/> {this.props.veggies}
+            <p className="congrats">
+              Great job!  You earned this many veggies! <br/><br/> 
             </p>
-            
-            <p class="text-center"> 
+            <p>
+              {this.props.veggies}
+            </p>
+            <p className="source-info"> 
             <a href={this.props.article.url} target="_blank">
               This article was originally published by {this.props.article.source}.
             </a>

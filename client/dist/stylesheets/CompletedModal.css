@@ -1,9 +1,9 @@
-.modal-body {
-  display: flex;
-  flex-direction: flex-start;
+.source-info {
+  text-align: center;
+  font-size: 1.5em;
 }
 
-.button {
-  height: 0px;
-  border: none;
+.congrats {
+  text-align: center;
+  font-size: 1.5em;
 }
