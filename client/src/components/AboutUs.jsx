@@ -21,7 +21,7 @@ class AboutUs extends React.Component {
     return (
       <div className="about-us-container">
         <Sidebar location={this.props.location} getUserInfo={this.props.getUserInfo}/>
-        <div id='about-us-inner-content' style={{height: this.state.divHeight}}> 
+        <div id='about-us-inner-content' > 
           <Query query={GET_LIST_OF_SOURCES}>
             {({ loading, error, data }) => {
               if (loading) return <Loading />;

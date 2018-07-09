@@ -15,9 +15,7 @@ class Sidebar extends Component {
     this.state = {
       divHeight: ''
     };
-    this.handleSpeedometerClick = this.handleSpeedometerClick.bind(this);
-    this.goToAboutUs= this.goToAboutUs.bind(this);
-
+    this.goTo= this.goTo.bind(this);
   }
 
   componentDidMount() {
@@ -25,13 +23,9 @@ class Sidebar extends Component {
     this.setState({divHeight: window.innerHeight - 147 + 'px'});
   }
 
-  handleSpeedometerClick() {
-    this.props.history.push('/report');
-  }
-
-  goToAboutUs(displayName) {
+  goTo(displayName, link) {
     if (displayName !== 'Login') {
-      this.props.history.push('/about');
+      this.props.history.push(`/${link}`);
     }
   }
 
@@ -41,7 +35,7 @@ class Sidebar extends Component {
     var displayName = this.props.getUserInfo.data.userInfo.displayName;
 
     return (
-      <div id='dash-sidebar' style={{height: this.state.divHeight}}>
+      <div id='dash-sidebar' >
         <Query query={GET_USER_INFO}>
           {(({data}) => {
             return (
@@ -51,13 +45,16 @@ class Sidebar extends Component {
                   if (error) return `Error! ${error.message}`;
                   var userStance = JSON.parse(data.user.user_stance);
                   return (
-
                     <div id='dash-sidebar-inner'>
+                      {/* <div onClick={() => this.goTo(displayName, "dashboard")} className='sidebar-container'>
+                        <h3>Home:</h3>
+                        <img src="./assets/logo.png" />
+                      </div> */}
                       <UserInfo location={this.props.location} displayName={displayName} userId={userId} />
-                      <a onClick = {this.handleSpeedometerClick}>{' '}
+                      <a onClick = {() => this.goTo(displayName, "report")}>{' '}
                         <OverlayTrigger overlay={tooltip}>
                           <div id='sidebar-pol-stance'>
-                            <h3 id='stance-title'>Your Veggies Stance:</h3>
+                            <h3 id='stance-title'>Stance</h3>
                             <HealthSpeedometer 
                               height={100}
                               width={150}
@@ -66,14 +63,18 @@ class Sidebar extends Component {
                               endColor="red"
                               min={-1}
                               max={1}
+                              sidebar={true}
                             />
                           </div>
                         </OverlayTrigger>
                       {' '}</a>
-                      <div id='sidebar-about-container' onClick={this.goToAboutUs}>
+                      <div className='sidebar-container' onClick={() => this.goTo(displayName, "about")}>
                         <h3>About</h3>
+                        <img src="./assets/bargraph.png" />
                       </div>
+                      <h3 id="logout-button"><a href='/logout'>Logout</a></h3>
                     </div>
+                    
                   );
                 }}
               </Query>
