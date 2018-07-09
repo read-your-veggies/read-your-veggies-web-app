@@ -45,9 +45,11 @@ class ArticleCard extends React.Component {
   // There are three modals launched from ArticleCard.  Their closing and opening is handled by these functions.
   handleClose(modalType) {
     if (modalType === 'article') {
+      let time = Date.now();
+      console.log('end', this.state);
       this.setState({ 
         showArticle: false,
-        endTime: Date.now()
+        endTime: time
       });
     } else if (modalType === 'voter'){
       this.setState({ showVoter: false })
@@ -58,14 +60,11 @@ class ArticleCard extends React.Component {
 
   handleShow(modalType) {
     if (modalType === 'article') {
-      this.setState({ 
-        showArticle: true,
-        startTime: Date.now()
-       });
+      this.setState({ showArticle: true });
     } else if (modalType === 'voter') {
-      console.log('state now', this.state)
       this.setState({ showVoter: true})
     } else if (modalType === 'completed') {
+      console.log('state now', this.state);
       this.setState({ showCompleted: true })
     }
   }
@@ -169,6 +168,7 @@ class ArticleCard extends React.Component {
                     console.log('full article incoming', data.article);
                     this.setState({
                       fullArticle: data.article,
+                      startTime: Date.now(),
                       showArticle: true,
                     })
                     this.props.setCurrentArticleId(this.props.article._id);
