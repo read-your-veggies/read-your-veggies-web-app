@@ -42,7 +42,7 @@ class App extends Component {
         <Query query={GET_USER_INFO}>
           {(getUserInfo => 
             <Header location = {location} getUserInfo = {getUserInfo} />)}
-        </Query>
+        </Query>  
         <Switch>
           <Route path={"/about"}
             component={() => 

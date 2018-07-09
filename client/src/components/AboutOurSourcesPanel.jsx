@@ -2,11 +2,9 @@ import React from 'react';
 import Panel from 'react-bootstrap/lib/Panel';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import {BarChart} from 'react-easy-chart';
 import { ApolloConsumer } from "react-apollo";
 import { GET_SOURCE_PERSONALITY } from '../apollo/serverQueries';
-import {Query} from 'react-apollo';
 
 class AboutOurSourcesPanel extends React.Component {
   constructor(props) {
@@ -89,35 +87,6 @@ class AboutOurSourcesPanel extends React.Component {
   render() {
     return (
       <Panel eventKey="3" className="about-our-sources-panel">
-        {/* <Panel.Heading> */}
-          {/* <ApolloConsumer>
-            { client => (
-              <Panel.Title 
-                toggle
-                onClick={async () => {
-                  const {data} = await client.query({
-                    query: GET_SOURCE_PERSONALITY,
-                    variables: {name: "Fox News"},
-                  })
-                  this.setPersonality(data);
-                }}
-              >
-              About Our Sources
-            </Panel.Title>
-            )}
-          </ApolloConsumer> */}
-          {/* <Query query={GET_SOURCE_PERSONALITY} variables={{name: "Fox News"}}>
-            {({ loading, error, data }) => {
-              if (loading) return null;
-              if (error) return `Error! ${error.message}`;
-              this.setPersonality(data);
-              return (
-                null
-              );
-            }}
-          </Query> */}
-        {/* </Panel.Heading> */}
-
         <Panel.Body>
           <img id="watson-logo" src='../assets/watson.png' /> 
           <h3 className="about-our-sources-title">Select a source to get started</h3> 
@@ -127,7 +96,6 @@ class AboutOurSourcesPanel extends React.Component {
               <ApolloConsumer>
                 { client => (
                   <FormGroup controlId="formControlsSelect" className="watson-dropdown">
-                    {/* <ControlLabel>Source</ControlLabel> */}
                     <FormControl 
                       componentClass="select" 
                       placeholder="select" 
@@ -153,7 +121,6 @@ class AboutOurSourcesPanel extends React.Component {
               </ApolloConsumer>
 
               <FormGroup controlId="formControlsSelect" className="watson-dropdown">
-                {/* <ControlLabel>Attribute</ControlLabel> */}
                 <FormControl 
                   componentClass="select" 
                   placeholder="select" 
@@ -168,7 +135,6 @@ class AboutOurSourcesPanel extends React.Component {
           </div>
 
           <BarChart className="bar-graph"
-            axisLabels={{y: 'Percentile'}}
             yDomainRange={[0, 100]}
             width={800}
             height={400}

@@ -6,7 +6,7 @@ import HealthSpeedometer from './HealthSpeedometer.jsx';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import { withRouter } from 'react-router-dom';
-import Loading from './Loading.jsx';
+import UserInfo from './UserInfo.jsx';
 
 
 class Sidebar extends Component {
@@ -37,6 +37,8 @@ class Sidebar extends Component {
 
   render() {
     var tooltip = <Tooltip id="modal-tooltip">See Your Report</Tooltip>;
+    var userId = this.props.getUserInfo.data.userInfo.userId;
+    var displayName = this.props.getUserInfo.data.userInfo.displayName;
 
     return (
       <div id='dash-sidebar' style={{height: this.state.divHeight}}>
@@ -49,7 +51,9 @@ class Sidebar extends Component {
                   if (error) return `Error! ${error.message}`;
                   var userStance = JSON.parse(data.user.user_stance);
                   return (
+
                     <div id='dash-sidebar-inner'>
+                      <UserInfo location={this.props.location} displayName={displayName} userId={userId} />
                       <a onClick = {this.handleSpeedometerClick}>{' '}
                         <OverlayTrigger overlay={tooltip}>
                           <div id='sidebar-pol-stance'>

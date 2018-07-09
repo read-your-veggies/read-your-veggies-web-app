@@ -40,12 +40,12 @@ class CompletedArticles extends React.Component {
                             var article = data.article;
                             return (
                               <Panel className="completed-article">
-                                <Panel.Heading className="completed-article-title">
-                                  <a href={article.url}>{article.title}</a>
+                                <Panel.Heading>
+                                  <p className="completed-article-carrots">{'🥕'.repeat(completedArticleInfo[articleId].nutritionalValue)}</p>
                                 </Panel.Heading>
-                                <Panel.Body>
-                                  <p>Nutrition for you: {completedArticleInfo[articleId].nutritionalValue}</p>
-                                  <img src={article.image} />                             
+                                <Panel.Body className="completed-article-body">
+                                  <img className="completed-article-image" src={article.image} />
+                                  <a href={article.url}><h3 className="completed-article-title">{article.title.slice(0, 45)}...</h3></a>
                                 </Panel.Body>
                               </Panel>
                             )
@@ -59,8 +59,8 @@ class CompletedArticles extends React.Component {
               </Query>
             );
           }
-          )}
-        </Query>
+        )}
+      </Query>
     );
   }
 }

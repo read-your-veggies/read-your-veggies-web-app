@@ -6,7 +6,6 @@ import 'react-rangeslider/lib/index.css';
 import { withRouter } from "react-router-dom";
 import UserStats from './UserStats.jsx';
 
-
 class GettingStartedModal extends React.Component {
   constructor(props) {
     super(props);

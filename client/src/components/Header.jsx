@@ -1,4 +1,3 @@
-import UserInfo from './UserInfo.jsx';
 import React from 'react';
 import { withRouter } from "react-router-dom";
 
@@ -19,10 +18,14 @@ class Header extends React.Component {
   }
 
   render() {
-
     var displayName = this.props.getUserInfo.data.userInfo.displayName;
-    var userId = this.props.getUserInfo.data.userInfo.userId;
-
+    var linkName;
+    if (displayName === 'Login') {
+      linkName = 'Login';
+    } else {
+      linkName = 'Logout';
+    }
+    
     return (
       
       <div className="header">
@@ -30,10 +33,12 @@ class Header extends React.Component {
           <img id="logo" src="./assets/logo.png" />
         </div>
         <div className="header-text">
-          <h1 onClick={() => this.goToDashboard(displayName)} id="read-your-veggies">Read-Your-Veggies.com</h1>
+          <h1 onClick={() => this.goToDashboard(displayName)} id="read-your-veggies">Read-Your-Veggies</h1>
           <h2>Your news app for a balanced media diet</h2>
-        </div> 
-        <UserInfo location={location} displayName={displayName} userId={userId} />
+        </div>
+        <h2 id="profile-link">{' '}
+          <a href={displayName === 'Login' ? '/auth/facebook' : '/logout'}>{linkName}</a>
+        </h2>
       </div>
     )
   }

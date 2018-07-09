@@ -20,31 +20,25 @@ class ArticleModal extends React.Component {
   render() {
     return (
       <Modal className="article-modal" show={this.props.show} onHide={() => this.props.handleClose('article')}>
-        <Modal.Header closeButton>
-          <Modal.Title>{this.props.article.title}</Modal.Title>
+        <Modal.Header className="article-header" closeButton>
+          <Modal.Title className="article-title">{this.props.article.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/* <h4>{this.props.article.description}</h4> */}
-          {/* <div className="modal-body-left">
+          <Panel className="article-panel">
             <img className="article-image" src={this.props.article.image} />
-          </div>
-          <div className="modal-body-right"> */}
-            <Panel className="article-panel">
-              <img className="article-image" src={this.props.article.image} />
-              <Panel.Body className="article-full-text">
-                {this.props.article.fullText}
-                <div className="complete-article-wrapper">
-                  <Button bsSize="large" bsStyle="success" onClick={(e) => {
-                      e.preventDefault();
-                      this.completeArticle();
-                    }}
-                    >
-                  Complete Article
-                  </Button>
-                </div>
-              </Panel.Body>
-            </Panel>
-            
+            <Panel.Body className="article-full-text">
+              {this.props.article.fullText}
+              <div className="complete-article-wrapper">
+                <Button bsSize="large" bsStyle="success" onClick={(e) => {
+                    e.preventDefault();
+                    this.completeArticle();
+                  }}
+                  >
+                Complete Article
+                </Button>
+              </div>
+            </Panel.Body>
+          </Panel>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={
