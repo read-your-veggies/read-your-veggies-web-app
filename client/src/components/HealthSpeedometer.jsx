@@ -29,8 +29,9 @@ class HealthSpeedometer extends React.Component {
   render() {
     // console.log('speedometer', this.props);
     let polValueString = '';
-    
-    if (this.state.value < -0.6) {
+    if (this.props.sidebar === true) {
+      polValueString = '';
+    } else if (this.state.value < -0.6) {
       polValueString = 'Very Liberal';
     } else if (this.state.value < -0.2) {
       polValueString = 'Leaning Liberal';

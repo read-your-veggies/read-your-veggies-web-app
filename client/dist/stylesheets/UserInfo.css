@@ -1,26 +1,12 @@
 #user-info-container {
-  flex-basis: 20%;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
 }
 
-#profile-link {
-  align-self: center;
-  margin: 0;
-}
-
-#profile-link a {
-  color: black;
-}
-
-#profile-link a:hover {
-  color: red;
-}
 
 .small-speedometer-click-wrapper {
-  border-radius: 10px;
-  background-color: #dff0d8;
+  /* background-color: #dff0d8; */
   padding: 5px;
 }
 
@@ -30,17 +16,14 @@
 }
 
 .rc-progress-line {
-  width: 80%;
+  width: 60%;
+  height: 40px;
   display: block;
   margin: 0 auto;
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
 }
 
-#logout-button{
-  align-self: center;
-}
-
-#line-start{
+/* #line-start{
   float: left;
   padding-left: 10%;
 }
@@ -48,4 +31,4 @@
 #line-end{
   float: right;
   padding-right: 10%;
-}
+} */

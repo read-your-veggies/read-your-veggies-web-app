@@ -1,12 +1,14 @@
 #dash-sidebar {
-  background-color: #dff0d8;
+  /* background-color: #dff0d8; */
+  /* background-color: #FAFFD8; */
   box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+  height: 100%;
 }
 
 #dash-sidebar-inner {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   height: 100%;
 }
 
@@ -42,13 +44,21 @@
 
 #sidebar-pol-stance:hover {
   background-color: #bbdfad;
+  cursor: pointer;
 }
 
-#sidebar-about-container {
-  border-top: 2px solid rgb(51, 51, 51);
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-#sidebar-about-container:hover {
+.sidebar-container img {
+  height: 80px;
+}
+
+.sidebar-container:hover {
   background-color: #bbdfad;
   cursor: pointer;
 }
