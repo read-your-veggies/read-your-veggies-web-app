@@ -23,10 +23,10 @@ class HealthDashboard extends React.Component {
   render() {
     return (
       <div id='health-dashboard' style={{height: this.state.divHeight}}>
-        <Sidebar />
-          <div id='health-dashboard-inner-content'>
-            <h3>Recent Veggies</h3>
-            <CompletedArticles />
+        <Sidebar location={this.props.location} getUserInfo={this.props.getUserInfo}/>
+        <div id='health-dashboard-inner-content'>
+          <h3>Recent Veggies</h3>
+          <CompletedArticles />
         </div>
       </div>
     );

@@ -48,7 +48,7 @@ class Dashboard extends Component {
   render() {
     return(
       <div className="dashboard">
-        <Sidebar />
+        <Sidebar location={this.props.location} getUserInfo={this.props.getUserInfo}/>
         {this.state.onboardInformation === null
           ?
           <div>
