@@ -86,8 +86,8 @@ class AboutOurSourcesPanel extends React.Component {
 
   render() {
     return (
-      <Panel eventKey="3" className="about-our-sources-panel">
-        <Panel.Body>
+      <div eventKey="3" className="about-our-sources-panel">
+       <div>
           <img id="watson-logo" src='../assets/watson.png' /> 
           <h3 className="about-our-sources-title">Select a source to get started</h3> 
           <p className="about-our-sources-tagline">We build personality profiles of our sources over time using IBM Watson's Personality Insights.</p>
@@ -143,8 +143,8 @@ class AboutOurSourcesPanel extends React.Component {
             margin={{top: 20, right: 20, bottom: 30, left: 40}}
             data={this.state.data[this.state.currentAttribute]}
           />
-        </Panel.Body>
-      </Panel>
+        </div>
+      </div>
     )
   }
 }

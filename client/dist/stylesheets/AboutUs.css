@@ -1,6 +1,7 @@
 .about-us-container {
   display: flex;
   justify-content: space-between;
+  height: 88%;
 }
 
 #about-us-inner-content {
@@ -10,6 +11,7 @@
 
 .about-our-sources-panel {
   margin-bottom: 0;
+  padding: 2%;
 }
 
 .about-our-sources-header {

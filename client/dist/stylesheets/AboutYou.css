@@ -1,11 +1,13 @@
 #about-you-dash {
   display: flex;
   justify-content: space-between;
+  height: 88%;
 }
 
 #about-you-inner-content {
   flex-basis: 80%;
   overflow-y: scroll;
+  
 }
 
 #about-you-user-stances-wrapper {

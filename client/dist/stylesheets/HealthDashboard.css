@@ -1,6 +1,7 @@
 #health-dashboard {
   display: flex;
   justify-content: space-between;
+  height: 88%;
 
 }
 #health-dashboard-inner-content{
