@@ -74,10 +74,11 @@ startGraphQl();
 /*****************************LISTEN*****************************/
 var port = process.env.PORT || 5000;
 
-if (process.env.DEPLOYED !== 'true') {
+if (process.env.DEPLOYED === 'aws') {
+  console.log('on aws server');
   var certOptions = {
-    key: fs.readFileSync(path.resolve('server.key')),
-    cert: fs.readFileSync(path.resolve('server.crt'))
+    key: fs.readFileSync('/etc/letsencrypt/live/read-your-veggies.com/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/read-your-veggies.com/fullchain.pem')
   }  
   var server = https.createServer(certOptions, app).listen(port, function() {
     console.log(`listening on port ${port}!`);
