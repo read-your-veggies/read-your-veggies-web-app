@@ -83,8 +83,13 @@ if (process.env.DEPLOYED === 'aws') {
   var server = https.createServer(certOptions, app).listen(port, function() {
     console.log(`listening on port ${port}!`);
   });  
-} else {
-  var server = app.listen(port, () => {
+} else  {
+  console.log('on local server');
+  var certOptions = {
+    key: fs.readFileSync(path.resolve('server.key')),
+    cert: fs.readFileSync(path.resolve('server.crt'))
+  }  
+  var server = https.createServer(certOptions, app).listen(port, function() {
     console.log(`listening on port ${port}!`);
-  });
-}
+  });  
+} 
