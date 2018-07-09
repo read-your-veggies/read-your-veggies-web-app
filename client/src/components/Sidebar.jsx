@@ -72,7 +72,7 @@ class Sidebar extends Component {
                         <h3>About</h3>
                         <img src="./assets/bargraph.png" />
                       </div>
-                      <h3><a href='/logout'>Logout</a></h3>
+                      <h3 id="logout-button"><a href='/logout'>Logout</a></h3>
                     </div>
                     
                   );

@@ -12,7 +12,7 @@
   /* background-color: grey; */
   /* color: #ff77e8; */
   /* color: #ff77e8; */
-  height: 12%;
+  min-height: 12%;
 }
 
 /* .header h2 {
@@ -79,8 +79,4 @@
 
 /* #header-right h4 {
   text-align: right;
-} */
-
-/* #logout-button{
-  align-self: center;
 } */

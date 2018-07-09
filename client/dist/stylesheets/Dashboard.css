@@ -1,5 +1,6 @@
 .dashboard {
   height: 88%;
+  min-height: 600px;
   display: flex;
   justify-content: space-between;
 }
