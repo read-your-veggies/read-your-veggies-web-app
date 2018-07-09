@@ -23,7 +23,7 @@ class AboutYou extends React.Component {
   render() {
     return (
       <div id='about-you-dash'>
-        <Sidebar />
+        <Sidebar location={this.props.location} getUserInfo={this.props.getUserInfo}/>
         <div id='about-you-inner-content' style={{height: this.state.divHeight}}>
         <h3>Your user stance is calculated from the following categories:</h3>
             <div id='about-you-user-stances-wrapper'>

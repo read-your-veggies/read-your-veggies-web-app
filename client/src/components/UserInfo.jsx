@@ -5,7 +5,7 @@ import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import { GET_USER_HEALTH } from '../apollo/serverQueries.js';
 import { Query } from "react-apollo";
 import { Line } from 'rc-progress';
-
+import Error from './Error.jsx';
 
 
 class UserInfo extends React.Component {
@@ -23,15 +23,9 @@ class UserInfo extends React.Component {
 
   render() {
     var userId = this.props.userId;
-    var loginTip = <Tooltip id="modal-tooltip">{this.props.displayName === 'Login' ? 'Login' : 'Logout?'}</Tooltip>;
     
     return (
       <div id='user-info-container'>
-        <h2 id="profile-link">{' '}
-          <OverlayTrigger overlay={loginTip}>
-            <a href={this.props.displayName === 'Login' ? '/auth/facebook' : '/logout'}>{this.props.displayName}</a>
-          </OverlayTrigger>{' '}
-        </h2>
         <div className='small-speedometer-click-wrapper' onClick={this.handleSpeedometerClick}>
           {userId !== '1234567890' 
             ?
@@ -40,8 +34,8 @@ class UserInfo extends React.Component {
               variables={{ _id: userId }}
             >
             {({ loading, error, data }) => {
-              if (loading) return "Loading...";
-              if (error) return `Error! ${error.message}`;
+              if (loading) return null;
+              if (error) return <Error />;
               
               var veggieGoal = data.user.onboard_information === 'NEED_ON_BOARDING' ? 30 : JSON.parse(data.user.onboard_information).veggieSlider;
               var mediaHealth = data.user.health / veggieGoal * 100;
