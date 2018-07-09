@@ -7,3 +7,4 @@ server.crt
 server.key
 sslConfig/
 .vscode/
+client/dist/.well-known/
