@@ -63,13 +63,13 @@ class ArticleCard extends React.Component {
   }
 
   renderCarrots (align) {
-    var nutritionalValue = calculateNutritionalValue(this.props.userStance, this.props.article.articleStance )
+    let nutritionalValue = calculateNutritionalValue(this.props.userStance, this.props.article.articleStance, this.props.article.fullText.length )
     return (<h3 className={align}>{'🥕'.repeat(nutritionalValue)}</h3>);
   }
 
   componentDidMount() {
-    var words = this.props.article.fullText.split(' ');
-    var badWords = {
+    let words = this.props.article.fullText.split(' ');
+    let badWords = {
       'a': true, 
       'the': true, 
       'to': true, 
@@ -158,7 +158,7 @@ class ArticleCard extends React.Component {
                       query: GET_ONE_FULL_ARTICLE,
                       variables: {_id: this.props.article._id}
                     })
-                    console.log('full article incoming', data.article);
+                    console.log('full article incoming', data.article.fullText.length);
                     console.log('start time', Date.now())
                     this.setState({
                       fullArticle: data.article,
@@ -192,7 +192,7 @@ class ArticleCard extends React.Component {
           articleId={this.props.article._id}
           articleStance={this.props.article.articleStance}
           userStance={this.props.userStance}
-          nutritionalValue={calculateNutritionalValue(this.props.userStance, this.props.article.articleStance )}
+          nutritionalValue={calculateNutritionalValue(this.props.userStance, this.props.article.articleStance, this.props.article.fullText.length )}
         />
         <CompletedModal
           show={this.state.showCompleted}

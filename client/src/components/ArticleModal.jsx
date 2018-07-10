@@ -32,7 +32,7 @@ class ArticleModal extends React.Component {
                 <Button bsSize="large" bsStyle="success" onClick={(e) => {
                   e.preventDefault();
                   var msPerChar = (Date.now() - this.props.startTime) / this.props.article.fullText.length;
-                  if (msPerChar < 6) {  
+                  if (msPerChar < 1) {  
                     console.log('milliseconds per character', msPerChar);
                     alert("Whoa, slow down!  Please spend some more time reading the article to earn your veggies.");
                   } else {
