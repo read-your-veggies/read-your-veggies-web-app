@@ -2,12 +2,16 @@ import React from 'react';
 import ReactSpeedometer from "react-d3-speedometer";
 
 class HealthSpeedometer extends React.Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      value: 0,
-    }
+  //   this.state = {
+  //     value: 0,
+  //   }
+  // }
+
+  state = {
+    value: 0,
   }
 
   componentDidMount() {

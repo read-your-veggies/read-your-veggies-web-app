@@ -26,7 +26,7 @@ class ArticleCarousel extends Component {
   setCurrentArticleId(id) {
     this.setState({
       currentArticleId: id
-    }}
+    });
   }
 
   shuffle(data) {
