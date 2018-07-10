@@ -23,7 +23,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    var id = this.props.getUserInfo.data.userInfo.userId;
+    const id = this.props.getUserInfo.data.userInfo.userId;
     if (id !== '1234567890') {
       let userBrowsingHistory = [];
       try {

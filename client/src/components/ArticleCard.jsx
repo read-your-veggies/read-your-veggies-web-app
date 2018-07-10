@@ -99,7 +99,7 @@ class ArticleCard extends React.Component {
       'these': true,
       'but': true,
     };
-    var wordsObj = {};
+    let wordsObj = {};
     words.forEach(word => {
       if (badWords[word] === undefined) {
         if (wordsObj[word]) {
@@ -109,8 +109,8 @@ class ArticleCard extends React.Component {
         }
       }  
     })
-    var results = [];
-    for (var key in wordsObj) {
+    let results = [];
+    for (let key in wordsObj) {
       if (wordsObj[key] > 1) {
         results.push({
           value: key,

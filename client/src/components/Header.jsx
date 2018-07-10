@@ -17,7 +17,7 @@ class Header extends React.Component {
   }
 
   render() {
-    var displayName = this.props.getUserInfo.data.userInfo.displayName;
+    const displayName = this.props.getUserInfo.data.userInfo.displayName;
     
     return (
       <div className="header" onClick={() => this.goToDashboard(displayName)}>

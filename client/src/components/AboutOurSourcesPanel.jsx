@@ -37,7 +37,7 @@ class AboutOurSourcesPanel extends React.Component {
   }
 
   setSources(data) {
-    var sources = data.sources.map(source => {
+    const sources = data.sources.map(source => {
       return source.name;
     });
     this.setState({
@@ -47,10 +47,10 @@ class AboutOurSourcesPanel extends React.Component {
 
   setPersonality(data) {
     if (data.source.fullTextsPersonality) {
-      var parsedData = JSON.parse(data.source.fullTextsPersonality);
-      var newData = {};
+      const parsedData = JSON.parse(data.source.fullTextsPersonality);
+      let newData = {};
   
-      for (var key in parsedData) {
+      for (let key in parsedData) {
         if (key === 'needs' || key === 'values') {
           newData[key] = [];
           parsedData[key].forEach(trait => {
