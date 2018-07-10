@@ -8,6 +8,7 @@ import 'react-rangeslider/lib/index.css';
 import { ON_BOARD_USER } from '../apollo/resolvers.js';
 import { Mutation } from "react-apollo";
 import GettingStartedModal from './GettingStartedModal.jsx';
+import {states} from '../lib/50states.js';
 
 
 class OnboardModal extends React.Component {
@@ -60,6 +61,7 @@ class OnboardModal extends React.Component {
   }
 
   render() {
+    console.log('50 states', states);
     return (
       <div>
         <Modal id='onboard-modal' show={this.state.show} onHide={this.handleClose}>
@@ -134,6 +136,13 @@ class OnboardModal extends React.Component {
                       }
                     tooltip={false}
                   />
+                </div>
+                <div>
+                  <input type="text" name="hometown"/>
+                  <select>
+                    <option value="val1">Value 1</option>
+                    <option value="val2">Value 2</option>
+                  </select>
                 </div>
                 </Panel.Body>
               </Panel>
