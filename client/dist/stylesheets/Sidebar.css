@@ -1,7 +1,8 @@
 #dash-sidebar {
   /* background-color: #dff0d8; */
   /* background-color: #FAFFD8; */
-  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,0);
+  height: 100%;
 }
 
 #dash-sidebar-inner {
@@ -27,9 +28,9 @@
   color: rgb(51,51,51);
 }
 
-#dash-sidebar a #stance-title:hover {
+/* #dash-sidebar a #stance-title:hover {
   color: brown;
-}
+} */
 
 
 #dash-sidebar a:hover {

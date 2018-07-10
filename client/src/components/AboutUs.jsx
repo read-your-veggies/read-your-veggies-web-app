@@ -14,12 +14,12 @@ class AboutUs extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({divHeight: window.innerHeight - 147 + 'px'});
+    this.setState({divHeight: window.innerHeight - 100 + 'px'});
   }
 
   render() {
     return (
-      <div className="about-us-container">
+      <div className="about-us-container" style={{height: this.state.divHeight}}>
         <Sidebar location={this.props.location} getUserInfo={this.props.getUserInfo}/>
         <div id='about-us-inner-content' > 
           <Query query={GET_LIST_OF_SOURCES}>

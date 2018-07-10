@@ -17,15 +17,15 @@ class AboutYou extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({divHeight: window.innerHeight - 147 + 'px'});
+    this.setState({divHeight: window.innerHeight - 100 + 'px'});
   }
 
   render() {
     return (
-      <div id='about-you-dash'>
+      <div id='about-you-dash' style={{height: this.state.divHeight}}>
         <Sidebar location={this.props.location} getUserInfo={this.props.getUserInfo}/>
         <div id='about-you-inner-content' >
-        <h3>Your user stance is calculated from the following categories:</h3>
+        <h3>Your political stance is calculated from the following categories and weights:</h3>
             <div id='about-you-user-stances-wrapper'>
               <UserStats userId ={this.props.getUserInfo.data.userInfo.userId} />
             </div>
@@ -36,7 +36,7 @@ class AboutYou extends React.Component {
                 var userStance = JSON.parse(data.user.user_stance);
                 return (
                   <div className='aggregate-stance'>
-                    <h2>Your Read Your Veggies Stance:</h2>
+                    <h3>Overall:</h3>
                     <HealthSpeedometer
                           className='data' 
                           height={200}
