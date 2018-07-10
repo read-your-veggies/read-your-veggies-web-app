@@ -15,7 +15,6 @@ class UserInfo extends React.Component {
   }
 
   handleSpeedometerClick() {
-    console.log('speedometer props', this.props)
     if (this.props.displayName !== 'Login') {
       this.props.history.push('/health');
     }

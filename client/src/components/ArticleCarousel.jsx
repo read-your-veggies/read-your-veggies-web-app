@@ -5,7 +5,7 @@ import ArticleCard from './ArticleCard.jsx';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { calculateNutritionalValue } from '../lib/calculateStance.js';
-import { GET_ONE_FULL_ARTICLE, GET_COMPLETED_ARTICLES } from '../apollo/serverQueries.js';
+import { GET_COMPLETED_ARTICLES } from '../apollo/serverQueries.js';
 import Loading from './Loading.jsx';
 import Error from './Error.jsx';
 

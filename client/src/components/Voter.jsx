@@ -1,10 +1,6 @@
 import React from 'react';
 import Panel from 'react-bootstrap/lib/Panel';
 import Button from 'react-bootstrap/lib/Button';
-import Grid from 'react-bootstrap/lib/Grid';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import { UPDATE_ARTICLE_VOTES, UPDATE_USER_VOTES } from '../apollo/resolvers';
 import { Mutation } from "react-apollo";
 import Modal from 'react-bootstrap/lib/Modal';

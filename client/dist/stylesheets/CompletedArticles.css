@@ -36,3 +36,7 @@
   padding: 0;
   margin: 0;
 }
+
+.completed-articles-header {
+  display: block;
+}

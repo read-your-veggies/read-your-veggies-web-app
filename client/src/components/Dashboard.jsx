@@ -12,7 +12,6 @@ class Dashboard extends Component {
 
   constructor(props) {
     super(props);
-    console.log('dash props', props)
 
     this.state = {
       userId: null,
@@ -59,7 +58,7 @@ class Dashboard extends Component {
                 this.setState({
                   onboardInformation: data.user.onboard_information,
                   userData: data.user,
-                }, () => console.log(this.state));
+                });
                 return (
                   null
                 );
