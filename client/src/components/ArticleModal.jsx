@@ -31,7 +31,13 @@ class ArticleModal extends React.Component {
               <div className="complete-article-wrapper">
                 <Button bsSize="large" bsStyle="success" onClick={(e) => {
                     e.preventDefault();
+                    let msPerChar = (Date.now() - this.props.startTime) / this.props.article.fullText.length;
+                    // console.log('milliseconds per character', msPerChar);
+                  if (msPerChar < 30) {
+                    alert("Whoa, slow down!");
+                  } else {
                     this.completeArticle();
+                  }
                   }}
                   >
                 Complete Article
@@ -43,7 +49,7 @@ class ArticleModal extends React.Component {
         <Modal.Footer>
           <Button onClick={
             (e) => {
-              e.preventDefault();
+              e.preventDefault();              
               this.props.handleClose('article');
           }}>Close</Button>
         </Modal.Footer>
