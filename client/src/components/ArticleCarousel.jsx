@@ -52,7 +52,7 @@ class ArticleCarousel extends Component {
 
   shuffle(data, completedArticleKeys) {
     let articles = data.slice();
-    for (var i = 0; i < articles.length; i++) {
+    for (let i = 0; i < articles.length; i++) {
       let randomIdx = Math.floor( Math.random() * articles.length);
       let temp = articles[randomIdx];
       articles[randomIdx] = articles[i];

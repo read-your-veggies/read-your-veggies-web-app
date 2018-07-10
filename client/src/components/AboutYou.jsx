@@ -33,7 +33,7 @@ class AboutYou extends React.Component {
               {({ loading, error, data, }) => {
                 if (loading) return <Loading />;
                 if (error) return `Error! ${error.message}`;
-                var userStance = JSON.parse(data.user.user_stance);
+                const userStance = JSON.parse(data.user.user_stance);
                 return (
                   <div className='aggregate-stance'>
                     <h3>Overall:</h3>

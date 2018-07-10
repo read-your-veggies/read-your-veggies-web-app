@@ -26,24 +26,22 @@ class CompletedArticles extends React.Component {
       0: 0,
     }
     const now = Date.now();
-    for (var id in data) {
+    for (let id in data) {
       let daysElapsed = Math.round((now - data[id].completed) / 86400000);
       if (daysElapsed < 6) {
-        console.log('daysElapsed is', daysElapsed);
         days[Math.abs(daysElapsed - 6)]++;
       } 
     }
-    console.log('days is', days);
-    var result = [];
-    for (var day in days) {
+
+    let result = [];
+    for (let day in days) {
       result.push({
         x: day,
         y: days[day],
       })
     }
-    console.log('result is', result);
-    return result;
 
+    return result;
   }
 
   render() {
@@ -83,7 +81,7 @@ class CompletedArticles extends React.Component {
                               console.log(`Error! ${error.message}`);
                               return <Error />
                             }
-                            var article = data.article;
+                            let article = data.article;
                             return (
                               <Panel className="completed-article">
                                 <Panel.Heading>

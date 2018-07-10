@@ -30,9 +30,9 @@ class Sidebar extends Component {
   }
 
   render() {
-    var tooltip = <Tooltip id="modal-tooltip">See Your Report</Tooltip>;
-    var userId = this.props.getUserInfo.data.userInfo.userId;
-    var displayName = this.props.getUserInfo.data.userInfo.displayName;
+    const tooltip = <Tooltip id="modal-tooltip">See Your Report</Tooltip>;
+    const userId = this.props.getUserInfo.data.userInfo.userId;
+    const displayName = this.props.getUserInfo.data.userInfo.displayName;
 
     return (
       <div id='dash-sidebar' >
@@ -43,7 +43,7 @@ class Sidebar extends Component {
                 {({ loading, error, data }) => {
                   if (loading) return null;
                   if (error) return `Error! ${error.message}`;
-                  var userStance = JSON.parse(data.user.user_stance);
+                  const userStance = JSON.parse(data.user.user_stance);
                   return (
                     <div id='dash-sidebar-inner'>
                       {/* <div onClick={() => this.goTo(displayName, "dashboard")} className='sidebar-container'>
