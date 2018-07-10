@@ -14,9 +14,14 @@
   padding: 0;
 }
 
-.completed-article img {
-  width: 100%;
+.completed-article-image-container {
   height: 120px;
+  overflow: hidden;
+}
+
+.completed-article-image {
+  width: 100%;
+  
 }
 
 .completed-article-title {
@@ -30,4 +35,8 @@
   text-align: right;
   padding: 0;
   margin: 0;
+}
+
+.completed-articles-header {
+  display: block;
 }

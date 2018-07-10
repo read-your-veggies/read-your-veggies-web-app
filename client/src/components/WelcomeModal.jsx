@@ -51,8 +51,8 @@ class WelcomeModal extends React.Component {
                       {({ loading, error, data }) => {
                         if (loading) return "Loading...";
                         if (error) return `Error! ${error.message}`;
-                        var locPolRatio = JSON.parse(data.user.locPolRatio);
-                        var homePolRatio = JSON.parse(data.user.homePolRatio);
+                        const locPolRatio = JSON.parse(data.user.locPolRatio);
+                        const homePolRatio = JSON.parse(data.user.homePolRatio);
                         return (
                           <div>
                           <h3>Current City: <strong>{data.user.location}</strong></h3>

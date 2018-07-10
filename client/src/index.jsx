@@ -12,8 +12,6 @@ import {withClientState} from 'apollo-link-state';
 import { Mutation } from "react-apollo";
 import { UPDATE_USER_INFO } from './apollo/localQueries.js';
 
-
-
 // Set up Cache
 const cache = new InMemoryCache();
 
@@ -23,14 +21,12 @@ const stateLink = withClientState({
   resolvers: {
     Mutation: {
       updateUserInfo: (_, { theDisplayName, theProvider, theUserId }, { cache }) => {
-        console.log(theDisplayName, theProvider, theUserId);
         client.writeData({ data: { userInfo: {
           __typename:'userInfo',
           displayName: theDisplayName,
           provider: theProvider,
           userId: theUserId,
         } } });
-        console.log('written');
       }
     }
   },

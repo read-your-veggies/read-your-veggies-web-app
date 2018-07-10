@@ -4,16 +4,22 @@ import Modal from 'react-bootstrap/lib/Modal';
 import { withRouter } from "react-router-dom";
 
 
-
 class CompletedModal extends React.Component {
   constructor(props) {
     super(props);
 
+    //this.share = this.share.bind(this);
   }
 
+  // share() {
+  //   FB.ui({
+  //     method: 'share',
+  //     href: 'www.read-your-veggies.com',
+  //     quote: `I just earned ${this.props.veggies} by reading on Read-Your-Veggies.com`,
+  //   }, function(response){});
+  // }
+
   render() {
-    // let author;  // If the author field is undefined, print an empty string instead.
-    // this.props.article.author ? author = this.props.article.author[0] : author = '';
 
     return (
       <Modal show={this.props.show} onHide={() => this.props.handleClose('completed')}>
@@ -21,13 +27,15 @@ class CompletedModal extends React.Component {
           <Modal.Title>Thanks for reading "{this.props.article.title}".</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div class="container">
+          <div className="container">
             <p className="congrats">
               Great job!  You earned this many veggies: <br/><br/> 
             </p>
-            <p>
-              {this.props.veggies}
-            </p>
+            {this.props.veggies}
+            {/* <Button bsStyle="info" onClick={(e) => {
+              e.preventDefault();
+              this.share();
+            }}>Share to Facebook</Button> */}
             <p className="source-info"> 
             <a href={this.props.article.url} target="_blank">
               This article was originally published by {this.props.article.source}.
