@@ -30,16 +30,15 @@ class ArticleModal extends React.Component {
               {this.props.article.fullText}
               <div className="complete-article-wrapper">
                 <Button bsSize="large" bsStyle="success" onClick={(e) => {
-                    e.preventDefault();
-                    let msPerChar = (Date.now() - this.props.startTime) / this.props.article.fullText.length;
-                    // console.log('milliseconds per character', msPerChar);
-                  if (msPerChar < 30) {
-                    alert("Whoa, slow down!");
+                  e.preventDefault();
+                  var msPerChar = (Date.now() - this.props.startTime) / this.props.article.fullText.length;
+                  if (msPerChar < 10) {  
+                    console.log('milliseconds per character', msPerChar);
+                    alert("Whoa, there!  Please take some more time to read the article to earn your veggies.");
                   } else {
                     this.completeArticle();
                   }
-                  }}
-                  >
+                }}>
                 Complete Article
                 </Button>
               </div>
