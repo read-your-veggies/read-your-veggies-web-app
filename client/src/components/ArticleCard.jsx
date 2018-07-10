@@ -10,25 +10,18 @@ import { calculateNutritionalValue } from '../lib/calculateStance.js';
 import { TagCloud } from "react-tagcloud";
 
 class ArticleCard extends React.Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      showArticle: false,
-      showVoter: false,
-      showCompleted: false,
-      fullArticle: {},
-      wordCloud: [],
-      startTime: null,
-    };
 
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-    this.renderCarrots = this.renderCarrots.bind(this);
-  }
+  state = {
+    showArticle: false,
+    showVoter: false,
+    showCompleted: false,
+    fullArticle: {},
+    wordCloud: [],
+    startTime: null,
+  };
 
   // There are three modals launched from ArticleCard.  Their closing and opening is handled by these functions.
-  handleClose(modalType) {
+  handleClose = (modalType) => {
     if (modalType === 'article') {
       this.setState({ showArticle: false });
     } else if (modalType === 'voter') {
@@ -38,7 +31,7 @@ class ArticleCard extends React.Component {
     }
   }
 
-  handleShow(modalType) {
+  handleShow = (modalType) => {
     if (modalType === 'article') {
       this.setState({ showArticle: true });
     } else if (modalType === 'voter') {
@@ -48,7 +41,7 @@ class ArticleCard extends React.Component {
     }
   }
 
-  renderCarrots (align) {
+  renderCarrots = (align) => {
     let nutritionalValue = calculateNutritionalValue(this.props.userStance, this.props.article.articleStance, this.props.article.fullText.length )
     return (<h3 className={align}>{'🥕'.repeat(nutritionalValue)}</h3>);
   }

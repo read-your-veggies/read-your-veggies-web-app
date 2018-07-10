@@ -11,16 +11,10 @@ import Error from './Error.jsx';
 
 
 class ArticleCarousel extends Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      user_stance: 0,
-      currentArticleId: null,
-    }
 
-    this.setCurrentArticleId = this.setCurrentArticleId.bind(this);
-    this.shuffle = this.shuffle.bind(this);
+  state = {
+    user_stance: 0,
+    currentArticleId: null,
   }
 
   // componentDidMount() {
@@ -44,13 +38,13 @@ class ArticleCarousel extends Component {
   //    console.log('sdk loaded');
   // }
 
-  setCurrentArticleId(id) {
+  setCurrentArticleId = (id) => {
     this.setState({
       currentArticleId: id,
     });
   }
 
-  shuffle(data, completedArticleKeys) {
+  shuffle = (data, completedArticleKeys) => {
     let articles = data.slice();
     for (let i = 0; i < articles.length; i++) {
       let randomIdx = Math.floor( Math.random() * articles.length);

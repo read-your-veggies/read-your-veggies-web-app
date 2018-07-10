@@ -3,14 +3,8 @@ import { withRouter } from "react-router-dom";
 
 
 class Header extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.goToDashboard= this.goToDashboard.bind(this);
-  }
-
-
-  goToDashboard(displayName) {
+  goToDashboard = (displayName) => {
     if (displayName !== 'Login') {
       this.props.history.push('/dashboard');
     }

@@ -11,15 +11,12 @@ import { OFF_BOARD_USER } from '../apollo/resolvers.js';
 
 
 class UserStats extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = ({
-      showChromeExtensionModal: false,
-    })
-    this.handleChromeExtensionClick = this.handleChromeExtensionClick.bind(this);
-  }
 
-  handleChromeExtensionClick() {
+  state = {
+    showChromeExtensionModal: false,
+  };
+
+  handleChromeExtensionClick = () => {
     this.setState({
       showChromeExtensionModal: true,
     });

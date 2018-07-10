@@ -11,51 +11,41 @@ import GettingStartedModal from './GettingStartedModal.jsx';
 
 
 class OnboardModal extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      show: true,
-      stanceSlider: 0,
-      parentSlider: 0,
-      veggieSlider: 40,
-      showGettingStartedModal: false,
-    };
-
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-
-    this.handleStanceChange = this.handleStanceChange.bind(this);
-    this.handleParentChange = this.handleParentChange.bind(this);
-    this.handleVeggieChange = this.handleVeggieChange.bind(this);
-  }
+  state = {
+    show: true,
+    stanceSlider: 0,
+    parentSlider: 0,
+    veggieSlider: 40,
+    showGettingStartedModal: false,
+  };
   
-  handleStanceChange(value){
+  handleStanceChange = (value) => {
     this.setState({
       stanceSlider: value
     })
   }
 
-  handleParentChange(value){
+  handleParentChange = (value) => {
     this.setState({
       parentSlider: value
     })
   }
 
-  handleVeggieChange(value){
+  handleVeggieChange = (value) => {
     this.setState({
       veggieSlider: value
     })
   }
 
-  handleClose() {
+  handleClose = () => {
     this.setState({
       show: false,
       showGettingStartedModal: true,
     });
   }
 
-  handleShow() {
+  handleShow = () => {
     this.setState({ show: true });
   }
 

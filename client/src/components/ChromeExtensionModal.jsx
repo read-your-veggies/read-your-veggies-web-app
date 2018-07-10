@@ -5,26 +5,19 @@ import Modal from 'react-bootstrap/lib/Modal';
 import 'react-rangeslider/lib/index.css';
 
 
-class ChromeExtensionModal extends React.Component {
-  constructor(props) {
-    super(props);
+class ChromeExtensionModal extends React.Component {  
 
-    this.state = {
-      show: true,
-    };
-
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-
-  }
+  state = {
+    show: true,
+  };
   
-  handleClose() {
+  handleClose = () => {
     this.setState({
       show: false,
     });
   }
 
-  handleShow() {
+  handleShow = () => {
     this.setState({ show: true });
   }
 

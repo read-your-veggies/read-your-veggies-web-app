@@ -6,37 +6,29 @@ import { ApolloConsumer } from "react-apollo";
 import { GET_SOURCE_PERSONALITY } from '../apollo/serverQueries';
 
 class AboutOurSourcesPanel extends React.Component {
-  constructor(props) {
-    super(props); 
-
-    this.state = {
-      sources: [],
-      data: {
-        'needs': [],
-        'values': [],
-        'personality': [],
-        'traits': [],
-      },
-      currentAttribute: 'needs',
-      attributes: ['needs', 'values', 'personality', 'traits'],
-    }
-
-    this.handleAttributeChange = this.handleAttributeChange.bind(this);
-    this.setPersonality = this.setPersonality.bind(this);
-    this.setSources = this.setSources.bind(this);
+  state = {
+    sources: [],
+    data: {
+      'needs': [],
+      'values': [],
+      'personality': [],
+      'traits': [],
+    },
+    currentAttribute: 'needs',
+    attributes: ['needs', 'values', 'personality', 'traits'],
   }
 
   componentDidMount() {
     this.setSources(this.props.sources);
   }
 
-  handleAttributeChange(e) {
+  handleAttributeChange = (e) => {
     this.setState({
       currentAttribute: e.target.value,
     })
   }
 
-  setSources(data) {
+  setSources = (data) => {
     const sources = data.sources.map(source => {
       return source.name;
     });
@@ -45,7 +37,7 @@ class AboutOurSourcesPanel extends React.Component {
     });
   }
 
-  setPersonality(data) {
+  setPersonality = (data) => {
     if (data.source.fullTextsPersonality) {
       const parsedData = JSON.parse(data.source.fullTextsPersonality);
       let newData = {};

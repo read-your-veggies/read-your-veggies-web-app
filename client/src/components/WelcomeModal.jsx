@@ -9,30 +9,21 @@ import HealthSpeedometer from './HealthSpeedometer.jsx'
 import OnboardModal from './OnboardModal.jsx';
 
 
-
-
 class WelcomeModal extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      show: true,
-      showOnboardModal: false,
-    };
-
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-
-  }
+  state = {
+    show: true,
+    showOnboardModal: false,
+  };
   
-  handleClose() {
+  handleClose = () => {
     this.setState({
       show: false,
       showOnboardModal: true,
     });
   }
 
-  handleShow() {
+  handleShow = () => {
     this.setState({ show: true });
   }
 

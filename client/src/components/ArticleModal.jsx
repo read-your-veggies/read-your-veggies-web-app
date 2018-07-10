@@ -4,14 +4,9 @@ import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
 
 class ArticleModal extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.completeArticle = this.completeArticle.bind(this);
-  }
-
+ 
   // When finished, close this modal, launch the voter modal.
-  completeArticle() {
+  completeArticle = () => {
     console.log("completed article");
     this.props.handleClose('article');
     this.props.handleShow('voter');

@@ -9,13 +9,8 @@ import Error from './Error.jsx';
 import {AreaChart} from 'react-easy-chart';
 
 class CompletedArticles extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.generateChartData = this.generateChartData.bind(this);
-  }
-
-  generateChartData(data) {
+  generateChartData = (data) => {
     const days = {
       6: 0,
       5: 0,
