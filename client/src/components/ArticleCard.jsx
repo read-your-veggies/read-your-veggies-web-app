@@ -158,8 +158,7 @@ class ArticleCard extends React.Component {
                       query: GET_ONE_FULL_ARTICLE,
                       variables: {_id: this.props.article._id}
                     })
-                    console.log('full article incoming', data.article.fullText.length);
-                    console.log('start time', Date.now())
+                    console.log('full article incoming', data.article.source);
                     this.setState({
                       fullArticle: data.article,
                       startTime: Date.now(),

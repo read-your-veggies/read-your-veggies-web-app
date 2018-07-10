@@ -28,7 +28,7 @@ class ArticleModal extends React.Component {
           {
             this.props.article.source !== "BBC News" && this.props.article.source !== "The Guardian (UK)" ? 
             <img className="article-image" src={this.props.article.image} /> :
-            <img className="article-image" id="crop-image" src={this.props.article.image}
+            <img className="article-image" id="crop-image" src={this.props.article.image} />
           }
             <Panel.Body className="article-full-text">
               {this.props.article.fullText}
