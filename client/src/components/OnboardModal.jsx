@@ -140,8 +140,13 @@ class OnboardModal extends React.Component {
                 <div>
                   <input type="text" name="hometown"/>
                   <select>
-                    <option value="val1">Value 1</option>
-                    <option value="val2">Value 2</option>
+                    {
+                      states.map( (state) => {
+                        return (
+                          <option value="{state}">{state}</option>
+                        )
+                      })
+                    }
                   </select>
                 </div>
                 </Panel.Body>
