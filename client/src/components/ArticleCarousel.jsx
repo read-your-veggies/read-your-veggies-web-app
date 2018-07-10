@@ -60,7 +60,7 @@ class ArticleCarousel extends Component {
     }
 
     return articles.filter(article => {
-      let carrotCount = calculateNutritionalValue(this.props.userData.user_stance, article.articleStance);
+      let carrotCount = calculateNutritionalValue(this.props.userData.user_stance, article.articleStance, article.fullText.length);
       return carrotCount > 0 && completedArticleKeys.indexOf(article._id) < 0 && article.fullText.length > 1000 || this.state.currentArticleId === article._id;
     });
   }
@@ -71,8 +71,8 @@ class ArticleCarousel extends Component {
         {({ loading, error, data }) => {
           if (loading) return <Loading />;
           if (error) return `Error! ${error.message}`;
-          var completedArticleInfo = JSON.parse(data.user.completed_articles);
-          var completedArticleKeys = Object.keys(completedArticleInfo);
+          let completedArticleInfo = JSON.parse(data.user.completed_articles);
+          let completedArticleKeys = Object.keys(completedArticleInfo);
 
           return (
             <Query query={GET_ARTICLES_FROM_SERVER}>
