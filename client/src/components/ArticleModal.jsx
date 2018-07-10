@@ -25,7 +25,10 @@ class ArticleModal extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <Panel className="article-panel">
-            <img className="article-image" src={this.props.article.image} />
+          {
+            this.props.article.source !== "BBC News" ? 
+            <img className="article-image" src={this.props.article.image} /> : null
+          }
             <Panel.Body className="article-full-text">
               {this.props.article.fullText}
               <div className="complete-article-wrapper">
