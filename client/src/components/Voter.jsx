@@ -9,21 +9,9 @@ import { withRouter } from "react-router-dom";
 
 
 class Voter extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {    // Remove these state variables.
-      agree: false,
-      disagree: false,
-      fun: false,
-      bummer: false,
-    }
-
-    this.submitVote = this.submitVote.bind(this);
-  }
 
   // When done, close this modal, open the CompletedModal
-  submitVote() {
+  submitVote = () => {
     this.props.handleClose('voter');
     this.props.handleShow('completed');
   }

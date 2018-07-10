@@ -6,11 +6,8 @@ import Sidebar from './Sidebar.jsx';
 import Loading from './Loading.jsx';
 
 class AboutUs extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      divHeight: '',
-    }
+  state = {
+    divHeight: '',
   }
 
   componentDidMount() {

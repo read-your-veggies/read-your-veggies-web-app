@@ -9,12 +9,8 @@ import Error from './Error.jsx';
 
 
 class UserInfo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleSpeedometerClick = this.handleSpeedometerClick.bind(this);
-  }
 
-  handleSpeedometerClick() {
+  handleSpeedometerClick = () => {
     if (this.props.displayName !== 'Login') {
       this.props.history.push('/health');
     }

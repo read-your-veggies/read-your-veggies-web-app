@@ -12,10 +12,7 @@ import AboutYou from './AboutYou.jsx';
 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+  
   componentDidMount() {
     axios.get('/checkAuthHeaders').then((res) => {
       if (res.headers.user !== undefined) {

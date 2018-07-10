@@ -4,13 +4,10 @@ import CompletedArticles from './CompletedArticles.jsx';
 import Sidebar from './Sidebar.jsx';
 
 class HealthDashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      userId: null,
-      divHeight: ''
-    }
+
+  state = {
+    userId: null,
+    divHeight: ''
   }
 
   componentDidMount() {

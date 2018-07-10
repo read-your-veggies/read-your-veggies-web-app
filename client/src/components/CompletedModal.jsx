@@ -5,13 +5,8 @@ import { withRouter } from "react-router-dom";
 
 
 class CompletedModal extends React.Component {
-  constructor(props) {
-    super(props);
 
-    //this.share = this.share.bind(this);
-  }
-
-  // share() {
+  // share = () => {
   //   FB.ui({
   //     method: 'share',
   //     href: 'www.read-your-veggies.com',
@@ -20,7 +15,6 @@ class CompletedModal extends React.Component {
   // }
 
   render() {
-
     return (
       <Modal show={this.props.show} onHide={() => this.props.handleClose('completed')}>
         <Modal.Header>

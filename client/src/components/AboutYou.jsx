@@ -9,11 +9,8 @@ import UserStats from './UserStats.jsx';
 
 
 class AboutYou extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      divHeight: '',
-    }
+  state = {
+    divHeight: '',
   }
 
   componentDidMount() {

@@ -10,16 +10,12 @@ import WelcomeModal from './WelcomeModal.jsx';
 
 class Dashboard extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      userId: null,
-      onboardInformation: null,
-      userData: null,
-      browsingHistory: [],
-      divHeight: '',
-    }
+  state = {
+    userId: null,
+    onboardInformation: null,
+    userData: null,
+    browsingHistory: [],
+    divHeight: '',
   }
 
   componentDidMount() {

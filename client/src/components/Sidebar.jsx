@@ -10,20 +10,17 @@ import UserInfo from './UserInfo.jsx';
 
 
 class Sidebar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      divHeight: ''
-    };
-    this.goTo= this.goTo.bind(this);
-  }
+
+  state = {
+    divHeight: ''
+  };
 
   componentDidMount() {
     //subtract 147 px (size of header);
     this.setState({divHeight: window.innerHeight - 147 + 'px'});
   }
 
-  goTo(displayName, link) {
+  goTo = (displayName, link) => {
     if (displayName !== 'Login') {
       this.props.history.push(`/${link}`);
     }

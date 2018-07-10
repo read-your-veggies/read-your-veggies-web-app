@@ -7,25 +7,18 @@ import { withRouter } from "react-router-dom";
 import UserStats from './UserStats.jsx';
 
 class GettingStartedModal extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      show: true,
-    };
-
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-
-  }
+  state = {
+    show: true,
+  };
   
-  handleClose() {
+  handleClose = () => {
     this.setState({
       show: false,
     });
   }
 
-  handleShow() {
+  handleShow = () => {
     this.setState({ show: true });
   }
 
