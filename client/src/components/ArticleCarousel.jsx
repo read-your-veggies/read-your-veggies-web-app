@@ -50,7 +50,7 @@ class ArticleCarousel extends Component {
     });
   }
 
-  shuffle(data) {
+  shuffle(data, completedArticleKeys) {
     let articles = data.slice();
     for (var i = 0; i < articles.length; i++) {
       let randomIdx = Math.floor( Math.random() * articles.length);
@@ -58,7 +58,11 @@ class ArticleCarousel extends Component {
       articles[randomIdx] = articles[i];
       articles[i] = temp;
     }
-    return articles;  
+
+    return articles.filter(article => {
+      let carrotCount = calculateNutritionalValue(this.props.userData.user_stance, article.articleStance);
+      return carrotCount > 0 && completedArticleKeys.indexOf(article._id) < 0 && article.fullText.length > 1000 || this.state.currentArticleId === article._id;
+    });
   }
 
   render() {
@@ -78,7 +82,7 @@ class ArticleCarousel extends Component {
                   console.log(`Error! ${error.message}`);
                   return <Error />
                 }
-                let shuffled = this.shuffle(data.articles);
+                let shuffled = this.shuffle(data.articles, completedArticleKeys);
 
                 return (
                   <div className="articles-container">
@@ -92,19 +96,16 @@ class ArticleCarousel extends Component {
                   >        
                     <Slider>
                       {shuffled.map((article, i) => {
-                        let carrotCount = calculateNutritionalValue(this.props.userData.user_stance, article.articleStance);
-                        if ( (carrotCount > 0 && completedArticleKeys.indexOf(article._id) < 0 && article.fullText.length > 1000) || this.state.currentArticleId === article._id ) {
-                          return (
-                            <Slide index={i}>
-                              <ArticleCard 
-                                article={article}
-                                userId={this.props.userData._id}
-                                userStance={this.props.userData.user_stance}
-                                setCurrentArticleId={this.setCurrentArticleId}
-                              />
-                            </Slide>
-                          )
-                        }
+                        return (
+                          <Slide index={i}>
+                            <ArticleCard 
+                              article={article}
+                              userId={this.props.userData._id}
+                              userStance={this.props.userData.user_stance}
+                              setCurrentArticleId={this.setCurrentArticleId}
+                            />
+                          </Slide>
+                        )
                       })}
                     </Slider>
                     <div className="next-article-wrapper">
