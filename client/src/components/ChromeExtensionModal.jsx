@@ -3,12 +3,6 @@ import Panel from 'react-bootstrap/lib/Panel';
 import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
 import 'react-rangeslider/lib/index.css';
-import { Query } from "react-apollo";
-import { GET_USER_STANCE_INFO } from '../apollo/serverQueries.js';
-import HealthSpeedometer from './HealthSpeedometer.jsx'
-import OnboardModal from './OnboardModal.jsx';
-
-
 
 
 class ChromeExtensionModal extends React.Component {

@@ -1,5 +1,4 @@
 import React from 'react';
-import Panel from 'react-bootstrap/lib/Panel';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import {BarChart} from 'react-easy-chart';

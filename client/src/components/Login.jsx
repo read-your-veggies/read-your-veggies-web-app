@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, withRouter, Switch } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {

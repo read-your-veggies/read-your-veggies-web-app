@@ -55,7 +55,6 @@ class AboutYou extends React.Component {
         </div>
     );
   }
-
 }
 
 export default withRouter(AboutYou);
