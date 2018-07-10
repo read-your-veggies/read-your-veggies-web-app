@@ -16,13 +16,13 @@ class HealthDashboard extends React.Component {
   componentDidMount() {
     this.setState({
       userId: this.props.getUserInfo.data.userInfo.userId,
-      divHeight: window.innerHeight - 147 + 'px'
+      divHeight: window.innerHeight - 100 + 'px'
     })
   }
 
   render() {
     return (
-      <div id='health-dashboard'>
+      <div id='health-dashboard' style={{height: this.state.divHeight}}>
         <Sidebar location={this.props.location} getUserInfo={this.props.getUserInfo}/>
         <div id='health-dashboard-inner-content'>
           <CompletedArticles />

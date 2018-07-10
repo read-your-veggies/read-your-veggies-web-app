@@ -1,0 +1,16 @@
+.login-page {
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .login-div {
+  width: 35%;
+  height: 125px;
+  border: 0.5px solid grey;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */

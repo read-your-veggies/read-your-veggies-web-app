@@ -8,11 +8,13 @@
   height: 147px; */
   padding-left: 30px;
   padding-right: 30px;
-  padding-top: 1em;
   /* background-color: grey; */
   /* color: #ff77e8; */
   /* color: #ff77e8; */
-  min-height: 12%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* .header h2 {
@@ -25,7 +27,8 @@
 }
 
 .header-text h4 {
-  margin-top: 0.2em;
+  margin-top: 0.4em;
+  margin-bottom: 0;
 }
 
 #read-your-veggies {
@@ -42,7 +45,7 @@
   /* margin: 0; */
 }
 
-#read-your-veggies:hover {
+.header:hover {
   cursor: pointer;
   color: #ff77e8;
 }

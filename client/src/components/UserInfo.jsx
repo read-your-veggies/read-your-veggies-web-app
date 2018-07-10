@@ -55,7 +55,7 @@ class UserInfo extends React.Component {
                 <div>
                   <OverlayTrigger overlay={healthBarTip}>
                   <div>
-                      <h3>Goal</h3>
+                      <h3>Health</h3>
                       <Line percent={mediaHealth} strokeWidth={4} trailWidth={4} strokeColor={healthBarColor} />
                       {/* <div id='line-start'>0</div>
                       <div id='line-end'>{veggieGoal}</div> */}

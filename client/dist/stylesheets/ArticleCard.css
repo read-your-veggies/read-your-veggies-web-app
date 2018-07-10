@@ -36,7 +36,8 @@
 
 .article-panel-heading {
   height: 20% !important;
-  background-color: rgb(160, 160, 160) !important;
+  background: linear-gradient(to right, rgb(160, 160, 160), white);
+  /* background-color: rgb(160, 160, 160) !important; */
 }
 
 .article-panel-body {
@@ -58,7 +59,7 @@
   width: 80%;
   display: block;
   margin: 0 auto;
-  text-align: justify !important;
+  text-align: justify !important; 
 }
 
 .carrots-right {

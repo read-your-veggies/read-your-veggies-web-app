@@ -36,7 +36,7 @@ class UserStats extends React.Component {
         {({ loading, error, data, }) => {
           if (loading) return <Loading />;
           if (error) return `Error! ${error.message}`;
-          var userStance = JSON.parse(data.user.user_stance);
+
           var onboardStance = JSON.parse(data.user.onboard_stance);
           var locPolRatio = JSON.parse(data.user.locPolRatio);
           var homePolRatio = JSON.parse(data.user.homePolRatio);
@@ -46,31 +46,29 @@ class UserStats extends React.Component {
           return (
             <div>
             <div className='user-stances'>
-              <div className='partial-user-stance-container'>
+              {/* <div className='partial-user-stance-container'>
                 <h3 className='category'>Stance Subcategory</h3>
                 <h3 className='data'>Your Stance</h3>
                 <h3 className = 'multiplier'>Weight</h3>
-              </div>
+              </div> */}
               <div className='partial-user-stance-container'>               
                 <Mutation mutation={OFF_BOARD_USER} >
                   {(offBoardUser) => {
                   return (
-                    <h3 className='category'>
-                      Your{' '}
+                    <p className='category'>Your{' '}
                       <OverlayTrigger overlay={onboardTip} placement="bottom">
                         <a
-                          id='submit-onboard'
                           onClick={(e) => {
                             e.preventDefault();
                             offBoardUser({ variables: { _id: this.props.userId } });
                             setTimeout(() => {
                               this.props.history.push('/dashboard');
                             }, 200)
-                          }}><strong>Self Reported</strong>
+                          }}><strong>self-reported</strong>
                         </a>
-                      </OverlayTrigger>
-                      Political Stance:</h3>
-                    )}}
+                      </OverlayTrigger>{' '}political stance:
+                    </p>
+                  )}}
                 </Mutation>
                 <HealthSpeedometer
                   className='data'
@@ -82,13 +80,14 @@ class UserStats extends React.Component {
                   min={-1}
                   max={1}
                 />
-                <h3 className = 'multiplier'>50%</h3>
+                <p className = 'multiplier'>50%</p>
               </div>
               <div className='partial-user-stance-container'>
-                <h3 className='category'>The Political Stance of Your{' '}
-          <OverlayTrigger overlay={chromeTip} placement='bottom'>
-            <a onClick={this.handleChromeExtensionClick}><strong>browsing habits</strong></a>
-          </OverlayTrigger>{' '}(based off of {browsingStance[1]} web pages):</h3>
+                <p className='category'>The political stance of your{' '}
+                  <OverlayTrigger overlay={chromeTip} placement='bottom'>
+                    <a onClick={this.handleChromeExtensionClick}><strong>browsing habits</strong></a>
+                  </OverlayTrigger>{' '}(based off of {browsingStance[1]} web pages):
+                </p>
                 <HealthSpeedometer
                   className='data'
                   height={100}
@@ -99,13 +98,14 @@ class UserStats extends React.Component {
                   min={-1}
                   max={1}
                 />
-                <h3 className = 'multiplier'>20%</h3>
+                <p className = 'multiplier'>20%</p>
               </div>
               <div className='partial-user-stance-container'>
-                <h3 className='category'>The Political Stance of Your{' '}
-          <OverlayTrigger overlay={readingTip} placement='bottom'>
-            <a href='/'><strong>reading habits</strong></a>
-          </OverlayTrigger>{' '} (based off of {readingStance[1]} articles):</h3>
+                <p className='category'>The political stance of your{' '}
+                  <OverlayTrigger overlay={readingTip} placement='bottom'>
+                    <a href='/'><strong>reading habits</strong></a>
+                  </OverlayTrigger>{' '} (based off of {readingStance[1]} articles):
+                </p>
                 <HealthSpeedometer
                   className='data'
                   height={100}
@@ -116,10 +116,10 @@ class UserStats extends React.Component {
                   min={-1}
                   max={1}
                 />
-                <h3 className = 'multiplier'>10%</h3>
+                <p className = 'multiplier'>10%</p>
               </div>
               <div className='partial-user-stance-container'>
-                <h3 className='category'>The Political Stance of Your Current City ({data.user.location}):</h3>
+                <p className='category'>The political stance of your current city ({data.user.location}):</p>
                 <HealthSpeedometer 
                   className='data'
                   height={100}
@@ -130,10 +130,10 @@ class UserStats extends React.Component {
                   min={-1}
                   max={1}
                 />
-                <h3 className = 'multiplier'>10%</h3>
+                <p className = 'multiplier'>10%</p>
               </div>
               <div className='partial-user-stance-container'>
-                <h3 className='category'>The Political Stance of Your Hometown ({data.user.hometown}):</h3>
+                <p className='category'>The political stance of your hometown ({data.user.hometown}):</p>
                 <HealthSpeedometer 
                   className='data'
                   height={100}
@@ -144,7 +144,7 @@ class UserStats extends React.Component {
                   min={-1}
                   max={1}
                 />
-                <h3 className = 'multiplier'>10%</h3>
+                <p className = 'multiplier'>10%</p>
               </div>
             </div>
           </div>
