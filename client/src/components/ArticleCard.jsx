@@ -2,26 +2,12 @@ import React from 'react';
 import Panel from 'react-bootstrap/lib/Panel';
 import Button from 'react-bootstrap/lib/Button';
 import Voter from './Voter.jsx';
-import Badge from 'react-bootstrap/lib/Badge';
 import ArticleModal from './ArticleModal.jsx';
 import CompletedModal from './CompletedModal.jsx';
-import { DELETE_ARTICLE } from '../apollo/resolvers';
-import { GET_ARTICLES_FROM_SERVER, GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
-import { Query, Mutation, ApolloConsumer } from "react-apollo";
+import { GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
+import { ApolloConsumer } from "react-apollo";
 import { calculateNutritionalValue } from '../lib/calculateStance.js';
 import { TagCloud } from "react-tagcloud";
-
-const updateCache = (cache, { data: { deleteArticle} }) => {
-  console.log('cache', cache, deleteArticle);
-  const { articles } = cache.readQuery({ query: GET_ARTICLES_FROM_SERVER });
-
-  cache.writeQuery({
-    query: GET_ARTICLES_FROM_SERVER,
-    data: {
-      articles: articles.filter(article => article._id !== deleteArticle._id)
-    }
-  });
-};
 
 class ArticleCard extends React.Component {
   constructor(props) {
@@ -63,13 +49,13 @@ class ArticleCard extends React.Component {
   }
 
   renderCarrots (align) {
-    var nutritionalValue = calculateNutritionalValue(this.props.userStance, this.props.article.articleStance )
+    let nutritionalValue = calculateNutritionalValue(this.props.userStance, this.props.article.articleStance, this.props.article.fullText.length )
     return (<h3 className={align}>{'🥕'.repeat(nutritionalValue)}</h3>);
   }
 
   componentDidMount() {
-    var words = this.props.article.fullText.split(' ');
-    var badWords = {
+    let words = this.props.article.fullText.split(' ');
+    let badWords = {
       'a': true, 
       'the': true, 
       'to': true, 
@@ -113,7 +99,7 @@ class ArticleCard extends React.Component {
       'these': true,
       'but': true,
     };
-    var wordsObj = {};
+    let wordsObj = {};
     words.forEach(word => {
       if (badWords[word] === undefined) {
         if (wordsObj[word]) {
@@ -123,8 +109,8 @@ class ArticleCard extends React.Component {
         }
       }  
     })
-    var results = [];
-    for (var key in wordsObj) {
+    let results = [];
+    for (let key in wordsObj) {
       if (wordsObj[key] > 1) {
         results.push({
           value: key,
@@ -158,8 +144,7 @@ class ArticleCard extends React.Component {
                       query: GET_ONE_FULL_ARTICLE,
                       variables: {_id: this.props.article._id}
                     })
-                    console.log('full article incoming', data.article);
-                    console.log('start time', Date.now())
+                    
                     this.setState({
                       fullArticle: data.article,
                       startTime: Date.now(),
@@ -192,7 +177,7 @@ class ArticleCard extends React.Component {
           articleId={this.props.article._id}
           articleStance={this.props.article.articleStance}
           userStance={this.props.userStance}
-          nutritionalValue={calculateNutritionalValue(this.props.userStance, this.props.article.articleStance )}
+          nutritionalValue={calculateNutritionalValue(this.props.userStance, this.props.article.articleStance, this.props.article.fullText.length )}
         />
         <CompletedModal
           show={this.state.showCompleted}
@@ -202,48 +187,6 @@ class ArticleCard extends React.Component {
           setCurrentArticleId ={this.props.setCurrentArticleId}
         />
       </div>
-
-      // <Mutation mutation={DELETE_ARTICLE} update={updateCache}>
-      // { (deleteArticle) => {
-      //   return (
-      //     <div className="article">
-      //       <Panel bsStyle="success">
-      //           <Panel.Heading className='title'>
-      //             <button className='delete-article-button' onClick={() => deleteArticle({ variables: { _id: this.props.article._id } })}> X </button>
-      //             <Panel.Title>{this.props.article.title}</Panel.Title>
-      //             <Badge id='nutrition-count' bsStyle="danger">{this.renderCarrots()}</Badge>
-      //           </Panel.Heading>
-      //           <Panel.Body>
-      //             <h3 className="article-card-title">{this.props.article.title}</h3>
-      //             <img className="article-thumbnail" src={this.props.article.image} />
-      //             {/* <p>{this.props.article.description}</p> */}
-      //           </Panel.Body>
-      //           <ApolloConsumer>
-      //             { client => (
-      //               <Button 
-      //                 className="eat-me" 
-      //                 bsStyle="info" 
-      //                 bsSize="large" 
-      //                 onClick={async () => {
-      //                   const {data} = await client.query({
-      //                     query: GET_ONE_FULL_ARTICLE,
-      //                     variables: {_id: this.props.article._id}
-      //                   })
-      //                   console.log('full article incoming', data.article);
-      //                   this.setState({
-      //                     fullArticle: data.article,
-      //                     showArticle: true,
-      //                   })
-      //                 }}
-      //               >
-      //               Eat me
-      //             </Button>
-      //             )}
-      //           </ApolloConsumer>
-      //       </Panel>
-      //     </div>
-      //   )}}
-      // </Mutation>
     );
   }
 }

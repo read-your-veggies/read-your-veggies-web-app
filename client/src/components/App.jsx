@@ -14,7 +14,6 @@ import AboutYou from './AboutYou.jsx';
 class App extends Component {
   constructor(props) {
     super(props);
-    console.log('App props', props);
   }
 
   componentDidMount() {
@@ -22,7 +21,7 @@ class App extends Component {
       if (res.headers.user !== undefined) {
         // Redirect user to /dashboard with react router.
         this.props.history.push('/dashboard');
-        var user = (JSON.parse(res.headers.user));
+        const user = (JSON.parse(res.headers.user));
 
         this.props.updateUserInfo({
           variables: {
@@ -36,6 +35,7 @@ class App extends Component {
       }
     });
   }
+
   render() {
     return (
       <div className="app-container">

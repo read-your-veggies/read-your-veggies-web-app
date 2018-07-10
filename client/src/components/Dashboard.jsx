@@ -12,7 +12,6 @@ class Dashboard extends Component {
 
   constructor(props) {
     super(props);
-    console.log('dash props', props)
 
     this.state = {
       userId: null,
@@ -24,7 +23,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    var id = this.props.getUserInfo.data.userInfo.userId;
+    const id = this.props.getUserInfo.data.userInfo.userId;
     if (id !== '1234567890') {
       let userBrowsingHistory = [];
       try {
@@ -59,7 +58,7 @@ class Dashboard extends Component {
                 this.setState({
                   onboardInformation: data.user.onboard_information,
                   userData: data.user,
-                }, () => console.log(this.state));
+                });
                 return (
                   null
                 );

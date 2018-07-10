@@ -15,14 +15,13 @@ class UserInfo extends React.Component {
   }
 
   handleSpeedometerClick() {
-    console.log('speedometer props', this.props)
     if (this.props.displayName !== 'Login') {
       this.props.history.push('/health');
     }
   }
 
   render() {
-    var userId = this.props.userId;
+    const userId = this.props.userId;
     
     return (
       <div id='user-info-container'>
@@ -37,11 +36,11 @@ class UserInfo extends React.Component {
               if (loading) return null;
               if (error) return <Error />;
               
-              var veggieGoal = data.user.onboard_information === 'NEED_ON_BOARDING' ? 30 : JSON.parse(data.user.onboard_information).veggieSlider;
-              var mediaHealth = data.user.health / veggieGoal * 100;
-              var healthBarColor;
+              const veggieGoal = data.user.onboard_information === 'NEED_ON_BOARDING' ? 30 : JSON.parse(data.user.onboard_information).veggieSlider;
+              const mediaHealth = data.user.health / veggieGoal * 100;
+              let healthBarColor;
 
-              var healthBarTip = <Tooltip id="modal-tooltip">{data.user.health} Veggies See Health</Tooltip>;
+              const healthBarTip = <Tooltip id="modal-tooltip">{data.user.health} Veggies See Health</Tooltip>;
               
               if (mediaHealth <= 39) {
                 healthBarColor = 'red';

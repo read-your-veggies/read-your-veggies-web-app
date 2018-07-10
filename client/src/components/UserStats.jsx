@@ -26,9 +26,9 @@ class UserStats extends React.Component {
   }
 
   render() {
-    var chromeTip = <Tooltip id="modal-tooltip">Get the Chrome Extension</Tooltip>;
-    var readingTip = <Tooltip id="modal-tooltip">Read Some Veggies!</Tooltip>;
-    var onboardTip = <Tooltip id="modal-tooltip">Reset Your Stance</Tooltip>;
+    const chromeTip = <Tooltip id="modal-tooltip">Get the Chrome Extension</Tooltip>;
+    const readingTip = <Tooltip id="modal-tooltip">Read Some Veggies!</Tooltip>;
+    const onboardTip = <Tooltip id="modal-tooltip">Reset Your Stance</Tooltip>;
 
     return (
       <div>
@@ -37,11 +37,11 @@ class UserStats extends React.Component {
           if (loading) return <Loading />;
           if (error) return `Error! ${error.message}`;
 
-          var onboardStance = JSON.parse(data.user.onboard_stance);
-          var locPolRatio = JSON.parse(data.user.locPolRatio);
-          var homePolRatio = JSON.parse(data.user.homePolRatio);
-          var readingStance = data.user.reading_stance;
-          var browsingStance = data.user.browsing_history_stance;
+          const onboardStance = JSON.parse(data.user.onboard_stance);
+          const locPolRatio = JSON.parse(data.user.locPolRatio);
+          const homePolRatio = JSON.parse(data.user.homePolRatio);
+          const readingStance = data.user.reading_stance;
+          const browsingStance = data.user.browsing_history_stance;
           
           return (
             <div>
