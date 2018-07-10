@@ -46,10 +46,10 @@ class Sidebar extends Component {
                   const userStance = JSON.parse(data.user.user_stance);
                   return (
                     <div id='dash-sidebar-inner'>
-                      {/* <div onClick={() => this.goTo(displayName, "dashboard")} className='sidebar-container'>
-                        <h3>Home:</h3>
+                      <div onClick={() => this.goTo(displayName, "dashboard")} className='sidebar-container'>
+                        <h3>Home</h3>
                         <img src="./assets/logo.png" />
-                      </div> */}
+                      </div>
                       <UserInfo location={this.props.location} displayName={displayName} userId={userId} />
                       <a onClick = {() => this.goTo(displayName, "report")}>{' '}
                         <OverlayTrigger overlay={tooltip}>
