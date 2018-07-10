@@ -33,6 +33,7 @@ class ArticleCard extends React.Component {
       showCompleted: false,
       fullArticle: {},
       wordCloud: [],
+      startTime: null,
     };
 
     this.handleShow = this.handleShow.bind(this);
@@ -44,10 +45,10 @@ class ArticleCard extends React.Component {
   handleClose(modalType) {
     if (modalType === 'article') {
       this.setState({ showArticle: false });
-    } else if (modalType === 'voter'){
-      this.setState({ showVoter: false })
+    } else if (modalType === 'voter') {
+      this.setState({ showVoter: false });
     } else if (modalType === 'completed') {
-      this.setState({ showCompleted: false })
+      this.setState({ showCompleted: false });
     }
   }
 
@@ -55,9 +56,9 @@ class ArticleCard extends React.Component {
     if (modalType === 'article') {
       this.setState({ showArticle: true });
     } else if (modalType === 'voter') {
-      this.setState({ showVoter: true})
+      this.setState({ showVoter: true });
     } else if (modalType === 'completed') {
-      this.setState({ showCompleted: true })
+      this.setState({ showCompleted: true });
     }
   }
 
@@ -158,8 +159,10 @@ class ArticleCard extends React.Component {
                       variables: {_id: this.props.article._id}
                     })
                     console.log('full article incoming', data.article);
+                    console.log('start time', Date.now())
                     this.setState({
                       fullArticle: data.article,
+                      startTime: Date.now(),
                       showArticle: true,
                     })
                     this.props.setCurrentArticleId(this.props.article._id);
@@ -179,6 +182,7 @@ class ArticleCard extends React.Component {
           handleClose = {this.handleClose}
           handleShow = {this.handleShow}
           article = {this.state.fullArticle}
+          startTime = {this.state.startTime}
         />
         <Voter
           show={this.state.showVoter}
