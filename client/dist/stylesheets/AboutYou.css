@@ -1,12 +1,12 @@
 #about-you-dash {
   display: flex;
   justify-content: space-between;
-  height: 88%;
 }
 
 #about-you-inner-content {
   flex-basis: 80%;
   overflow-y: scroll;
+  padding: 0 2em 2em 2em;
   
 }
 
@@ -23,13 +23,18 @@
 .partial-user-stance-container {
   display: flex;
   width: 100%;
-  border-bottom: 2px solid rgb(51, 51, 51);
+  /* border-bottom: 1px solid rgb(51, 51, 51); */
+  border-bottom: 1px solid grey;
   margin: 0 auto;
+  padding: 5px 0;
 }
 
 .partial-user-stance-container .category {
   flex-basis: 50%;
   align-self: center;
+  text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
 .partial-user-stance-container .data, .speedometer-wrapper {
@@ -40,4 +45,10 @@
 .partial-user-stance-container .multiplier {
   flex-basis: 20%;
   align-self: center;
+  padding: 0;
+  margin: 0;
+}
+
+.category strong {
+  cursor: pointer;
 }

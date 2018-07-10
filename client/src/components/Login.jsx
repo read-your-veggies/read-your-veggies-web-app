@@ -8,7 +8,9 @@ class Login extends Component {
 
   render() {
     return (
-      <h1><a href = '/auth/facebook'>Login with FB</a></h1>
+      <div className="login-page">
+        <h2><a href = '/auth/facebook'>Login with Facebook</a></h2>
+      </div>
     )
   }
 }

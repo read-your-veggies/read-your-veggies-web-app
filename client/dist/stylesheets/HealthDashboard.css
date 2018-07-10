@@ -1,19 +1,13 @@
 #health-dashboard {
   display: flex;
   justify-content: space-between;
-  height: 88%;
-
 }
+
 #health-dashboard-inner-content{
   flex-basis: 80%;
   overflow-y: scroll;
 }
 .health-dashboard-speedometer {
   height: 200px;
-}
-
-#submit-onboard {
-  float: right;
-  margin-right: 2%;
 }
 

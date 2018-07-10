@@ -37,7 +37,7 @@ class Dashboard extends Component {
         userId: id,
         browsingHistory: userBrowsingHistory,
         //subtract 147 px (size of header);
-        divHeight: window.innerHeight - 147 + 'px',
+        divHeight: window.innerHeight - 100 + 'px',
       }, () => {
         localStorage.setItem('readYourVeggies', '');
       });
@@ -47,7 +47,7 @@ class Dashboard extends Component {
   //run request to see if user is onboarded -- if not do ternary to render onboardmodal 
   render() {
     return(
-      <div className="dashboard">
+      <div className="dashboard" style={{height: this.state.divHeight}}>
         <Sidebar location={this.props.location} getUserInfo={this.props.getUserInfo}/>
         {this.state.onboardInformation === null
           ?

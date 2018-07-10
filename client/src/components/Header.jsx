@@ -28,15 +28,12 @@ class Header extends React.Component {
     
     return (
       
-      <div className="header">
-      
-        <div className="header-text" onClick={() => this.goToDashboard(displayName)}>
+      <div className="header" onClick={() => this.goToDashboard(displayName)}>
+        <div className="header-text" >
           {/* <img id="logo" src="./assets/logo.png" /> */}
           {/* <h1>R</h1><h3>ead</h3><h1>Y</h1><h3>our</h3><h1>V</h1><h3>eggies</h3> */}
           <h1 id="read-your-veggies">READ YOUR VEGGIES</h1>
-          <h4>Your news app for a balanced media diet</h4>
-        
-          
+          <h4>Your news app for a balanced media diet</h4>      
         </div>
         
         {/* <div id="header-right">
