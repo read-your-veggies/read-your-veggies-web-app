@@ -24,10 +24,9 @@ class ArticleCarousel extends Component {
   }
 
   setCurrentArticleId(id) {
-    this.setState(
-      {currentArticleId: id},
-      ()=> {console.log(this.state)}
-    );
+    this.setState({
+      currentArticleId: id
+    }}
   }
 
   shuffle(data) {
@@ -88,7 +87,7 @@ class ArticleCarousel extends Component {
                       })}
                     </Slider>
                     <div className="next-article-wrapper">
-                      <ButtonNext className="btn btn-info btn-sm" >Nah, show me another article</ButtonNext>
+                      <ButtonNext className="btn btn-info btn-sm">Nah, show me another article</ButtonNext>
                     </div>
                   </CarouselProvider>
                   </div>

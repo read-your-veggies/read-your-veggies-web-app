@@ -29,10 +29,19 @@ module.exports = {
       return prepare(await Users.findOne(new mongodb.ObjectID(_id)));
     },
     sources: () => {
-      return Source.find({}).select('name')
-      .then(res => {    
-        var data = res.map(prepare);
-        return data;
+      return Source.find({}).select('name fullTextsPersonality')
+      .then(res => {
+        let filtered = res.filter(source => {
+          return source.fullTextsPersonality !== undefined;
+        });
+        let data = filtered.map(source => {
+          return {
+            _id: source._id, 
+            name: source.name,
+          } 
+        })
+        console.log('data is', data);
+        return data.map(prepare);
       })
       .catch(err => {
         return err;
