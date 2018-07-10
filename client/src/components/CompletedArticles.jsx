@@ -44,7 +44,9 @@ class CompletedArticles extends React.Component {
                                   <p className="completed-article-carrots">{'🥕'.repeat(completedArticleInfo[articleId].nutritionalValue)}</p>
                                 </Panel.Heading>
                                 <Panel.Body className="completed-article-body">
-                                  <img className="completed-article-image" src={article.image} />
+                                  <div className="completed-article-image-container">
+                                    <img className="completed-article-image" src={article.image} />
+                                  </div>
                                   <a href={article.url}><h3 className="completed-article-title">{article.title.slice(0, 45)}...</h3></a>
                                 </Panel.Body>
                               </Panel>

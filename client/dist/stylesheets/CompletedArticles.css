@@ -14,9 +14,14 @@
   padding: 0;
 }
 
-.completed-article img {
-  width: 100%;
+.completed-article-image-container {
   height: 120px;
+  overflow: hidden;
+}
+
+.completed-article-image {
+  width: 100%;
+  
 }
 
 .completed-article-title {
