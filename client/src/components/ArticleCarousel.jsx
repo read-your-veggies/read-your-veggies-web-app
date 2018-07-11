@@ -63,7 +63,6 @@ class ArticleCarousel extends Component {
 
 
   render() {
-    console.warn('carousel render run');
     return (
       <Query query={GET_COMPLETED_ARTICLES} variables={{ _id: this.props.userData._id }}>
         {({ loading, error, data }) => {
