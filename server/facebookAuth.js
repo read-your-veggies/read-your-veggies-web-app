@@ -34,16 +34,39 @@ passport.use(new FacebookStrategy({  // Passport can utilize many different 'str
           var newUser = new User();
           newUser.facebookId = profile.id;
           newUser.name = profile.displayName;
-          newUser.emails = profile._json.email;
           newUser.facebookUrl = profile.profileUrl;
-          newUser.location = profile._json.location.name;
-          newUser.locPolRatio = calculateLocPol(profile._json.location.name);
-          newUser.hometown = profile._json.hometown.name;
-          newUser.homePolRatio = calculateLocPol(profile._json.hometown.name);
-          newUser.age_range = JSON.stringify(profile._json.age_range);
           newUser.health = 0;
-
-          console.log('new user to be saved', newUser);
+          try {
+            newUser.emails = profile._json.email;
+          } catch(err) {
+            newUser.emails = '';
+          }
+          try {
+            newUser.location = profile._json.location.name;
+          } catch(err) {
+            newUser.location = 'New York, New York';
+          }
+          try {
+            newUser.locPolRatio = calculateLocPol(profile._json.location.name);
+          } catch(err) {
+            newUser.locPolRatio = calculateLocPol('New York, New York');
+          }
+          try {
+            newUser.hometown = profile._json.hometown.name;
+          } catch(err) {
+            newUser.hometown = 'New York, New York';
+          }
+          try {
+            newUser.homePolRatio = calculateLocPol(profile._json.hometown.name);
+          } catch(err) {
+            newUser.homePolRatio = calculateLocPol('New York, New York');
+          }
+          try {
+            newUser.age_range = JSON.stringify(profile._json.age_range);
+          } catch(err) {
+            newUser.age_range = JSON.stringify({min: 21});
+          }        
+          
           newUser.save( (err) => {
             if (err) {
               console.log(err);
