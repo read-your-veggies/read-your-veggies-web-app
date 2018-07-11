@@ -46,20 +46,24 @@ class ArticleCarousel extends Component {
 
   shuffle = (data, completedArticleKeys) => {
     let articles = data.slice();
-    for (let i = 0; i < articles.length; i++) {
-      let randomIdx = Math.floor( Math.random() * articles.length);
-      let temp = articles[randomIdx];
-      articles[randomIdx] = articles[i];
-      articles[i] = temp;
-    }
+    // for (let i = 0; i < articles.length; i++) {
+    //   let randomIdx = Math.floor( Math.random() * articles.length);
+    //   let temp = articles[randomIdx];
+    //   articles[randomIdx] = articles[i];
+    //   articles[i] = temp;
+    // }
+
+    // articles.unshift(data[0]);
 
     return articles.filter(article => {
       let carrotCount = calculateNutritionalValue(this.props.userData.user_stance, article.articleStance, article.fullText.length);
-      return carrotCount > 0 && completedArticleKeys.indexOf(article._id) < 0 && article.fullText.length > 1000 || this.state.currentArticleId === article._id;
+      return article._id === this.state.currentArticleId || (carrotCount > 0 && completedArticleKeys.indexOf(article._id) < 0 && article.fullText.length > 1000);
     });
   }
 
+
   render() {
+    console.warn('carousel render run');
     return (
       <Query query={GET_COMPLETED_ARTICLES} variables={{ _id: this.props.userData._id }}>
         {({ loading, error, data }) => {

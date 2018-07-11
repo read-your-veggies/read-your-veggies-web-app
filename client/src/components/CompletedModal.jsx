@@ -15,6 +15,7 @@ class CompletedModal extends React.Component {
   // }
 
   render() {
+    console.log('complete modal', this.props);
     return (
       <Modal show={this.props.show} onHide={() => this.props.handleClose('completed')}>
         <Modal.Header>
