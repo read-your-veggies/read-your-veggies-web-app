@@ -19,6 +19,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
+    //alert('dash mounted');
     const id = this.props.getUserInfo.data.userInfo.userId;
     if (id !== '1234567890') {
       let userBrowsingHistory = [];
