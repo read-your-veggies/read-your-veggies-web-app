@@ -167,8 +167,8 @@ class ArticleCard extends React.Component {
           handleClose = {this.handleClose}
           handleShow = {this.handleShow}
           userId = {this.props.userId}
-          articleId={this.props.article._id}
-          articleStance={this.props.article.articleStance}
+          articleId={this.state.fullArticle._id}
+          articleStance={this.state.fullArticle.articleStance}
           userStance={this.props.userStance}
           nutritionalValue={calculateNutritionalValue(this.props.userStance, this.props.article.articleStance, this.props.article.fullText.length )}
         />
