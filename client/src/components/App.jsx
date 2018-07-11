@@ -12,6 +12,9 @@ import AboutYou from './AboutYou.jsx';
 
 
 class App extends Component {
+  state = {
+    guestLoggedIn: false,
+  }
   
   componentDidMount() {
     axios.get('/checkAuthHeaders').then((res) => {
