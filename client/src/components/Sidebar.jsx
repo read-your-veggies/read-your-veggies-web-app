@@ -27,7 +27,7 @@ class Sidebar extends Component {
   }
 
   render() {
-    const tooltip = <Tooltip id="modal-tooltip">See Your Report</Tooltip>;
+    //const tooltip = <Tooltip id="modal-tooltip">See Your Report</Tooltip>;
     const userId = this.props.getUserInfo.data.userInfo.userId;
     const displayName = this.props.getUserInfo.data.userInfo.displayName;
 
@@ -47,26 +47,25 @@ class Sidebar extends Component {
                         <h3>Home</h3>
                         <img src="./assets/logo.png" />
                       </div>
-                      <UserInfo location={this.props.location} displayName={displayName} userId={userId} />
-                      <a onClick = {() => this.goTo(displayName, "report")}>{' '}
-                        <OverlayTrigger overlay={tooltip}>
-                          <div id='sidebar-pol-stance'>
-                            <h3 id='stance-title'>Stance</h3>
-                            <HealthSpeedometer 
-                              height={100}
-                              width={150}
-                              value = {userStance}
-                              startColor="blue"
-                              endColor="red"
-                              min={-1}
-                              max={1}
-                              sidebar={true}
-                            />
-                          </div>
-                        </OverlayTrigger>
-                      {' '}</a>
-                      <div className='sidebar-container' onClick={() => this.goTo(displayName, "about")}>
-                        <h3>About</h3>
+                      <UserInfo location={this.props.location} displayName={displayName} userId={userId} goTo={this.goTo}/>
+                      <div onClick = {() => this.goTo(displayName, "report")} className='sidebar-container speedometer-container'>{' '}
+                        {/* <OverlayTrigger overlay={tooltip}> */}
+                          <h3 id="stance-title">Stance</h3>
+                          <HealthSpeedometer 
+                            height={100}
+                            width={150}
+                            value = {userStance}
+                            startColor="blue"
+                            endColor="red"
+                            min={-1}
+                            max={1}
+                            sidebar={true}
+                          />
+                        {/* </OverlayTrigger> */}
+                        {' '}
+                      </div>
+                      <div onClick={() => this.goTo(displayName, "about")} className='sidebar-container'>
+                        <h3 id="about-title">About</h3>
                         <img src="./assets/bargraph.png" />
                       </div>
                       <h3 id="logout-button"><a href='/logout'>Logout</a></h3>
