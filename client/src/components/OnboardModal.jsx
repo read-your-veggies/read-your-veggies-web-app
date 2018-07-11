@@ -136,19 +136,7 @@ class OnboardModal extends React.Component {
                       }
                     tooltip={false}
                   />
-                </div>
-                <div>
-                  <input type="text" name="hometown"/>
-                  <select>
-                    {
-                      states.map( (state) => {
-                        return (
-                          <option value="{state}">{state}</option>
-                        )
-                      })
-                    }
-                  </select>
-                </div>
+                </div>             
                 </Panel.Body>
               </Panel>
           </Modal.Body>
