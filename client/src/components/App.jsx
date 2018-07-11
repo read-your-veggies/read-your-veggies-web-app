@@ -12,26 +12,58 @@ import AboutYou from './AboutYou.jsx';
 
 
 class App extends Component {
+  state = {
+    guestLoggedIn: false,
+  }
   
   componentDidMount() {
-    axios.get('/checkAuthHeaders').then((res) => {
-      if (res.headers.user !== undefined) {
-        // Redirect user to /dashboard with react router.
-        this.props.history.push('/dashboard');
-        const user = (JSON.parse(res.headers.user));
+    // console.log('mounting component')
+    // If guestLoggedIn: Set the auth headers to match the guest profile
+    // OR can we just use the updateUserInfo function below?
 
-        this.props.updateUserInfo({
-          variables: {
-            theDisplayName: user.name,
-            theProvider: 'Facebook',
-            theUserId: user._id,
-          }
-        })
-      } else {
-        this.props.history.push('/login');
-      }
-    });
+    if (this.state.guestLoggedIn) {
+      
+    } else {
+      axios.get('/checkAuthHeaders').then((res) => {
+        if (res.headers.user !== undefined) {
+          // Redirect user to /dashboard with react router.
+          this.props.history.push('/dashboard');
+          const user = (JSON.parse(res.headers.user));
+
+          console.log('user id info',  user._id);
+          
+          this.props.updateUserInfo({
+            variables: {
+              theDisplayName: user.name,
+              theProvider: 'Facebook',
+              theUserId: user._id,
+            }
+          })
+        } else {
+          this.props.history.push('/login');
+        }
+      });
+    }
   }
+    
+  loginGuest = () => {
+    this.setState({
+      guestLoggedIn: true,
+    }, () => {
+      console.log(this.state);
+      // alert('guest is logged in!');
+      this.props.history.push('/dashboard')
+      this.props.updateUserInfo({
+        variables: {
+          theDisplayName: 'Guesty McGuestFace',
+          theProvider: 'Guest',
+          theUserId: '5b464a41af4f326b8e8a3cc9',
+        }
+      })
+    })
+  }
+
+
 
   render() {
     return (
@@ -65,7 +97,13 @@ class App extends Component {
               </Query>
             }
           />
-          <Route path='/login' component={Login} />
+
+          <Route path={'/login'} 
+            component={() => 
+              <Login loginGuest={this.loginGuest} />
+            } 
+          />
+
           <Route path={"/health"}
             component={() => 
               <Query query={GET_USER_INFO}>
