@@ -8,10 +8,9 @@ import { GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
 import { ApolloConsumer } from "react-apollo";
 import { calculateNutritionalValue } from '../lib/calculateStance.js';
 import { TagCloud } from "react-tagcloud";
-import {badWords} from '../lib/badwords.js';
+import { badWords } from '../lib/badwords.js';
 
 class ArticleCard extends React.Component {
-
   state = {
     showArticle: false,
     showVoter: false,
