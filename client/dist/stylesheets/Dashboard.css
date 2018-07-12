@@ -10,6 +10,7 @@
 
 #dash-sidebar {
   flex-basis: 20%;
+  min-width: 0px;
 }
 
 .dashboard-container {

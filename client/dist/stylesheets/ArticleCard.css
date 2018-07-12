@@ -90,3 +90,20 @@
   z-index: 999999 !important;
 }
 
+@media only screen and (max-width: 992px) {
+
+  .article-thumbnail {
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 50px;
+  }
+
+  .article {
+    font-size: 0.8em;
+  }
+
+  .carrots-right {
+    font-size: 1.8em;
+  }
+
+}

@@ -50,16 +50,7 @@ class Sidebar extends Component {
                       <OverlayTrigger overlay={tooltip}>
                         <div onClick = {() => this.goTo(displayName, "report")} className='sidebar-container speedometer-container'>{' '}
                           <h3 id="stance-title">Stance</h3>
-                          <HealthSpeedometer 
-                            height={100}
-                            width={150}
-                            value = {userStance}
-                            startColor="blue"
-                            endColor="red"
-                            min={-1}
-                            max={1}
-                            sidebar={true}
-                          />
+                          <img src = './assets/sidebar-speedometer.png' />
                         </div>
                       </OverlayTrigger>
                       <div onClick={() => this.goTo(displayName, "about")} className='sidebar-container'>
