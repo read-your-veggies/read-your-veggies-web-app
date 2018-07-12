@@ -35,8 +35,9 @@
 }
 
 .sidebar-container img {
-  height: 80px;
   width: 80px;
+  max-width:100%;
+  height: auto;
 }
 
 .rc-progress-line {
