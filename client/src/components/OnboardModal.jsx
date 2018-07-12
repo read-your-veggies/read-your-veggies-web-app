@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/lib/Button';
 import Modal from 'react-bootstrap/lib/Modal';
 import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
-
 import { ON_BOARD_USER } from '../apollo/resolvers.js';
 import { Mutation } from "react-apollo";
 import GettingStartedModal from './GettingStartedModal.jsx';
@@ -137,7 +136,6 @@ class OnboardModal extends React.Component {
                   onClick={(e) => {
                     e.preventDefault();
                     onBoardUser({ variables: { _id: this.props.userId, onboard_info: JSON.stringify(this.state) } });
-                    console.log('onboarded!');
                     this.handleClose();
                   }}>Submit!</Button>
                 )}}

@@ -12,7 +12,7 @@ const getGraphQlSchema = async () => {
     return schema;
 
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 }
 

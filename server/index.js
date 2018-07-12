@@ -34,10 +34,9 @@ app.get('/checkauthheaders', (req, res) => {res.send();})
 //Handle logouts
 app.get('/logout', ((req, res) => {
   req.logout();
-  console.log(req.user);
   req.session.destroy((err) => {
     if (err) {
-      console.log(err);
+      console.error(err);
     }
     req.session = null;
     res.clearCookie('connect.sid');

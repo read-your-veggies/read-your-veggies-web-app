@@ -43,11 +43,6 @@ class UserStats extends React.Component {
           return (
             <div>
             <div className='user-stances'>
-              {/* <div className='partial-user-stance-container'>
-                <h3 className='category'>Stance Subcategory</h3>
-                <h3 className='data'>Your Stance</h3>
-                <h3 className = 'multiplier'>Weight</h3>
-              </div> */}
               <div className='partial-user-stance-container'>               
                 <Mutation mutation={OFF_BOARD_USER} >
                   {(offBoardUser) => {

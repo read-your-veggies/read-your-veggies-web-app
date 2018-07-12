@@ -80,14 +80,6 @@ module.exports = [`
   }
 
   type Mutation {
-    deleteArticles: Article
-    deleteArticle(_id: String): Article
-    createArticle(url: String,
-      title: String,
-      author: [String],
-      source: String,
-      description: String,
-      fullText: String): Article
     onboardUser(_id: String, onboard_info: String): User
     updateUserVotes(_id: String, completed_articles: String): User
     updateArticleVotes(_id: String, votes: VoteInput, userStance: Float): Article

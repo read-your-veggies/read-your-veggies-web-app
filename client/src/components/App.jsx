@@ -17,7 +17,6 @@ class App extends Component {
   }
   
   componentDidMount() {
-    // console.log('mounting component')
     // If guestLoggedIn: Set the auth headers to match the guest profile
     // OR can we just use the updateUserInfo function below?
 
@@ -29,8 +28,6 @@ class App extends Component {
           // Redirect user to /dashboard with react router.
           this.props.history.push('/dashboard');
           const user = (JSON.parse(res.headers.user));
-
-          console.log('user id info',  user._id);
           
           this.props.updateUserInfo({
             variables: {
@@ -50,7 +47,6 @@ class App extends Component {
     this.setState({
       guestLoggedIn: true,
     }, () => {
-      console.log(this.state);
       // alert('guest is logged in!');
       this.props.history.push('/dashboard')
       this.props.updateUserInfo({
@@ -62,8 +58,6 @@ class App extends Component {
       })
     })
   }
-
-
 
   render() {
     return (

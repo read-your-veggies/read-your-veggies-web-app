@@ -69,7 +69,7 @@ passport.use(new FacebookStrategy({  // Passport can utilize many different 'str
           
           newUser.save( (err) => {
             if (err) {
-              console.log(err);
+              console.error(err);
             }  // New user saved.  We can now invoke done, like we did for the previous case.
             return done(null, {_id: newUser._id, name: newUser.name});
           })

@@ -1,17 +1,8 @@
 .login-page {
   height: 60%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 }
-
-/* .login-div {
-  width: 35%;
-  height: 125px;
-  border: 0.5px solid grey;
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */

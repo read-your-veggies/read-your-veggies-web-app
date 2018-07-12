@@ -23,7 +23,6 @@ let browsingHistory = [];
 chrome.runtime.onStartup.addListener(function() {
   chrome.storage.sync.get(['read_your_veggies_web_cache'], function(result) {
     browsingHistory = result.read_your_veggies_web_cache;
-    // console.log(browsingHistory);
   });
 })
 
@@ -33,7 +32,6 @@ function handleSiteVisit(details) {
   let currentUrl = details.url;
   currentUrl = currentUrl.replace('https://', '');
   currentUrl = currentUrl.replace('http://', '');
-  // console.log(currentUrl);
   if (lastVisitedPage !== currentUrl) {
     lastVisitedPage = currentUrl;
 
@@ -43,7 +41,7 @@ function handleSiteVisit(details) {
           tabs[0].id,
           {code: `localStorage.setItem('readYourVeggies', '${browsingHistory}');`});
       });
-      console.log('dumping history', browsingHistory);
+      //console.log('dumping history', browsingHistory);
     } else if (details.url.includes('https://localhost:5000/dashboard')) {
       browsingHistory = [];
     } else if (!details.url.includes('https://localhost:5000/')) {

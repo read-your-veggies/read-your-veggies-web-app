@@ -40,7 +40,6 @@ module.exports = {
             name: source.name,
           } 
         })
-        console.log('data is', data);
         return data.map(prepare);
       })
       .catch(err => {
@@ -52,27 +51,7 @@ module.exports = {
     },
   },
   Mutation: {
-    // probably should disable this for production:
-    createArticle: async (root, args, context, info) => {
-      const res = await Articles.insert(args);
-      console.log('res is', res);
-      return prepare(await Articles.findOne({_id: res.insertedIds[0]}))
-    },
-    // probably should disable this as well:
-    deleteArticles: async () => {
-      const res = await Articles.remove({});
-      console.log('res is', res);
-      return 'deleted';
-    },
-    //test function to allow client to delete article on click
-    deleteArticle: async (root, args, context, info) => {
-      console.log('deleting', args._id)
-      const res = await Articles.findOneAndDelete({_id: new mongodb.ObjectID(args._id)});
-      console.log(res);
-      return res.value;
-    },
-
-    // We need to have this update the summed user stance fields as well.
+    
     updateArticleVotes: async (root, args) => {
       // We need to know the state of the current votes before we can update them.
       let currentState = prepare(await Articles.findOne(new mongodb.ObjectID(args._id)));

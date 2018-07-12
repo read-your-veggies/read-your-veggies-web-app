@@ -6,14 +6,6 @@ import { withRouter } from "react-router-dom";
 
 class CompletedModal extends React.Component {
 
-  // share = () => {
-  //   FB.ui({
-  //     method: 'share',
-  //     href: 'www.read-your-veggies.com',
-  //     quote: `I just earned ${this.props.veggies} by reading on Read-Your-Veggies.com`,
-  //   }, function(response){});
-  // }
-
   render() {
     return (
       <Modal show={this.props.show} onHide={() => this.props.handleClose('completed')}>
@@ -26,10 +18,6 @@ class CompletedModal extends React.Component {
               Great job!  You earned this many veggies: <br/><br/> 
             </p>
             {this.props.veggies}
-            {/* <Button bsStyle="info" onClick={(e) => {
-              e.preventDefault();
-              this.share();
-            }}>Share to Facebook</Button> */}
             <p className="source-info"> 
             <a href={this.props.article.url} target="_blank">
               This article was originally published by {this.props.article.source}.
