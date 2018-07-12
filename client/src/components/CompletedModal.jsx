@@ -19,9 +19,9 @@ class CompletedModal extends React.Component {
             </p>
             {this.props.veggies}
             <p className="source-info"> 
-            <a href={this.props.article.url} target="_blank">
-              This article was originally published by {this.props.article.source}.
-            </a>
+              <a href={this.props.article.url} target="_blank">
+                This article was originally published by {this.props.article.source}.
+              </a>
             </p>
           </div>
         </Modal.Body>
@@ -39,7 +39,6 @@ class CompletedModal extends React.Component {
             }}>View your health report</Button>
           </div>
         </Modal.Footer>
-        
       </Modal>
     )
   }
