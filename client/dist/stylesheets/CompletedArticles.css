@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   padding-top: 1%;
+  justify-content: space-around;
 }
 
 .completed-article {
@@ -39,4 +40,12 @@
 
 .completed-articles-header {
   display: block;
+}
+
+@media only screen and (max-width: 992px) {
+
+  .completed-article {
+    width: 80%;
+  }
+
 }

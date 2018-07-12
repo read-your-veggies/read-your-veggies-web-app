@@ -18,10 +18,10 @@ class Voter extends React.Component {
 
   render() {
     const buttons = [
-      {label: "grin.png", votes: {agree: true, fun: true}, class: "agree-enjoy", style: "success"},
-      {label: "meh.png", votes: {agree: true, bummer: true}, class: "agree-dislike", style: "primary"},
-      {label: "think.png", votes: {disagree: true, fun: true}, class: "disagree-enjoy", style: "warning"},
-      {label: "argh.png", votes: {disagree: true, bummer: true}, class: "disagree-dislike", style: "danger"},      
+      {label: "grin.png", votes: {agree: true, fun: true}, class: "agree-enjoy", style: "success", text: 'Agree and Enjoy'},
+      {label: "meh.png", votes: {agree: true, bummer: true}, class: "agree-dislike", style: "primary", text: 'Agree but Dislike'},
+      {label: "think.png", votes: {disagree: true, fun: true}, class: "disagree-enjoy", style: "warning", text: 'Disagree but Enjoy'},
+      {label: "argh.png", votes: {disagree: true, bummer: true}, class: "disagree-dislike", style: "danger", text: 'Disagree and Dislike'},      
     ]
 
     return (
@@ -39,18 +39,12 @@ class Voter extends React.Component {
                 <Mutation mutation={UPDATE_USER_VOTES}>
                   {(updateUserVotes) => {
                     return (
-                      <div>
-                        <div className="agree">Agree</div>
-                        <div className="disagree">Disagree</div>
-                        <div className="like">Like</div>
-                        <div className="dislike">Dislike</div>
-
+                      <div className='voter-wrapper'>
                       {
                         buttons.map( (button) => {
                           return (
                             <Button className={"button " + button.class} onClick={(e) => {
                               let { articleId, userId, articleStance, userStance, nutritionalValue } = this.props;  
-                        
                               let userVoteInfo = {};
                               userVoteInfo[articleId] = {
                                 'articleStance': articleStance,
@@ -65,6 +59,7 @@ class Voter extends React.Component {
                               this.submitVote();
                             }}>
                               <img id="button" src={`./assets/${button.label}`} />
+                              <h3>{button.text}</h3>
                             </Button>
                           )
                         })
