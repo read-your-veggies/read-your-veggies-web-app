@@ -2,9 +2,9 @@
 
 Welcome to Read Your Veggies, a news app to help you read outside your bubble!
 
--- gif of our site here --
+<img src="./client/dist/assets/read-your-veggies-cast.gif" width="450px" height="250px">
 
-Read Your Veggies diagnoses your political stance using five data points: where you live, where you grew up, your browsing habits, your reading habits on our site, and your responses to an onboarding questionnaire. It then serves news articles that, based on source, will likely contain an opposing political viewpoint to "digest." Users can set weekly health goals and track their reading history. They can also view personality insights into our news outlets, generated from IBM Watson's [Personality Insights](https://www.ibm.com/watson/services/personality-insights/)
+Read Your Veggies diagnoses a user's political stance using five data points: current city, hometown,  browsing habits, reading habits on the site, and responses to an onboarding questionnaire. It then serves news articles that, based on source, will likely contain an opposing political viewpoint to "digest." Users can set weekly health goals and track their reading history. They can also view personality insights into our news outlets, generated from IBM Watson's [Personality Insights](https://www.ibm.com/watson/services/personality-insights/)
 
 ## Features
 
@@ -23,7 +23,7 @@ Read Your Veggies diagnoses your political stance using five data points: where 
 - [Passport Facebook](http://www.passportjs.org/docs/facebook/) - Configuration used with Passport to authenticate with Facebook
 - [Mongoose](http://mongoosejs.com/) - Used to configure and query MongoDB database
 - [IBM Watson Personality Insights](https://www.ibm.com/watson/services/personality-insights/) - Used to generate personality profiles of news sources.
-- [AWS Lambda](https://aws.amazon.com/lambda/) - Runs two data services and cron job
+- [AWS Lambda](https://aws.amazon.com/lambda/) - Runs two data services and cron jobs
 
 ## Development
 
@@ -65,9 +65,9 @@ To deploy your own version:
 
 ## Authors
 
-- __Phil Gonzalez__: [p-gonzo](www.github.com/p-gonzo)
-- __Ian Schmidt__: [ianschmidt83](www.github.com/ianschmidt83)
-- __Scott McCreary__: [scottmccreary](www.github.com/scottmccreary)
+- __Phil Gonzalez__: [p-gonzo](https://github.com/p-gonzo)
+- __Ian Schmidt__: [ianschmidt83](https://github.com/ianschmidt83)
+- __Scott McCreary__: [scottmccreary](https://github.com/scottmccreary)
 
 ## License
 
