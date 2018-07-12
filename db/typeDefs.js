@@ -1,3 +1,5 @@
+// These typeDefs are exported to graphql.js
+
 module.exports = [`
   type Query {
     message: String

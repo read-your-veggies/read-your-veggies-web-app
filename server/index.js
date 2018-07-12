@@ -28,9 +28,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(authMiddleware);
 
-//dummy endpoint to verify user authentication
 //Authentication 
 app.get('/checkauthheaders', (req, res) => {res.send();})
+
 //Handle logouts
 app.get('/logout', ((req, res) => {
   req.logout();
@@ -50,9 +50,9 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
   successRedirect: '/',
   failureRedirect: '/',
 }));
+
 app.get('/auth/facebook', passport.authenticate('facebook',{
-  // authType: 'rerequest',
-  // This scope array seems to be how we request additional info
+  // This scope array is how we request additional info from facebook
   scope:['email', 'user_location', 'user_hometown', 'user_age_range']
 }));
 
@@ -62,6 +62,7 @@ app.get('/login', (req,res) => res.redirect('/'));
 app.get('/health', (req,res) => res.redirect('/'));
 app.get('/about', (req,res) => res.redirect('/'));
 app.get('/report', (req,res) => res.redirect('/'));
+
 /*****************************GRAPHQL*****************************/
 async function startGraphQl() {
   var schema = await getGraphQlSchema();

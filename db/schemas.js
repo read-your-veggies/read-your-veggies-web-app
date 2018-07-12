@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//const db = require('./index.js').db;
 const articleDbConn = require('./index.js').articleDbConn;
 const userDbConn = require('./index.js').userDbConn;
 const sourceDbConn = require('./index.js').sourceDbConn;
@@ -55,7 +54,7 @@ const userSchema = new Schema({
   age_range: String,
   onboard_stance: { type: Number, default: 0 },
   onboard_information: { type: String, default: 'NEED_ON_BOARDING' },
-  //this will be a HUGE object/string
+  //completed articles will be a HUGE object/string
   completed_articles: { type: String, default: JSON.stringify({})},
   reading_stance: { type: [Number], default:[0,0] },
   browsing_history: [String],

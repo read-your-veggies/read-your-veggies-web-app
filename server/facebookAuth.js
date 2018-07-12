@@ -23,7 +23,8 @@ passport.use(new FacebookStrategy({  // Passport can utilize many different 'str
     callbackURL: process.env.CALLBACK_URL,
     profileFields: ['email', 'birthday', 'location', 'displayName', 'hometown', 'age_range']
   },
-  function(accessToken, refreshToken, profile, done) {  // We obtain a profile object from the FacebookStrategy, passed into this callback func 
+  // We obtain a profile object from the FacebookStrategy, passed into the callback func below
+  function(accessToken, refreshToken, profile, done) {  
     process.nextTick( () => {
       User.findOne({facebookId: profile.id}, (err, user) => {
         if (err) return done(err);
@@ -31,11 +32,13 @@ passport.use(new FacebookStrategy({  // Passport can utilize many different 'str
         if (user) {  // User exists, we invoke done and pass information to the middleware.
           return done(null, {_id: user._id, name: user.name});
         } else { // User does not exist, we create a new user for the DB.
-          var newUser = new User();
+          let newUser = new User();
           newUser.facebookId = profile.id;
           newUser.name = profile.displayName;
           newUser.facebookUrl = profile.profileUrl;
           newUser.health = 0;
+
+          // If facebook doesn't return the below info properly, we use try/catch to set default values
           try {
             newUser.emails = profile._json.email;
           } catch(err) {
@@ -87,7 +90,7 @@ const calculateLocPol = function (city) {
   let result12 = convert2012[county];
   let result16 = convert2016[county];
 
-  var aggregateResult = (result12 + result16) / 2;
+  let aggregateResult = (result12 + result16) / 2;
 
   if (isNaN(aggregateResult)) {
     return 0;

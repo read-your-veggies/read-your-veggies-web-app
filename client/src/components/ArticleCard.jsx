@@ -8,9 +8,9 @@ import { GET_ONE_FULL_ARTICLE } from '../apollo/serverQueries';
 import { ApolloConsumer } from "react-apollo";
 import { calculateNutritionalValue } from '../lib/calculateStance.js';
 import { TagCloud } from "react-tagcloud";
+import { badWords } from '../lib/badwords.js';
 
 class ArticleCard extends React.Component {
-
   state = {
     showArticle: false,
     showVoter: false,
@@ -48,50 +48,7 @@ class ArticleCard extends React.Component {
 
   componentDidMount() {
     let words = this.props.article.fullText.split(' ');
-    let badWords = {
-      'a': true, 
-      'the': true, 
-      'to': true, 
-      'and': true, 
-      'of': true, 
-      'in': true, 
-      'him': true, 
-      'her': true, 
-      'at': true,
-      'as': true,
-      'was': true,
-      'on': true,
-      'who': true,
-      'she': true,
-      'he': true,
-      'said': true,
-      'is': true,
-      'said': true,
-      'be': true,
-      'or': true,
-      'that': true,
-      'for': true,
-      '-': true,
-      '--': true,
-      'with': true,
-      'been': true,
-      'this': true,
-      'are': true,
-      'The': true,
-      'by': true,
-      'such': true,
-      'which': true,
-      'has': true,
-      'his': true,
-      'had': true,
-      'AP': true,
-      'will': true,
-      'it': true,
-      'I': true,
-      'its': true,
-      'these': true,
-      'but': true,
-    };
+    
     let wordsObj = {};
     words.forEach(word => {
       if (badWords[word] === undefined) {
