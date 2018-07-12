@@ -55,12 +55,8 @@
     margin: 0 auto;
     margin-top: 1em;
     box-shadow:  6px 1px 6px rgba(0, 0, 0, .5);
-    /* height: 50px; */
     font-family: 'Roboto', sans-serif;
-    /* font-size: 1.6em; */
-    border-radius: 30px;
-    /* position: relative !important;
-    z-index: 999999 !important; */  
+    border-radius: 30px; 
 }
 
 #crop-image {

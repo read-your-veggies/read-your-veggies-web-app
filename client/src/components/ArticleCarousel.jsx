@@ -16,28 +16,6 @@ class ArticleCarousel extends Component {
     user_stance: 0,
     currentArticleId: null,
   }
-
-  // componentDidMount() {
-  //   window.fbAsyncInit = function() {
-  //     FB.init({
-  //       appId            : '960983460729474',
-  //       autoLogAppEvents : true,
-  //       xfbml            : true,
-  //       version          : 'v3.0'
-  //     });
-  //   };
-  
-  //   (function(d, s, id){
-  //      var js, fjs = d.getElementsByTagName(s)[0];
-  //      if (d.getElementById(id)) {return;}
-  //      js = d.createElement(s); js.id = id;
-  //      js.src = "https://connect.facebook.net/en_US/sdk.js";
-  //      fjs.parentNode.insertBefore(js, fjs);
-  //    }(document, 'script', 'facebook-jssdk'));
-
-  //    console.log('sdk loaded');
-  // }
-
   setCurrentArticleId = (id) => {
     this.setState({
       currentArticleId: id,
@@ -46,14 +24,6 @@ class ArticleCarousel extends Component {
 
   shuffle = (data, completedArticleKeys) => {
     let articles = data.slice();
-    // for (let i = 0; i < articles.length; i++) {
-    //   let randomIdx = Math.floor( Math.random() * articles.length);
-    //   let temp = articles[randomIdx];
-    //   articles[randomIdx] = articles[i];
-    //   articles[i] = temp;
-    // }
-
-    // articles.unshift(data[0]);
 
     return articles.filter(article => {
       let carrotCount = calculateNutritionalValue(this.props.userData.user_stance, article.articleStance, article.fullText.length);
@@ -76,7 +46,7 @@ class ArticleCarousel extends Component {
               {({ loading, error, data }) => {
                 if (loading) return <Loading />
                 if (error) {
-                  console.log(`Error! ${error.message}`);
+                  console.error(`Error! ${error.message}`);
                   return <Error />
                 }
                 let shuffled = this.shuffle(data.articles, completedArticleKeys);
@@ -86,8 +56,6 @@ class ArticleCarousel extends Component {
                   <CarouselProvider
                     lockOnWindowScroll={true}
                     isPlaying={false}
-                    // naturalSlideWidth={500}
-                    // naturalSlideHeight={200}
                     totalSlides={50}
                     visibleSlides={1}
                   >        

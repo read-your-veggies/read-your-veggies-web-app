@@ -16,7 +16,7 @@ const CompletedArticles = () => (
             {({ loading, error, data }) => {
               if (loading) return <Loading />;
               if (error) {
-                console.log(`Error! ${error.message}`);
+                console.error(`Error! ${error.message}`);
                 return <Error />
               }
               const completedArticleInfo = JSON.parse(data.user.completed_articles);
@@ -36,7 +36,7 @@ const CompletedArticles = () => (
                         {({ loading, error, data }) => {
                           if (loading) return <Loading />;
                           if (error) {
-                            console.log(`Error! ${error.message}`);
+                            console.error(`Error! ${error.message}`);
                             return <Error />
                           }
                           let article = data.article;

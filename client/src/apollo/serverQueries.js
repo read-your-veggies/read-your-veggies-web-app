@@ -45,33 +45,6 @@ export const GET_LIST_OF_SOURCES = gql`
   }
 `
 
-export const GET_USER_FROM_DB =  gql`
-  query user($_id: String!) {
-    user(_id: $_id){
-      _id
-      authenticationInfo
-      avatar
-      name
-      health 
-      user_stance
-      recently_read
-      emails
-      facebookId
-      facebookUrl
-      birthday
-      location
-      locPolRatio
-      hometown
-      homePolRatio
-      age_range
-      onboard_stance
-      onboard_information
-      completed_articles
-      reading_stance
-    }
-  }
-`
-
 export const GET_COMPLETED_ARTICLES =  gql`
   query user($_id: String!) {
     user(_id: $_id) {

@@ -37,7 +37,6 @@
 .article-panel-heading {
   height: 20% !important;
   background: linear-gradient(to right, rgb(160, 160, 160), white);
-  /* background-color: rgb(160, 160, 160) !important; */
 }
 
 .article-panel-body {

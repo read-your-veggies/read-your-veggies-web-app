@@ -23,7 +23,6 @@ class HealthSpeedometer extends React.Component {
   }
 
   render() {
-    // console.log('speedometer', this.props);
     let polValueString = '';
     if (this.props.sidebar === true) {
       polValueString = ' ';
