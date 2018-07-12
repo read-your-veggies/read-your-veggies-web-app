@@ -11,11 +11,11 @@ import Error from './Error.jsx';
 
 
 class ArticleCarousel extends Component {
-
   state = {
     user_stance: 0,
     currentArticleId: null,
   }
+
   setCurrentArticleId = (id) => {
     this.setState({
       currentArticleId: id,
@@ -24,7 +24,6 @@ class ArticleCarousel extends Component {
 
   shuffle = (data, completedArticleKeys) => {
     let articles = data.slice();
-
     return articles.filter(article => {
       let carrotCount = calculateNutritionalValue(this.props.userData.user_stance, article.articleStance, article.fullText.length);
       return article._id === this.state.currentArticleId || (carrotCount > 0 && completedArticleKeys.indexOf(article._id) < 0 && article.fullText.length > 1000);
