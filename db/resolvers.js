@@ -40,7 +40,7 @@ module.exports = {
             name: source.name,
           } 
         })
-        console.log('data is', data);
+        // console.log('data is', data);
         return data.map(prepare);
       })
       .catch(err => {
@@ -79,7 +79,7 @@ module.exports = {
       let sourceStance = sourceBiases[ sourceConvert [currentState.source] ]
       
       // Take the current state and update the vote fields as necessary.
-      for (var key in currentState.votes) {
+      for (let key in currentState.votes) {
         if (args.votes[key]) {
           currentState.votes[key].totalVotes++;
           currentState.votes[key].summedUserStance += args.userStance;
@@ -88,7 +88,7 @@ module.exports = {
 
       let avgVoteStances = {}; 
       let totalVotes = 0;
-      for (var key in currentState.votes) {
+      for (let key in currentState.votes) {
         if (currentState.votes[key].totalVotes !== 0) {
           avgVoteStances[key] = currentState.votes[key].summedUserStance / currentState.votes[key].totalVotes;
           totalVotes += currentState.votes[key].totalVotes;
@@ -128,16 +128,16 @@ module.exports = {
 
       previouslyCompletedArticles[incomingArticleKey] = incomingArticle[incomingArticleKey];
       
-      var updatedReadingStance = helpers.calculateUserReadingStance(currentReadingStance, incomingArticle[incomingArticleKey]);
+      let updatedReadingStance = helpers.calculateUserReadingStance(currentReadingStance, incomingArticle[incomingArticleKey]);
 
-      var aggregates = {
+      let aggregates = {
         onboardingStance: userDocument.onboard_stance,
         localPolStance: userDocument.locPolRatio,
         homePolStance: userDocument.homePolRatio,
         browsingStance: userDocument.browsing_history_stance,
         readingStance: updatedReadingStance,
       }
-      var updatedAggregateStance = helpers.calculateUserAggregateStance(aggregates);
+      let updatedAggregateStance = helpers.calculateUserAggregateStance(aggregates);
       
       const res = await Users.findOneAndUpdate(
         {_id: new mongodb.ObjectID(args._id)}, 
