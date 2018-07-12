@@ -24,7 +24,7 @@ class AboutYou extends React.Component {
         <div id='about-you-inner-content' >
         <h3>Your political stance is calculated from the following categories and weights:</h3>
             <div id='about-you-user-stances-wrapper'>
-              <UserStats userId ={this.props.getUserInfo.data.userInfo.userId} />
+              <UserStats userId={this.props.getUserInfo.data.userInfo.userId} />
             </div>
             <Query query={GET_USER_STANCE_INFO} variables={{ _id: this.props.getUserInfo.data.userInfo.userId } } fetchPolicy='network-only'>
               {({ loading, error, data, }) => {

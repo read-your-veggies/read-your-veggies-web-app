@@ -1,7 +1,5 @@
 const apolloStateDefaults = {
   
-  teamName: 0,
-  
   userInfo: {
     __typename: 'userInfo',
     displayName: 'Login',

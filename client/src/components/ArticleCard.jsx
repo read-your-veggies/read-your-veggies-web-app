@@ -59,6 +59,7 @@ class ArticleCard extends React.Component {
         }
       }  
     })
+    
     let results = [];
     for (let key in wordsObj) {
       if (wordsObj[key] > 1) {
