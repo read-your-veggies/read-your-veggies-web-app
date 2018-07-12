@@ -40,7 +40,7 @@ module.exports = {
             name: source.name,
           } 
         })
-        console.log('data is', data);
+        // console.log('data is', data);
         return data.map(prepare);
       })
       .catch(err => {
