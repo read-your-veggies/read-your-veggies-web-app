@@ -136,7 +136,9 @@ class OnboardModal extends React.Component {
                   onClick={(e) => {
                     e.preventDefault();
                     onBoardUser({ variables: { _id: this.props.userId, onboard_info: JSON.stringify(this.state) } });
-                    this.handleClose();
+                    setTimeout(() => {
+                      this.handleClose();
+                    }, 200);
                   }}>Submit!</Button>
                 )}}
             </Mutation>

@@ -48,7 +48,7 @@ class Dashboard extends Component {
         {this.state.onboardInformation === null
           ?
           <div>
-            <Query query={GET_USER_ONBOARD_INFO_AND_STANCE} variables={{ _id: this.state.userId }}>
+            <Query query={GET_USER_ONBOARD_INFO_AND_STANCE} variables={{ _id: this.state.userId }} fetchPolicy='network-only'>
               {({ loading, error, data }) => {
                 if (loading) return <Loading />
                 if (error) return `Error! ${error.message}`;

@@ -1,7 +1,7 @@
 import React from 'react';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
-import {BarChart} from 'react-easy-chart';
+import { BarChart } from 'react-easy-chart';
 import { ApolloConsumer } from "react-apollo";
 import { GET_SOURCE_PERSONALITY } from '../apollo/serverQueries';
 
@@ -102,7 +102,7 @@ class AboutOurSourcesPanel extends React.Component {
                       }}
                     >
                     <option>--Source--</option>
-                    {this.state.sources.map((sourceName, index) => {
+                    {this.state.sources.map((sourceName) => {
                       return <option value={sourceName}>{sourceName}</option>
                     })}
                   >
@@ -117,7 +117,7 @@ class AboutOurSourcesPanel extends React.Component {
                   placeholder="select" 
                   onChange={this.handleAttributeChange}
                 >
-                  {this.state.attributes.map((attributeName, index) => {
+                  {this.state.attributes.map((attributeName) => {
                     return <option value={attributeName}>{attributeName}</option>
                   })}    
                 </FormControl>

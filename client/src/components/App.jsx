@@ -6,10 +6,9 @@ import Dashboard from './Dashboard.jsx';
 import Login from './Login.jsx';
 import AboutUs from './AboutUs.jsx';
 import HealthDashboard from './HealthDashboard.jsx';
-import {GET_USER_INFO} from '../apollo/localQueries.js';
+import { GET_USER_INFO } from '../apollo/localQueries.js';
 import { Query } from "react-apollo";
 import AboutYou from './AboutYou.jsx';
-
 
 class App extends Component {
   state = {
@@ -17,12 +16,7 @@ class App extends Component {
   }
   
   componentDidMount() {
-    // If guestLoggedIn: Set the auth headers to match the guest profile
-    // OR can we just use the updateUserInfo function below?
-
-    if (this.state.guestLoggedIn) {
-      
-    } else {
+    if (!this.state.guestLoggedIn) {
       axios.get('/checkAuthHeaders').then((res) => {
         if (res.headers.user !== undefined) {
           // Redirect user to /dashboard with react router.
@@ -47,7 +41,6 @@ class App extends Component {
     this.setState({
       guestLoggedIn: true,
     }, () => {
-      // alert('guest is logged in!');
       this.props.history.push('/dashboard')
       this.props.updateUserInfo({
         variables: {

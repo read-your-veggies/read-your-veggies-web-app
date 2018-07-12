@@ -59,7 +59,6 @@ class Sidebar extends Component {
                       </div>
                       <h3 id="logout-button"><a href='/logout'>Logout</a></h3>
                     </div>
-                    
                   );
                 }}
               </Query>
