@@ -1,0 +1,51 @@
+#dash-sidebar {
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,0);
+}
+
+#dash-sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.speedometer-container {
+  padding-bottom: 0;
+}
+
+.sidebar-container:hover {
+  background-color: #bbdfad;
+  cursor: pointer;
+}
+
+#dash-sidebar h1, h2, h3, h4, h5 {
+  font-weight: 200 !important;
+  padding: 0;
+}
+
+#dash-sidebar a:hover {
+  text-decoration: none;
+}
+
+.sidebar-container img {
+  width: 80px;
+  max-width:100%;
+  height: auto;
+}
+
+.rc-progress-line {
+  width: 50%;
+  height: 40px;
+  display: block;
+}
+
+#stance-title {
+  margin-bottom: 0;
+}

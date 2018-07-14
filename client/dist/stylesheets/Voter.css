@@ -1,0 +1,26 @@
+
+
+.voting-panel {
+  font-weight: 200 !important;
+  text-align: center;
+  width: 100%;
+}
+
+.voter-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.voter-wrapper .button {
+  flex-basis: 50%;
+}
+
+@media only screen and (max-width: 992px) {
+
+  .voter-wrapper .button {
+    flex-basis: 75%;
+  }
+
+}
